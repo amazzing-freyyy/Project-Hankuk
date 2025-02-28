@@ -1,0 +1,44 @@
+.time-split-widget{
+    display:flex;
+    flex-direction: column;
+}
+
+.time-labels{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.label-hrs, .label-min{
+    text-align: center;
+    width: 90px;
+}
+
+.time-widgets{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+input.horas, input.minutos{
+    background-color: rgba(0, 0, 0, 0.126);
+    font-family: Agdasima;
+    font-size: 60%;
+    color: rgb(0, 170, 119);
+    height: 40px;
+    border: 0;
+    width: 90px;
+    height: 50px;
+    text-align: center;
+
+}
+
+input#id_date{
+    background-color: rgba(0, 0, 0, 0.126);
+    font-family: Agdasima;
+    font-size: 60%;
+    color: rgb(0, 170, 119);
+    height: 40px;
+    border: 0;
+}

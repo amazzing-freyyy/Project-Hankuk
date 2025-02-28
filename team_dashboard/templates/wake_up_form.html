@@ -1,0 +1,123 @@
+{% extends 'base_template.html' %}
+
+{% block title %}Encuesta Mañanera{% endblock %}
+
+{% load static %}
+{% block styleSheets %}
+<link rel="stylesheet" href="{% static 'team_dashboard/css/encuestas.css' %}">
+<link rel="stylesheet" href="{% static 'team_dashboard/css/widgets/starrating.css' %}">
+<link rel="stylesheet" href="{% static 'team_dashboard/css/widgets/date.css' %}">
+<link rel="stylesheet" href="{% static 'team_dashboard/css/widgets/time.css' %}">
+{% endblock %}
+
+{% block main_content %}
+{% load static %}
+<div class="parent">
+    <a href="{% url 'redirect' %}" class="nav">Página Principal</a>
+    {%if form.errors%}
+        <ul class="errors">
+            {% for field, errors in form.errors.items %}
+            <li>{{ errors|join:", " }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="body-encuestas">
+        <button id="back" class="arrow disabled"  onclick="prevParent()">&lt;</button>
+        <form method="post" class="subcontainer">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_date">Fecha: </label>
+                {{ form.date }}
+
+            </div>
+
+            <div class="form-group">
+                <label for="id_measurement_quality">Calidad de medición: </label>
+                {{ form.measurement_quality }}
+            </div>
+        
+            <div class="form-group">
+                <label for="id_RMSSD">RMSSD: </label>
+                {{ form.RMSSD }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_SDNN">SDNN: </label>
+                {{ form.SDNN }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_HR">HR: </label>
+                {{ form.HR }}
+            </div>
+
+            <div class="form-group image">
+                <div class="minicontainer">
+                    <label for="id_emotional_wellness">Estado de ánimo (1-5): </label>
+                    {{ form.emotional_wellness.errors }}
+                </div>
+                {{ form.emotional_wellness }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_hours_of_sleep">Tiempo de sueño: </label>
+                {{ form.hours_of_sleep }}
+            </div>
+        
+            <div class="form-group image">
+                <div class="minicontainer">
+                    <label for="id_quality_of_sleep">Calidad de sueño: </label>
+                    {{ form.quality_of_sleep.errors }}
+                </div>
+                {{ form.quality_of_sleep }}
+
+            </div>
+        
+            <div class="form-group image">
+                <div class="minicontainer">
+                    <label for="id_muscle_pain">Dolor: </label>
+                </div>
+                {{ form.muscle_pain }}
+            </div>
+
+            <div class="form-group image">
+                <div class="minicontainer">
+                    <label for="id_tiredness">Recuperación: </label>
+                    {{ form.tiredness.errors }}
+                </div>
+                {{ form.tiredness }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_menstruation">Menstruación: </label>
+                {{ form.menstruation }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_injury">¿Algún dolor?: </label>
+                {{ form.injury }}
+            </div>
+
+            <div class="form-group text-area">
+                <label for="id_comments">Comentarios: </label>
+                {{ form.comments }}
+            </div>
+
+            <button id="submit" type="submit" class="encuesta">Someter</button>
+        </form>
+        <button id="next" class="arrow"  onclick="nextParent()">&gt;</button>
+    </div>
+</div>
+<script src="{% static 'team_dashboard/js/navform.js' %}">
+document.getElementById("_0").addEventListener("input", function() {
+    console.log("Current value:", this.value);
+});
+document.getElementById("_1").addEventListener("input", function() {
+    console.log("Current value:", this.value);
+});
+</script>
+{% endblock %}
+
+{% block logout%}
+{% endblock %}
+

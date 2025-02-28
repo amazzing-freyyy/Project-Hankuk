@@ -1,0 +1,3162 @@
+date	user	measurement_quality	RMSSD	SDNN	HR 	emotional_wellness	hours_of_sleep	quality_of_sleep	muscle_pain	tiredness	menstruation	injury	comments
+2022-11-08	Laura	Good	117.9	120.1	58	4	5	5	3	3	No		
+2022-11-09	Laura	Okay	100.2	91.8	57.5	1	6	3	4	2	No		
+2022-11-11	Laura	Good	150.3	93.7	53	5	6	5	4	4	No		
+2022-11-25	Vivi	Okay	88		50	4	6.4	5	4	4	No	Yes	"Agujetas en bazos y gluteos ( poco, no mucho)"
+2022-11-25	Vivi												
+2022-11-25	Lua	Good	147.29	194.32	56	4	7.4	5	5	5	No	No	
+2022-11-26	Vivi	Okay	1.25	102.8	55	4	9	5	4	5	No	Yes	Molestia en la parte interior de la rodilla
+2022-11-26	Adriana	Good	384	412	56	5	9	5	2	2	No	No	
+2022-11-26	Vivi												
+2022-11-26	Lua	Good	122.79	124.62	57	5	10	5	5	5	No	No	
+2022-11-28	Vivi	Okay	1.34	89.1	46	4	8.15	5	4	5	Yes	Yes	Tengo el isquio como un poco tenso
+2022-11-28	Vivi												
+2022-11-28	Vivi												
+2022-11-29	Laura	Good	112	151.7	69.6	4	5	5	5	3	No	No	
+2022-11-29	Vivi	Okay	58	70.5	46	4	7	5	4	5	Yes	No	
+2022-11-29	Vivi												
+2022-11-30	Vivi	Okay	105	85.9	46	5	8	5	4	5	Yes	Yes	Poco de molestias en la rodilla
+2022-11-30	Laura	Okay	68.4	85.1	67.2	4	6	4	5	4	No	No	
+2022-11-30	Adriana	Good	351	285	42	5	9	5	1	2	No	No	
+2022-12-01	Vivi	Okay	121	92	67	5	7.5	5	4	4	Yes	Yes	La rodilla un poco de molestias 
+2022-12-01	Iker					4	8	4	5	4	No	Yes	
+2022-12-01	Laura	Okay	80.4	102.8	73.7	4	9	4	4	3	No	No	
+2022-12-01	Laura												
+2022-12-01	Lua												
+2022-12-01	Vivi												
+2022-12-02	Laura	Okay	80.1	121.11	72.2	4	6	5	3	4	No	No	
+2022-12-02	Vivi	Poor	142.91	146.6	48	5	7	5	4	5	Yes	Yes	Agujetas un poco en los gluteos y abductores 
+2022-12-02	Adriana	Good	361	197	58	5	7.3	5	1	1	No	No	
+2022-12-02	Lua												
+2022-12-02	Vivi												
+2022-12-02	Vivi												
+2022-12-02	Laura												
+2022-12-03	Vivi	Okay	156.7	193.9	62	5		5	4	5	No	No	
+2022-12-03	Laura	Good	123.6	141.3	61.3	5	9	5	5	4	No	No	
+2022-12-03	Adriana	Good	374	284	46	5	9	5	1	2	No	No	
+2022-12-03	Lua												
+2022-12-04	Vivi	Good	112.31	127.54	52	5	8.3	5	4	5	No	No	
+2022-12-04	Iker	Good	51.1	49	58.6	5	10.3	4	5	5	No	Yes	
+2022-12-04	Iker												
+2022-12-04	Fraile												
+2022-12-05	Fraile	Good	91.05	130.92	38	5	6	5	5	5		No	
+2022-12-05	Fraile												
+2022-12-06	Fraile	Good	116.94	164.12	44	4	6.3	5	3	4		Yes	golpes y lo normal de la competicion
+2022-12-06	Laura	Okay	33	65.2	80.3	4	8	5	4	4	Yes	No	
+2022-12-06	Fraile												
+2022-12-08	Vivi	Good	166.06	181.86	56	4	10.3	5	5	4	No	No	
+2022-12-08	Fraile	Good	93.7	155.88	40	5	10.3	5	4	4		Yes	el meñique de la mano sigue hinchado pero esta mucho mejor.
+2022-12-08	Fraile												
+2022-12-09	Vivi	Good	148.96	157.51	48	4	6.3	5	5	5	No	No	
+2022-12-09	Fraile	Good	106.18	155.32	36	5	7	5	5	5		Yes	"el meñique de la mano, esta mejorando mucho pero le queda un poco."
+2022-12-09	Fraile												
+2022-12-10	Fraile	Good	98.88	127.41	44	5	9.3	5	4	5		No	
+2022-12-09	Lua	Good	1.06	75.6	43	5	8	5	5	3	Yes	No	
+2022-12-11	Fraile	Good	86.69	133.31	42	5	8.3	4	5	5		No	
+2022-12-12	Vivi	Okay	197.38	165.7	50	5	8.25	5	5	5	No	No	
+2022-12-12	Laura	Good	72.9	163.9	63.8	5	7	5	5	4	No	No	
+2022-12-12	Lua	Good	1.35	83.3	43	5	8.3	5	5	5	No	No	
+2022-12-12	Vivi												
+2022-12-13	Vivi	Good	160.43	170.51	53	5	7	5	5	5	No	No	
+2022-12-13	Fraile	Good	142.88	153.13	44	5	6.3	5	5	5		Yes	"ayer recibi otro golpe en el meñique de la mano, poca molestia."
+2022-12-13	Laura	Good	84.9	70.2	57	4	5	4	4	3	No	No	
+2022-12-13	Adriana	Good	347.4	229.2	53.5	5	7	5	4	5	No	No	
+2022-12-13	Fraile												
+2022-12-13	Vivi												
+2022-12-14	Vivi	Poor	132.01	196.8	63	5	6.3	5	5	5	No	No	"Hice la mediación después de haberme levantado, puede que eso de datos mas elevado . Nose yo te lo pongo por si acaso :)"
+2022-12-14	Fraile	Good	128.75	124.02	39	5	6	5	4	5		Yes	"el meñique todavia me duele al moverlo, pero mucho menos que antes"
+2022-12-14	Laura	Okay	56.3	74.7	69.5	4	6	5	4	4	No	No	
+2022-12-14	Vivi												
+2022-12-15	Laura	Okay	52.3	86.2	73.8	3	5	4	3	3	No	No	
+2022-12-15	Vivi	Good	173.72	172.93	62	5	6.3	5	5	5	No	No	
+2022-12-14	Fraile												
+2022-12-15	Fraile	Good	95.31	93.38	40	5	6	5	5	5		Yes	el meñique de la mano.
+2022-12-15	Iker	Okay	58.4	43.9	58.7	3	5	3	3	3	No	Yes	
+2022-12-15	Fraile												
+2022-12-15	Vivi												
+2022-12-16	Vivi	Good	183.02	190.53	63	5	5.3	5	2	4	No	Yes	Agujetas en el abductor y hombros
+2022-12-16	Iker	Good	81.3	100	57.8	3	6	4	5	4	No	No	
+2022-12-17	Fraile	Good	119.35	101.1	41	5	7.3	5	5	4		Yes	el meñique de la mano.
+2022-12-17	Fraile												
+2022-12-19	Fraile	Good	84.88	63.09	41	4	7.3	5	4	5		Yes	un poco el meñique de la mano todavia.
+2022-12-19	Fraile												
+2022-12-19	Vivi												
+2022-12-20	Vivi	Good	191.54	221.18	54	4	6.3	5	5	4	No	No	
+2022-12-20	Fraile	Good	97.41	84.11	43	5	6.3	5	5	4		Yes	el meñique de la mano todavia.
+2022-12-20	Laura	Okay	67.2	84.3	56	5	9	5	5	5	No	No	
+2022-12-20	Fraile												
+2022-12-20	Vivi												
+2022-12-20	Lua												
+2022-12-21	Vivi	Okay	89	80.3	43	5	6	5	5	5	Yes	No	Hoy no pude medirlo con el pulsómetro pero te pongo los datos que me salió con la otra aplicación
+2022-12-21	Iker	Good	67.7	77.4	66.2	3	7	5	4	3	No	Yes	"En la rodilla, se bloquea el menisco"
+2022-12-15	Adriana	Good	451	297	48	5	8	5	1	2	No	No	
+2022-12-21	Adriana	Good	376	219	52	5	8	5	5	4	No	No	
+2022-12-21	Fraile												
+2022-12-22	Fraile	Good	91.22	122.29	49	5	6	5	5	4		Yes	el meñique de la mano.
+2022-12-22	Iker	Good	47.7	54.8	67.5	3	4	2	4	3	No	Yes	"La rodilla, debido al bloqueo del menisco"
+2022-12-22	Iker												
+2022-12-22	Laura	Okay	84.9	94.4	64.4	5	8	5	3	3	No	No	
+2022-12-22	Fraile												
+2022-12-22	Laura												
+2022-12-22	Adriana	Good	372	284	47	5	8.5	5	5	4	No	No	
+2022-12-22	Vivi												
+2022-12-23	Vivi	Good	166.51	175.68	58	5	7	5	5	5	Yes	Yes	Me molesta la rodilla pero esta mucho mejor que ayer por la noche
+2022-12-23	Iker	Good	42.9	53.9	69.6	4	6	3	4	3	No	No	
+2022-12-23	Laura	Poor	53.4	61.7	64.3	3	6	3	3	3	No	No	
+2022-12-23	Fraile	Good	102.78	128.51	49	5	8	3	5	4		Yes	El meñique de la mano todavia.
+2022-12-23	Adriana	Good	340	214	52	5	8.5	5	5	5	No	No	
+2022-12-23	Fraile												
+2022-12-23	Vivi												
+2022-12-24	Fraile	Good	110.82	123.47	47	5		4	5	5		Yes	"el meñique de la mano, solo con el movimiento."
+2022-12-24	Adriana					5	10	5	5	5	No	Yes	Un poco en el codo por híper extensión en el entrenamiento anterior
+2022-12-26	Adriana	Good	344	290	46	5	9	5	5	5	No	Yes	Muy poco en el codo
+2022-12-26	Fraile												
+2022-12-26	Fraile												
+2022-12-27	Vivi	Good	181.82	211.94	62	5		5	5	5	No	No	
+2022-12-27	Iker	Good	73.5	79.7	67.9	4	8	4	2	3	No	Yes	
+2022-12-27	Fraile												
+2022-12-27	Fraile												
+2022-12-27	Adriana	Okay	417	282	48	5	9	5	5	4		No	
+2022-12-27	Vivi												
+2022-12-28	Vivi	Good	163.55	162.36	65	5	8.3	5	5	5	No	No	
+2022-12-28	Lua	Good	112.35	142.57	58	5	8.3	5	5	5	No	No	
+2022-11-28	Adriana	Good	454	314	40	5	8	5	4	5	No	No	
+2022-12-28	Vivi												
+2022-12-29	Vivi	Good	113.98	155.88	62	5	8	5	5	5	No	No	
+2022-12-29	Vivi												
+2023-01-02	Adriana	Good	361	308	52	5	9	5	5	5	No	Yes	Codo derecho 
+2023-01-03	Vivi	Good	222.1	211.73	57	5	9.3	5	5	5	No	No	
+2023-01-03	Laura	Poor	38.5	54.1	92.1	4	9	5	3	4	No	No	
+2023-01-03	Laura												
+2023-01-03	Vivi												
+2023-01-03	Lua	Good	104.22	112.05	60	4	9	5	5	4	No	No	
+2023-01-03	Adriana	Good	353	283	56	5		5	5	5	No	Yes	Codo derecho
+2023-01-03	Vivi												
+2023-01-04	Vivi	Good	176.35	183.81	54	5	8	5	4	5	No	No	
+2023-01-04	Lua	Good	131.16	137.82	52	4	8	5	4	4	No	Yes	Codo
+2023-01-04	Vivi												
+2023-01-04	Lua												
+2023-01-05	Vivi	Good	206.79	213.22	55	5	9	5	4	4	No	No	
+2023-01-05	Lua	Good	188.84	274.75	59	5	8	5	4	3	No	Yes	Codo
+2023-01-05	Vivi												
+2023-01-05	Adriana	Good	355	278	48	5	9	5	5	5	No	Yes	Golpe pie izquierdo 
+2023-01-07	Vivi	Good	122.94	122.19	46	5	8.3	5	5	5	No	No	
+2023-01-07	Lua	Good	122.34	147.18	52	4	9	5	4	5	No	No	
+2023-01-07	Vivi												
+2023-01-09	Vivi	Good	187.62	158.09	47	5	8	5	5	5	No	No	
+2023-01-09	Laura	Okay	56.7	55.6	51	4	6	5	4	3	Yes	No	
+2023-01-09	Adriana	Good	377	250	51	5	8	4	4	4	No	Yes	Codo
+2023-01-10	Laura	Good	96.7	121.8	63.8	5	5	5	4	4	Yes	No	
+2023-01-10	Vivi	Good	203.3	194.42	54	5	8	5	5	5	No	No	
+2023-01-09	Vivi												
+2023-01-09	Lua	Good	139.81	136.12	50	4	8	5	4	5	No	No	
+2023-01-11	Laura	Good	120.3	92.8	55.3	4	6	4	4	4	Yes	No	
+2023-01-11	Vivi	Good	151.14	170.66	64	5	7.15	5	5	5	No	No	
+2023-01-10	Vivi												
+2023-01-10	Lua	Good	167.89	165.5	50	4	8	5	4	5	No	Yes	Un poco el codo
+2023-01-11	Iker	Good	27.2	26.1	70.5	4	6.3	3	4	4	No	No	
+2023-01-11	Adriana	Good	372	251	48	5	9	5	5	5	No	No	
+2023-01-11	Vivi												
+2023-01-12	Vivi	Good	158.16	144.83	51	5	7.15	5	5	5	No	No	
+2023-01-12	Laura	Good	121	84.4	55.5	4	5	5	4	4	No	No	
+2023-01-11	Lua	Good	156.78	157.33	52	4	8	5	5	5	No	No	
+2023-01-12	Adriana	Good	494.5	320.2	42.2	5	9	5	5	5	No	Yes	Codo derecho
+2023-01-12	Vivi												
+2023-01-12	Laura												
+2023-01-13	Vivi	Poor	479.27	488.74	83	5	7.3	5	5	4	No	No	
+2023-01-13	Laura	Good	101.9	88.6	61.2	5	6	5	5	4	No	No	
+2023-01-12	Lua	Good	155.84	164.37	49	4	8	5	5	5	No	No	
+2023-01-12	Lua												
+2023-01-13	Lua	Good	131.68	161.2	49	4	8	5	4	5	Yes		Agujetas en los cuadriceps
+2023-01-13	Iker	Good	73.4	77.3	67.2	4	8	4	4	3	No	No	
+2023-01-13	Adriana	Good	429	277	45	5	9	5	5	5	No	Yes	Codo
+2023-01-13	Lua												
+2023-01-13	Vivi												
+2023-01-13	Laura												
+2023-01-13	Adriana												
+2023-01-14	Fraile	Good	143.3	218.22	58	4	7	5	4	4		No	
+2023-01-14	Laura	Okay	58.4	93.1	74.1	4		5	5	5	No	No	
+2023-01-14	Vivi					5	10	5	5	5	Yes	Yes	Esta mañana me duele la rodilla en la parte interna
+2023-01-14	Lua												
+2023-01-14	Vivi												
+2023-01-14	Lua												
+2023-01-15	Lua	Poor	143.43	208.7	56	4	8	5	4	5	Yes		
+2023-01-15	Vivi	Good	168.22	211.18	55	5	9	5	5	5	Yes	Yes	Rodilla en la parte interior
+2023-01-14	Fraile												
+2023-01-16	Laura	Okay	91.5	86.9	56.2	4	5	4	4	3	No	No	
+2023-01-16	Vivi	Poor	313.2	387.46	76	5	8	5	5	5	Yes	Yes	"Un poco de dolor en la parte interior de la rodilla, esta mejor"
+2023-01-16	Lua	Good	164.29	167.47	45	4	8	5	4	5	Yes	No	
+2023-01-16	Iker	Good	72.9	82.6	62.2	5	8	4	5	5	Yes	No	
+2023-01-16	Adriana	Good	399	282	39	5	9.5	5	5	5	No	Yes	Codo
+2023-01-16	Fraile												
+2023-01-16	Lua												
+2023-01-16	Vivi												
+2023-01-16	Laura												
+2023-01-16	Adriana												
+2023-01-16	Adriana												
+2023-01-17	Laura	Okay	78.4	91.9	61	3	5	5	4	3	No	No	
+2023-01-17	Vivi	Good	205.59	198.77	50	5	8	5	5	5	Yes	Yes	Interior de la rodilla dolor pero menos 
+2023-01-17	Fraile	Good	122.57	161.36	41	4	5	5	5	5		No	
+2023-01-17	Lua	Okay	181.96	199.99	51	5	8	5	5	5	Yes	No	
+2023-01-17	Iker	Good	54.6	104.8	65.8	5	7	4	5	5	Yes	No	
+2023-01-17	Fraile												
+2023-01-17	Laura												
+2023-01-17	Lua												
+2023-01-17	Lua												
+2023-01-17	Vivi												
+2023-01-18	Vivi	Good	210.18	186.82	52	5	7.15	5	5	5	Yes	Yes	Rodilla parte interior un  2/10
+2023-01-18	Laura	Okay	74.3	75.7	69.4	4	6	4	4	4	No	No	
+2023-01-18	Lua	Poor	75.05	72.53	122	4	8	5	5	5	No	No	La medicion es bastante pobre y me han salido unos datos bastante malos 
+2023-01-18	Fraile	Good	144.63	192.8	45	4	4	5	5	4		No	
+2023-01-18	Iker	Good	59.4	70.2	65.6	5		3	4	4	Yes	No	
+2023-01-18	Adriana	Good	527	334	44	5		5	5	5	No	Yes	Codo
+2023-01-18	Fraile												
+2023-01-18	Laura												
+2023-01-18	Vivi												
+2023-01-18	Lua												
+2023-01-19	Vivi	Good	175.71	170.17	57	5	7.15	5	4	5	No	Yes	Rodilla interna 2/10 y casdera derecha 4/10
+2023-01-19	Lua	Good	147.01	136.75	55	4	7.15	5	5	5	No	No	
+2023-01-19	Fraile	Good	110.95	201.96	46	4	7	5	4	5		No	
+2023-01-19	Laura	Good	150.7	106.8	81	4	8	5	4	5	No	No	
+2023-01-19	Adriana	Good	535	380	48	5	9	5	5	5	No	Yes	Codo
+2023-01-19	Vivi												
+2023-01-19	Fraile												
+2023-01-20	Laura	Okay	108	132	54.7	4	6	4	4	4	No	No	
+2023-01-19	Lua												
+2023-01-20	Lua	Good	134.59	116.83	47	5	10	5	5	5	No	No	
+2023-01-20	Vivi	Good	198.21	238.97	63	5	9	5	5	5	No	Yes	Rodilla interna 2/10 y cadera 3/10
+2023-01-20	Fraile	Good	133.16	249.81	43	4	4.3	5	4	4		No	
+2023-01-20	Laura												
+2023-01-21	Fraile	Good	116.41	122.61	37	4	6	5	5	5		No	
+2023-01-20	Lua												
+2023-01-21	Lua	Good	178.99	193.57	56	4	9	5	5	5	No	No	
+2023-01-21	Vivi	Good	83.06	86.73	44	5	8	5	4	5	No	Yes	"Rodilla interna 2/10 y cadera 2/10, en la rodilla al tirar un bandal ( es la patada trasera que pegas al cuerpo) me molesta un 5/10 en la zona del menisco"
+2023-01-21	Laura	Okay	66.2	87.2	66.2	5	8	5	5	4	No	No	
+2023-01-21	Adriana	Good	392	292	42	5	8.5	5	5	4	No	No	Codo
+2023-01-21	Vivi												
+2023-01-21	Lua												
+2023-01-21	Fraile												
+2023-01-22	Vivi	Good	228.86	244.21	54	5	8.3	5	5	5	No	Yes	Rodilla interna 2/10 y cadera 2/10
+2023-01-22	Lua	Good	170.2	145.4	45	4	9	5	5	5	No	No	
+2023-01-22	Fraile	Good	104.93	120.75	48	4		5	5	4		No	
+2023-01-22	Lua												
+2023-01-22	Vivi												
+2023-01-23	Vivi	Good	232.37	246.57	54	5	7.45	5	4	5	No	Yes	Dolor en la rodilla interna 5/10 y cadera 2/10
+2023-01-23	Lua	Good	147.67	136.99	47	4	8	5	5	4	No	No	
+2023-01-23	Laura	Good	119	87.9	55.6	5	6	4	4	4	No	No	
+2023-01-23	Adriana	Good	489	370	44	5	9	5	5	5	No	Yes	Codo
+2023-01-23	Fraile	Good	90.1	122.28	46	4	12	5	5	5		No	
+2023-01-23	Adriana												
+2023-01-23	Laura												
+2023-01-24	Laura	Okay	81.5	97.7	59.6	4	6	5	4	4	No	No	
+2023-01-24	Lua	Okay	187.43	162.26	44	4	8	5	5	5	No	No	
+2023-01-24	Vivi	Good	70.92	83.48	44	5	8	5	5	5	No	Yes	Rodilla 6/10 mejoró desde ayer y cadera 2/10
+2023-01-24	Fraile	Good	102.77	114.93	36	5	7.3	5	5	5		No	
+2023-01-24	Adriana	Good	502	341	47	5	9	5	5	5	No	Yes	Codo 
+2023-01-24	Lua												
+2023-01-24	Adriana												
+2023-01-24	Laura												
+2023-01-24	Fraile												
+2023-01-24	Lua												
+2023-01-25	Vivi	Poor	205.19	243.64	53	5	8	5	5	5	No	Yes	Rodilla 4/10 y cadera 2/10
+2023-01-25	Lua	Good	178.88	164.67	44	4	8	5	5	5	No	No	
+2023-01-25	Fraile	Good	143.29	250.17	40	5	5	5	5	4		No	
+2023-01-25	Laura	Good	151.1	117.3	56.4	4	7	4	4	4	No	No	
+2023-01-25	Iker	Good	60.2	73.2	64.8	5	7	4	5	4	No	No	
+2023-01-25	Fraile												
+2023-01-25	Laura												
+2023-01-25	Lua												
+2023-01-25	Vivi												
+2023-01-26	Vivi	Good	160.51	181.63	46	5	7.3	5	4	5	No	Yes	Rodilla 3/10 cadera 2/10
+2023-01-26	Lua	Okay	181.5	173.23	45	4	8	5	4	5	No	No	
+2023-01-26	Fraile	Good	116.83	215.08	41	5	6.3	5	5	4		No	
+2023-01-26	Adriana	Good	426	433	46	5	8.5	5	4	5	No	Yes	Codo derecho
+2023-01-26	Iker	Good	40.1	65.9	66.5	5	8.45	5	3	4	No		
+2023-01-26	Vivi												
+2023-01-26	Fraile												
+2023-01-26	Lua												
+2023-01-26	Vivi												
+2023-01-26	Lua												
+2023-01-27	Vivi	Good	217.58	213.95	58	5	5.3	5	5	5	No	Yes	Rodilla 2/10 agujetas en los brazos y gluteos
+2023-01-27	Lua	Okay	149.24	148.77	49	4	5.3	5	4	4	No	Yes	Agujetas
+2023-01-27	Laura	Okay	71.8	90.5	72.8	4	7	5	4	4	No	No	
+2023-01-27	Fraile	Good	128.8	195.82	41	5	6	5	5	5		No	
+2023-01-27	Iker	Good	67	79	62.8	4	7	4	3	3	No	Yes	
+2023-01-27	Adriana	Good	451	278	53	5	9	5		5	No	Yes	Codo
+2023-01-27	Fraile												
+2023-01-27	Vivi												
+2023-01-28	Laura	Good	144.9	91.8	53.3	4	7	5	4	5	No	No	
+2023-01-28	Lua	Good	153.25	163.06	47	4	10	5	5	4	No	No	
+2023-01-28	Vivi	Good	140.37	220.43	60	5	9	5	4	5	No	No	Rodilla 1/10
+2023-01-28	Vivi												
+2023-01-28	Fraile												
+2023-01-28	Lua												
+2023-01-28	Laura												
+2023-01-30	Fraile	Good	144.5	126.3	42	5	5.3	5	5	5		No	
+2023-01-30	Laura	Good	163.2	163.2	58.2	5	6	5	4	4	No	No	
+2023-01-30	Vivi	Poor	187.7	188.64	47	5	8	5	5	5	No		
+2023-01-30	Lua	Good	154.55	135.65	43	4	8	5	5	5	No	No	
+2023-01-30	Adriana	Good	400	266	53	5	9	5	5	5	No	Yes	Codo
+2023-01-30	Fraile												
+2023-01-28	Adriana												
+2023-01-30	Vivi												
+2023-01-30	Lua												
+2023-01-31	Lua	Good	134.14	154.48	53	4	8	5	5	5	No	No	
+2023-01-31	Vivi	Good	139.29	175.4	61	5	8	5	5	5	No	No	
+2023-01-31	Laura	Okay	100.8	115.3	71.3	4	7	4	4	4	No	No	
+2023-01-31	Fraile	Good	148.7	244.18	46	4		5	5	5		No	
+2023-01-31	Adriana	Good	412	250	50	5	9	5	5	5	No	Yes	Codo 
+2023-01-31	Iker	Good	25.4	41.1	65.5	4	6	3	5	3	Yes	No	
+2023-01-31	Norberto	Good	92.16	96.7	59	4		4	3	3	No	Yes	dolor espalda baja
+2023-01-31	Fraile												
+2023-01-31	Lua												
+2023-01-31	Norberto												
+2023-01-31	Vivi												
+2023-01-31	Laura												
+2023-01-31	Lua												
+2023-02-01	Laura	Okay	74.1	76.1	79.9	5	7	5	4	5	No	No	
+2023-02-01	Fraile	Good	118.44	207.71	42	5	6.3	5	5	5		No	
+2023-02-01	Iker	Good	41.3	56.5	64.8	4		4	4	3	Yes	No	
+2023-02-01	Norberto	Good	72.9	86.11	60	4	7	4	4	4		No	
+2023-02-01	Fraile												
+2023-02-01	Vivi												
+2023-02-01	Laura												
+2023-02-02	Lua	Good	134.97	107.91	45	4	9	5	5	5	No	No	
+2023-02-02	Vivi	Good	183.17	157.9	50	5	9.2	5	5	5	No	No	
+2023-02-02	Laura	Okay	59.4	75.9	72	5	9	5	4	5	No	No	
+2023-02-02	Fraile	Good	118.12	159.81	43	5	9.3	5	5	5		No	
+2023-02-03	Vivi	Good	142.18	209.18	48	5	8	5	5	5	No	No	
+2023-02-03	Lua	Good	150.71	201.7	45	5	8	5	5	5	No	No	
+2023-02-02	Fraile												
+2023-02-03	Fraile	Good	109.26	108.69	41	5	8	5	5	5		No	
+2023-02-03	Laura	Okay	100.8	107.7	65	4	8	3	4	4	No	No	
+2023-02-03	Laura												
+2023-02-03	Fraile												
+2023-02-04	Vivi	Good	152.8	166.95	72	5	8	5	5	5	No	No	
+2023-02-04	Lua	Okay	149.96	211.6	56	4	7	4	5	5	No	No	
+2023-02-04	Fraile	Good	77.94	106.57	52	4	5	4	5	4		No	
+2023-02-04	Fraile	Good	77.94	106.57	52	4	5	4	5	4		No	
+2023-02-04	Fraile												
+2023-02-04	Lua												
+2023-02-05	Vivi	Good	132.5	129.32	71	5	7	5	2	4	No	Yes	Me duele todo el cuerpo literal
+2023-02-05	Lua	Good	156.57	150.23	47	5	7	5	4	3	No	Yes	"Rodilla izquierda ( dolor un 2/10), fue antes de la final donde note que la rodilla la tenía como atascada podria ser el menisco pero no es grave"
+2023-02-05	Fraile	Good	103.71	101.75	42	5	9	5	5	5		No	
+2023-02-06	Fraile	Good	149.72	129.38	37	5	6.3	5	5	5		No	
+2023-02-06	Vivi	Good	188.83	208.9	59	5	8.3	5	3	5	No	Yes	Rodilla 3/10
+2023-02-06	Lua	Okay	167.47	199.99	59	4	9	4	4	4	No	No	
+2023-02-06	Norberto	Good	74.52	90.51	60	3	6	3	5	3		No	
+2023-02-06	Laura	Good	77.8	58	61.7	4	8	4	4	4	No	No	
+2023-02-06	Fraile												
+2023-02-06	Fraile												
+2023-02-06	Lua												
+2023-02-07	Lua	Okay	174.87	214.68	57	4	8	5	5	4	No	No	
+2023-02-07	Vivi	Good	188.33	211.64	60	5	8.3	5	3	5	No	Yes	Rodilla 3/10 y muchas cosas mas jajajaja
+2023-02-07	Fraile	Good	186.47	193.58	42	5	7	5	4	5		Yes	"Me he levantado con la muñeca un poco dolorida seguramente por algun golpe de ayer, no es mucho solo me molesta en algunos movimientos."
+2023-02-07	Norberto	Good	94.04	114.56	61	4	7	4	5	4		No	
+2023-02-07	Norberto												
+2023-02-07	Lua												
+2023-02-08	Lua	Okay	219.96	199.21	55	4	7	5	5	4	No	No	
+2023-02-08	Vivi	Good	150.19	209.55	63	5	5.3	5	4	4	No	Yes	Rodilla 3/10
+2023-02-08	Laura	Good	145.4	102.6	51.4	4	6	4	4	4	No	No	
+2023-02-08	Adriana	Good	399	240	51	5	6	5	3	5		Yes	Golpe gemelo 
+2023-02-08	Fraile	Good	110.88	123.33	41	5	7	5	4	5		Yes	"Me he levantado con molestia en la rodilla al caminar, creo que de pegar mal un bandal ayer, lo noto poco no es mucho."
+2023-02-08	Iker	Good	68.1	61.1	57.6	4	7	4	4	4	Yes	No	
+2023-02-08	Fraile												
+2023-02-09	Laura	Okay	75.2	45.6	53.4	4	7	4	3	4	Yes	No	
+2023-02-09	Norberto	Good	120.13	125.56	59	4	6	1	3	3		Yes	espalda
+2023-02-09	Iker	Good	30.4	47.4	66.7	4	8.3	4	3	3	Yes	No	
+2023-02-09	Adriana	Good	484	340	52	5	8	5	5	5	No	No	
+2023-02-09	Fraile	Good	108.1	78.5	45	5	8	5	5	5		No	
+2023-02-09	Fraile												
+2023-02-09	Laura												
+2023-02-09	Vivi												
+2023-02-09	Adriana												
+2023-02-09	Adriana												
+2023-02-10	Vivi	Good	209.55	207.12	57	5	7.5	5	5	5	No	No	
+2023-02-10	Lua	Good	138.86	130.61	59	4	8	5	5	5	No	No	
+2023-02-10	Adriana	Good	456	314	44	5	8.5	5	5	5	No	No	
+2023-02-10	Norberto	Good	103.62	104.21	56	4	9	4	3	4		Yes	espalda baja
+2023-02-10	Laura	Poor	47.8	68.4	78.5	5	8	5	3	4	Yes	Yes	Me duele un poquito el isquio :( 
+2023-02-10	Fraile	Good	103.92	139.43	41	5	11	5	5	5		Yes	El golpe de ayer en la rodilla.
+2023-02-10	Lua												
+2023-02-10	Vivi												
+2023-02-10	Fraile												
+2023-02-10	Laura												
+2023-02-11	Fraile	Good	111.01	111.58	40	4	6	5	5	4		Yes	Un poco de molestia en la rodilla.
+2023-02-10	Lua												
+2023-02-11	Lua	Okay	138.06	203.83	52	4	10	5	5	5	No	No	
+2023-02-11	Laura	Okay	58.4	59.4	89.6	4		5	4	4	Yes	Yes	Isquios
+2023-02-11	Vivi	Good	161.03	146.55	57	5	10	5	5	5	No	Yes	Rodilla 1/10
+2023-02-11	Fraile												
+2023-02-11	Lua												
+2023-02-11	Norberto	Good	106.73	122.55	59	4	8	5	3	4		Yes	espalda baja
+2023-02-11	Lua												
+2023-02-12	Laura	Poor	34.2	63.9	87.2	5	8	5	4	4		No	
+2023-02-12	Fraile	Good	119.1	93.4	44	5	8	5	5	5		No	
+2023-02-13	Laura	Good	133	108.5	57.4	4	6	4	4	4	Yes	No	
+2023-02-13	Lua	Good	172.78	171.96	50	4	8	5	5	5	No	No	
+2023-02-13	Vivi	Good	194.93	176.06	53	5	8.15	5	5	5	No	No	
+2023-02-13	Iker	Good	39.8	46.9	63	5	9	4	5	5	Yes	No	
+2023-02-13	Adriana	Good	407	248	49	5	9	5	5	5	No	No	
+2023-02-13	Fraile	Good	148.37	140.49	35	4	7	5	5	4		Yes	Un poco de molestia en la rodilla.
+2023-02-13	Laura												
+2023-02-13	Vivi												
+2023-02-13	Fraile												
+2023-02-13	Adriana												
+2023-02-14	Vivi	Good	208.7	192.35	48	5	7.4	5	5	5	No	No	
+2023-02-13	Lua												
+2023-02-14	Lua	Good	177.21	194.94	47	4	8.3	5	5	5	No	Yes	Dolor un poco en el empeine por un golpe
+2023-02-14	Laura	Good	84	83.5	72.5	4	5	4	4	4	No	No	
+2023-02-14	Fraile	Good	116.36	125.59	39	5	6	5	5	4		No	
+2023-02-14	Norberto	Good	122.72	199.28	59	4	7	4	4	4			
+2023-02-14	Iker	Good	27.1	57.7	61.5	5	7	4	4	5	Yes	Yes	Dolor en la parte de la derecha de la espalda y la espalda baja
+2023-02-14	Vivi												
+2023-02-14	Norberto												
+2023-02-14	Vivi												
+2023-02-14	Lua												
+2023-02-14	Laura												
+2023-02-14	Fraile												
+2023-02-15	Lua	Good	200.28	168.33	51	4	7	5	5	5	No	No	
+2023-02-15	Vivi	Good	184.31	147.64	51	5	6.3	5	5	5	No	No	
+2023-02-15	Laura	Poor	33.5	51.1	81.5	4	6	5	4	3	No	No	
+2023-02-15	Fraile	Good	77.71	90.43	37	5	6.3	5	3	5		No	
+2023-02-15	Iker	Good	106	109	56.4	5	7	4	5	4	Yes	Yes	Zona derecha de la espalda y parte de baja de la espalda
+2023-02-16	Fraile	Good	83.34	89.57	42	5	6.3	5	4	5		No	
+2023-02-16	Laura	Okay	60.6	63.8	80.3	5	7	5	4	4	No	No	
+2023-02-16	Iker	Good	32.8	68.4	62.9	5	7	4	5	4	Yes	No	
+2023-02-16	Adriana	Good	379	305	50	5	8	5	5	5	No	No	
+2023-02-16	Fraile												
+2023-02-16	Laura												
+2023-02-17	Laura	Good	166.8	168.5	58.8	4	7	5	5	4	No	No	
+2023-02-17	Vivi	Good	202	147	51	5	9	5	5	5	No	No	Estos días no tengo el pulsómetro para medirme
+2023-02-17	Lua	Good	170	114	44	4	8	5	5	5	No	No	Lo he medido con el HRV porque estos dias no tengo el pulsometro
+2023-02-17	Fraile	Good	77.5	80.75	46	4	8	5	5	4		No	
+2023-02-17	Lua												
+2023-02-17	Vivi												
+2023-02-17	Fraile												
+2023-02-18	Vivi	Good	230	176	54	5	7	5	5	5	No	No	
+2023-02-18	Lua	Good	283	176	51	4	7	4	5	5	No	No	
+2023-02-18	Laura	Good	83.3	71.6	60.3	5	7	5	5	5	No	No	
+2023-02-18	Lua												
+2023-02-19	Lua	Good	181	123	47	5	7	5	3	3	No	No	
+2023-02-19	Fraile	Good	115.3	111.7	50	5	7	5	4	4	Yes	Yes	La rodilla por un golpe :( 
+2023-02-18	Fraile	Good	128.52	130.33	40	5	8.3	5	5	5		No	
+2023-02-19	Laura	Good	94.7	117.1	70.3	5	7	5	4	4	No	No	
+2023-02-20	Vivi	Good	112.86	115.3	69	5	7.4	5	5	5	No	No	
+2023-02-20	Lua	Okay	190.02	192.11	56	4	8	5	4	3	No	No	Ya es con el pulsometro 
+2023-02-20	Laura	Good	67.5	61.2	62.5	5	6	5	4	4	No	No	
+2023-02-20	Adriana	Good	387	243	43	5	9	5	5	5	No	No	
+2023-02-20	Fraile	Good	115.51	145.06	33	5	9.3	5	4	4		Yes	"La muñeca y la rodilla, solo golpes????."
+2023-02-20	Norberto	Good	99.05	122	58	4	7	4	5	5		No	
+2023-02-20	Norberto												
+2023-02-20	Fraile												
+2023-02-20	Fraile												
+2023-02-20	Vivi												
+2023-02-20	Lua												
+2023-02-20	Laura												
+2023-02-21	Vivi	Good	135.41	166.32	64	5	7.3	5	5	5	No	No	
+2023-02-21	Lua	Good	161.79	153.06	51	4	7	5	4	4	No	No	
+2023-02-21	Fraile	Good	99.18	98.42	37	4	6	5	5	5		Yes	un poco de molestia en la rodilla todavia
+2023-02-21	Laura	Good	71.8	61.4	56.1	4	7	5	4	3	No	No	
+2023-02-21	Norberto	Good	123.01	128.16	54	5	7	4	4	4		No	
+2023-02-21	Fraile												
+2023-02-21	Lua												
+2023-02-21	Lua												
+2023-02-21	Vivi												
+2023-02-21	Laura												
+2023-02-22	Laura	Good	97.1	89.1	53.7	4	6	4	4	4	No	No	
+2023-02-22	Fraile	Good	176.93	148.13	35	5	6.3	5	5	5		No	
+2023-02-22	Vivi	Good	145.05	182.24	57	5	7.3	5	5	4	No	No	
+2023-02-22	Lua	Poor	465.37	357.25	64	4	8	5	5	5	No	No	
+2023-02-22	Norberto	Good	105.93	151.39	57	4	7	4	4	4			
+2023-02-22	Fraile												
+2023-02-22	Lua												
+2023-02-22	Laura												
+2023-02-23	Laura	Okay	44.2	51.4	82.6	4	6	5	4	4	No	No	
+2023-02-23	Lua	Good	144.68	106.67	46	4	5	5	5	4	No	No	
+2023-02-23	Vivi					5	4	1	5	4	No	No	Hoy no he podido dormir casi nada porque me dolía un montón la oreja 
+2023-02-23	Iker	Good	39.8	47.1	63	5	7	4	5	5	Yes	Yes	Molestia en el isquio derecho
+2023-02-23	Adriana	Good	362	311	53	5	8.5	5	5	5	No	No	
+2023-02-23	Fraile	Good	194.94	162.04	38	5	8	5	5	4		Yes	El golpe en la mano.
+2023-02-23	Lua												
+2023-02-23	Laura												
+2023-02-23	Fraile												
+2023-02-24	Fraile	Good	122.57	116.74	40	5	7	5	5	5		Yes	El golpe en el meñique/mano.
+2023-02-24	Laura	Good	58.7	107.3	80.1	5	7	5	4	5	No	No	
+2023-02-24	Lua	Good	136.14	108.69	48	5	9	5	5	5	No	No	
+2023-02-24	Vivi	Good	142.93	180.11	63	5	11	5	5	5	No	No	
+2023-01-24	Adriana	Good	286		301	5		5	5	5	No	No	
+2023-02-24	Adriana												
+2023-02-24	Laura												
+2023-02-24	Lua												
+2023-02-24	Fraile												
+2023-02-25	Laura	Poor	29.1	39.9	84.9	5	7	5	4	4	No	No	
+2023-02-25	Vivi	Good	164.06	189.8	69	5	7	5	5	5	No	No	
+2023-02-25	Lua	Good	174.38	245.24	59	4	8	5	5	4	No	No	
+2023-02-25	Fraile	Good	104.34	96.42	38	4	7	5	5	4		No	
+2023-02-25	Laura												
+2023-02-25	Lua												
+2023-02-26	Fraile	Good	103.9	91.9	44	5	8.3	5	5	5		Yes	los golpes en los meñiques.
+2023-02-26	Laura	Okay	49.6	70.7	75.2	5	8	5	5	5	No	No	
+2023-02-27	Fraile	Good	125.49	138.37	37	5	6.3	5	5	4		No	
+2023-02-27	Vivi	Good	114.03	132.33	75	5	7.5	5	5	5	No	No	
+2023-02-27	Lua	Good	194.56	186.2	50	5	8	5	5	5	No	No	
+2023-02-27	Fraile												
+2023-02-27	Fraile												
+2023-02-28	Fraile	Good	137.04	143.43	42	4	6.3	5	5	4		No	
+2023-02-28	Iker	Good	50.1	68.5	62.4	4	6	3	5	4	Yes	No	
+2023-02-28	Lua	Good	103.12	167	46	4	8	5	5	5	No	No	
+2023-02-28	Laura	Okay	47.3	79.4	78	5		5	4	4	No	No	
+2023-02-28	Fraile												
+2023-02-28	Lua												
+2023-02-28	Lua												
+2023-03-01	Fraile	Good	125.28	114.77	39	5	6	5	5	4		Yes	los golpes en meñiques/manos.
+2023-03-01	Adriana	Good	466	294	40	5	9	5	5	5	No	Yes	"Un poquito zona baja del talón, pero todo ????"
+2023-02-28	Laura												
+2023-03-01	Laura	Good	58.3	105.2	73.3	4	8	5	4	4	No	No	
+2023-03-01	Fraile												
+2023-03-01	Lua	Okay	234.83	256.73	53	4	9	5	5	5	No	No	
+2023-03-01	Vivi	Good	163.95	185.61	64	5	10	5	5	4	Yes	No	
+2023-03-01	Laura												
+2023-03-02	Fraile	Good	97.58	92.18	38	5	8.3	5	5	5		Yes	Las manos y meñiques.
+2023-03-02	Iker	Good	47.6	56	67.3	5	8	4	4	4	Yes	Yes	Mano derecha
+2023-03-02	Lua	Good	163.94	141.39	43	4	8	5	5	5	No	No	
+2023-03-02	Vivi	Good	150.59	190.4	53	5	8	5	5	5	Yes	No	
+2023-03-02	Vivi												
+2023-03-02	Laura	Good	54.9	85	76.1	4	8	5	3	3	No	No	Tengo las piernas un poco cargadas 
+2023-03-02	Adriana	Good	417	259	42	5	9	5	5	5	No	Yes	Talon
+2023-03-02	Lua												
+2023-03-02	Lua												
+2023-03-02	Laura												
+2023-03-03	Laura	Good	96	65.7	57.9	4	8	5	4	4	No	No	
+2023-03-03	Lua	Good	192.15	250.45	57	4	8.5	5	5	5	No	No	
+2023-03-03	Fraile												
+2023-03-03	Lua												
+2023-03-03	Lua												
+2023-03-04	Fraile	Good	99.43	97.87	41	5	8.3	5	5	5		Yes	Las manos/meñiques.
+2023-03-03	Laura												
+2023-03-04	Lua	Good	165.48	165.25	48	4	8	5	5	5	No	No	
+2023-03-04	Vivi	Good	155.67	193.06	64	5	8.3	5	5	5	Yes	No	
+2023-03-04	Laura	Good	111	74.8	51	4	8	5	4	4	No	No	
+2023-03-04	Adriana	Good	441	400	46	5	9	5	5	5	No	Yes	"Un poco el talón , pero muchísimo mejor "
+2023-03-04	Fraile												
+2023-03-04	Lua												
+2023-03-04	Vivi												
+2023-03-05	Fraile	Good	69.26	73	42		8.3	5	5	5		Yes	Meñiques y manos.
+2023-03-05	Vivi	Good	137.99	160.45	60	5	7	5	5	5	No	No	
+2023-03-05	Lua	Okay	200.66	218.07	65	4	7	5	5	5	No	No	
+2023-03-05	Fraile												
+2023-03-05	Lua												
+2023-03-05	Laura												
+2023-03-06	Fraile	Good	137.72	115.41	36	5	8	5	4	3		Yes	Golpes del campeonato en general y golpe en la espalda.
+2023-03-07	Fraile	Good	122.51	122.85	35	4	7	5	5	4		Yes	el golpe en la espalda.
+2023-03-07	Fraile												
+2023-03-08	Iker	Good	55.9	70.6	64.9	5	8	5	5	5	Yes	Yes	El tobillo izquierdo
+2023-03-08	Fraile	Good	124.65	119.25	35	5	7	5	5	4		Yes	La espalda y las manos.
+2023-03-07	Laura	Good	54.4	57	56.3	4	8	5	3	4	No	Yes	
+2023-03-08	Laura	Good	99.4	165.6	61.1	5	9	5	3	5	Yes	Yes	
+2023-03-08	Fraile												
+2023-03-08	Laura												
+2023-03-09	Laura	Good	117.5	99.6	49.2	5	6	5	5	4	No	Yes	
+2023-03-09	Vivi					4	6	5	4	3	No	Yes	Dolor en el cuello 
+2023-03-09	Lua	Good	144	125	50	4	7	5	3	4	No	Yes	
+2023-03-09	Fraile	Good	103.62	107.77	35	5	7	5	4	5		Yes	Las manos. 
+2023-03-09	Lua												
+2023-03-09	Vivi												
+2023-03-09	Laura												
+2023-03-10	Laura	Good	114.9	95.3	52.7	5	6	5	5	4	No	No	
+2023-03-10	Lua	Good	185	153	45	4	8	5	4	4	No	No	
+2023-03-10	Vivi	Good	170.75	250.37	51	5	7	5	5	5	No	No	
+2023-03-09	Adriana	Good	410	240	57	5	9	5	5	5	No	Yes	Un poco el talón y un poco la tibia izqyierda
+2023-03-10	Norberto	Good	42.73	49.51	69	3	7	4	2	2			
+2023-03-09	Fraile												
+2023-03-10	Fraile	Good	99.73	104.98	37	5	9.3	5	5	5		Yes	Las manos.
+2023-03-10	Vivi												
+2023-03-10	Laura												
+2023-03-10	Fraile												
+2023-03-11	Laura	Good	99.7	91	57.4	5		5	4	4	No	No	
+2023-03-10	Lua												
+2023-03-11	Lua	Good	109	77	43	4	9.3	5	4	4	No	No	
+2023-03-11	Laura												
+2023-03-11	Fraile	Good	93.02	98.12	38	5	7	5	4	4		Yes	"La espalda, me la ha mirado Maria y estoy mejor."
+2023-03-11	Lua												
+2023-03-11	Lua												
+2023-03-12	Lua	Good	151	132	43	4	10	5	5	4	No	No	
+2023-03-12	Laura	Okay	46	112.4	83.9	5	9	5	4	5	No	No	
+2023-03-12	Fraile	Good	86.5	97.8	44	5	9.3	5	5	5		Yes	Un poco la espalda.
+2023-03-13	Vivi	Good	129.09	133.19	48	5	4.3	5	5	5	No	No	Dormí poco porque me levanté a las 3 y luego ya no me podia dormir otra vez
+2023-03-13	Laura	Good	119.2	137.8	56.2	5	6	5	5	5	No	No	
+2023-03-13	Lua	Good	164.89	145.59	46	4	8.5	5	5	5	No	No	
+2023-03-13	Adriana	Good	378	352	52	5	8.5	5	5	5	No	No	
+2023-03-13	Fraile	Good	148.61	148.51	36	5	9	5	5	5		No	
+2023-03-13	Iker	Good	57.2	76.2	64.5	5	9	5	5	5	Yes	Yes	"En tobillo derecho, este finde semana me incremento  el dolor"
+2023-03-13	Lua												
+2023-03-13	Vivi												
+2023-03-13	Laura												
+2023-03-13	Fraile												
+2023-03-14	Vivi	Poor	164.51	181.88	47	5	8	5	4	5	No	Yes	Agujetas en los abductores 2/10
+2023-03-14	Lua	Good	166.89	209.55	54	4	8	5	5	5	No	No	
+2023-03-14	Iker	Good	27.9	38.5	68.8	3	6	3	5	5	Yes	Yes	Tobillo derecho
+2023-03-14	Laura	Good	65.1	88.8	76	4	5	5	4	4	No	No	
+2023-03-14	Fraile	Good	150.55	158.2	39	5	7	5	5	4		Yes	La espalda.
+2023-03-14	Lua												
+2023-03-14	Laura												
+2023-03-14	Fraile												
+2023-03-15	Vivi	Good	188.36	197.5	54	5	7	5	5	5	No	No	
+2023-03-15	Lua	Good	184	154	44	4	8	5	5	5	No	No	Te he puesto el hrv de la aplicación porqué por el pulsometro me salió pobre y me salia mal
+2023-03-15	Fraile	Good	128.6	125.23	38	5	5	2	5	4		No	
+2023-03-15	Laura	Good	56.7	99.6	72.7	4	7	4	4	3	No	No	
+2023-03-15	Norberto	Good	106.42	131.23	60	3	8	4	2	3		Yes	cargado el gemelo y las rodillas
+2023-03-15	Iker	Good	40.1	51.7	58.9	3	7	4	5	5	Yes	Yes	Tobillo izquierdo
+2023-03-15	Fraile												
+2023-03-15	Lua												
+2023-03-15	Laura												
+2023-03-15	Fraile												
+2023-03-16	Lua	Good	209.43	237.15	57	5	6.5	5	5	5	No	No	
+2023-03-16	Laura	Good	129.3	108.5	59.4	4	7	4	4	4	No	No	
+2023-03-16	Fraile	Good	85.92	110.65	41	5	8.3	5	5	4		Yes	La espalda.
+2023-03-16	Norberto	Good	126.09	127.33	58	4	8	4	3	3		Yes	dolor del gemelo
+2023-03-16	Lua												
+2023-03-16	Fraile												
+2023-03-17	Fraile	Good	125.36	128.04	39	4	6	4	5	4		No	
+2023-03-17	Vivi	Good	133.3	151.73	59	5	9	5	5	5	No	No	
+2023-03-17	Lua	Good	149.27	129.76	42	4	10	5	5	5	No	No	
+2023-03-17	Laura	Good	77.4	50.7	57.5	5	10	5	5	5	Yes	No	
+2023-03-17	Lua												
+2023-03-17	Vivi												
+2023-03-17	Fraile												
+2023-03-18	Lua	Good	208.71	208.37	57	4	8	5	5	5	No	No	
+2023-03-18	Vivi	Good	115.84	162.97	68	5	8	5	5	5	No	No	
+2023-03-17	Laura												
+2023-03-18	Laura	Good	179.8	112.2	58	4	9	5	5	5	Yes	No	
+2023-03-19	Lua	Poor	140.38	196.85	63	4	5.5	5	3	2	No	No	
+2023-03-19	Laura	Good	113	95.5	50.2	5	7	5	1	4	Yes	Yes	Hombro 
+2023-03-19	Vivi	Good	199.48	224.49	67	5	5	5	5	4	No	Yes	El tendón de aquiles 6/10
+2023-03-18	Fraile												
+2023-03-19	Fraile	Good	142.37	143.77	45	5	9	5	2	2	Yes	Yes	"Bastantes golpes, zona del psoas y dedo pulgar de la mano, pero solo son golpes."
+2023-03-20	Lua	Good	172	121	49	4	10	5	4	4	No	No	
+2023-03-20	Vivi	Good	130.03	107.01	46	5	11.3	5	4	5	No	Yes	Tendón de aquiles 6/10
+2023-03-20	Fraile	Good	150.69	141.3	43	5	7	5	3	3	Yes	Yes	Los golpes en manos lo mas importante.
+2023-03-20	Laura	Good	90	90.6	57.8	5	9	5	2	5	Yes	Yes	Hombroo 
+2023-03-20	Adriana	Good	385	264	43	5	9	5	5	5	No	Yes	Ciático 
+2023-03-20	Laura												
+2023-03-20	Fraile												
+2023-03-21	Lua	Good	155	139	46	4	7.5	5	5	4	No	No	
+2023-03-21	Vivi	Good	133.63	161.65	66	5	7.3	5	5	5	No	Yes	5/10
+2023-03-21	Laura	Good	83.6	59	51.5	5	7	5	4	5	No	Yes	Hombro
+2023-03-21	Fraile												
+2023-03-21	Lua												
+2023-03-21	Laura												
+2023-03-22	Laura	Good	103.4	95.6	50.7	4	6	5	4	4	No	Yes	Hombro 
+2023-03-22	Vivi	Good	182.82	196.36	65	5	7	5	5	5	No	Yes	Tendón 5/10
+2023-03-22	Lua	Good	148.55	160.65	50	4	8	5	5	5	No	No	
+2023-03-22	Fraile	Good	148.5	177.58	44	4	7	4	4	4	Yes	Yes	Un poco el dedo del pie.
+2023-03-23	Laura												
+2023-03-22	Fraile												
+2023-03-23	Vivi	Good	213.9	240.9	57	5	6	5	5	5	No	Yes	Aquiles 5/10
+2023-03-23	Laura	Good	90	62.2	50.9	4	6	5	4	4	No	Yes	Hombro 
+2023-03-23	Lua	Good	140.7	192.13	53	4	7	5	5	5	No	No	
+2023-03-23	Fraile	Good	190.45	182.57	38	4	7.3	5	4	4	Yes	Yes	El dedo del pie.
+2023-03-23	Norberto	Good	92.41	125.06	59	3	8	4	4	4		No	
+2023-03-23	Vivi												
+2023-03-24	Laura												
+2023-03-23	Fraile												
+2023-03-24	Laura	Good	94	101.4	56.7	5	6	5	4	4	No	Yes	Hombro
+2023-03-24	Fraile	Good	106.37	113.54	41	4	6	5	5	4		Yes	El dedito del pie.
+2023-03-24	Vivi	Good	155.1	177.45	60	5	8	5	5	5	No	Yes	"Talon 2/10 al estirarlo solamente nada grave , rodilla 1/10 al estirarlo"
+2023-03-24	Iker	Good	35.3	50.1	71.7	4	8	4	5	5	Yes	No	Estoy malo
+2023-03-24	Norberto	Good	93.55	106.52	58	3	7	4	4	4			
+2023-03-24	Fraile												
+2023-03-25	Lua	Good	182	129	45	4	9	5	5	5	No	No	
+2023-03-25	Fraile	Good	107.79	116.69	38	4	7	5	5	5	Yes	Yes	El dedo del pie.
+2023-03-25	Vivi	Good	161.05	146.72	50	5	8	5	4	5	No	Yes	"Agujetas glúteos 4/10, brazos 2/10 y piernas 1/10, aquiles 1/10"
+2023-03-25	Laura	Good	63	74.5	66.2	4	8	5	4	4	No	Yes	Hombro 
+2023-03-25	Fraile												
+2023-03-26	Lua	Good	117	139	40	4	7	5	5	5	No	No	
+2023-03-26	Fraile	Good	96.31	89.85	38	5	7	5	5	5	Yes	Yes	El dedo del pie.
+2023-03-26	Vivi	Good	202.78	201.28	50	5	9	5	4	5	No	Yes	"Agujetas 3/10, Aquiles 1/10"
+2023-03-26	Laura	Good	106.7	100.4	65.8	4	9	5	5	4	No	Yes	Un poco el hombro
+2023-03-26	Fraile												
+2023-03-27	Norberto	Good	80.88	101.79	57	3	4	3	4	3			
+2023-03-27	Fraile	Good	110.92	105.07	35	5	9	5	4	4	Yes	Yes	Dedo del pie y de la mano.
+2023-03-27	Laura	Good	77.8	70.2	58.2	5	9	5	5	5	No	Yes	Un poco en el hombro 
+2023-03-27	Fraile												
+2023-03-28	Adriana	Good	408	309	49	5	9.5	5	5	5	No	No	
+2023-03-28	Lua	Okay	102.92	117.37	42	4	8	5	5	5	No	No	"El jetlag va muy bien, he dormido toda la noche"
+2023-03-28	Vivi	Good	121.77	114.9	46	5	9.2	5	5	5	No	No	Jet lag va muy bien he dormido toda la noche
+2023-03-28	Fraile	Good	108.51	96.43	38	5	6.3	5	5	3	Yes	Yes	El dedo del pie y de la mano.
+2023-03-28	Norberto	Good	74.5	116.97	61	3	4	3	4	3			
+2023-03-28	Laura	Good	56.8	85.1	71.4	4	10	5	5	5	No	Yes	Un poco el hombro 
+2023-03-28	Fraile												
+2023-03-28	Laura												
+2023-03-29	Lua	Good	178.79	208.41	45	4	9	5	5	5	No	No	
+2023-03-29	Vivi	Good	191.05	191.33	53	5	9	5	5	5	No	No	Jet lag esta bien
+2023-03-29	Laura	Good	83.7	111.2	64.5	5	6	5	4	4	No	Yes	En el hombro 
+2023-03-29	Fraile	Good	170.74	224.13	36	4	5.3	3	5	4	Yes	Yes	El dedo del pie.
+2023-03-30	Vivi	Good	139.79	116.69	46	5	8	5	5	5	No	No	
+2023-03-29	Laura												
+2023-03-29	Fraile												
+2023-03-30	Lua	Good	204.76	235.03	49	4	9.5	5	5	5	No	No	
+2023-03-30	Norberto	Good	73.13	109.62	63	4	5	4	4	4			
+2023-03-30	Laura	Good	68.7	117	77.8	5	8	5	5	5	No	Yes	Un poco el hombro 
+2023-03-30	Fraile	Good	108.05	91.69	40	5	8	5	5	5		Yes	Dedo del pie.
+2023-03-31	Lua	Good	211.53	174.59	59	4	8	5	5	5	No	No	
+2023-03-31	Vivi	Good	192.53	202.05	57	5	6.5	5	4	4	No	Yes	Lumbar 9/10
+2023-03-31	Laura	Good	63.9	71.9	83.7	5	7	5	5	5	No	Yes	Un poco el hombro 
+2023-03-30	Laura												
+2023-03-30	Fraile												
+2023-03-31	Fraile	Good	116.47	115.58	41	5	7	5	1	4		No	
+2023-04-01	Fraile	Good	131.5	138.81	43	5	6	5	2	4	Yes	No	
+2023-04-01	Lua	Okay	129.89	191.09	53	4	8	5	5	5	No	Yes	
+2023-03-31	Laura												
+2023-04-01	Laura	Good	110.1	83.4	60.5	5	7	5	4	4	No	Yes	Un pco el hombro 
+2023-04-01	Fraile												
+2023-04-03	Vivi	Good	180.42	227.65	66	5	8	5	5	5	No	Yes	"Espalda 5/10, rodilla 3/10"
+2023-04-03	Norberto	Good	108.55	112.25	57	4	6	4	4	4			
+2023-04-04	Laura	Good	94.7	78.1	51.3	4	7	5	5	4	No	Yes	Un poco en el hombro 
+2023-04-04	Fraile	Good	143.12	164.98	50	5	6.3	5	4	5	Yes	No	
+2023-04-05	Norberto	Good	96.68	99		4	7	4	4	4			
+2023-04-05	Vivi	Good	176.63	183.89	67	5	10	5	4	4	No	Yes	Lumbar 5/10
+2023-04-05	Lua	Good	183.83	212.24	58	5	11	5	5	5	No	No	
+2023-04-05	Fraile	Good	175.59	192.88	48	5	9.3	5	5	5	Yes	No	
+2023-04-05	Vivi												
+2023-04-05	Fraile												
+2023-04-06	Lua	Good	173.56	204.47	54	4	8	5	5	5	No	No	
+2023-04-06	Laura	Good	121.4	99.9	55	4	7	5	5	4	No	Yes	Un poco el hombro
+2023-04-06	Fraile	Good	113.11	148.4	47	5	8	5	5	5	Yes	No	
+2023-04-06	Laura												
+2023-04-07	Lua	Good	180.98	181.16	51	4	10	5	5	5	No	No	
+2023-04-07	Vivi	Good	128.39	190	56	5	10	5	5	5	No	Yes	Lumbar 4/10
+2023-04-06	Fraile												
+2023-04-06	Fraile												
+2023-04-07	Fraile	Good	115.07	157.88	43	5	7.3	5	3	4	Yes	No	
+2023-04-07	Fraile												
+2023-04-07	Laura	Good	97.4	91.5	74.2	5	7	5	4	4	No	Yes	Un poco en le hombro 
+2023-04-08	Vivi	Good	111.91	112.25	68	5	9	5	5	5	No	Yes	Lumbar 4/10
+2023-04-08	Lua	Good	171.45	208.5	62	4	9	5	5	5	No	No	
+2023-04-08	Laura	Good	113.8	104.5	57.3	4	7	5	4	4	No	Yes	Un poco el hombro 
+2023-04-09	Vivi	Good	156.88	135.21	60	5	10	5	4	5	No	Yes	"Lumbar 4/10 , rodilla en el interior 4/10"
+2023-04-09	Lua	Good	137.45	172.63	65	4	10	5	5	5	No	No	
+2023-04-08	Laura												
+2023-04-09	Laura	Good	69.8	60.8	62	5	9	5	5	5	No	Yes	Un poco en hombro 
+2023-04-09	Fraile	Good	146.34	138.63	43	2	8.3	5	5	5	No	No	
+2023-04-10	Lua	Good	180.82	193.57	50	4	4.5	5	5	5	No	No	
+2023-04-10	Fraile	Good	131.6	184.04	39	2	4	3		4		No	
+2023-04-10	Laura	Good	163.9	139.8	55.4	4	7	5	4	4	No	Yes	Un pcoo el hombro 
+2023-04-10	Adriana	Good	386	276	55	5	9	5	5	5	No	No	
+2023-04-10	Fraile												
+2023-04-10	Fraile												
+2023-04-11	Lua	Good	206	139	46	4	8.5	5	5	5	No	No	
+2023-04-11	Fraile	Good	155.28	156.93	40	3	6.3	5	5	5	Yes	Yes	el dedo del pie.
+2023-04-11	Vivi	Good	192.39	216.07	58	5	8	5	5	5	No	Yes	"Lumbar 4/10, rodilla 2/10"
+2023-04-11	Fraile												
+2023-04-12	Vivi	Good	216.28	191.68	52	5	7.3	5	5	5	Yes	Yes	"Lumbar 3/10, rodilla interna 1/10"
+2023-04-12	Lua	Good	135.23	135.18	56	4	8	5	5	5	No	No	
+2023-04-12	Fraile	Good	119.92	98.7	38	4	6.3	5	4	4		No	
+2023-04-12	Fraile												
+2023-04-13	Vivi	Poor	202.34	216.63	64	5	5.2	5	5	5	Yes	Yes	Lumbar 3/10
+2023-04-13	Fraile	Good	110.29	115.61	39	3	8	5	5	4	Yes	No	
+2023-04-13	Fraile												
+2023-04-14	Fraile	Good	134.13	150.12	38	4	6	3	5	4	Yes	No	
+2023-04-14	Vivi												
+2023-03-15	Fraile	Good	102.96	132.19	43	4	7	5	5	4	Yes	No	
+2023-04-14	Fraile												
+2023-04-15	Fraile	Good	102.96	132.19	38	4	8	5	5	4		No	
+2023-04-16	Fraile												
+2023-04-17	Lua	Okay	121.62	125.86	67	4	5	5	5	4	No	No	
+2023-04-17	Fraile	Good	143.69	144.53	42	4	8	5	2	3		Yes	el codo y el meñique de la mano.
+2023-04-17	Vivi	Good	213.69	290.46	59	5	5	5	5	4		Yes	Lumbar 2/10
+2023-04-17	Vivi												
+2023-04-18	Lua	Okay	206.63	214.04	60	4	7	5	5	5	No	No	
+2023-04-18	Vivi	Good	160.44	173.17	56	5	7	5	5	4	No	Yes	Lumbar 2/10
+2023-04-18	Adriana	Good	390	272	53	5	8.5	5	5	5	No	No	
+2023-04-18	Fraile	Good	119.76	107.16	35	4	8	5	4	5		Yes	el codo y el dedo de la mano
+2023-04-18	Laura	Okay	48.5	55.2	68	5	7	5	4	5	No	Yes	Rodilla
+2023-04-19	Lua	Good	198	148	49	4	7	5	5	5	No	No	
+2023-04-19	Vivi	Good	158.73	162.19	53	5	7	5	5	4	No	Yes	"Rodilla interna pata de ganso 2/10, lumbar 1/10, cadera 1/10"
+2023-04-19	Fraile	Good	134.02	113.27	37	4	8	5	5	5		Yes	el codo y el dedo de la mano
+2023-04-19	Lua												
+2023-04-19	Vivi												
+2023-04-20	Laura	Good	69.9	128.8	69	5	6	5	5	5	No	Yes	La rodilla 
+2023-04-20	Lua	Good	154	137	52	4	7	5	5	5	No	No	
+2023-04-20	Vivi	Good	167.59	145.86	52	5	6	5	5	5	No	Yes	Rodilla interna 2/10
+2023-04-20	Fraile	Good	91.49	129.26	50	4	9	4	5	5		Yes	codo y dedo de la mano
+2023-04-20	Lua												
+2023-04-20	Vivi												
+2023-04-20	Laura												
+2023-04-21	Lua	Good	153.3	182.24	53	4	5.5	5	4	5	No	Yes	Isquio 5/10
+2023-04-21	Vivi	Good	190.45	206.57	51	5	5	5	5	5	No	Yes	Rodilla 2/10
+2023-04-21	Fraile	Good	160.61	166.99	37	5	5	5	5	5	Yes	Yes	el codo y el dedo de la mano
+2023-04-21	Laura	Okay	39	59	79	4	7	5	5	4	No	Yes	2
+2023-04-21	Lua												
+2023-04-21	Laura												
+2023-04-22	Fraile	Good	135.68	126.74	40	4	6.3	5	5	5		Yes	el codo 
+2023-04-22	Laura	Good	63.7	68.4	69.9	5	7	5	5	5	No	Yes	2
+2023-04-22	Lua	Good	120.79	125.63	54	4	9	5	4	5	No	No	
+2023-04-22	Vivi	Good	138.55	156.48	54	5	8.3	5	5	5	No	Yes	Rodilla 2/10
+2023-04-22	Lua												
+2023-04-23	Lua	Good	179	126	50	4	10	5	5	5	No	No	
+2023-04-23	Vivi	Good	162.4	225.63	55	5	8.3	5	4	5	No	Yes	"Rodilla interna 3/10, el codo al doblar 5/10"
+2023-04-24	Lua	Good	146.89	176.81	52	4	8	5	5	5	No	No	
+2023-04-24	Vivi	Good	107.04	128.3	45	5	7.3	5	5	5	No	Yes	"Rodilla interna 2/10, codo al doblar 4/10, agujetas en los hombros "
+2023-04-24	Laura	Good	104.3	77.2	58.2	4	6	5	4	4	Yes	Yes	3
+2023-03-24	Fraile	Good	164.68	153.03	37	5	6	5	5	5		Yes	codo y dedo de la mano
+2023-04-25	Fraile	Good	125.62	125.39	38	4	4.3	5	4	4		Yes	el codo y el dedo de la mano
+2023-04-25	Vivi	Good	147.09	205.37	52	5	7.3	5	5	5	No	Yes	"Rodilla interna 1/10, codo 4/10"
+2023-04-25	Lua	Good	155.44	179.44	57	4	8	5	5	5	No	No	
+2023-04-24	Laura												
+2023-04-25	Laura	Okay	49.5	72.4	78.8	4	7	5	4	4	Yes	Yes	2
+2023-04-25	Fraile												
+2023-03-25	Fraile												
+2023-04-25	Laura												
+2023-04-26	Lua	Good	179.98	164.64	52	4	8	5	5	5	No	No	
+2023-04-26	Vivi	Good	205.23	224.56	53	5	7	5	5	5	No	Yes	"Rodilla interna 1/10, el codo me lo trataron y No me duele"
+2023-04-26	Fraile	Good	109.01	126.05	44	5	6.3	5	4	4		Yes	Codo y dedo de la mano
+2023-04-26	Laura	Okay	25.9	53.8	95.8	4	7	5	5	4	Yes	No	
+2023-04-26	Fraile												
+2023-04-27	Fraile	Good	127.19	125.81	46	5	9	5	5	5		Yes	El codo y el dedo de la mano.
+2023-04-26	Laura												
+2023-04-27	Laura	Good	57.9	41.5	61.1	4	7	5	5	5	No	No	
+2023-04-27	Fraile												
+2023-04-28	Laura	Good	117.6	84.5	59.1	4	7	4	5	4	No	No	
+2023-04-28	Vivi	Good	150.56	148.26	53	5	9.3	5	5	5	No	No	
+2023-04-28	Lua	Good	150.13	182.7	64	4	9.5	5	5	5	No	No	
+2023-04-28	Fraile	Good	130.64	155.31	45	5	8.3	5	4	5		Yes	El codo y el dedo de la mano.
+2023-04-29	Lua	Good	186.68	234.87	66	4	9.5	5	5	5	No	No	
+2023-04-29	Fraile	Good	132.78	140.65	40	5	6.3	5	4	4		Yes	el codo
+2023-04-29	Vivi	Good	112.99	155.61	65	5	9.3	5	5	5	No	No	
+2023-04-30	Lua	Good	207.99	224.08	55	4	9.5	5	5	5	No	No	
+2023-04-30	Vivi	Good	167.28	178.18	56	5	9	5	5	5	No	No	
+2023-04-29	Laura	Good	80.7	65.1	65	5	9	5	5	5	No	No	
+2023-04-30	Fraile	Good	116.37	124.89	45	5	10	5	5	5		Yes	El codito. 
+2023-04-30	Laura	Good	66.2	70.2	63	5	10	5	5	5	No	No	
+2023-04-29	Fraile												
+2023-05-01	Fraile	Good	127.35	134.95	39	5	7	5	5	5		Yes	el codo
+2023-05-01	Laura	Good	94.4	74.5	60.4	5	8	5	5	5	No	No	
+2023-05-01	Fraile												
+2023-05-02	Lua	Good	238	148	47	4	10.5	5	5	5	No	No	
+2023-05-02	Fraile	Good	168.58	154.79	41	5	8.3	5	4	5		Yes	el codo
+2023-05-02	Laura	Good	59.2	44.3	62.1	5	8		1	1	No	No	
+2023-05-02	Laura												
+2023-05-03	Laura	Good	82.6	69.2	55.5	4	7	5	5	4	No	No	
+2023-05-03	Vivi	Good	124.26	125.97	62	5	7	5	5	5	No	No	
+2023-05-03	Lua	Good	119.59	174.22	57	4	7.5	5	5	5	No	No	
+2023-05-03	Fraile	Good	108.59	119.54	44	4	5.3	3	5	5		Yes	el codo
+2023-05-02	Fraile												
+2023-05-04	Lua	Good	180.95	170.79	49	4	7	5	5	5	No	No	
+2023-05-04	Vivi	Good	170.55	165.55	45	5	6	5	5	5	No	No	
+2023-05-03	Fraile												
+2023-05-04	Fraile	Good	109.79	140.24	49	5	6.3	5	5	5		Yes	el codo
+2023-05-04	Fraile												
+2023-05-05	Vivi	Poor	80.1	80.11	43	5	6	5	5	5	Yes	No	
+2023-05-05	Lua	Good	161	114	46	4	6.5	5	5	5	No	Yes	Lumbar 2/10
+2023-05-05	Fraile	Good	135.04	144.15	45	5	7.3	5	5	5	Yes	Yes	el codo
+2023-05-05	Laura	Good	140.9	111.4	57.2	5	6	5	5	5	No	No	
+2023-05-06	Fraile	Good	136.63	143.32	44	5	7.3	3	5	5		Yes	el codo
+2023-05-05	Fraile												
+2023-05-06	Lua	Good	180	141	48	4	10	5	5	5	No	No	
+2023-05-06	Laura	Good	130	102	58.6	5	8	5	5	5	No	No	
+2023-05-06	Vivi	Good	159.81	132.05	44	5	10	5	5	5	Yes	No	
+2023-05-08	Lua	Okay	135.24	127.27	43	4	7	5	5	5	No	No	
+2023-05-08	Vivi	Good	146.97	107.4	43	5	7	5	5	5	Yes	No	
+2023-05-08	Adriana	Good	465	361	46	5	9	5	5	5	No	No	
+2023-05-08	Fraile	Good	150.52	187.04	43	5	6	3	4	4	Yes	Yes	El codo.
+2023-05-08	Fraile												
+2023-05-09	Fraile	Good	141.38	171.82	45	4	6	3	5	5	Yes	Yes	El codo.
+2023-05-09	Vivi	Good	220.92	191.59	51	5	8.2	5	5	5	Yes	No	
+2023-05-09	Lua	Good	198.75	182.07	53	4	9	5	5	5	No	No	
+2023-05-09	Adriana	Good	441	284	43	5	8.5	5	5	5	No	No	
+2023-05-09	Fraile												
+2023-05-10	Fraile	Good	139.91	142.76	39	5	6.3	5	5	4	Yes	Yes	el codo
+2023-05-10	Lua	Okay	150.23	186.52	68	4	8.5	5	5	5	No	No	
+2023-05-10	Vivi	Good	235.74	202.03	55	5	8	5	5	5	No	No	
+2023-05-10	Adriana	Good	409	297	60	5	9	5	5	5	No	No	
+2023-05-11	Lua	Good	144.59	183	55	4	9.5	5	5	5	No	No	
+2023-05-11	Vivi	Good	199.24	203.03	59	5	9	5	5	5	No	No	
+2023-05-10	Fraile												
+2023-05-11	Fraile	Good	147.16	150.5	44	5	6.3	3	5	4		Yes	el codo
+2023-05-12	Vivi	Good	160.53	207.36	62	5	7.4	5	5	5	No	No	
+2023-05-12	Lua	Good	200.44	223.83	57	4	8	5	5	5	No	No	
+2023-05-12	Adriana	Good	583	361	44	5	7	5	4	4	No	No	
+2023-05-11	Fraile												
+2023-05-12	Fraile	Good	139.58	153.85	39	5	7.15	4	4	4		Yes	El codo
+2023-05-13	Lua	Good	207.46	206.04	53	4	8	5	5	5	No	No	
+2023-05-13	Vivi	Good	209.14	227.23	57	5	8.3	5	4	5	No	Yes	Rodilla 3/10
+2023-05-12	Fraile												
+2023-05-13	Fraile	Good	110.55	133.65	39	4	7	3	5	4		Yes	Codo
+2023-05-15	Lua	Okay	162.64	181.94	44	4	8	5	4	5	No	Yes	El cuello
+2023-05-15	Vivi	Good	301.73	292.52	55	5	7.4	5	5	5	No	Yes	Rodilla 2/10
+2023-05-15	Fraile	Good	130.87	144.43	37	4	6.3	4	5	5		Yes	El codo
+2023-05-15	Adriana	Good	449	295	44	5	10	5	5	5	No	No	
+2023-05-15	Fraile												
+2023-05-15	Vivi												
+2023-05-16	Lua	Good	236.98	230.19	47	4	7.5	5	5	5	No	No	
+2023-05-16	Vivi	Good	155.28	129.61	45	5	7.3	5	5	5	No	Yes	Rodilla 1/10
+2023-05-16	Fraile	Good	138.99	129.16	38	5	6.3	4	5	5	Yes	Yes	El codo
+2023-05-16	Adriana	Good	441	316	42	5	9	5	5	5	No	No	
+2023-05-16	Vivi												
+2023-05-17	Lua	Good	151.51	165.64	44	4	5.5	5	5	4	No	No	
+2023-05-17	Vivi	Good	146.72	159.18	47	5	5	5	5	4	No	Yes	Rodilla 4/10 
+2023-05-16	Fraile												
+2023-05-17	Vivi												
+2023-05-17	Fraile	Good	170.86	211.81	41	4	7	5	4	4	Yes	Yes	El codo
+2023-05-17	Fraile												
+2023-05-17	Vivi												
+2023-05-18	Lua	Good	252	157	41	4	7.5	5	5	5	No	No	
+2023-05-18	Vivi	Good	127	115	45	5	7	5	4	5	No	Yes	"Rodilla 2/10, lumbar izquierdo 4/10 me dio un tirón. Los datos no son con el pulsometro"
+2023-05-18	Fraile	Good	133.08	128.28	38	4	6	4	5	3		Yes	El codo
+2023-05-18	Fraile												
+2023-05-18	Fraile												
+2023-05-19	Fraile	Good	132.86	148.29	37	5	6	5	5	5	Yes	Yes	"El codo, pero tengo muchisima movilidad ya."
+2023-05-19	Lua	Okay	205.94	236.36	47	4	7.5	5	5	5	No	No	
+2023-05-19	Vivi	Good	146.73	131.7	46	5	6	5	5	5	No	Yes	"Rodilla 1/10, lumbar 2/10"
+2023-05-19	Adriana	Good	505	321	46	5	8.5	5	5	5	No	No	
+2023-05-20	Lua	Okay	172.78	120.88	44	4	9.5	5	5	5	No	No	
+2023-05-20	Vivi	Good	206.39	194.2	55	5	9.3	5	5	5	No	Yes	Rodilla 1/10
+2023-05-21	Lua	Okay	215.15	196.27	51	4	8.5	5	5	5	No	No	
+2023-05-21	Vivi	Good	198.11	211.92	52	5	8	5	5	5	No	No	Rodilla 1/10
+2023-05-23	Vivi	Good	185.82	236.89	64	5	5	5	5	5	No	Yes	Rodilla 1/10
+2023-05-23	Lua	Good	124.95	127.16	44	4	5	5	5	4	No	No	
+2023-05-23	Fraile	Good	108.02	113.77	41	5	6.3	5	3	4	Yes	Yes	El codo y algunos golpes 
+2023-05-23	Adriana	Good	497	396	48	5	8	5	5	5	No	No	
+2023-05-23	Fraile												
+2023-05-24	Lua	Okay	161.08	224.35	52	4	7.5	5	5	5	No	No	
+2023-05-24	Vivi	Good	215.57	244.91	55	5	7	5	5	5	No	Yes	"Rodilla 1/10 , caderas 1/10"
+2023-05-24	Fraile	Good	184.92	170.01	39	5	7.3	5	5	5	Yes	Yes	El codo
+2023-05-25	Lua	Good	292	205	46	4	6	5	5	4	No	No	
+2023-05-24	Fraile												
+2023-05-25	Fraile	Good	159.43	151.07	39	5	7	5	5	5	Yes	Yes	El codo
+2023-05-25	Adriana	Good	400	320	42	5	9	5	5	5		No	
+2023-05-25	Fraile												
+2023-05-26	Fraile	Good	133.29	162.42	39	5	6.3	5	5	4	Yes	Yes	El codo
+2023-05-26	Vivi	Good	205.64	232.99	56	5	9.3	5	5	5	No	Yes	Rodilla 6/10
+2023-05-27	Lua	Good	179.21	202.82	54	4	7	5	5	5	No	No	
+2023-05-27	Vivi	Good	142.8	110.14	48	5	7	5	5	5	No	Yes	Rodilla 6/10
+2023-05-27	Adriana	Good	431	354	41	5	9.5	5	5	5	No	Yes	Un poco de molestia en el dedo gordo del pie 
+2023-05-26	Fraile												
+2023-05-27	Fraile	Good	138.82	126.93	42	5	7	5	5	5	Yes	Yes	El codo
+2023-05-28	Vivi	Good	134.32	161.16	67	5	9	5	5	5	No	Yes	Rodilla 4/10
+2023-05-28	Lua	Good	135.1	123.09	44	4	9.5	5	5	5	No	No	
+2023-05-28	Fraile	Good	113.52	113.77	40	5	7.3	5	5	5	Yes	Yes	el codo
+2023-05-29	Lua	Good	151.61	175.9	52	4	7.5	5	5	5	No	No	
+2023-05-29	Vivi	Good	154.16	174.56	66	5	7.3	5	5	5	No		Rodilla 3/10
+2023-05-29	Adriana	Good	427	284	52	5	8.5	5	5	5	No	No	
+2023-05-29	Fraile												
+2023-05-30	Adriana	Good	410	358	46	5	9	5	5	5	No	No	
+2023-05-30	Fraile	Good	104.05	116.21	39	5	6.3	5	4	5	Yes	Yes	El codo
+2023-05-30	Lua	Good	146	149	49	5	9.5	5	5	4	No	No	
+2023-05-30	Vivi	Good	136	111	63	5	9	5	5	5	No	Yes	Rodilla 2/10
+2023-05-31	Lua	Poor	196.67	198.35	61	5	7.5	5	5	4	No	No	
+2023-05-31	Vivi	Good	223.09	207	61	5	7.3	5	5	3	No	Yes	"1,5/10 rodilla"
+2023-05-30	Fraile												
+2023-05-30	Fraile												
+2023-05-31	Fraile	Good	116.58	156.52	46	5	5	3	5	3	Yes	Yes	Codo
+2023-06-01	Lua	Good	104.63	110.29	59	4	8.5	5	5	5	No	No	
+2023-06-01	Vivi	Good	223.71	191.39	60	5	8.2	5	5	5	No	Yes	Rodilla 1/10
+2023-05-31	Fraile												
+2023-05-31	Fraile												
+2023-06-01	Fraile	Good	108.29	115.06	41	5	6.3	5	3	5	Yes	No	
+2023-05-02	Lua	Good	142.23	150.32	57	4	8.15	5	5	5	No	No	
+2023-06-02	Vivi	Good	159.3	195.63	66	5	8.15	5	5	5	No		Rodilla 1/10
+2023-06-02	Adriana	Good	395	230	42	5	7	5	5	4	No	No	
+2023-06-02	Fraile	Good	119.19	119.33	40	5	8.3	5	5	4	No	No	
+2023-06-03	Lua	Good	114.81	150.09	58	4	7.15	5	5	5	No	No	
+2023-06-03	Vivi	Good	188.18	225.4	60	5	7.15	5	5	5	No		Rodilla 1/10
+2023-06-03	Fraile	Good	189.45	196.65	41	5	8	5	5	4	Yes	No	
+2023-06-02	Fraile												
+2023-06-04	Vivi	Good	127.05	153.03	72	5	8.3	5	5	5	No	Yes	Rodilla 1/10
+2023-06-03	Fraile												
+2023-06-04	Fraile	Good	123.11	135.16	45	5	8.3	5	5	5	Yes	No	
+2023-06-05	Lua	Good	156	130	53	4	7	5	5	5	No	No	
+2023-06-05	Vivi	Good	162.66	162.77	64	5	7	5	3	4	No	Yes	Rodilla 2/10
+2023-06-05	Fraile	Good	133.98	167.18	43	5	6.3	5	5	5	Yes	No	
+2023-06-06	Lua	Good	233	253	53	4	6.5	5	5	5	No	No	
+2023-06-06	Vivi	Good	245	179	58	5	6.4	5	4	5	No	Yes	Rodilla 1/10
+2023-06-05	Fraile												
+2023-06-05	Fraile												
+2023-06-06	Fraile	Good	125.62	175.54	42	4	5	2	3	3	Yes	No	
+2023-06-06	Adriana	Good	398	349	57	5	9.5	5	5	5	No	No	
+2023-06-07	Lua	Good	159	140	57	4	7	5	5	5	No	No	
+2023-06-07	Vivi	Good	88	70	46	5	8	5	5	5	No	Yes	Rodilla 1/10
+2023-06-07	Fraile	Good	147.88	187.35	36	5	5	3	5	4	Yes	No	
+2023-06-06	Fraile												
+2023-06-08	Lua	Good	103.02	129.87	66	4	7.5	5	5	5	No	No	
+2023-06-08	Vivi	Good	169.23	218.95	62	5	7	5	5	5	No	Yes	"Rodilla 1/10, todavia me molestan algunos movimientos y aveces si me cruje eso me molestan esos crujidos "
+2023-06-08	Fraile												
+2023-06-08	Fraile												
+2023-06-09	Vivi	Good	202.22	236.63	58	5	4.3	5	4	3	No	Yes	Rodilla 1/10
+2023-06-09	Lua	Good	124	122	46	4	5	5	4	5	No	Yes	Agujetas en los gluteos
+2023-06-09	Fraile	Good	116.73	124.41	44	5	7	5	3	5	Yes	No	
+2023-06-10	Vivi	Good	168	172	58	5	10	5	5	5	No	Yes	"Rodilla 1/10, si se me va para adentro o me cruje me duele pero sino va bastante bien"
+2023-06-10	Adriana	Good	413	291	50	5	8.5	5	5	5	No	No	
+2023-06-11	Fraile	Good	122.27	159.12	41	5	9.3	5	5	5	Yes	No	
+2023-06-12	Fraile	Good	144.46	126.48	35	5	7.3	5	5	5		No	
+2023-06-12	Fraile												
+2023-06-12	Fraile												
+2023-06-13	Fraile	Good	146.3	149.11	40	5	6	5	3	4		No	
+2023-06-13	Vivi	Good	174.94	186.6	69	5	8	5	5	5	Yes	Yes	"Rodilla, todavía me molesta en algunos gestos y si me cruje también molesta"
+2023-06-13	Lua	Good	89	85	48	4	8	5	5	5	No	No	
+2023-06-13	Adriana	Good	413	289	43	5	9	5	5	5	No	No	
+2023-06-13	Fraile												
+2023-06-13	Fraile												
+2023-06-14	Fraile	Good	108.36	88.48	36	4	6.3	5	4	4	Yes	Yes	"Algun golpe de ayer, nada importante"
+2023-06-14	Lua	Good	146	138	54	4	8.5	5	5	5	No	No	
+2023-06-14	Vivi	Good	171.41	232.5	66	5	8.5	5	5	5	Yes	Yes	"Rodilla, todavía me duele si pegó "
+2023-06-14	Fraile												
+2023-06-15	Fraile	Good	102.02	140.85	38	4	6	5	5	3		No	
+2023-06-15	Lua	Good	157	122	53	4	8	5	5	5	No	No	
+2023-06-15	Vivi	Good	206.68	172.73	55	5	8	5	5	5	Yes	Yes	Rodilla 
+2023-06-15	Fraile												
+2023-06-15	Fraile												
+2023-06-16	Fraile	Good	110.95	137.27	40	4	6	3	4	3	Yes	No	
+2023-06-16	Vivi	Good	170.56	238.45	58	5	9	5	5	5	Yes	Yes	Rodilla 
+2023-06-16	Lua	Okay	159.29	199.74	68	4	8.5	5	5	5	No	No	
+2023-06-16	Adriana	Good	420	350	50	5	9	5	5	5	No	No	
+2023-06-17	Lua	Good	153	123	50	4	9.3	5	5	5	No	No	
+2023-06-18	Lua	Okay	126	107	48	4	9	5	2	3	No	Yes	"Me tiran los isquios, estan cargados. 6/10"
+2023-06-18	Laura	Good	116.5	154.5	60.3	4	9	5	5	5	No	No	
+2023-06-17	Fraile												
+2023-06-17	Fraile												
+2023-06-18	Fraile	Good	139.17	127.38	37	4	8	5	5	5	Yes	No	
+2023-06-19	Lua	Okay	133	133	44	4	8.3	5	4	5	No	No	
+2023-06-19	Vivi	Good	187.44	194.41	57	5	8.15	5	5	5	No	Yes	Rodilla 
+2023-06-19	Laura	Poor	28.6	97	82.6	4	7	5	5	4	No	No	
+2023-06-19	Fraile	Good	95.57	104.99	40	5	7	5	5	5	Yes	No	
+2023-06-20	Lua	Okay	159.92	152.84	51	4	8.5	5	5	5	No	No	
+2023-06-20	Vivi	Good	233.05	284.81	63	5	8	5	5	5	No	Yes	Rodilla 1/10
+2023-06-20	Laura	Good	56.3	82.5	82.7	4	7	5	5	4	No	No	
+2023-06-19	Fraile												
+2023-06-20	Fraile	Good	129.41	147.75	40	5	6	5	5	4	Yes	No	
+2023-06-20	Fraile												
+2023-06-21	Vivi	Good	129.04	140.55	45	5	2.25	5	5	5	No	Yes	Rodilla 
+2023-06-20	Laura												
+2023-06-22	Laura	Good	76.4	100	69.3	5	7	5	5	5	No	No	
+2023-06-22	Lua	Okay	187.57	190.34	53	4	10	5	5	5	No	No	
+2023-06-22	Vivi	Good	163.59	150.64	62	5	10	5	5	5	No	Yes	Rodilla 1/10
+2023-06-21	Fraile												
+2023-06-22	Fraile	Good	115.8	114.45	37	5	8	5	5	4	Yes	No	
+2023-06-22	Fraile												
+2023-06-23	Fraile	Good	102.83	131.6	41	5	7	5	5	4		No	
+2023-06-23	Lua	Good	204.3	160.58	48	4	9	5	5	5	No	No	
+2023-06-23	Vivi	Good	153.5	154.71	61	5	8	5	5	5	No	Yes	Rodilla 1/10
+2023-06-24	Lua	Okay	175.26	246.47	64	4	8	5	5	5	No	No	
+2023-06-24	Vivi	Good	186.56	218.24	67	5	8.15	5	5	5	No	Yes	Rodilla 
+2023-06-23	Fraile												
+2023-06-23	Fraile												
+2023-06-24	Fraile	Good	97.04	132.06	41	5	6	5	4	5	Yes	No	
+2023-06-25	Lua	Okay	162.22	209.25	62	4	7.45	5	3	3	No	No	
+2023-06-25	Vivi	Good	174.58	187.8	72	5	8	5	5	5	No	Yes	Rodilla 
+2023-06-26	Laura	Good	86.1	126.6	87.2	5	9	5	5	5	No	No	
+2023-06-27	Laura												
+2023-06-26	Fraile												
+2023-06-26	Fraile												
+2023-06-27	Laura	Good	54.1	77.2	81.5	5	7	5	5	5	No	No	
+2023-06-28	Laura												
+2023-06-28	Fraile	Good	114.38	218.38	41	5	7	5	5	4	Yes	No	
+2023-06-28	Laura	Good	92.2	117	56.2	5	8	5	5	5	No	No	
+2023-06-28	Fraile												
+2023-06-29	Fraile	Good	133.39	128.24	34	5	5.3	5	5	4	Yes		
+2023-06-28	Laura												
+2023-06-29	Laura	Okay	37.3	107.8	90.5	4	7	5	5	4	No	No	
+2023-07-07	Laura	Okay	36.3	53	86.5	5	7	5	3	4	No	No	
+2023-07-07	Fraile	Good	72.31	71.78	44	5	8	5	3	5		No	
+2023-07-07	Laura												
+2023-07-07	Fraile												
+2023-07-08	Fraile	Good	102.2	108.84	42	5	6	5	4	4		No	
+2023-07-08	Fraile												
+2023-08-10	Fraile	Good	166.6	190.29	40	5	7	5	5	5	Yes	No	
+2023-07-11	Lua	Good	94.83	110	65			5	5	4	No	No	
+2023-07-11	Vivi	Good	235.84	197.22	54	5	6.3	5	5	4	Yes	No	
+2023-07-11	Fraile	Good	125.93	127.97	40		7.3	5	5	5		No	
+2023-07-11	Fraile												
+2023-07-12	Vivi	Good	166.97	200.6	54	5	7	5	5	4	Yes	No	
+2023-07-12	Lua	Good	123.17	170.41	70	4	9	5	5	5	No	No	
+2023-07-12	Fraile	Good	139.71	151.86	41	5	8	4	4	4	Yes	No	
+2023-07-13	Lua	Good	135.01	167.1	63	4	9	5	5	5	No	No	
+2023-07-13	Vivi	Good	188.94	197.75	64	5	7.3	5	5	5	Yes	No	
+2023-07-13	Adriana	Good	424	325	49	5	9	5	5	5	No	Yes	Muy poco el dedo del pie 
+2023-07-12	Fraile												
+2023-07-13	Fraile	Good	146.22	165.53	40	5	6	5	3	4	Yes	No	
+2023-07-14	Vivi	Good	174.58	167.02	54	5	9.2	5	5	5	Yes	No	
+2023-07-14	Lua	Okay	127.12	146.97	72	4	9.5	5	4	5	No	Yes	Poco de agujetas en los muslos 2/10
+2023-07-15	Lua	Good	119.73	139.92	66	4	8	5	4	5	No	Yes	Agujetas 
+2023-07-15	Vivi	Good	202.45	207.86	67	5	8	5	4	5	No	No	
+2023-07-15	Adriana	Good	505	305	35	5	9	5	5	5	No	Yes	Muy poco el el dedo 
+2023-07-16	Lua	Good	84.3	94.88	70	4	9	5	4	5	No	Yes	Agujetas 
+2023-07-16	Vivi	Good	113.39	139.86	75	5	9	5	5	5	No	No	
+2023-07-16	Adriana	Good	499	333	44	5	9	5	5	5	No	Yes	Dedo gordo 
+2023-07-17	Lua	Good	88.91	90.51	70	4	8	5	5	5	No	No	
+2023-07-17	Vivi	Good	167.79	189.53	67	5	7	5	5	5	No	No	
+2023-07-18	Lua	Good	97.06	109.01	72	4	9.5	5	4	5	No	No	
+2023-07-18	Vivi	Good	192.04	239.04	65	5	9.3	5	5	5	No	No	
+2023-07-18	Iker	Good	25.8	39.4	69.2	3	9	3	5	3	No	No	
+2023-07-18	Laura	Good	65.5	66.7	69.3	4	9	5	5	4	No	No	
+2023-07-17	Fraile	Good	136.99	132.9	38	4	6	5	5	5		No	
+2023-07-18	Fraile	Good	104.26	126.22	43	5	6	5	5	5	Yes	No	
+2023-07-18	Fraile												
+2023-07-18	Fraile	Poor											
+2023-07-19	Lua	Okay	215.76	201.75	71	4	9	5	5	5	No	No	
+2023-07-19	Vivi	Good	153.63	172.76	67	5	9	5	5	5	No	No	
+2023-07-18	Laura												
+2023-07-19	Laura	Good	39.9	71.3	75.7	5	9	5	5	5	No	No	
+2023-07-19	Iker	Good	43.1	39.3	72.4	3	5	2	5	3	No	Yes	
+2023-07-19	Adriana	Good	449	326	46	5	9	5	5	5	No	Yes	Dedo 
+2023-07-19	Fraile	Good	140.82	174.26	40	5	7	2	5	4	Yes	No	
+2023-07-20	Vivi	Good	190.28	197.48	66	5	7	5	5	5	No	No	
+2023-07-20	Lua	Good	132.01	199.81	75	4	8	5	5	5	No	No	
+2023-07-20	Laura	Good	75.6	68.5	66.3	5	7	4	4	4	No	No	
+2023-07-19	Laura												
+2023-07-20	Iker	Good	53.1	56.3	68.9	3	2	1	3	3	No	No	
+2023-07-19	Fraile												
+2023-07-19	Fraile												
+2023-07-20	Fraile	Good	87.76	116.28	44	5	7.3	4	4	5		No	
+2023-07-21	Lua	Good	103.15	121.27	65	4	9	5	5	5	Yes	No	
+2023-07-21	Vivi	Good	218.85	209.57	60	5	9	5	5	5	No	No	
+2023-07-21	Adriana	Good	581	365	43	5	8.5	5	5	5	No	Yes	Dedo gordo 
+2023-07-21	Iker	Good	54.5	60	64.1	3	8	4	3	3	No	Yes	
+2023-07-21	Laura	Okay	75	121.3	70.6	5	9	5	5	4	No	No	
+2023-07-20	Fraile												
+2023-07-22	Lua	Poor	108.04	138.81	79	4	8	5	5	5	Yes	No	Estoy un poco resfriada
+2023-07-22	Vivi	Poor	66.38	90.48	80	5	8	5	5	5	No	No	
+2023-07-22	Iker	Good	31.6	57.4	69.3	3	2	5	3	3	No	No	
+2023-07-23	Lua	Good	220.95	222.97	57	4	10	5	5	5	Yes	No	
+2023-07-23	Vivi	Good	227.79	211.13	55	5	9	5	5	5	No	No	
+2023-07-23	Adriana	Good	394	285	44	5	9.5	5	5	5	No	Yes	Dedo gordo
+2023-07-23	Laura	Good	60.5	43.1	59	5	9	5	5	5	No	No	
+2023-07-24	Lua	Good	153.99	163.71	56	4	9.5	5	5	5	Yes	No	
+2023-07-24	Vivi	Good	186.46	209.86	64	5	9.3	5	5	5	Yes	No	
+2023-07-25	Vivi	Good	164.49	192.42	67	5	8.3	5	5	5	Yes	No	
+2023-07-25	Lua	Good	157.21	195.8	55	4	9	5	5	5	No	No	
+2023-07-25	Iker	Good	56.2	57.4	58.4	3	4.3	3	3	3	No	No	
+2023-07-25	Fraile	Good	150.4	128.36	39	5	4.3	5	5	5	Yes	Yes	"Lo de la espalda y el gluteo, pero me he levantado mucho mejor."
+2023-07-26	Lua	Okay	156.03	190.23	66	4	10	5	4	4	No	Yes	 isquios
+2023-07-27	Iker	Good	28	37	66.1	3	5.3	3	3	3	No	No	
+2023-07-28	Vivi	Good	203.32	226.75	54	5	6	5	5	5	No	No	Agujetas piernas 4/10
+2023-07-28	Lua	Good	140.07	109.7	44	4	6	5	4	5	No	No	
+2023-07-28	Laura	Good	81.6	119.7	70.7	5	7	5	5	4	No	No	
+2023-07-28	Fraile	Good	111.55	102.07	40	5	8	5	5	5	Yes	No	
+2023-07-28	Fraile												
+2023-07-29	Lua	Okay	204.73	228.63	52	4	8	5	4	5	No	No	
+2023-07-29	Vivi	Good	145.89	197.15	53	5	8	5	5	5	No	No	
+2023-07-28	Laura												
+2023-07-29	Laura	Good	103.4	83.2	62.9	5	7	5	4	4	No	No	
+2023-07-29	Fraile	Good	123.31	136.7	36	5	7	5	5	4		Yes	hoy me he levantado un poco dolorido de la espalda 
+2023-07-29	Fraile												
+2023-07-30	Lua	Good	216.17	232.8	56	4	9.15	5	4	5	No	Yes	Isquios
+2023-07-30	Vivi	Good	150.14	181.54	50	5	9.15	5	5	5	No	No	
+2023-07-29	Laura												
+2023-07-30	Laura	Good	112.4	95.8	62.5	5	7	5	4	5	No	No	
+2023-07-30	Fraile	Good	107.55	144.18	38	5	8	5	5	4		No	
+2023-07-30	Adriana	Good	417	308	48	5	8.5	5	5	5	No	Yes	Dedo gordo 
+2023-07-30	Iker	Good	41.6	82.2	58.8	3	7.3	5	2	2	No	No	
+2023-07-30	Laura	Good	112.4	95.8	62.5	5	7	5	5	3	No	No	
+2023-07-31	Lua	Okay	157.47	130.22	50	4	9.5	5	4	5	No	No	
+2023-07-31	Vivi	Good	218.39	202.66	60	5	9	5	5	5	No	No	
+2023-07-30	Fraile												
+2023-08-01	Lua	Good	228.15	285.79	61	4	7.5	5	4	5	No	No	
+2023-08-01	Vivi	Good	169.8	188.91	57	5	8	5	4	5	No	Yes	Isquios 3/10
+2023-07-01	Fraile	Good	104.47	100.13	39	5	6	5	5	5		No	
+2023-08-01	Iker	Good	80.6	74.8	52.7	3	7.3	5	4	3	No	Yes	Rotura del semimenbranoso de la pierna izquierda 
+2023-07-02	Lua	Good	130.8	105	42	4	9.5	5	4	5	No	No	
+2023-08-02	Vivi	Good	185.47	216.63	58	5	9.3	5	5	5	No	Yes	Isquios 2/10 
+2023-08-01	Fraile												
+2023-08-02	Fraile	Good	92.57	129.43	38	5	9.3	5	1	3		Yes	Casi todo el cuerpo con golpes y la espalda con el gluteo.
+2023-08-02	Iker	Good	18.3	33.3	76.4	3	9.3	5	2	5	No	Yes	
+2023-08-03	Lua	Good	220.24	245.21	49	4	8	5	5	5	No	No	
+2023-08-03	Vivi	Good	204.57	215.51	52	5	8	5	5	5	No	No	
+2023-08-04	Lua	Good	196.93	186.89	50	4	5	5	4	4	No	Yes	Los dos pulgares de la mano me duele
+2023-08-04	Vivi	Good	216.61	156.25	51	5	5	5	5	4	No	Yes	Isquio 4/10
+2023-08-05	Vivi	Good	206.13	228.43	62	5	9	5	5	5	No	Yes	Isquios 3/10
+2023-08-05	Lua	Okay	148.83	131.52	58	4	9	5	5	5	No	No	
+2023-08-06	Lua	Good	158.22	179.72	54	4	10	5	4	5	No	No	
+2023-08-06	Vivi	Good	141.83	153.15	67	5	9.3	5	5	5	No		
+2023-08-07	Lua	Good	204.11	217.28	54	4	9	5	4	5	No	No	Agujetas cuadriceps
+2023-08-07	Vivi	Good	128.95	125.77	59	5	9	4	5	5	No	No	
+2023-08-08	Lua	Okay	128.55	119.19	45	4	7.5	5	4	5	No	No	
+2023-08-08	Vivi	Good	195.39	235.21	58	5	7.3	5	5	5	Yes	No	
+2023-08-08	Fraile	Good	128.76	116.64	36	5	7.3	5	5	5	No	Yes	Lo de la zona del gluteo superior y la espalda baja
+2023-08-09	Lua	Good	198.05	179.42	51	4	9	5	5	5	No	No	
+2023-08-09	Vivi	Good	204.64	223.19	55	5	9	5	5	5	Yes	No	
+2023-08-09	Adriana	Good	499	296	38	5	8	5	5	5	No	Yes	dedo gordo 
+2023-08-08	Fraile												
+2023-08-08	Fraile												
+2023-08-09	Fraile	Good	138.13	139.38	41	4	6.3	3	4	4		Yes	"Gluteo-espalda, no me ha dejado dormir bien."
+2023-08-09	Iker	Good	62.4	51	59.6	4	8	5	5	5	No	Yes	Rotura del semimenbranoso 
+2023-08-10	Lua	Good	180.65	225.28	54	4	8.4	5	5	5	No	No	
+2023-08-10	Vivi	Good	212.88	199.24	54	5	8.4	5	5	5	Yes	No	
+2023-08-10	Adriana	Good	424	286	47	5	9	5	5	5	No	Yes	Dedo
+2023-08-11	Vivi	Good	161.34	180.35	64	5	7.3	5	5	5	No	No	
+2023-08-11	Lua	Good	150.57	160.69	44	4	7.5	5	5	5	No	No	
+2023-08-12	Lua	Good	174.8	169.19	56	4	9.3	5	5	5	No	No	
+2023-08-12	Vivi	Good	145.55	165.52	64	5	9.3	5	5	5	No	No	
+2023-08-13	Lua	Good	121.32	98.35	45	4	8	5	5	4	No	No	
+2023-08-13	Vivi	Good	187.07	207.71	56	5	8.3	5	5	4	No	No	
+2023-08-15	Vivi	Good	149.23	170.37	73	5	10	5	5	5	No	Yes	Isquio sigue cargado 3/10
+2023-08-16	Lua	Good	177	132	47	4	8.5	5	5	5	No	No	
+2023-08-16	Vivi	Good	142.54	172.27	70	5	8	5	5	5	No	Yes	Isquio cargado 2/10
+2023-08-17	Lua	Good	149	134	53	4	9.5	5	5	4	No	No	
+2023-08-17	Vivi	Good	180.02	214.22	63	5	9.2	5	5	4	No	No	
+2023-08-18	Vivi	Poor	94.22	111.64	75	5	9.2	5	5	5	No	No	
+2023-08-18	Lua	Good	121	169	47	4	9.15	5	5	5	No	No	
+2023-08-19	Vivi	Good	213.01	236.45	62	5	9	5	4	5	No	No	
+2023-08-21	Lua	Good	157	123	45	4	9.5	5	5	5	No	No	
+2023-08-21	Vivi	Good	260.17	252.74	58	5	9	5	5	5	Yes	No	
+2023-08-21	Fraile	Good	116.83	181.31	42	5	7	5	5	5		No	
+2023-08-21	Fraile												
+2023-08-22	Fraile	Good	100.94	91.17	43	5	6	5	3	4		No	
+2023-08-24	Lua	Okay	216.5	184.68	46	4	9	5	5	5	No	No	
+2023-08-24	Vivi	Good	207.81	200.66	63	5	9.1	5	5	5	No	No	
+2023-08-25	Lua	Okay	149.34	135.58	48	4	9.45	5	5	5	No	No	
+2023-08-25	Vivi	Good	176.31	164.69	61	5	9.45	5	5	5	No	No	
+2023-08-26	Lua	Okay	193.98	195.24	52	4	8.2	5	5	5	No	No	
+2023-08-26	Vivi	Good	155.88	155.53	52	5	8.2	5	5	5	No	No	
+2023-08-27	Vivi	Good	152.71	190.64	62	5	5	5	4	4	No	No	
+2023-08-29	Vivi	Good	201.26	214.04	56	5	9	5	4	5	No	No	
+2023-08-30	Vivi	Good	131.4	160.4	68	5	10	5	5	5	No	No	
+2023-08-30	Lua	Good	147.03	129.48	47	4	10.5	5	5	5	No	No	
+2023-08-31	Lua	Good	141	95	53	4	9	5	5	5	No	No	
+2023-09-01	Lua	Good	198	149	60	4	10	5	5	5	No	No	
+2023-09-04	Lua	Good	224	166	52	4	9	5	5	4	No	No	
+2023-09-04	Vivi	Good	170.57	191.36	52	5	9	5	5	5	Yes	No	
+2023-09-05	Vivi	Good	249.15	241.48	52	5	8	5	5	5	Yes	No	
+2023-09-11	Lua	Good	120	103	49	4	7	5	5	5	No	No	
+2023-09-12	Lua	Good	131	115	50	4	7.5	5	5	5	No	No	
+2023-09-12	Vivi	Good	165	126	48	5	7.2	5	5	5	No	No	
+2023-09-13	Lua	Good	124	98	43	4	7.5	5	5	5	No	No	
+2023-09-13	Vivi	Good	163	120	47	5	7.3	5	5	5	No	No	No me conecta el pulsometro 
+2023-09-14	Lua	Good	134	92	46	4	8	5	5	5	No	No	
+2023-09-14	Vivi	Good	231	176	47	5	7.4	5	5	5	No	No	
+2023-09-15	Lua	Good	111	75	44	4	7.5	5	5	5	No	No	
+2023-09-15	Vivi	Good	222	154	49	5	7.15	5	5	5	No	No	
+2023-09-16	Vivi	Good	191	129	46	5	8	5	5	5	No	No	
+2023-09-16	Lua	Good	141	118	48	4	10	5	5	5	No	No	
+2023-09-18	Lua	Good	195	133	47	4	7	5	5	5	No	No	
+2023-09-18	Vivi	Good	214	162	50	5	7	5	5	5	No	No	
+2023-09-19	Lua	Okay	76	67	39	4	9	5	5	5	No	Yes	Un poco los tobillos
+2023-09-19	Vivi	Good	161	133	42	5	7.45	5	5	5	No	No	
+2023-09-19	Adriana	Good	470	361	47	5	9	5	5	5	No	No	Un poco de molestia en el dedo 
+2023-09-20	Lua	Good	184	120	44	4	7.5	5	5	5	No	No	
+2023-09-20	Vivi	Good	61	46	43	5	7	5	5	5	Yes	No	
+2023-09-20	Adriana	Good	479	342	45	5	9	5	5	5	No	Yes	Poco en el dedo gordo 
+2023-09-21	Vivi	Good	278	188	48	5	7	5	5	5	Yes	No	
+2023-09-21	Lua	Good	115	89	41	4	7	5	4	5	No	No	
+2023-09-21	Fraile	Good	114.9		147.59	4	7	5	5	4		Yes	"Me he levantado con dolor en la zona de la lesion, por encima del gluteo."
+2023-09-22	Lua	Good	108	75	40	4	8	5	5	5	No	No	
+2023-09-22	Vivi	Good	182	156	45	5	7.3	5	5	5	Yes	No	
+2023-09-22	Adriana	Good	435	253	42	5	8	5	5	5	No	Yes	Dedo 
+2023-09-22	Fraile	Good	135.9	130.93	43	5	12	5	5	5	Yes	Yes	Tengo bastante dolorida la zona de la lesion.
+2023-09-21	Fraile												
+2023-09-23	Lua	Good	153	140	39	4	9.4	5	5	5	No	No	
+2023-09-23	Vivi	Good	101	137	44	5	8	5	5	5	Yes	No	
+2023-09-25	Lua	Good	124	65	39	4	9	5	5	5	No	No	
+2023-09-25	Vivi	Good	102	78	42	5	8.1	5	4	5	No	No	
+2023-09-25	Adriana	Good	448	304	41	5	8	5	5	5	No	Yes	Dedo gordo 
+2023-09-26	Lua	Good	171	142	42	4	7.5	5	5	5	No	No	
+2023-09-26	Vivi	Good	69	45	42	5	7	5	5	5	No	No	
+2023-09-26	Fraile	Good	123.47	129.14	35	3	4	2	5	3		No	
+2023-09-27	Lua	Okay	284	235	45	4	7.5	5	5	5	No	No	
+2023-09-27	Vivi	Good	175	122	42	5	7.2	5	5	5	No	No	
+2023-09-27	Adriana	Good	595	377	42	5	9	5	5	5	No	Yes	dedo
+2023-09-28	Fraile	Good	118.68	156.29	39	3	6	5	5	4		Yes	"La espalda, en la zona de la lesion"
+2023-09-28	Lua	Good	104	94	42	4	8.15	5	5	5	No	No	
+2023-09-28	Vivi	Good	151	100	45	5	7	5	5	5	No	No	
+2023-09-29	Lua	Good	226	148	43	4	7	5	5	5	No	No	
+2023-09-29	Vivi	Good	100	76	42	5	7	5	5	5	No	No	
+2023-09-29	Fraile	Good	168.71	156.53	39	5	10	5	5	5	No	Yes	"La espalda, zona de la lesion."
+2023-09-30	Lua	Good	136	131	56	4	8	5	5	5	No	No	Resfriada
+2023-10-02	Lua	Okay	93	61	38	4	8.5	5	5	5	No	No	
+2023-10-02	Vivi	Good	187	139	42	5	8.15	5	5	5	No	No	
+2023-10-02	Adriana	Good	554	336	45	5	9	5	5	5	No	No	Dedo isquio
+2023-10-03	Lua	Good	119	83	39	4	8	5	5	5	No	No	
+2023-10-03	Vivi	Poor	101.61	134.28	44	5	7.15	5	5	5	No	No	
+2023-10-03	Fraile	Good	121.77	178.09	36	4	6.3	5	4	4	Yes	Yes	"La zona de la lesion, menos que otros dias."
+2023-10-04	Lua	Okay	80	64	37	4	8	5	5	5	No	No	
+2023-10-04	Vivi	Good	112.91	137.77	45	5	7	5	5	5	No	Yes	Cuádriceps como lo que ayer 5/10
+2023-10-04	Adriana	Good	523	334	59	5	9	5	5	5	No	Yes	 dedo y aductor 
+2023-10-05	Lua	Good	105	63	40	4	7	5	5	5	No	No	
+2023-10-05	Vivi	Good	124.15	155.66	45	5	7	5	5	5	No	Yes	Cuádriceps 3/10
+2023-10-07	Fraile	Good	113.15	121.13	41	5	6.3	5	2	5	Yes	No	
+2023-10-09	Fraile	Good	154.51	156.68	36	4	7	5	5	5	Yes	No	
+2023-10-10	Fraile	Good	129.4	174.51	39	2	6.3	3	5	3	Yes	No	
+2023-10-11	Fraile	Good	139.37	161.37	40	4	7	5	4	4		Yes	Me he levantado con un poco de dolor en la lesion.
+2023-10-12	Fraile	Good	123.08	110.33	40	4	8	5	4	5		No	
+2023-10-14	Lua	Good	191	172	49	4	8.5	5	5	4	No	No	
+2023-10-14	Fraile	Good	128.17	123.94	41	4	7	5	5	5	Yes	No	
+2023-10-15	Lua	Good	182	140	44	4	9	5	4	3	No	No	
+2023-10-16	Lua	Good	194	160	47	4	8.5	5	5	5	No	No	
+2023-10-16	Vivi	Good	244.09	288.06	58	5	8	5	5	5	No	No	
+2023-10-16	Fraile	Good	142.76	176.03	37	4	7	5	5	5		No	
+2023-10-16	Adriana	Good	447	290	46	5	9	5	5	5	No	No	
+2023-10-17	Lua	Good	186	136	47	4	4	5	5	4	No	No	
+2023-10-17	Vivi	Good	181.71	191.4	53	5	4.15	5	5	5	No	No	
+2023-10-18	Lua	Good	217	155	47	4	4.5	5	4	4	No	No	
+2023-10-18	Vivi	Good	195.53	184.63	52	5	4	5	5	5	No	No	
+2023-10-18	Fraile	Good	184	222.54	37	4	7	5	2	3	Yes	Yes	Hoy me he levantado con dolor en la lesion.
+2023-10-19	Lua	Good	137	100	42	4	8.15	5	5	5	No	No	
+2023-10-19	Fraile	Good	116.56	181.03	37	5	7	5	3	3		No	
+2023-10-19	Adriana	Good	485	246	52	5	9	5	5	5	No	No	
+2023-10-20	Lua	Good	237	156	43	4	4.4	5	5	4	No	No	
+2023-10-20	Vivi	Good	306.03	245.84	49	5	4.4	5	5	4	No	No	
+2023-10-20	Fraile	Good	145.08	152.97	37	5	8	5	3	5		No	
+2023-10-20	Adriana	Good	446	277	47	5	9	5	5	5	No	No	
+2023-10-21	Fraile	Good	164.36	153.88	37	5	7	5	4	5		Yes	Hoy si que me duele bastante la lesion.
+2023-10-21	Lua	Good	117	100	45	4	10	5	5	5	No	No	
+2023-09-21	Vivi	Good	194.34	291.88	56	5	9	5	5	5	Yes	No	
+2023-10-22	Fraile	Good	128.19	137.61	41	5	7	5	5	5		No	
+2023-10-23	Lua	Good	214	151	44	4	7.5	5	4	5	No	Yes	Isquio 2/10
+2023-10-23	Vivi	Good	144.75	182.74	46	5	7.3	5	5	5	No	No	
+2023-10-23	Fraile	Good	147.32	179.78	37	5	6.3	5	5	5	Yes	No	
+2023-10-24	Fraile	Good	113.4	98.62	35	5	7.3	5	5	5	Yes	No	
+2023-10-25	Fraile	Good	177.03	201.05	35	5	8	4	5	4		No	
+2023-10-26	Fraile	Good	123.06	117.17	34	5	7	5	5	4		No	
+2023-10-27	Lua	Good	125	89	44	4	7.5	5	5	5	No	No	
+2023-10-28	Lua	Good	237	180	50	4	10.5	5	5	5	No	No	
+2023-10-29	Lua	Good	212	158	49	4	8.45	5	5	5	No	No	
+2023-10-30	Lua	Good	273	178	52	4	8.5	5	4	4	No	No	
+2023-10-31	Vivi	Good	79	74	44	5	8	5	5	5	No	Yes	la rodilla 4/10
+2023-10-31	Lua	Good	116	89	46	4	8.15	5	5	4	No	No	
+2023-10-31	Adriana	Good	474	279	47	5	9.5	5	5	5	No	No	
+2023-11-01	Vivi	Good	101	80	43	5	8	5	5	5	No	Yes	Rodilla 2/10
+2023-11-01	Fraile	Good	98.66	102.85	38	5	7	5	2	4		No	
+2023-11-01	Adriana	Good	482	292	50	5	8.5	5	5	5	No	No	
+2023-11-02	Lua	Good	144	113	45	4		5	5	5	No	No	
+2023-11-02	Vivi	Good	156	124	45	5	7.45	5	5	5	No	Yes	Rodilla 2/10
+2023-11-02	Fraile	Good	121.03	96.74	41	5	7	5	2	4		No	
+2023-11-02	Adriana	Good	527	310	41	5	9	5	5	5	No	No	
+2023-11-03	Vivi	Good	165	123	46	5	6.3	5	5	5	No	Yes	Rodilla 2/10
+2023-11-03	Lua	Good	150	108	46	4	6.5	5	5	4	No	No	
+2023-11-03	Fraile	Good	160.23	144.1	39	5	7	5	2	4		No	
+2023-11-03	Adriana	Good	502	443	44	5	8	5	5	5	No	Yes	isquio 
+2023-11-04	Lua	Good	184	124	51	4	9	5	5	5	No	No	
+2023-11-04	Vivi	Good	130	96	45	5	8.3	5	5	5	No	Yes	Rodilla 2/10
+2023-11-05	Fraile	Good	114.42	144.18	51	5	8	5	4	5		No	
+2023-11-06	Lua	Good	175	181	45	4	7	5	5	5	No	No	
+2023-11-06	Vivi	Good	163.02	227.08	49	5	7	5	5	5	No	No	
+2023-11-06	Fraile	Good	122.46	114.75	41	5	6.3	5	5	5		No	
+2023-11-06	Adriana	Good	467	357	47	5	9	5	5	5	No	No	Creo que bastante mejor del isquio 
+2023-11-07	Fraile	Good	86.99	108.45	42	5	7	5	5	5		No	
+2023-11-07	Lua	Good	165	101	46	4	8.5	5	5	5	No	No	
+2023-11-07	Vivi	Good	213.73	207.01	52	5	8	5	5	5	No	No	
+2023-11-08	Vivi	Good	176.05	196.13	56	5	5	5	5	4	No	No	
+2023-11-08	Lua	Good	197	129	48	4	6	5	5	5	No	No	
+2023-11-08	Fraile	Good	151.51	161.28	40	5	6	5	5	5		No	
+2023-11-08	Adriana	Good	475	262	52	5	9	5	5	5	No	Yes	"Golpe e isquio, pero va mejor "
+2023-11-09	Lua	Good	180	155	50	4	7	5	5	5	No	No	
+2023-11-09	Vivi	Good	135	92	46	5	7	5	5	5	No	No	
+2023-11-09	Fraile	Good	142.24	168.07	41		6	4	5	4		No	
+2023-11-10	Fraile	Good	173.88	222.22	43	5	7	5	5	3	No	No	
+2023-11-11	Lua	Good	167	139	53	4	10	5	5	5	No	No	
+2023-11-13	Lua	Good	159	156	59	4	8	5	5	5	No	No	
+2023-11-14	Vivi	Good	214.32	218.77	54	5	8.1	5	5	5	No	No	
+2023-11-14	Lua	Good	123	118	46	4	9	5	5	5	No	No	
+2023-11-14	Adriana	Good	480	285	42	5	9	5	5	5	No	Yes	Rodilla 
+2023-11-15	Fraile	Good	124.9	115.74	41	5	6.3	5	5	5		No	
+2023-11-15	Vivi	Good	196	143	49	5	7	5	5	5	No	No	
+2023-11-15	Lua	Good	157	106	47	4	8	5	5	5	No	No	
+2023-11-16	Lua	Good	196	148	49	4	7	5	5	5	No	No	
+2023-11-16	Fraile	Good	124.29	159.3	37	5	6	5	5	4		Yes	Ayer me dio un tiron en el adductor entrenando
+2023-11-16	Adriana	Good	526	326	43	5	9	5	5	5	No	No	Rodilla perfecta e isquio muchísimo mejor 
+2023-11-17	Fraile	Good	114.87	87.63	34	5	7	5	5	5		Yes	En el adductor
+2023-11-10	Lua	Good	129	116	44	4	7.5	5	5	5	No	No	
+2023-11-17	Vivi	Good	141	127	46	5	7	5	5	5	No	No	
+2023-11-18	Lua	Good	146	115	44	4	9.5	5	5	5	No	No	
+2023-11-18	Fraile	Good	111.47	142.31	45	5	5.3	3	5	4		No	
+2023-11-20	Lua	Okay	110	78	41	4	8	5	5	5	No	No	
+2023-11-20	Vivi	Good	132	92	41	5	7.3	5	5	5	No	No	
+2023-11-20	Fraile	Good	143.32	181.59	36	5	7	5	5	4		No	
+2023-11-20	Adriana	Good	512	337	48	5	10	5	5	5	No	No	
+2023-11-21	Vivi	Good	134	102	45	5	7.3	5	5	5	No	No	
+2023-11-21	Lua	Good	132	105	44	4	8	5	5	5	No	No	
+2023-11-21	Fraile	Good	126.38	153.03	43	5	6.3	5	5	4		Yes	Golpe en la mano
+2023-11-22	Vivi	Good	144	109	46	5	7	5	5	5	Yes	No	
+2023-11-22	Fraile	Good	117.12	132.91	45	5	8	5	5	5		No	
+2023-11-22	Adriana	Good	509	293	45	5	9	5	5	5	No	Yes	Zona de isquio resentida 
+2023-11-23	Fraile	Good	131.44	147.61	41	5	5	3	5	4		No	
+2023-11-23	Lua	Good	182	127	41	4	8.15	5	4	5	No	Yes	"Tengo la lumbar con un poco de dolor, por estar cargada de la fuerza de ayer"
+2023-11-23	Adriana	Good	445	322	44	5	9	5	5	5	No	No	"No he forzado a buscar el dolor, pero creo que muy bien "
+2023-11-24	Fraile	Good	131.79	126.9	41	5	6	5	5	5		No	
+2023-11-24	Lua	Good	127	96	41	4	6.5	5	4	5	No	No	"La espalda me duele mucho menos, estoy perfect"
+2023-11-24	Vivi	Good	124	118	44	5	6.3	5	5	4	Yes		
+2023-11-25	Fraile	Good	107.5	141.67	57	5	6	5	5	4		No	
+2023-11-25	Lua	Good	207	172	43	4	8.5	5	4	5	No	No	
+2023-11-26	Lua	Good	172	163	44	4	9	5	4	5	No	No	
+2023-11-27	Vivi	Good	160	124	43	5	8	5	5	5	No	No	
+2023-11-27	Lua	Good	133	119	40	4	8	5	4	5	No	No	
+2023-11-27	Fraile	Good	80.42	91.43	43	5	8	5	5	5		No	
+2023-11-28	Lua	Good	198	129	46	4	7	5	5	5	No	No	
+2023-11-28	Vivi	Good	101	79	45	5	6	5	5	5	No	No	
+2023-11-28	Fraile	Good	137.43	140.42	38		6	5	5	5			
+2023-11-29	Lua	Good	237	139	39	4	6	5	5	5	No	No	
+2023-11-29	Fraile	Good	183.75	178.96	34	5	7	5	5	5		No	
+2023-11-29	Vivi	Good	293	193	43	5	6	5	5	5	No	No	
+2023-11-29	Adriana	Good	510	326	49	5	9	5	5	5	No	Yes	Un poquito el pie y la tibia pero muchísimo mejor que estos días 
+2023-11-30	Fraile	Good	148.14	142.22	39	5	5	5	5	3		No	
+2023-11-30	Lua	Good	148	103	59	4	11	5	5	5	No	No	
+2023-11-30	Vivi	Good	152	135	57	5	11	5	5	5	No	No	
+2023-12-01	Lua	Good	158	99	50	4	8.5	5	5	5	No	No	
+2023-12-01	Vivi	Good	186	123	46	5	8.3	5	5	5	No	No	
+2023-12-02	Fraile	Good	104.1	129.69	39	5	8	5	4	5		No	
+2023-12-02	Lua	Good	126	93	51	4	9.5	5	5	5	No	No	
+2023-12-03	Lua	Good	184	133	48	4	8	5	4	4	No	No	
+2023-12-04	Lua	Good	197	137	39	4	7	5	4	4	No	No	
+2023-12-04	Fraile	Good	154.77	180.41	34	5	6	5	5	5		No	
+2023-12-04	Iker	Good	40.4	64.2	75.3	5	9.3	5	5	5	Yes	No	
+2023-12-04	Adriana	Good	453	385	41	5	7.5	5	5	5	No	Yes	Tibia y dedos del pie por laInfección 
+2023-12-05	Lua	Good	223	163	47	4	7.5	5	5	5	No	No	
+2023-12-05	Vivi	Good	242	159	54	5	8	5	5	5	No	No	
+2023-12-05	Adriana	Good	445	294	50	5	9	5	5	5	No	Yes	Tibia y pie
+2023-12-06	Lua	Good	137	133	51	4	9	5	5	5	No	No	
+2023-12-06	Iker	Good	34.9	64.9	73.9	5	9	4	5	5	No	No	
+2023-12-06	Adriana	Okay	468	259	53	5	8	5	5	5	No	Yes	"Tibia mucho mejor, un poco de dolor en rel pie"
+2023-12-08	Lua	Good	207	133	43	4	7.5	5	5	5	No	No	
+2023-12-08	Vivi	Good	126	93	44	5	7	5	5	5	No	No	
+2023-12-08	Adriana	Good	420	228	49	5	8.5	5	5	5	No	Yes	Pie y un poco a la altura del tobillo (de la tibia mala)
+2023-12-09	Lua	Good	149	120	48	4	8.5	5	5	5	No	No	
+2023-12-09	Vivi	Good	201	190	51	5	8.3	5	5	5	No	No	
+2023-12-11	Lua	Good	173	131	53	4	10.15	5	4	4	No	No	
+2023-12-11	Vivi	Good	177	181	54	5	10	5	5	5	No	No	
+2023-12-12	Vivi	Good	130	91	43	5	7	5	4	5	No	No	
+2023-12-13	Lua	Good	194	158	49	4	7.5	5	4	5	No	No	
+2023-12-13	Vivi	Good	125	88	45	5	7	5	5	5	No	No	
+2023-12-13	Fraile	Good	172.08	183.6	40	5	7	5	3	4		Yes	"El isquio, cargado del campeonato"
+2023-12-15	Lua	Good	107	99	46	4	7	5	5	5	No	No	
+2023-12-15	Fraile	Good	133.38	144.39	39	5	6.3	5	5	5		Yes	El isquio por sobrecarga
+2023-12-18	Vivi	Good	202	155	44	5	7	5	5	5	No	No	
+2023-12-18	Lua	Good	170	152	43	4	8	5	5	5	No	No	
+2023-12-18	Fraile	Good	111.14	108.5	39	5	7	5	5	5		No	
+2023-12-19	Fraile	Good	123.47	168.24	43	5	6	5	5	5		No	
+2023-12-19	Lua	Good	177	115	47	4	7.5	5	5	5	No	No	
+2023-12-19	Vivi	Good	239	165	50	5	7	5	5	5	No	No	
+2023-12-19	Fraile												
+2023-12-19	Fraile												
+2023-12-20	Vivi	Good	213	153	48	5	7.3	5	5	5	No	No	
+2023-12-20	Fraile	Good	109.85	131.38	49	5	7	5	3	5		No	
+2023-12-20	Fraile												
+2023-12-26	Fraile	Good	127.65	128.65	46	5	8	5	5	5		No	
+2023-12-26	Laura	Good	101.7	85	60.1	5	8	5	5	5	No	No	
+2023-12-26	Laura												
+2023-12-27	Laura	Good	63.3	125.9	74.6	4	8	5	5	5	No	No	
+2023-12-28	Laura	Good	61.7	64.4	76.4	5	7	5	4	4	No	No	
+2023-12-29	Fraile	Good	126.9	166.87	54	4	3	1	3	3		No	
+2023-12-30	Laura	Okay	45.7	64.7	59.1	4	5	5	4	3	No	Yes	Pie derecho 
+2024-01-02	Lua	Good	200	139	45	4	8.5	5	4	5	No	Yes	Rodilla
+2024-01-02	Vivi	Good	210	149	48	5	8.3	5	5	5	No	No	
+2024-01-02	Fraile	Good	91.87	98.04	40	5	7	5	5	5		No	
+2024-01-02	Adriana	Good	422	220	50	5	9.5	5	5	5	No	No	
+2024-01-02	Laura	Okay	37.7	64.1	87.5	4	7	3	4	4	No	No	
+2024-01-03	Laura	Good	109.7	138.7	69.1	4	7	4	4	4	No	No	
+2024-01-02	Laura												
+2024-01-03	Lua	Good	223	183	47	4	9.5	5	5	5	No	No	
+2024-01-03	Fraile	Good	113.88	147.24	50	4	8	4	4	5		No	
+2024-01-03	Vivi	Good	177	119	45	5	9.3	5	5	5	No	No	
+2024-01-04	Lua	Good	156	148	46	4	8.5	5	5	5	No	No	
+2024-01-04	Vivi	Good	112	89	42	5	8	4	5	5	No	No	
+2024-01-04	Fraile	Good	133.1	153.69	40	5	7	5	5	5		No	
+2024-01-03	Laura												
+2024-01-05	Lua	Good	177	126	45	4	8.5	5	5	5	No	Yes	"Rodilla, 2/10"
+2024-01-05	Fraile	Good	113.43	127.87	43	5	9	5	5	5		No	
+2024-01-06	Lua	Good	168	136	47	4	8.5	5	4	5	No	Yes	"Rodilla, 1,5/10"
+2024-01-08	Laura	Good	82	72.1	63.8	4	6	5	4	4	No	Yes	Un poco en el pie derecho 
+2024-01-08	Lua	Good	210	133	42	4	7.5	5	5	5	No	No	"Rodilla, 1/10"
+2024-01-08	Vivi	Good	138	108	44	5	8	5	5	5	No	No	
+2024-01-08	Fraile	Good	144.76	140.64	39	5	7	5	5	5		No	
+2024-01-08	Laura												
+2024-01-09	Laura	Good	286	272	53	4	6	5	4	4	No	Yes	Un poco el pie derecho 
+2024-01-09	Vivi	Good	147	111	49	5	7	5	5	5	No	No	
+2024-01-09	Lua	Good	154	134	50	4	7.4	5	5	5	No	No	"Rodilla 0,5/10"
+2024-01-09	Fraile	Good	158.32	153.5	42	5	7	5	5	4		No	
+2024-01-09	Adriana	Good	305	295	47	5	8.5	5	5	5	No	No	Un quemazón por la noche en la zona de aductor (María sabe)
+2024-01-09	Laura												
+2024-01-10	Laura	Good	130.3	135	66.3	5	6	5	4	4	No	No	
+2024-01-10	Fraile	Good	145.31	181.59	42	5	6	4	5	4		No	
+2024-01-10	Lua	Good	157	135	50	4	8	5	5	5	No	No	Rodilla 0/10
+2024-01-10	Vivi	Good	152	114	49	5	7	5	5	5	No	No	
+2024-01-11	Fraile	Good	82.91	104.8	37	5	7.3	5	4	4		No	
+2024-01-11	Laura	Good	100.7	117.9	66.6	4	7	4	4	4	No	No	
+2024-01-11	Fraile												
+2024-01-11	Fraile												
+2024-01-12	Fraile	Good	122.32	127.36	38	4	6	5	5	4		No	
+2024-01-12	Lua	Good	204	133	54	4	8	5	5	5	No	No	"Rodilla, 0,5/10 ya menor dolor "
+2024-01-11	Laura												
+2024-01-12	Laura	Good	32.3	51.5	87.6	5	7	5	4	5	No	Yes	Un poco en el pie derecho
+2024-01-13	Fraile	Good	109.84	115.06	44	4	10	4	5	3		No	
+2024-01-13	Laura	Good	74.7	66.5	72.2	4	7	4	4	4	No	Yes	Pie derecho 
+2024-01-13	Lua	Good	220	147	52	4	8	5	5	5	No	No	"Rodilla, me suele molestar, 1,5/10"
+2024-01-13	Vivi	Good	195	161	52	5	8	5	5	5	Yes	No	
+2024-01-14	Fraile	Good	142.99	161.71	35	5	7	5	5	5		No	
+2024-01-13	Laura												
+2024-01-14	Laura	Good	68.7	112.6	66.4	5	8	4	5	5	No	No	
+2024-01-16	Fraile	Good	101.88	92.06	40	5	7.3	5	5	5		Yes	"Tobillo izquierdo, será algun golpe del campeonato"
+2024-01-16	Laura	Good	153.4	134	60	5	7	5	4	5	No	No	
+2024-01-16	Vivi	Good	141	104	42	5	9.3	5	4	5	Yes	No	Lumbar cargada 
+2024-01-16	Lua	Good	246	167	40	4	10.5	5	5	4	No	No	"Rodilla, 1/10"
+2024-01-17	Lua	Good	191	134	42	4	5.5	5	5	5	No	No	He dormido poco por el jet lag. Rodilla 0/10
+2024-01-17	Vivi	Good	134	125	40	5	5.3	5	5	4	No	No	He dormido poco creo que por jet lag
+2024-01-17	Adriana	Good	575	459	52	5	7.5	5		5	No	Yes	"Esta noche bastante mejor los aductores, todavía un poco en el derecho e isquio"
+2024-01-17	Fraile	Good	119.14	113.19	40		9	5	5	5		Yes	Tobillo izquierdo
+2024-01-17	Laura	Good	77.4	84.4	67.1	5	6	5	5	4	No	No	
+2024-01-17	Laura												
+2024-01-18	Lua	Good	209	155	40	4	7.5	5	4	5	No	No	
+2024-01-18	Vivi	Good	142	135	45	5	7	5	5	5	No	No	
+2024-01-18	Fraile	Good	141.22	162.29	36	5	6	5	5	5		Yes	"Tobillo, ayer me miro Maria y esta mejor"
+2024-01-18	Laura	Good	139.6	109.7	59.6	4	6	5	5	4	No	No	
+2024-01-18	Adriana	Good	609	298	41	5	9	5	5	5	No	No	Por la noche muy bien tanto isquio como aductor 
+2024-01-19	Vivi	Good	177	129	47	5	7	5	5	5	No	No	
+2024-01-19	Lua	Good	227	152	37	4	7.5	5	4	5	No	No	Agujetas cuadriceps 
+2024-01-18	Laura												
+2024-01-19	Laura	Good	84.2	79.6	68.2	4	5	5	4	3	No	No	
+2024-01-19	Adriana	Good	397	262	54	5	8.5	5	5	5	No	No	Nada de dolor por la noche 
+2024-01-19	Fraile	Good	107.37	96.31	39	5	8	5	5	5		Yes	Tobillo pero va mejorando
+2024-01-20	Lua	Good	208	204	40	4	8	5	4	5	No	No	
+2024-01-19	Laura												
+2024-01-20	Vivi	Good	245	218	60	5	8	5	5	5	No	Yes	
+2024-01-20	Laura	Okay	192.3	176	60.4	4	7	5	4	4	No	No	
+2024-01-20	Adriana	Good	383	206	56	5	9	5	5	5	No	Yes	Un poco en el aductor derecho 
+2024-01-22	Lua	Good	253	144	39	4	8	5	4	5	No	No	
+2024-01-22	Vivi	Good	114	72	41	5	8	5	5	5	No	No	
+2024-01-22	Laura	Good	161.3	127.1	48.4	4	6	5	5	4	No	No	
+2024-01-22	Adriana	Good	430	310	44	5	8	5	5	5	No	No	Por la noche muy bien 
+2024-01-22	Fraile	Good	117.2	127.93	37	5	8.3	5	5	5		Yes	"Tobillo, pero con mucha mejora."
+2024-01-22	Laura												
+2024-01-23	Vivi	Good	254	178	47	5	7	5	5	5	No	No	
+2024-01-23	Lua	Good	133	113	41	4	8	5	5	5	No	No	
+2024-01-22	Fraile												
+2024-01-23	Fraile	Good	118.4	121.86	39	5	6.3	5	5	5		Yes	Tobillo
+2024-01-23	Laura	Good	143.6	163.5	53.1	4	7	5	4	4	Yes	No	
+2024-01-23	Adriana	Good	494	317	40	5	9	5	5	5	No	Yes	"Por la noche muy bien, solo la molestia del isquio"
+2024-01-23	Laura												
+2024-01-24	Laura	Good	145.8	104.6	49.1	4	6	5	4	4	Yes	No	
+2024-01-24	Vivi	Good	289	172	49	5	7.2	5	5	5	No	No	
+2024-01-23	Fraile												
+2024-01-23	Fraile												
+2024-01-24	Fraile	Good	121.41	119.49	37	5	6	5	5	5		Yes	tobillo
+2024-01-24	Iker	Good	37.1	49.4	64.5	5	8	5	4	4	Yes	No	
+2024-01-24	Adriana	Good	414	293	43	5	8	5	5	5	No	No	"Por la noche bien y creo que del isquio un poco mejor ,ahora vemos en el entrenamiento "
+2024-01-25	Vivi	Good	175	114	43	5	7.3	5	5	5	No	No	
+2024-01-25	Lua	Good	181	140	40	4	7.5	5	5	5	No	No	
+2024-01-24	Fraile												
+2024-01-24	Fraile												
+2024-01-25	Fraile	Good	137.45	131.67	39	5	5	3	5	4		Yes	Tobillo
+2024-01-24	Laura												
+2024-01-25	Laura	Good	158.7	142.8	60.4	4	7	5	4	4	No	No	
+2024-01-25	Adriana	Good	348	210	54	5	8.5	5	5	5	No	No	"Antes de irme a dormir el isquio un poco resentido, pero por la noche muy bien y por la Mañana creí que un poco mejor que estos días "
+2024-01-25	Iker	Good	28.5	35.4	71.8	5	7	4	4	5	Yes	No	
+2024-01-26	Lua	Good	168	119	41	4	7	5	5	5	No	No	
+2024-01-26	Vivi	Good	155	135	50	5	7	5	5	5	No	No	
+2024-01-26	Iker	Good	83.1	97.2	60.9	5	8	4	3	4	No	No	
+2024-01-26	Adriana	Good	488	324	50	5	8	5	5	5	No	Yes	Igual que estos días. Por la noche bien 
+2024-01-25	Laura												
+2024-01-26	Laura	Good	77.5	88.6	62.1	5	8	5	4	5	No	No	
+2024-01-27	Lua	Good	187	131	43	4	8.5	5	5	5	No	No	
+2024-01-27	Vivi	Good	246	168	47	5	8	5	5	5	No	No	
+2024-01-26	Laura												
+2024-01-27	Laura	Good	151.6	123.1	55.5	4	7	5	4	4	No	No	
+2024-01-26	Fraile												
+2024-01-27	Fraile	Good	115.03	112.36	42	5	10	5	4	5		Yes	Tobillo 6 lo tengo un poco dolorido del entrenamiento de ayer
+2024-01-27	Adriana	Good	416	277	42	5	9	5	5	4	No	No	Creo que un poco mejor 
+2024-01-28	Lua	Good	177	136	45	4	9.5	5	5	5	No	No	
+2024-01-27	Fraile												
+2024-01-28	Fraile	Good	98.96	84.57	41	5	8.3	5	5	5		Yes	"Tobillo, 6, un poco resentido del entrenamiento de ayer."
+2024-01-29	Vivi	Good	151	123	46	5	8	5	5	5	No	No	
+2024-01-29	Laura	Good	81.8	107.3	70.1	4	7	5	4	4	No	No	
+2024-01-29	Lua	Good	146	119	40	4	8	5	5	5	No	No	
+2024-01-29	Fraile	Good	149.98	155.64	33	5	7	5	5	5		Yes	"tobillo, 6"
+2024-01-29	Iker	Good	65.9	79.6	58	5	8.3	4	5	4	No	No	
+2024-01-29	Adriana	Good	459	257	49	5	9	5	5	5	No	No	Creo que un poco mejor 
+2024-01-30	Lua	Good	194	130	42	4	7.5	5	5	5	No	No	
+2024-01-30	Vivi	Good	149	124	43	5	7	5	5	5	No	No	
+2024-01-29	Fraile												
+2024-01-29	Fraile												
+2024-01-30	Fraile	Good	130.05	148.77	36	5	7	5	5	5		Yes	"Tobillo, 5, el movimiento hacia el lado izquierdo me duele mucho menos. "
+2024-01-30	Iker	Good	42.3	41.2	64	5	7.3	4	5	5	No	No	
+2024-01-30	Adriana	Good	435	286	44	5	9	5	5	5	No	No	Ayer por la tarde bastante bien de sensaciones en el isquio
+2024-01-29	Laura												
+2024-01-30	Laura	Good	76.2	56.2	61.4	5	6	5	4	4	No	No	
+2024-01-31	Lua	Good	137	93	42	4	7	5	5	5	No	No	
+2024-01-31	Vivi	Good	271	170	47	5	7	5	5	5	No	No	
+2024-01-30	Fraile												
+2024-01-31	Fraile	Good	126.01	126.77	38	5	7	5	5	5		Yes	"Tobillo, 4, hoy me duele menos noto mejoría."
+2024-01-31	Laura	Good	187.7	205.3	54.9	5	6	5	5	4	No	No	
+2024-01-31	Iker	Good	39.5	46.1	62	5	8	4	5	5	Yes	No	
+2024-01-31	Adriana	Good	359	176	50	5	9	5	5	5	No	Yes	Un poco aductor d isquio por la noche 
+2024-02-01	Lua	Good	206	158	40	4	7.5	5	5	5	No	No	
+2023-02-01	Vivi	Good	160	118	46	5	7	5	5	5	No	No	
+2024-01-31	Laura												
+2024-02-01	Laura	Okay	215.9	188.6	51.5	4	7	5	5	4	No	No	
+2024-02-01	Adriana	Good	385	285	53	5	9	5	5	5	No	No	Isquio más o menos la misma línea pero por la noche nada de dolor hoy
+2024-02-02	Lua	Good	162	103	41	4	8	5	5	5	No	No	
+2024-01-02	Vivi	Good	195	168	53	5	8	5	5	5	No	No	
+2024-02-02	Laura	Good	143	119.5	60.3	5	8	5	5	5	No	No	
+2024-02-03	Laura	Good	137.2	106.8	56.6	4	7	5	5	4	No	No	
+2024-02-03	Lua	Good	157	104	50	4	8.5	5	5	5	No	No	
+2024-02-03	Vivi	Good	252	200	55	5	10	5	5	5	No	No	
+2024-02-04	Vivi	Good	212	172	54	5	9	5	5	5	No	No	
+2024-02-04	Lua	Good	166	110	43	4	9.2	5	5	5	No	No	
+2024-02-05	Lua	Good	267	184	50	4	7.5	5	4	4	No	No	
+2024-02-05	Vivi	Good	313	230	55	5	7	5	5	5	No	No	
+2024-02-05	Iker	Good	94.9	89.5	55.2	5	9	5	2	3	Yes	No	
+2024-02-05	Adriana	Good	435	368	43	5	8.5	5	5	5	No	No	"Por la noche muy bien, isquio igual "
+2024-02-05	Laura	Good	157.7	116	61.4	4	9	5	3	5	No	Yes	Me duele bastante la rodilla operada 
+2024-02-06	Lua	Good	122	137	45	4	8	5	4	4	No	No	
+2024-02-06	Vivi	Good	153	112	49	5	8	5	5	5	No	No	
+2024-02-06	Iker	Good	84	73.8	57	5	8	3	4	4	Yes	No	
+2024-02-06	Laura	Good	98.3	111.1	70.6	5	8	5	4	4	No	Yes	Un poco en la rodilla operada 
+2024-02-07	Vivi	Good	237	189	48	5	8	5	5	5	No	No	
+2024-02-07	Lua	Good	139	107	42	4	8	5	4	4	No	No	
+2024-02-07	Laura	Good	87.9	82.9	73.7	4	6	4	5	4	No	No	
+2024-02-07	Iker	Good	48.5	67.2	57.5	5	8.3	4	3	4	Yes	No	
+2024-02-07	Adriana	Good	437	328	40	5	7.5	5	5	5	No	No	"Por la noche muy bien, por la mañana isquio creo que más o menos igual"
+2024-02-07	Laura												
+2024-02-08	Laura	Good	77.4	93.7	68.1	4	7	5	4	4	No	No	
+2024-02-08	Iker	Good	33.7	44.6	67.4	5	7	3	4	4	Yes	No	
+2024-02-08	Adriana	Good	394	200	44	5	8	5	5	5	No	No	"Por la noche soloUn pelín de molestia en la espalda baja , después de moverme ayer "
+2024-02-09	Laura												
+2024-02-09	Laura	Good	85.7	115.9	70.2	4	6	5	5	4	No	No	
+2024-02-09	Adriana	Good	415	274	40	5	7	5	5	5	No	No	"Por la noche muy bien, al levantarme, no me he buscado el dolor en el Iskyo, pero bajando las escaleras no me molestaba nada y antes bastante??"
+2024-02-09	Iker	Good	45.4	93.5	66.7	5	8.3	5	4	4	Yes	No	
+2024-02-10	Fraile					5	7.3	5	2	5	Yes	Yes	"Tobillo, 6"
+2024-02-10	Laura	Good	85.8	125.1	61.1	5	7	5	5	4	No	No	
+2024-02-12	Laura	Okay	26.7	57.4	87.8	4	6	5	5	4	No	No	
+2024-02-12	Lua	Good	179	133	43	4	8	5	4	5	No	No	
+2024-02-12	Vivi	Good	171	113	41	5	8	5	5	5	No	No	
+2024-02-12	Fraile	Good	109.57	94.52	41	5	6	5	4	5		Yes	"tobillo, 4’5"
+2024-02-12	Adriana	Good	550	323	40	5	9	5	5	5	No	No	"No me he buscado nada el dolor estos días, pero haciendo todas las cosas normales no me siento nada de dolor "
+2024-02-13	Lua	Good	255	159	43	4	8	5	5	5	No	No	
+2024-02-13	Vivi	Good	94	83	45	5	8	5	5	5	No	No	
+2024-02-13	Iker	Good	62.5	68.4	60.2	5	7.3	4	5	5	Yes	No	
+2024-02-13	Adriana	Good	487	321	40	5	8	5	5	5	No	No	Sensaciones muy parecidas a las de ayer ????
+2024-02-13	Fraile	Good	107.76	122.1	51	5	7	5	5	5		Yes	"Tobillo, 4"
+2024-02-12	Fraile												
+2024-02-14	Laura	Good	114.1	101.9	58.8	4	6	5	5	4	No	No	
+2024-02-14	Vivi	Good	162	133	48	5	8	5	5	5	No	No	Hoy el día del baño ha sido exitoso ??? no me faltan acidos ????
+2024-02-14	Adriana	Good	452	303	47	5	8.5	5	5	5	No	No	Sensaciones parecidas por el momento ????
+2024-02-14	Vivi	Good	162	133	48	5	8	5	5	5	No	No	Esto es asqueroso un poco eh JAJAJJA
+2024-02-14	Lua	Okay	184	160	49	4	7	5	4	5	No	No	pocas agujetas 
+2024-02-13	Fraile												
+2024-02-13	Fraile												
+2024-02-14	Fraile	Good	122.25	128.91	45	5	7	5	4	5		Yes	"Tobillo, 4’5"
+2024-02-14	Iker	Good	39.9	58.9	67.3	5	8.3	4	3	4	Yes	Yes	
+2024-02-15	Lua	Good	235	157	41	4	7	5	5	5	No	No	
+2024-02-15	Vivi	Good	161	114	44	5	8	5	5	5	No	No	
+2024-02-15	Laura	Good	98.1	113.3	55.5	4	5	5	5	4	No	No	
+2024-02-15	Iker	Good	57.2	77.6	65	5	8	4	3	3	Yes	No	
+2024-02-14	Fraile												
+2024-02-14	Fraile												
+2024-02-15	Fraile	Good	97.43	128.48	54	5	8.3	4	5	5		Yes	"Me he levantado con el tobillo derechos hinchado, dolor 7’5"
+2024-02-15	Adriana	Good	377	231	43	5	8	5	5	5	No	No	"Por la noche muy bien, un pequea molestia al hacer fuerza, zona del tendón"
+2024-02-16	Adriana	Good	514	353	45	5	7.5	5	5	5	No	No	Isquio con sensación mucho mejor que ayer
+2024-02-16	Fraile	Good	76.23	118.87	48	5	7	5	5	5	Yes	Yes	Tobillo lesionado
+2024-02-16	Laura	Good	191	158	55.6	4	7	5	4	5	No	No	
+2024-02-17	Lua	Good	153	111	43	4	7	5	5	5	No	No	
+2024-02-17	Vivi	Good	229	154	48	5	7	5	5	5	No	No	
+2024-02-17	Laura	Good	92.9	105.7	65.6	4	7	5	5	4	No	No	
+2024-02-17	Adriana	Good	410	265	42	5	9	5	5	5	No	Yes	Dedo (isquio bastante bien)  
+2024-02-19	Laura	Good	154.6	110	50.1	4	6	5	4	4	No	No	
+2024-02-19	Lua	Good	198	156	43	4	7	5	5	5	No	No	
+2024-02-19	Vivi	Good	140	114	45	5	7	5	5	5	No	No	
+2024-02-19	Fraile	Good	105.8	97.57	38	5	7	5	5	5		Yes	El tobillo lesionado.
+2024-02-19	Adriana	Good	421	261	43	5	8.5	5	5	5	No	No	"De isquio bastante bien, sin dolores por la noche. Y analítica hecha hoy?????"
+2024-02-19	Iker	Good	53.9	75.4	63.2	5	10	4	5	5	No	No	
+2024-02-19	Laura												
+2024-02-20	Fraile	Good	112.29	124.04	39	5	6	5	5	5	Yes	Yes	Tobillo lesionado
+2024-02-20	Vivi	Good	253	192	41	5	7	5	5	5	No	No	
+2024-02-20	Iker	Good	72	86.9	59.2	5	9	5	5	5	Yes	No	
+2024-02-20	Adriana	Good	394	276	52	5	8	5	5	5	No	Yes	Un poco de quemazón en el aductor derecho por la noche 
+2024-02-21	Lua	Good	201	151	38	4	6	5	5	5	No	No	
+2024-02-21	Vivi	Good	202	156	48	5	7	5	5	5	No	No	
+2024-02-21	Adriana	Good	382	283	37	5	8.5	5	5	5	No	No	MeMovió ayer María y hoy por la noche muy bien 
+2024-02-21	Laura	Good	180	148	67	4	7	5	5	4	No	No	
+2024-02-21	Iker	Good	37.7	40.4	65.3	5	5	3	3	4	Yes	No	
+2024-02-22	Laura	Good	133.5	110	52.4	4	9	5	5	4	No	No	
+2024-02-22	Iker	Good	49.3	56.1	65.3	5	8.3	4	3	4	Yes	No	
+2024-02-22	Fraile	Good	70.89	65.68	41	5	7.3	5	5	5	Yes	Yes	Tobillo derecho 7’5. Tobillo izquierdo 6.
+2024-02-22	Vivi	Good	209	148	49	5	9.3	5	5	5	No	No	
+2024-02-22	Lua	Good	268	166	44	4	9.4	5	5	5	No	No	
+2024-02-22	Adriana	Good	395	372	44	5	8	5	5	5	No	No	Isquio más o menos como siempre y por la noche nada de dooor 
+2024-02-23	Iker	Good	49.9	50.5	61.8	5	7.3	4	3	4	Yes	No	
+2024-02-23	Adriana	Good	522	384	47	5	8	5	5	5	No	Yes	Solo dolor en la zona del trasverso al moverme por la noche 
+2024-02-23	Fraile	Good	66.98	74.67	44	5	8	5	5	5	Yes	Yes	Tobillo derecho 7 Tobillo izquierdo 6
+2024-02-23	Lua	Okay	173	106	42	4	10.15	5	5	5	No	No	
+2024-02-23	Laura	Good	166.9	128.8	58.9	4	7	5	4	4	No	No	
+2024-02-23	Vivi	Good	139	126	47	5	9.3	5	5	5	No	No	
+2024-02-24	Fraile	Good	95.45	99.12	44	5	6.3	5	4	5		Yes	Tobillo derecho 7 Tobillo izquierdo 5
+2024-02-24	Lua	Good	190	129	42	5	9.15	5	5	5	No	No	
+2024-02-24	Vivi	Good	173	166	55	5	9.15	5	5	5	No	No	
+2024-02-24	Adriana	Good	382	296	50	5	8	5	5	5	No	Yes	"Trasverso mucho mejor, hombro también después de tratar con María ayer "
+2024-02-24	Iker	Good	27	55.8	69.7	5	7	4	4	4	Yes	No	
+2024-02-25	Fraile	Good	108.11	102.99	46	5	7	5	5	5		Yes	Tobillo derecho 6’5. Tobillo izquierdo 4
+2024-02-25	Lua	Good	86	53	39	4	9.5	5	4	5	No	No	Agujetas cuadriceps 
+2024-02-26	Laura	Good	114	94	55	4	7	4	5	4	No	No	
+2024-02-26	Lua	Good	92	105	42	4	8.5	5	4	5	No	No	
+2024-02-26	Vivi	Good	194	161	48	5	9.3	5	5	5	No	No	
+2024-02-26	Fraile	Good	78.76	81.4	46	5	7	5	5	5		Yes	Tobillo derecho 6’5 Tobillo izquierdo 2
+2024-02-26	Iker	Good	55.2	68.4	61.7	5	8.3	4	5	5	Yes	No	
+2024-02-26	Adriana	Good	390	290	43	5	9	5	5	5	No	No	Isquio igual y lo demás todo okay 
+2024-02-27	Lua	Good	200	148	43	4	9	5	5	5	No	No	Ya me siento mucho mejor y con mas energía
+2024-02-27	Adriana	Good	406	223	48	5	8	5	5	5	No	Yes	"Un poco el hombro, isquio creo que guay "
+2024-02-27	Iker	Good	73.3	82.4	58.6	5	8.3	4	4	4	Yes	No	
+2024-02-27	Laura	Okay	52.1	91.4	79.6	4	8	5	4	4	No	No	
+2024-02-27	Fraile	Good	69.63	92.95	48		8	5	5	5		Yes	Tobillo derecho 5’5 Tobillo izquierdo 1
+2024-02-28	Adriana	Good	412	321	43	5	7	5	5	5	No	Yes	Todo okay pero un poco mano derecha y pie izquierd
+2024-02-28	Vivi	Good	169.2	108.4	45	5	8	5	5	5	No	No	
+2024-02-29	Lua	Good	154	99	42	4	9.5	5	5	5	No	No	
+2024-02-29	Vivi	Good	244	148	43	5	10	5	5	5	No	No	
+2024-02-29	Iker	Good	96.6	88.6	50.8	5	6	3	4	3	Yes	No	
+2024-02-29	Fraile					5	6	5	5	5		Yes	Tobillo derecho 6. Tobillo izquierdo 1
+2024-02-29	Laura	Good	110.6	105.8	61.1	5	7	5	5	4	No	No	
+2024-03-01	Lua	Good	185	139	42	4	8.5	5	5	5	No	No	
+2024-03-01	Vivi	Good	153	125	44	5	8	5	5	5	No	No	
+2024-03-01	Adriana	Good	442	277	43	5	9	5	5	5	No	No	"Un pelín de molestia todavía en el pie, pero cada día mejora  "
+2024-03-01	Fraile					5	7.3	5	5	5	Yes	Yes	Tobillo derecho 5. Tobillo izquierdo 1.
+2024-03-02	Lua	Good	169	110	38	4	7	5	5	5	No	No	
+2024-03-02	Vivi	Good	156	113	44	5	7	5	5	5	No	No	
+2024-03-02	Laura	Good	143.9	181	60.6	4	7	4	4	4	No	No	
+2024-03-03	Lua	Good	243	176	41	4	9.5	5	5	5	No	No	
+2024-03-04	Adriana	Good	386	319	40	5	6.5	5	4	5	No	Yes	"Un poco el pie izquierdo, lo demás todo perfect "
+2024-03-04	Lua	Good	227	158	42	4	9.5	5	5	5	No	No	
+2024-03-04	Vivi	Good	235	162	49	5	10.3	5	5	5	No	No	
+2024-03-05	Lua	Good	184	128	40	4	10	5	5	5	No	No	
+2024-03-05	Iker	Good	83.7	88	61	5	8	5	4	4	Yes	No	
+2024-03-05	Vivi	Good	218	154	47	5	9.3	5	5	5	No	No	
+2024-03-05	Adriana	Good	418	280	53	5	9	5	5	5	No	No	"Todo okay,"
+2024-03-05	Laura	Good	198	128	57.8	4	8	5	5	4	No	No	
+2024-03-05	Fraile	Good	122.23	142.64	43	5	8	5	5	5		Yes	Tobillo derecho 5. Tobillo izquierdo 1.
+2024-03-06	Fraile	Good	100.79	113.95	43	5	7	4	4	5		Yes	"Tobillo derecho 4,5. Tobillo izquierdo 0."
+2024-03-06	Lua	Good	174	123	41	4	9.5	5	5	5	No	No	
+2024-03-06	Vivi	Good	246	160	46	5	9.3	5	5	5	No	No	
+2024-03-06	Laura	Good	126.8	103.8	57.8	4	7	5	4	4	No	No	
+2024-03-06	Adriana	Good	385	279	49	5	8	5	5	5	No	Yes	"Un poco el pie derecho, pero solo pequeña molestia "
+2024-03-07	Lua	Good	152	148	43	4	9.5	5	5	5	No	No	
+2024-03-07	Vivi	Good	238	198	55	5	9.1	5	5	5	No	No	
+2024-03-07	Adriana	Good	503	279	40	5	8	5	5	5	No	Yes	"Igual que ayer, un pelín de molestia en el pie "
+2024-03-07	Iker	Good	87.5	94.4	60.9	5	8.3	4	5	5	No	No	
+2024-03-07	Fraile	Good	102.54	111.68	42	5	8	5	4	5		Yes	Tobillo derecho 4. Tobillo izquierdo 1.
+2024-03-07	Laura	Good	79.9	128	76.5	5	9	5	4	4	No	No	
+2024-03-08	Lua	Good	158	128	41	4	9.5	5	5	5	No	No	
+2024-03-08	Fraile	Good	106.21	100.18	39	5	7	5	4	5		Yes	Tobillo derecho 4. Tobillo izquierdo 1.
+2024-03-08	Vivi	Good	172	134	45	5	10	5	5	5	No	No	
+2024-03-09	Lua	Good	204	157	42	4	7.5	5	5	5	No	No	
+2024-03-09	Vivi	Good	280	224	49	5	7.3	5	5	5	No	No	
+2024-03-09	Fraile	Good	93.47	120.21	45	5	6	4	3	4		Yes	Tobillo derecho 4. Tobillo izquierdo 1.
+2024-03-10	Vivi	Good	229	146	54	5	9	5	5	5	No	No	
+2024-03-10	Lua	Good	341	224	39	3	9	5	5	3	No	No	
+2024-03-10	Fraile		103.25	102.56	42	5	11	5	5	5	Yes	Yes	Tobillo derecho 4. Tobillo izquierdo 1.
+2024-03-11	Fraile	Good	109.54	105.53	39	5	6	5	5	5		Yes	Tobillo derecho 3/4. Tobillo izquierdo 1.
+2024-03-11	Iker	Good	66.9	85.3	59.4	5	8.3	4	5	5	No	No	
+2024-03-12	Fraile	Good	124.37	111.06	37	5	7	5	5	5	Yes	Yes	Tobillo derecho 3. Tobillo izquierdo 1.
+2024-03-12	Laura	Good	94.4	80	57.9	4	7	5	4	4	No	No	
+2024-03-12	Lua	Good	167	119	46	4	10	5	5	4	No	Yes	Dolor de espalda 
+2024-03-12	Vivi	Good	184	185	58	5	10	5	3	5	Yes	Yes	Dolores que son golpes como en la tibia 
+2024-03-12	Iker	Good	83.8	78.2	58.5	5	8	5	5	5	No	Yes	"El codo derecho, ayer haciendo combate tuve un gesto raro y hoy me molesta al estirarlo, nacho ayer me lo miro"
+2024-03-12	Adriana	Good	396	338	60	5	9	5	5	5	No	No	"HRV, después de levantarme al baño, por eso creo que las pulsaciones un poco más altas"
+2024-03-13	Lua	Good	143	139	47	4	7.5	5	5	5	No	No	
+2024-03-13	Vivi	Good	194	169	52	5	9	5	4	5	No	Yes	La tibia la tengo sensible 7/10
+2024-03-13	Fraile	Good	117.45	112.43	40	5	7	5	4	5		Yes	Tobillo derecho 3/4. Tobillo izquierdo 1.
+2024-03-13	Adriana	Good	424	281	50	5	9		5	5	No	Yes	Un poco pillada de isquio 
+2024-03-14	Fraile	Good	131.72	156.52	38	5	5	5	3	4	Yes	Yes	"Tobillo derecho 3. Tobillo izquierdo 1. Ayer probe a pegar a pao y me dolió, pero jorge me descargó muy bien el tobillo."
+2024-03-14	Laura	Good	160	154.4	57.9	4	7	5	4	4	No	No	
+2024-03-14	Lua	Good	131	96	43	4	8	5	5	5	No	No	
+2024-03-14	Adriana	Good	491	312	48	5	8.5	5	5	5	No	Yes	Todavía un poco de molestia en m el isquio pero mejor a que ayer 
+2024-03-14	Vivi	Good	112	116	43	5	8.3	5	5	5	No	No	
+2024-03-15	Adriana	Good	479	324	45	5	9	5	5	5	No	Yes	Pequeña molestia en el isquio   
+2024-03-15	Vivi	Good	204	131	48	5	9.2	5	5	5	No	No	
+2024-03-15	Fraile					5	8.3	5	4	5		Yes	Tobillo derecho 4. Tobillo izquierdo 1
+2024-03-15	Lua	Good	222	161	46	4	10.15	5	5	5	No	No	
+2024-03-15	Laura	Good	159.5	123.1	52.2	4	8	5	5	5	No	No	
+2024-03-16	Vivi	Good	211	149	58	5	8.2	5	5	5	No	No	
+2024-03-16	Lua	Good	218	162	54	4	7.5	5	5	5	No	No	
+2024-03-16	Fraile					5	8	5	5	5		Yes	Tobillo derecho 3/4. Tobillo izquierdo 1.
+2024-03-18	Vivi	Good	74	68	44	5	7	5	5	5	No	Yes	Tibia
+2024-03-18	Lua	Good	158	111	53	4	6	5	5	4	No	No	
+2024-03-18	Adriana	Good	483	331	48	5	10	5	4	5	No	Yes	Muslo(solo de  golpe) e isquio 
+2024-03-18	Fraile	Good	129.4	119.74	42		12	5	5	5		Yes	Tobillo derecho 2/3. Tobillo izquierdo 1.
+2024-03-19	Laura	Good	69.3	106	76	4	6	5	4	4	No	Yes	"En el dedo, de un golpe "
+2024-03-19	Lua	Good	210	146	53	4	9	5	5	5	No	No	
+2024-03-19	Vivi	Good	92	74	42	5	8	5	5	5	No	Yes	Tibia 6/10
+2024-03-19	Fraile	Good	108.98	100.53	40	5	7.3	5	5	5	Yes	Yes	Tobillo derecho 3. Tobillo izquierdo 1.
+2024-03-19	Adriana	Good	416	317	51	5	8.5	5	5	5	No	No	Isquio y golpe bastante mejor  
+2024-03-20	Fraile	Good	121.1	136.8	42	5	6.3	5	5	5		Yes	Tobillo derecho 2/3. Tobillo izquierdo 1.
+2024-03-20	Lua	Good	190	157	46	4	9	5	5	5	No	No	
+2024-03-20	Vivi	Good	143	103	48	5	8.2	5	5	5	No	Yes	Tibia 6/10
+2024-03-20	Laura	Good	195.8	191.2	57.4	4	7	5	4	4	No	No	
+2024-03-20	Adriana	Good	451	338	48	5	8.5	5	5	5	No	Yes	"Isquio Más o menos bien, un poco de molestia en aductor /cadera derecha "
+2024-03-21	Lua	Good	187	114	43	4	7.5	5	5	5	No	Yes	"Me molesta un poco la cadera, el flexor derecho. 2/10"
+2024-03-21	Vivi	Good	240	152	47	5	7	5	5	5	No	Yes	Tibia 6/10
+2024-03-21	Laura	Okay	51.5	73.3	64.6	5	6	5	3	4	No	Yes	En los tibiales 
+2024-03-21	Iker	Good	61.9	74.8	59.5	4	7	3	4	4	No	Yes	"La insercion del isquio ayer calentando me pego un latigazo y hoy me he levantado pero, me duele al andar y sobretodo al sentarme"
+2024-03-21	Adriana	Good	427	347	46	5	9	5	5	5	No	No	"Isquio, creo que un poco mejor y cadera todavía con sensación un poco rara"
+2024-03-22	Lua	Good	173	110	45	4	9	5	5	5	No	No	
+2024-03-22	Iker	Good	66.9	84.3	60.4	4	8	4	5	5	No	Yes	Sigo con el mismo dolor y molestia al sentarme en el isquio
+2024-03-22	Adriana	Good	397	327	44	5	9	5	5	5	No	Yes	Isquio bastante bien y cadera derecha me quemaba un poco por la noche 
+2024-03-22	Vivi	Good	155	108	44	5	9	5	5	5	No	Yes	Tibia 5/10
+2024-03-22	Laura	Good	169.7	189.5	56.7	4	7	5	4	4	No	Yes	Un poco en los tibiales 
+2024-03-22	Fraile	Good	69.9	84.94	47	5	9.3	5	5	5		Yes	Tobillo derecho 2/3. Tobillo izquierdo 1.
+2024-03-23	Lua	Good	173	134	44	4	8	5	5	5	No	No	
+2024-03-23	Vivi	Good	154	103	44	5	8	5	5	5	No	Yes	Tibia 5/10
+2024-03-23	Fraile	Good	120.76	115.61	42		7	5	5	5		Yes	Tobillo derecho 5. Tobillo izquierdo 1.
+2024-03-23	Laura	Good	107.8	93	65.6	5	7	5	4	4	No	No	
+2024-03-23	Adriana	Good	458	351	56	5	8.5	5	5	5	No	No	"Iskyo, más o menos igual, un poco de quemazón en la cadera y zona de aductor"
+2024-03-24	Fraile					5	8	3	5	5		Yes	"Tobillo derecho 3/4 tengo menos dolor pero muchisima limitacion, creo que se me ha bloqueado el astrágalo otra vez. Tobillo izquierdo bien."
+2024-03-25	Fraile	Good	135.03	125.99	40	5	7	5	5	5		Yes	Tobillo derecho 3/4 (sensación de bloqueo). 
+2024-03-25	Lua	Good	121.1	94.4	42.7	4	8	5	5	5	No	No	
+2024-03-25	Vivi	Good	145	135	44	5	8	5	5	5	No	No	
+2024-03-25	Iker	Good	60.8	74.8	58.5	5	8	4	5	5	No	Yes	Sigo con algo de molestia al sentarme y me tira en casi cualquier movimiento al agacharme
+2024-03-25	Laura	Okay	38.2	64.4	79	4	7	5	4	4	No	No	
+2024-03-25	Adriana	Good	467	295	42	5	9	5	5	5	No	No	Aductor sin nada de molestia  
+2024-03-26	Lua	Good	151.4	138.1	41.9	4	8.5	5	5	5	No	No	
+2024-03-26	Vivi	Good	204	150	49	5	8.15	5	5	5	No	No	
+2024-03-26	Iker	Good	62.4	81.4	61.7	3	8	4	5	5	No	Yes	Hoy me he levantado con mas molestia que ayer en el isquio
+2024-03-26	Fraile	Good	116.58	123.76	45	5	7.3	5	5	5	Yes	Yes	Tobillo derecho 3. Tobillo izquierdo 1.
+2024-03-26	Laura	Good	126.2	114.3	59.6	4	7	5	4	4	No	No	
+2024-03-26	Adriana	Good	477	268	48	5	9	5	5	5	No	Yes	Un poco más resentida de isquio 
+2024-03-27	Lua	Good	230	172	44	4	8.5	5	5	5	No	No	
+2024-03-27	Vivi	Good	91	85	43	5	8	5	5	5	No	No	
+2024-03-27	Laura	Good	117.6	107.2	60.1	4	7	5	4	4	No	No	
+2024-03-27	Fraile					5	7	2	4	5		Yes	Tobillo derecho 3. Tobillo izquierdo 1.
+2024-03-27	Adriana	Good	409	283	49	5	8	5	5	5	No	Yes	Cadera bien isquio un poco resentido pero bastanre mejor que ayer 
+2024-03-28	Fraile	Good	135.66	118.58	44	5	7	5	3	5		Yes	Tobillo derecho 2 me duele muchisimo en un punto pero creo que es por las agujas que me pincharon ayer
+2024-03-28	Lua	Good	115	147	43	4	9.5	5	5	5	No	No	
+2024-03-28	Laura	Good	112.2	137	61.3	4	7	4	4	4	No	No	
+2024-03-28	Vivi	Good	157	141	46	5	8.3	5	5	5	No	No	
+2024-03-28	Iker	Good	55.8	81.5	60.3	4	8.3	5	4	5	No	No	
+2024-03-29	Lua	Good	169	111	45	4	9	5	5	4	No	No	
+2024-03-29	Laura	Good	97.8	87.9	54.8	4	7	5	4	4	No	No	
+2024-03-29	Fraile	Good	109.87	117.77	41	5	7	5	4	5	Yes	Yes	Tobillo derecho 2. Tobillo izquierdo 1.
+2024-03-29	Vivi	Good	215	143	48	5	8.3	5	5	5	No	No	
+2024-03-25	Adriana	Good	426	273	42	5	7	5		5	No	Yes	Isquio un poco más resentido de lo normal (aductor ayer en el entreno todavía con Algo de molestia)
+2024-03-30	Lua	Good	175	132	42	4	8.5	5	5	4	No	No	
+2024-03-30	Vivi	Good	245	169	47	5	8	5	5	5	No	No	
+2024-03-30	Iker	Good	80.9	69.4	58.3	5	8.3	4	5	5	No	No	
+2024-03-30	Adriana	Good	414	281	44	5	8	5	3	5	No	Yes	"En dolor muscular por un golpe en el gemelo, pero está okay. Un poco de molestia en el isquio "
+2024-03-30	Fraile					5	8.3	5	4	5		Yes	Tobillo derecho 2. Tobillo izquierdo 1.
+2024-03-31	Fraile	Good	102.79	120.33	44	5	9	5	5	5		Yes	Tobillo derecho 2. Tobillo izquierdo 1.
+2024-04-01	Iker	Good	64.6	62.6	55.8	5	7	3	5	4	No	No	
+2024-04-01	Laura	Good	161.8	173.9	64.3	4	7	5	4	4	No	No	
+2024-04-01	Fraile	Good	131.19	123.02	36	5	7	5	5	5	Yes	Yes	Tobillo derecho 2. Tobillo izquierdo 1.
+2024-04-01	Lua	Good	264	154	40	4	8	5	5	5	No	No	
+2024-04-01	Vivi	Good	139	131	45	5	8	5	5	5	No	No	
+2024-04-01	Adriana	Good	578	383	49	5	8.5	5	5	5	No	Yes	Golpe en el gemelo pero ya mucho mejor e isquio un poco d emolestia 
+2024-04-02	Lua	Good	173	125	40	4	7	5	5	5	No	No	
+2024-04-02	Vivi	Good	111	112	46	5	7	5	5	5	No	No	
+2024-04-02	Fraile	Good	134.97	122.01	41	5	6.3	5	5	5		Yes	Tobillo derecho 2. Tobillo izquierdo 1.
+2024-04-02	Laura	Good	112.6	117	61.3	4	6	4	4	4	No	No	
+2024-04-02	Adriana	Good	397	321	52	5	7.5	5	5	5	No	Yes	Molestia en el isquio
+2024-04-02	Iker	Good	123.8	139.3	51.8	4	6.3	3	3	3	No	No	
+2024-04-03	Vivi	Good	208	147	46	5	7	5	5	5	No	No	
+2024-04-03	Fraile	Good	134.92	151.9	40	5	6	5	5	5		Yes	Tobillo derecho 2. Tobillo izquiero 1.
+2024-04-03	Lua	Good	65	120	40	4	7	5	5	5	No	No	
+2024-04-03	Iker	Good	48	65.9	61.3	4	8	4	3	4	No	No	
+2024-04-03	Adriana	Good	467	307	38	5	8.5	5	5	5	No	No	Creo que isquio un poco mejor 
+2024-04-04	Lua	Good	147	122	40	4	7	5	5	4	No	No	
+2024-04-04	Vivi	Good	147	114	47	5	7	5	5	5	No	No	
+2024-04-04	Iker	Good	34.2	45	59.1	3	8.3	4	3	4	No	No	
+2024-04-04	Laura	Good	144.7	140	62.7	4	8	5	4	4	No	No	
+2024-04-04	Adriana	Good	526	304	45	5	8.5	5	5	5	No	Yes	Creo que el isquio un poco mejorn
+2024-04-05	Fraile	Good	89.24	81.61	41	5	5	3	5	5		Yes	Tobillo derecho 2 Tobillo izquierdo 1
+2024-04-05	Lua	Good	182	115	42		7	5	5	5	No	No	
+2024-04-05	Vivi	Good	176	127	47	5	7	5	5	5	No	No	
+2024-04-05	Laura	Good	73.8	82.4	75.7	4	7	4	4	4	No	No	
+2024-04-06	Laura	Good	117.1	98.9	55.4	4	7	5	4	4	No	No	
+2024-04-06	Vivi	Good	186	128	49	5	9	5	5	5	No	No	
+2024-04-06	Lua	Good	191	143	45	4	9.5	5	5	5	No	No	
+2024-04-06	Adriana	Good	534	367	50	5	9.5	5	5	5	No	Yes	Un poco isquiob
+2024-04-07	Lua	Good	261	197	44	4	7.5	5	5	4	No	No	
+2024-04-07	Vivi	Good	252	171	59	5	8	5	4	5	No	Yes	Agujetas gluteos 5/10
+2024-04-08	Lua	Good	165	115	39	4	5.5	5	4	4	No	No	
+2024-04-08	Vivi	Good	178	131	48	5	6	5	5	5	No	Yes	Agujetas gluteos 4/10
+2024-04-08	Fraile	Good	128.67	139	39	5	8	5	2	3		Yes	Tobillo derecho 2/3. Gluteo/espalda. Golpes por todo el cuerpo.
+2024-04-08	Adriana	Good	395	287	42	5	8	5	5	5	No	Yes	Un poco isquio 
+2024-04-09	Lua	Good	194	155	40	4	6	5	5	4	No	No	
+2024-04-09	Vivi	Good	210	149	47	5	6.5	5	5	5	No	No	
+2024-04-09	Iker	Good	95.4	104.8	61.1	4	8.3	5	5	5	No	No	
+2024-04-09	Fraile	Good	107.23	105.85	38	5	8	5	2	5		Yes	Tobillo derecho 2/3. Golpes.
+2024-04-09	Laura	Good	171.5	172.6	62.2	4	7	4	4	3	No	No	
+2024-04-09	Adriana	Good	500	300	49	5	7.5	5	5	5	No	Yes	Un poco más resentido isquio
+2024-04-10	Lua	Good	214	139	37	4	7.5	5	5	5	No	No	
+2024-04-10	Vivi	Good	186	148	48	5	6.5	5	5	5	No	No	
+2024-04-10	Laura	Good	161.4	158.2	54.2	4	6	5	4	4		No	
+2024-04-10	Adriana	Good	657	347	44	5	6.5	5	5	5	No	Yes	Ayer bastante irritada de isquio en el entrenamiento 
+2024-04-10	Fraile	Good	147.73	144.92	36	5	9	5	3	5		Yes	Tobillo derecho 2/3. Gluteo.
+2024-04-11	Fraile	Good	114.92	103.83	39	5	6.3	5	4	5		Yes	tobillo derecho 2/3. Espalda/gluteo
+2024-04-11	Iker	Good	74.7	67.4	58.1	5	8	4	4	4	No	No	
+2024-04-11	Lua	Good	168	98	43	4	9.45	5	5	5	No	No	
+2024-04-11	Vivi	Good	207	165	56	5	9.45	5	5	5	No	No	
+2024-04-11	Adriana	Good	448	327	42	5	9	5	5	5	No	Yes	Isquio ayer en el entrenamiento bastante mejor
+2024-04-11	Laura	Good	88.2	130.2	70	4	6	4	4	4	No	No	
+2024-04-12	Fraile	Good	137.5	120.85	34	5	6	5	5	4		Yes	Tobillo derecho 1/2. Gluteo (esta mejor).
+2024-04-12	Lua	Good	236	159	44	4	9	5	5	5	No	No	
+2024-04-12	Vivi	Good	178	139	51	5	9.15	5	5	5	Yes	No	
+2024-04-12	Laura	Good	104.9	147.1	67.8	5	7	5	5	5	No	No	
+2024-04-12	Iker	Good	44.5	71.2	66.8	5	7	3	4	4	No	No	
+2024-04-13	Lua	Good	189	173	42	4	9.5	5	5	5	No	No	
+2024-04-13	Vivi	Good	134	112	46	5	9.2	5	5	5	No	No	
+2024-04-14	Lua	Good	239	180	40	4	9	5	5	5	No	No	
+2024-04-14	Vivi	Good	190	134	48	5	9	5	5	5	No	No	
+2024-04-15	Lua	Good	120	117	42	4	8	5	4	3	No	No	
+2024-04-15	Iker	Good	75.2	82.1	66.7	5	8	4	5	5	Yes	No	
+2024-04-15	Laura	Good	189	166	55.2	4	7	5	4	4	No	No	
+2024-04-16	Lua	Good	154	107	44	4	8	5	4	4	No	No	"Tengo las piernas un poco cargadas, me molestan un poco ( toda la pierna en general) "
+2024-04-16	Vivi	Good	107	97	42	5	7	5	4	4	No	Yes	Agujetas en los músculos piernas y brazos 
+2024-04-16	Fraile	Good	124.96	139.58	43	5	6	4	5	5		Yes	Tobillo derecho 1/2
+2024-04-16	Adriana	Good	411	281	41	5	8.5	5	5	5	No	Yes	"Isquio bastante bien, un poco quemazón en el aductor "
+2024-04-16	Iker	Good	69	73.1	67.6	5	8	4	5	5	Yes	No	
+2024-04-16	Laura	Good	136.8	137.2	65	4	7	4	4	4	No	No	
+2024-04-17	Lua	Good	134	126	42	4	7.5	5	4	5	No	No	
+2024-04-17	Laura	Good	178.7	130.8	55.3	4	7	5	4	4	No	No	
+2024-04-17	Vivi	Good	53	71	42	5	7.3	5	5	5	No	No	
+2024-04-17	Fraile	Good	121.36	155.06	43	5	7	5	5	4	Yes	Yes	Tobillo derecho 1/2. Gluteo al entrenar (va mejor).
+2024-04-17	Adriana	Good	471	311	42	5	8	5	5	5	No	No	"Isquio un poco mejor, un poco mejor quemazón aductor "
+2024-04-18	Lua	Good	156	115	43	4	7	5	4	5	No	No	
+2024-04-18	Laura	Good	97.6	92.2	57.7	5	6	5	5	4	No	No	
+2024-04-18	Vivi	Good	177	110	44	5	7.3	5	5	5	No	No	
+2024-04-18	Fraile	Good	129.35	160.91	49	5	7	4	4	4		Yes	Tobillo derecho 1/2.
+2024-04-18	Adriana	Good	393	262	44	5	8.5	5	5	5	No	Yes	Isquio bastante bien y un pelín de quemazón en el aductor por la noche 
+2024-04-19	Lua	Good	232	144	43	4	7	5	5	5	No	No	
+2024-04-19	Vivi	Good	49	54	41	5	7	5	5	5	No	Yes	Agujetas cuádriceps 3/10
+2024-04-19	Iker	Good	51.9	61.7	66.5	4	7	3	3	3	No	No	
+2024-04-19	Adriana	Good	392	300	45	5	8	5	5	5	No	Yes	"Quemazón en el aductor, pero isquio bastante bien "
+2024-04-19	Laura	Good	80.4	66	51.5	4	7	5	4	4	No	No	
+2024-04-20	Lua	Good	167	113	44	4	8.5	5	5	5	No	No	
+2024-04-20	Vivi	Good	184	117	45	5	8.3	5	5	5	No	Yes	Agujetas cuádriceps 4/10 está mejor 
+2024-04-20	Fraile	Good	120.28	195.16	48	5	7	4	3	2		Yes	Tobillo 2/3.
+2024-04-21	Fraile	Good	83.53	81.98	44	5	10	5	4	5	Yes	Yes	Tobillo derecho 2. Gluteo molestia.
+2024-04-22	Laura	Good	111.7	113	67	4	6	5	4	4	No	No	
+2024-04-22	Fraile	Good	120.22	119.11	42	5	7	5	5	5		Yes	Tobillo derecho 1. Glúteo molestia.
+2024-04-22	Vivi	Good	151	110	42	5	7.3	5	5	5	No	No	
+2024-04-22	Lua	Good	147	108	44	4	7.5	5	5	5	No	No	
+2024-04-22	Adriana	Good	417	250	45	5	9	5	5	5	No	Yes	Todavía con molestia pero sigo sintiendo el isquio mucho mejorb
+2024-04-23	Fraile	Good	141.45	150.36	41	5	8	5	5	4		Yes	Tobillo derecho 1/2. Gluteo molestia
+2024-04-23	Iker	Good	76.2	78.1	60.9	5	8.3	4	4	4	No	No	
+2024-04-23	Adriana	Good	466	201	50	5	9	5	5	5	No	Yes	Molestia en la espalda baja desde ayer por la tarde e isquio igual
+2024-04-23	Laura	Good	160.6	125.5	57.7	4	8	5	4	4	No	No	
+2024-04-24	Lua	Good	189	138	44	4	7	5	5	5	No	No	
+2024-04-24	Laura	Good	124.2	128.7	66.3	4	6	5	4	4	No	No	
+2024-04-24	Vivi	Good	246	144	45	5	7	5	5	5	No	No	
+2024-04-24	Iker	Good	70.9	74.5	63.2	5	9	4	4	4	Yes	No	
+2024-04-24	Fraile	Good	116.69	139.77	46	5	7	5	4	5		Yes	Tobillo derecho 2. Golpe fuerte en el brazo.
+2024-04-25	Lua	Good	210	158	43	4	7.5	5	5	5	No	No	
+2024-04-25	Vivi	Good	132	56	43	5	7	5	5	5	No	No	
+2024-04-25	Fraile	Good	170.17	146.17	37	5	6	5	4	4		Yes	Tobillo derecho 1. Brazo golpe. 
+2024-04-25	Laura	Good	145.2	164.8	70.1	4	6	5	4	4	No	No	
+2024-04-26	Lua	Good	208	119	43	4	7	5	5	5	No	No	
+2024-04-26	Vivi	Good	201	172	47	5	7	5	5	4	No	No	
+2024-04-26	Fraile	Good	132.1	142.83	45	5	7.3	5	4	5		Yes	Tobillo 2. Golpe brazo
+2024-04-27	Fraile	Good	139.92	163.08	40	5	6.3	5	4	4		Yes	Tobillo 2. Golpe brazo.
+2024-04-27	Lua	Good	177	129	45	4	8	5	5	5	No	No	
+2024-04-27	Vivi	Good	242	157	51	5	8.3	5	5	5	No	No	
+2024-04-27	Adriana	Good	429	319	41	5	9	5	5	5	No	Yes	Isquio como soemore 
+2024-04-28	Fraile	Good	131.91	145.74	44	5	8	5	5	5		Yes	Tobillo 1/2. Golpe brazo
+2024-04-29	Lua	Good	175	141	40	4	8	5	5	5	No	No	
+2024-04-29	Vivi	Good	120	108	41	5	7.3	5	5	5	No	No	
+2024-04-29	Fraile	Good	141.56	142.84	36	5	7	5	5	5	Yes	Yes	Tobillo 1. Golpe brazo (va mejorando).
+2024-04-29	Adriana	Good	509	328	45	5	9	5	5	5	No	Yes	Isquio y un poco la cadera izquierda
+2024-04-30	Lua	Good	143	123	40	4	7	5	5	5	No	No	
+2024-04-30	Vivi	Good	129	100	45	5	7	5	5	5	No	Yes	
+2024-04-30	Fraile	Good	141.34	134.59	41	5	6.3	5	5	5		Yes	Tobillo 1/2 entrenando duele en algun impacto. Golpe brazo
+2024-04-30	Iker	Good	76.2	78.1	60.9	5	8	4	5	5	No	No	
+2024-04-30	Laura	Okay	340	232	39.5	4	7	5	4	4	No	No	
+2024-04-30	Adriana	Good	411	254	54	5	8.5	5	5	5	No	Yes	Isquio un poco más que la semana pasada 
+2024-05-01	Fraile	Good	119.45	142.78	42	5	7	5	4	4	Yes	Yes	Tobillo 2/3. Golpe brazo (esta mucho mejor)
+2024-05-01	Laura	Good	105.9	108.4	55.5	4	8	4	4	4	No	No	
+2024-05-01	Lua	Good	158	100	44	4	9	5	5	5	No	No	
+2024-05-01	Vivi	Good	143	113	51	5	8.2	5	5	5	No	No	
+2024-05-01	Iker	Good	67.8	84.2	64.2	5	8.3	4	4	5	No	No	
+2024-05-02	Fraile	Good	153.64	157.77	40	5	7	3	4	4			Tobillo 2. Dedo del pie.
+2024-05-02	Iker	Good	30.1	33	60.5	5	8	4	3	4	No	No	
+2024-05-02	Laura	Good	153.5	134.9	69.6	4	8	5	4	4	No	No	
+2024-05-02	Lua	Good	157	127	45	4	9.5	5	5	5	No	No	
+2024-05-02	Vivi	Good	225	142	48	5	9.2	5	5	5	No	Yes	Me sigue molestando la rodilla aveces
+2024-04-02	Adriana	Good	436	366	47	5	8	5	5	5	No	Yes	Un poco isquio pero mejor de lo que me esperaba 
+2024-05-03	Fraile	Good	153.37	144.77	40	5	6.3	5	4	4		Yes	Tobillo 1. Dedo del pie.
+2024-05-03	Lua	Good	163	135	45	4	8.5	5	5	5	No	No	
+2024-05-03	Vivi	Good	195	134	44	5	9.15	5	5	5	No	No	
+2024-05-03	Laura	Good	119.1	108.1	60.1	4	8	5	4	4	No	No	
+2024-05-03	Iker	Good	55	71	65.4	5	8	4	4	4	No	No	
+2023-05-04	Fraile	Good	129.52	129.28	38	5	7	5	3	3		Yes	Tobillo 1/2. 
+2024-05-04	Lua	Good	258	186	43	4	9.15	5	5	4	No	No	
+2024-05-04	Vivi	Good	130	121	44	5	8.2	5	5	5	No	No	
+2024-05-04	Laura	Okay	259.7	250.5	48.3	4	7	4	4	4	No	Yes	Un poco en el isquio derecho 
+2024-05-04	Adriana	Good	466	326	42	5	9	5	5	5	No	Yes	Isquio un pelín mas de lo normal 
+2024-05-06	Lua	Good	206	142	39	4	7	5	5	5	No	No	
+2024-05-06	Fraile	Good	146.86	137.61	35	5	7	5	5	5		Yes	Tobillo 1
+2024-05-06	Laura	Good	146.4	128.5	58.7	4	6	5	4	4	No	No	
+2024-05-06	Vivi	Good	66	54	43	5	7	5	5	5	No	No	
+2024-05-06	Adriana	Good	448	304	46	5	8	5	5	5	No	No	"Ayer me pinchó María traumel y por el momento, haciendo cosas normales"
+2024-05-06	Iker	Good	75.1	93.8	60.7	4	8	4	4	4	No	No	
+2024-05-07	Vivi	Good	111	91	45	5	7	5	5	5	No	No	
+2024-05-07	Lua	Good	211	141	41	4	7	5	5	5	No	No	
+2024-05-07	Laura	Good	81.8	95.4	68.8	4	5	5	4	4	No	No	
+2024-05-07	Fraile	Good	122.8	106.43	38	5	7.3	5	5	4		No	
+2024-05-08	Vivi	Good	176	143	48	5	6	1	1	1	No	No	
+2024-05-08	Lua	Good	193	133	41	4	6	5	5	5	No	No	
+2024-05-08	Fraile	Good	139.24	124.03	39	5	9	5	5	5		Yes	Tobillo 1.
+2024-05-09	Fraile	Good	167.76	148.69	37	5	6	5	5	5		Yes	Tobillo 1
+2024-05-09	Lua	Good	162	107	45	4	9	5	5	5	No	No	
+2024-05-09	Vivi	Good	211	163	57	5	9	5	5	5	No	No	
+2024-05-10	Lua	Good	161	116	41	4	10	5	5	5	No	No	
+2024-05-10	Vivi	Good	152	125	63	5	10	5	5	5	No	No	
+2024-05-11	Lua	Good	226	164	45	4	8.1	5	5	5	No	No	
+2024-05-11	Fraile	Good	137.2	142.06	37	5	7	5	5	4		Yes	Dedo del pie
+2024-05-12	Fraile	Good	131.53	148.84	38	5	7	5	5	3		Yes	Dedo del pie
+2024-05-12	Lua	Good	149	115	44	4	9.5	5	5	5	No	No	
+2024-05-12	Vivi	Good	153	126	57	5	9.3	5	5	5	No	No	
+2024-05-13	Fraile	Good	98.27	105.99	44	5	7	5	5	3		No	
+2024-05-14	Iker	Good	71.8	85.2	63.5	5	9	5	5	4	No	No	
+2024-05-14	Laura	Good	73.5	54.3	56	4	9	5	3	4	No	No	
+2024-05-15	Fraile	Good	141.32	117.64	37	5	6.3	5	5	5		No	
+2024-05-15	Adriana	Good	429	272	41	5	8	5	5	5		Yes	"Isquio, pero creo que un poco mejor que ayer "
+2024-05-15	Iker	Good	62.6	65.8	65.6	5	8	4	5	5	No	No	
+2024-05-16	Fraile	Good	135.23	150.88	38	5	7	5	4	4		Yes	Tobillo 1. 
+2024-05-16	Laura	Good	147.9	175.8	63.3	4	7	5	4	4	No	No	
+2024-05-17	Fraile	Good	130.3	143.07	39	5	7	5	4	4		Yes	Tobillo 1
+2024-05-20	Iker	Good	136.7	114.7	52.2	5	9	5	3	4	No	No	
+2024-05-20	Adriana	Good	539	309	45	5	8.5	5	5	5	No	No	Creo que tengo mejor sensación en el isquio pero todavía con molestia 
+2024-05-20	Vivi	Good	182	125	53	5	10	5	5	5	No	No	
+2024-05-20	Laura	Okay	265.7	255.2	63.5	4	7	5	4	4	No	No	
+2024-05-20	Lua	Good	160	124	49	4	11.5	5	5	5	No	No	
+2024-05-20	Fraile	Good				5	8	5	5	5		No	
+2024-05-21	Lua	Good	157	106	50	4	8	5	5	5	No	No	
+2024-05-21	Vivi	Good	233	169	49	5	9	5	5	5	No	No	
+2024-05-21	Fraile	Good	112.39	133.29	39	5	8	5	5	5		No	
+2024-05-21	Laura	Good	159	134.5	63.3	4	7	1	4	4		No	
+2024-05-21	Adriana	Good	427	309	53	5	8	5	5	5	No	Yes	Isquio más o menos como siempre. Ayer en el entreno con un poco más de molestia 
+2024-05-21	Iker	Good	75	69	58	4	8	3	4	4	No	No	
+2024-05-22	Vivi	Good	284	196	48	5	8	5	5	5	No	No	
+2024-05-22	Fraile	Good	167.84	180.51	42	5	8	5	5	4		Yes	Tobillo 1
+2024-05-22	Laura	Good	164.5	127.8	55.3	4	7	5	4	4	No	No	
+2024-05-22	Adriana	Good	500	357	41	5	7.5	5	5	5	No	Yes	Molestia pero creo que mejor que ayer por la mañana
+2024-05-22	Iker	Good	42.8	42.5	58.7	4	8	3	3	3	No	No	
+2024-05-22	Lua	Good	151	112	49	4	8	5	5	5	No	No	
+2024-05-23	Lua	Good	162	120	47	4	8	5	5	5	No	No	
+2024-05-23	Vivi	Good	276	183	47	5	8	5	5	5	No	No	
+2024-05-23	Fraile	Good	134.83	158.28	41	5	7	5	5	4		Yes	Tobillo 1
+2024-05-23	Iker	Good	75.1	77.5	58.5	5	8	4	3	4	No	No	
+2024-05-23	Adriana	Good	501	325	44	5	8	5	5	5	No	No	Bastante bien después de moverme ayer la espalda 
+2024-05-23	Laura	Good	97.2	100.4	71.7	4	7	4	4	4	No	No	
+2024-05-24	Fraile	Good	150.1	175.84	38	5	7	5	5	5		No	
+2024-05-24	Vivi	Good	170	123	47	5	8	5	5	5	No	No	
+2024-05-24	Lua	Good	175	134	47	4	8	5	5	5	No	No	
+2024-05-24	Laura	Good	124.3	121.8	60.7	4	7	4	4	4	No	No	
+2024-05-25	Lua	Good	144	123	49	4	9	5	3	5	No	No	
+2024-05-25	Vivi	Good	162	125	47	5	8	5	5	5	No	No	
+2024-05-27	Lua	Good	190	126	50	4	8.5	5	5	5	No	No	
+2024-05-27	Laura	Good	102.6	103.5	63.8	4	7	4	4	4	No	No	
+2024-05-27	Vivi	Good	203	128	49	5	9	5	5	5	No	No	
+2024-05-27	Adriana	Good	456	361	48	5	9	5	5	5	No	No	"No me he forzado mucho el dolor, porque me pinchó María ayer, pero tengo bastante buena sensación"
+2024-05-27	Fraile	Good	134.26	135.5	39	5	7	5	5	4		No	
+2024-05-27	Iker	Good	77.2	77.5	58	5	8	4	5	5	No	No	
+2024-05-28	Lua	Good	138	97	46	4	7	5	5	5	No	No	
+2024-05-28	Fraile	Good	136.98	137.78	41	5	7	5	5	4		No	
+2024-05-28	Vivi	Good	198	150	49	5	8	5	5	5	No	No	
+2024-05-28	Laura	Good	160.4	148.7	54.4	4	7	4	4	4	No	No	
+2024-05-28	Iker	Good	45.8	55.1	63.1	5	8.3	4	4	4	No	Yes	
+2024-05-29	Fraile	Good	150.18	156.2	41	5	7	5	5	4		No	
+2024-05-29	Lua	Good	119	89	49	4	7	5	4	5	No	No	
+2024-05-29	Vivi	Good	141	89	44	5	8	5	5	5	No	No	
+2024-05-29	Iker	Good	92.3	74.7	54	5	8.3	4	4	4	No	No	
+2024-05-29	Adriana	Good	611	304	43	5	8	5	5	5	No	No	De momento buena sensación por la noche con el isquio
+2024-05-29	Laura	Good	169.8	169.3	58.9	4	7	4	4	4	No	No	
+2024-05-30	Laura	Good	140.1	130.1	55.6	4	5	4	4	3	No	No	
+2024-05-30	Vivi	Good	216	151	45	5	7	5	5	5	No	No	
+2024-05-30	Lua	Good	141	148	53	4	7.5	5	5	5	No	No	
+2024-05-30	Fraile	Good	135.57	148.55	43	5	6	3	2	4		Yes	"Varios golpes, sobretodo en gluteo"
+2024-05-31	Lua	Good	152	141	54	4	7.5	5	5	4	No	No	
+2024-05-31	Vivi	Good	260	165	51	5	7	5	5	5	No	No	
+2024-05-31	Iker	Good	78.4	101.5	59.1	5	9	4	4	4	No	No	
+2024-05-31	Fraile	Good	120.41	120.88	42	5	7	4	3	4		Yes	Golpes
+2024-06-01	Lua	Good	138	117	49	4	8	5	5	4	No	No	
+2024-06-01	Vivi	Good	168	136	46	5	7	5	5	5	No	No	
+2024-06-02	Fraile	Good	90.25	120.39	42	5	8	5	5	4		No	
+2024-06-03	Vivi	Good	166	113	43	5	8	5	5	5	No	No	
+2024-06-03	Iker	Good	74.7	82.3	54.9	4	8.3	5	4	5	No	Yes	"Noto tirantez y cargado en la parte del isquio que me rompi, "
+2024-06-03	Fraile	Good	113.76	106.54	38	5	6	4	5	4		No	
+2024-06-04	Vivi	Good	122	158	46	5	5	5	5	5	No	No	
+2024-06-04	Lua	Good	186	155	57	4	5	5	5	4	No	No	
+2024-06-04	Fraile	Good	121.07	120.27	37	5	8	5	5	5		No	
+2024-06-04	Laura	Good	112.5	98.2	57.9	4	7	4	4	4	No	No	
+2024-06-05	Lua	Good	122.7	106.2	52	4	7	5	5	5	No	No	
+2024-06-05	Vivi	Good	157	104	43	5	7	5	5	5	No	No	
+2024-06-05	Iker	Good	65.6	86	56.7	5	8	4	4	4	Yes	No	
+2024-06-05	Fraile					5	7	4	4	4		No	
+2024-06-06	Fraile	Good	121.44	124.99	38	5	7	5	4	4		Yes	Golpe tibia
+2024-06-06	Laura	Good	89.6	113.1	67.2	4	7	4	4	4	No	Yes	"Todavía me sigue doliendo un poco la tripa, esta sensible "
+2024-06-06	Adriana	Good	479	374	54	5	8.5	5	5	5	No	No	creo que bastante bien de isquio 
+2024-06-07	Lua	Good	155	109	52	4	8	5	5	5	No	No	
+2024-06-07	Vivi	Good	188	172	52	5	8.15	5	5	5	No	No	
+2024-06-07	Adriana	Good	444	301	50	5	8.5	5	5	5	No	No	Isquio por la noche bastante bien
+2024-06-07	Laura	Okay	72.7	116.1	71.2	4	7	4	4	4	No	No	
+2024-06-08	Fraile	Good	113.18	102.54	35	5	7.3	4	4	4		No	
+2024-06-08	Lua	Good	164	147	51	4	8	5	5	5	No	No	
+2024-06-08	Vivi	Good	253	172	52	5	8	5	5	5	No	No	
+2024-06-09	Lua	Good	210	180	51	4	8	5	5	5	No	No	
+2024-06-09	Vivi	Good	259	195	59	5	8	5	5	5	No	No	
+2024-06-10	Lua	Good	161	120	55	4	9	5	5	4	No	No	
+2024-06-10	Vivi	Good	115	81	43	5	8.3	5	4	5	No	No	
+2024-06-10	Fraile					5	9	5	2	2		Yes	Golpes por todo el cuerpo. Pierna izquierda donde mas.
+2024-06-11	Lua	Good	206	149	51	4	8.5	5	4	4	No	No	
+2024-06-11	Vivi	Good	136	90	44	5	8.3	5	5	5	No	No	
+2024-06-11	Fraile	Good	141.87	123.62	36	5	8	5	2	4		Yes	Golpes
+2024-06-11	Iker	Good	79.1	83.8	51.4	5	8	4	3	4	No		
+2024-06-11	Adriana	Good	430	274	48	5	9.5	5	5	5	No	No	Bastante bien de isquio
+2024-06-11	Laura	Good	126.2	146.9	64.5	3	2	5	4	2	No	Yes	Un poco la rodilla 
+2024-06-11	Carlota	Good	38	27	64	4	8	5	3	4	Yes	No	
+2024-06-12	Iker	Good	122.2	102.3	56.4	4	8	4	4	4	No	No	
+2024-06-12	Vivi	Good	165	134	44	5	8.3	5	5	5	No	No	
+2024-06-12	Fraile	Good	125.05	130.1	34	5	7	5	4	4		Yes	"El dedo del pie, los golpes van mejor"
+2024-06-12	Lua	Good	154	139	54	4	9.5	5	5	5	No	No	
+2024-06-12	Adriana	Good	652	371	49	5	8	5	5	5	No	No	"Isquio las o menos bien, no muy resentido "
+2024-06-12	Carlota	Good	44	32	61	5	7	5	3	5	Yes	Yes	me duele un poco la rodilla derecha
+2024-06-12	Laura	Good	167.1	145.9	66	4	7	5	4	3	No	No	
+2024-06-13	Laura	Good	156.6	149.2	60.4	4	7	5	4	4	No	No	
+2024-06-13	Vivi	Good	204	141	47	5	7.3	5	5	5	No	No	
+2024-06-14	Lua	Good	193	168	51	4	8.5	5	5	5	No	No	
+2024-06-14	Vivi	Good	182	113	46	5	8.3	5	5	5	No	No	
+2024-06-14	Laura	Good	94.1	95.8	54	4	7	5	4	4	No	No	
+2024-06-14	Adriana	Good	404	334	42	5	8.5	5	5	5	No	No	"Ayer con un poco de dolor pero me movió María, hoy creo que mejor "
+2024-06-14	Carlota	Good	88	70	55	4	8	5	4	3	Yes	No	
+2024-06-14	Fraile	Good	130.61	122.62	35	5	8	4	5	5		Yes	Dedo del pie
+2024-06-15	Fraile	Good	143.26	121.72	36	5	8	3	5	5		Yes	"Dedo del pie, va mejorando."
+2024-06-15	Lua	Good	107	115	54	4	9.5	5	5	4	No	No	
+2024-06-15	Vivi	Good	179	154	49	5	9.15	5	5	5	No	No	
+2024-06-15	Carlota	Good	53	67	62	5	7	5	5	5	No	No	
+2024-06-15	Laura	Good	102.6	95.5	54.5	4	7	5	4	4	No	No	
+2024-06-16	Fraile	Good	128.76	115.54	37	5	8	5	5	5		No	
+2024-06-17	Lua	Good	160	159	52	4	9.5	5	5	5	No	No	
+2024-06-17	Vivi	Good	223	142	50	5	9.3	5	5	5	No	No	
+2024-06-17	Laura	Good	103.9	90.5	55.7	4	7	4	4	4	No	No	
+2024-06-18	Iker	Good	74.8	77.2	55.9	5	7	3	2	3	No	Yes	
+2024-06-18	Lua	Good	137	135	53	4	9	5	5	5	No	No	
+2024-06-18	Vivi	Good	257	188	49	5	8.3	5	5	5	No	No	
+2024-06-18	Adriana	Good	524	371	42	5	7.5	5	5	5	No	Yes	Un poco de molestia en el isquio
+2024-06-18	Laura	Good	113	127.1	65.8	4	7	5	4	4	No	No	
+2024-06-18	Fraile					5	9	5	3	3		Yes	Dedo y psoas.
+2024-06-19	Lua	Good	176	126	51	4	8	5	5	5	No	No	
+2024-06-19	Vivi	Good	145	123	43	5	8.1	5	4	5	No	No	
+2024-06-19	Fraile	Good	118.33	113.41	41		9	5	4	4		Yes	Dedo y psoas
+2024-06-19	Laura	Good	118.4	105.8	49.1	4	6	4	4	4	No	No	
+2024-06-20	Carlota	Good	37.9	51.6	63.7	3	3	3	4	2	No	No	
+2024-06-20	Lua	Good	213	164	51	4	8	5	5	5	No	No	
+2024-06-20	Vivi	Good	173	132	48	5	8.15	5	5	5	No	No	
+2024-06-20	Fraile	Good	110.22	125.08	42	5	7	5	5	5		Yes	Dedo y psoas
+2024-06-21	Lua	Good	170	154	51	4	8	5	4	5	No	No	
+2024-06-21	Laura	Good	95.8	108	71.8	4	7	5	3	4	No	Yes	Me duelen un poco los isquios 
+2024-06-21	Vivi	Good	216	139	45	5	8	5	5	5	Yes	No	
+2024-06-21	Fraile	Good	99.08	100.69	41	5	7.3	5	5	5		Yes	Dedo y psoas
+2024-06-21	Adriana	Good	443	289	42	5	7.5	5	5	5	No	No	Isquio más o menos bien 
+2024-06-21	Carlota	Good	45	40	63	4	7	5	4	3	No	No	
+2024-06-22	Carlota	Good	33	31	60	4	7	4	5	4	No	No	
+2024-06-22	Lua	Good	142	119	53	4	9.5	5	5	5	No	No	
+2024-06-22	Vivi	Good	187	121	45	5	9.2	5	5	5	Yes	No	
+2024-06-23	Fraile	Good	111.36	111.4	42	5	8	5	5	5		Yes	La nariz
+2024-06-24	Laura	Okay	236.2	202.3	52.4	4	6	5	4	4	No	No	
+2024-06-24	Lua	Good	108	79	51	4	9.5	5	5	5	No	No	
+2024-06-24	Fraile	Good	95.71	101.81	49	5	8	5	5	5		Yes	Nariz
+2024-06-24	Carlota	Good	46	35	60	5	5	4	5	4	No	No	
+2024-06-24	Vivi	Good	89	100	44	5	9	5	5	5	Yes	No	
+2024-06-24	Adriana	Good	539	281	40	5	8.5	5	5	5	No	No	"Hoy por la mañana creo que bastante bien, la semana pasada varios días con un poco de molestia en los entrenamientos al hacer movimientos explosivos y reBotes"
+2024-06-25	Lua	Good	129	116	55	4	8	5	5	5	No	No	
+2024-06-25	Laura	Good	185.6	136	57.4	4	7	5	4	4	No	No	
+2024-06-25	Vivi	Good	202	147	49	5	7	5	5	5	No	No	
+2024-06-25	Iker	Good	53.4	61.9	64.6	5	7	4	5	4	No	No	
+2024-06-25	Fraile					5	7.3	5	5	5		Yes	Nariz
+2024-06-26	Lua	Good	149	119	54	4	9.5	5	5	5	No	No	
+2024-06-26	Vivi	Good	207	149	51	5	9	5	5	5	No	No	
+2024-06-26	Adriana	Good	419	284	50	5	8	5	5	5	No	Yes	Molestia en el isquio por la noche y un h poco el pectoral
+2024-06-26	Fraile	Good	133.77	152.93	45	5	8.3	5	5	5		Yes	Nariz
+2024-06-26	Laura	Good	205.6	193.3	58.7	4	7	5	4	4	No	No	
+2024-06-27	Laura	Good	191.4	144	60.2	4	8	5	4	4	No	No	
+2024-06-27	Lua	Good	103	97	59	4	9.5	5	5	5	No	No	
+2024-06-27	Vivi	Good	164	130	49	5	9.3	5	5	5	No	No	
+2024-06-27	Adriana	Good	455	350	46	5	8.5	5	5	5	No	Yes	Todavía molestia en el isquio por la noche pero bastante mejor que ayer 
+2024-06-27	Iker	Good	28.4	31.1	65.9	5	8.3	4	4	4	No	No	
+2024-06-27	Fraile	Good	127.56	126.99	46	5	9	5	5	5		Yes	Nariz
+2024-06-27	Carlota	Good	76	73	58	5	8	5	3	5	No	Yes	abductor derecho 
+2024-06-28	Lua	Good	101	109	62	4	9.5	5	5	5	No	No	
+2024-06-28	Vivi	Good	156	132	56	5	9.3	5	5	5	No	No	
+2024-06-28	Adriana	Good	457	292	42	5	8.5	5	5	5	No	No	Mucho mejor de isquio
+2024-06-28	Fraile	Good	96.29	117.35	49	5	7.3	5	5	5		Yes	Nariz
+2024-06-28	Laura	Okay	66.5	99.6	71.8	4	8	5	4	4	No	No	
+2024-06-28	Iker	Good	36.1	59.8	65.8	5	6.3	4	4	4	No	No	
+2024-06-29	Laura	Good	209.7	153.9	53.6	4	8	5	4	4	No	No	
+2024-06-29	Lua	Good	88	85	59	4	9.5	5	5	5	No	No	
+2024-06-29	Vivi	Good	208	196	54	5	9.2	5	5	5	No	No	
+2024-06-29	Adriana	Good	497	266	45	5	8.5	5	5	5	No	Yes	"Por la noche muy bien, peor molestia en el isquio al probarme doblando la rodilla por la mañana "
+2024-06-29	Fraile	Good	123.09	147.81	51	5	7.3	5	5	5		Yes	Nariz
+2024-06-29	Iker	Good	43.9	72.2	63.8	4	7.45	4	4	4	No	No	
+2024-06-29	Carlota	Good	46	36	57	5	8	5	3	5	No	No	
+2024-06-30	Vivi	Good	150	152	50	5	8	5	5	5	No	No	
+2024-06-30	Lua	Good	100	99	60	4	9	5	5	5	No	No	
+2024-06-30	Laura	Good	142.4	101.6	60.2	4	7	5	5	4	No	No	
+2024-06-30	Iker	Good	76	65.5	54.4	4	7	3	5	3	Yes	No	
+2024-06-30	Fraile	Good	120.86	125.09	46	5	4	5	5	3		Yes	Nariz
+2024-06-30	Carlota	Good	62	68	63	5	4	5	4	3	No	No	
+2024-06-30	Adriana	Good	428	392	44	5	8	5	5	5	No	No	Bastante mejor de isquio de lo que me esperaba 
+2024-07-01	Lua	Good	147	134	68	4	8.5	5	5	5	No	No	
+2024-07-01	Vivi	Good	134	134	49	5	8.3	5	5	5	No	No	
+2024-07-01	Adriana	Good	583	351	46	5	9	5	5	5	No	No	Crei que me he levantado con el isquio muy bien 
+2024-07-01	Iker	Good	49.1	69.7	55.5	4	10	4	5	4	No	No	
+2024-07-01	Fraile	Good	109.56	130.11	47	5	9	5	4	5		Yes	Nariz
+2024-07-01	Laura	Good	88.7	83.4	71.8	4	7	5	4	4	No	No	
+2024-07-01	Carlota	Good	41	50	67	3	8	4	4	5	No	No	
+2024-07-02	Lua	Good	123	109	60	4	9.5	5	5	5	No	No	
+2024-07-02	Fraile	Good	123.95	129.5	49	5	7.3	3	4	4		Yes	Nariz
+2024-07-02	Laura	Good	139.3	146.5	64.9	4	7	5	4	4	No	No	
+2024-07-02	Adriana	Good	460	323	45	5	8	5	5	5	No	No	Creo que un pelín peor que ayer pero aún así bastante bien 
+2024-07-03	Lua	Good	135	97	62	4	10	5	5	5	No	No	
+2024-07-03	Vivi	Good	176	152	57	5	9	5	5	5	No	No	Me lo medí cuando ya me levanté un rato así que no sé si está muy bien
+2024-07-03	Laura	Good	96.8	86.6	70.1	4	7	4	3	4	No	Yes	Estoy un poco cargada en general 
+2024-07-03	Adriana	Good	451	347	46	5	8.5	5	5	5	No	Yes	Un poco de molestia en el isquio por la mañana y golpe en el pie izquierdo
+2024-07-03	Fraile	Good	109.57	119.45	48	5	8	5	5	5		Yes	Nariz
+2024-07-05	Lua	Good	122	124	54	4	6.5	5	5	4	No	No	
+2024-07-05	Iker	Good	83.8	70.8	58.4	5	7.3	5	4	4	No	No	
+2024-07-05	Carlota	Good	95	100	54	5	8	5	3	3	No	No	
+2024-07-05	Adriana	Good	483	272	43	5	8.5	5	5	5	No	No	"Creo que bien de isquio, un poco de dolor en el pie de golpe, pero todo okay "
+2024-07-06	Fraile	Good	108.11	132.32	52	5	7	2	5	4		Yes	Nariz
+2024-07-06	Laura	Good	196.6	165.3	48.7	4	8	4	4	4	No	No	
+2024-07-06	Lua	Good	151	110	52	4	8.5	5	5	5	No	No	
+2024-07-06	Vivi	Good	202	136	48	5	9	5	5	5	No	No	
+2024-07-06	Carlota	Good	73	67	56	4	8	5	4	4	No	No	
+2024-07-08	Fraile	Good	120.45	117.7	41	5	7	2	2	4		Yes	Nariz. No he podido dormir por un puto mosquito toda la noche y me duele hasta el alma de la halterofilia
+2024-07-08	Vivi	Good	147	102	43	5	8	5	5	5	No	No	
+2024-07-08	Adriana	Good	538	365	42	5	8.5	5	5	5	No	No	Isquio bastante bien
+2024-07-08	Carlota	Good	45	81	71	5	7	5	4	5	Yes	No	
+2024-07-09	Laura	Good	87.4	118.9	70.6	5	6	5	4	4	Yes	Yes	Un poco en los Isquios :( 
+2024-07-09	Lua	Good	179	142	56	4	8.5	5	5	5	No	No	
+2024-07-09	Vivi	Good	229	166	50	5	8	5	5	5	No	No	
+2024-07-09	Fraile	Good	147.6	158	46	5	7	5	3	5	Yes	Yes	Nariz
+2024-07-09	Carlota	Good	75	61	55	5	7	3	3	4	Yes		
+2024-07-10	Lua	Good	206	162	51	4	7.5	5	5	5	No	No	
+2024-07-10	Vivi	Good	186	156	50	5	8	5	5	5	No	No	
+2024-07-10	Iker	Good	62.8	79.9	59.6	4	7	4	4	4	No	No	
+2024-07-10	Carlota	Good	106	91	56	4	7	2	3	3	Yes	Yes	rodilla izquierda
+2024-07-10	Fraile	Good	108.78	113.24	45	5	7	5	5	5		Yes	"Nariz. Me he levantado un poco a coger el pulsometro, que lo tenia en la maleta."
+2024-07-11	Laura	Okay	71.8	128.9	76.4	4	7	5	4	4	Yes	Yes	Isquio
+2024-07-11	Vivi	Good	177	145	47	5	8	5	5	5	No	No	
+2024-07-11	Lua	Good	120	118	56	4	8	5	5	5	No	No	
+2024-07-11	Fraile	Good	109.73	131.45	50	5	7.3	5	5	4		Yes	Nariz
+2024-07-11	Iker	Good	36.4	59.2	61.6	4	8	4	4	3	No	No	
+2024-07-11	Carlota	Good	47	86	63	4	6	3	4	4	Yes	Yes	rodilla izquierda
+2024-07-12	Iker	Good	56.1	57.3	66.6	4	7	3	3	3	No	No	
+2024-07-12	Vivi	Good	225	166	61	5	8.2	5	5	5	No	No	
+2024-07-12	Lua	Good	173	146	63	4	8.5	5	5	5	No	No	
+2024-07-12	Carlota	Good	56	80	61	4	6	3	2	3	No	No	
+2024-07-13	Iker	Good	45.9	59.8	60.2	4	8	4	4	4	No	No	
+2024-07-13	Fraile	Good	137.63	127.41	43	5	8	5	4	5		Yes	Nariz y tobillo
+2024-07-13	Lua	Good	136	128	56	4	6.5	5	5	5	No	No	
+2024-07-13	Carlota	Good	44	42	65	4	8	4	3	2	No	Yes	rodilla izquierda
+2024-07-14	Iker	Good	78	74.1	58	4	9	4	4	4	No	No	
+2024-07-14	Fraile	Good	118.14	122.63	48	5	8	5	5	5		Yes	Nariz y tobillo
+2024-07-15	Fraile	Good	121.4	125.15	41	5	7.3	5	5	5		Yes	Tobillo y nariz
+2024-07-15	Iker	Good	47.6	64.4	60.9	4	7.4	3	4	4	No	No	
+2024-07-15	Lua	Good	160	153	55	4	9	5	5	5	No	Yes	"Me duele todavía la rodilla derecha. 2/10. Entrenando también me duele, pegando patadas. Básicamente no tiro con la derecha"
+2024-07-15	Laura	Okay	50.5	86.1	75.6	4	8	4	4	4	No	No	
+2024-07-15	Adriana	Good	447	333	42	5	8.5	5	5	5	No	Yes	"Del isquio bastante bien, pero dolor en el pectoral derecho "
+2024-07-15	Vivi	Good	138	98	45	5	8.15	5	5	5	No	No	
+2024-07-15	Carlota	Good	58	53	60	5	6	4	4	4	No	No	
+2024-07-16	Laura	Good	126.1	127.5	65.7	4	6	4	4	4	No	No	
+2024-07-16	Fraile	Good	154.44	150.15	41	5	7	5	5	5		Yes	Nariz y tobillo
+2024-07-16	Lua	Good	187	133	51	4	8.5	5	5	5	No	No	
+2024-07-16	Vivi	Good	103	82	44	5	7	5	5	5	No	No	
+2024-07-16	Carlota	Good	65	55	55	5	8	5	5	5	No	No	
+2024-07-17	Fraile	Good	139.64	157.96	44	5	6.3	5	5	4		Yes	Nariz y tobillo
+2024-07-17	Iker	Good	69	63.4	59	4	8.45	5	4	4	No	No	
+2024-07-17	Adriana	Good	456	337	42	5	7.5	5	5			Yes	"Isquio muy bien, molestia un pelín pectoral "
+2024-07-17	Lua	Good	143	139	57	4	9.5	5	5	5	No	No	
+2024-07-17	Laura	Good	150	215.6	71.3	4	7	4	4	4	No	No	
+2024-07-17	Vivi	Good	151	96	47	5	7.3	5	5	5	No	No	
+2024-07-17	Carlota	Good	61	45	56	5	6	5	4	5	No	No	
+2024-07-18	Lua	Good	120	103	56	4	8	5	5	5	No	No	
+2024-07-18	Vivi	Good	209	144	50	5	7	5	5	5	No	No	
+2024-07-18	Adriana	Good	497	309	56	5	7	5	5	4	No	Yes	Un poco pecho e isquio un poquito más molesto 
+2024-07-19	Iker	Good	88.2	92.5	58	4	8.3	5	5	5	No	No	
+2024-07-19	Lua	Good	150	149	57	4	8	5	5	5	No	No	
+2024-07-19	Vivi	Good	211	151	52	5	8.3	5	5	5	No	No	
+2024-07-19	Laura	Good	122.6	128.5	61.5	4	8	5	4	4	No	No	
+2024-07-19	Fraile	Good	158.26	131.22	43	5	8	5	5	5		Yes	Nariz y tobillo (el tobillo va mucho mejor)
+2024-07-19	Carlota	Good	48	51	61	5	8	5	3	5	No	Yes	caderas
+2024-07-20	Lua	Good	141	127	54	4	9.15	5	5	5	No	No	
+2024-07-20	Vivi	Good	185	179	49	5	9.3	5	5	5	No	No	
+2024-07-20	Carlota	Good	66	85	64	5	8	5	5	5	No	No	
+2024-07-21	Lua	Good	184	126	53	4	9	5	5	5	No	No	
+2024-07-21	Vivi	Good	174	111	45	5	8	5	5	5	No	No	
+2024-07-22	Iker	Good	74.3	73.9	55.8	4	8.3	5	5	5	No	No	
+2024-07-22	Fraile	Good	130.49	138.14	45	5	8	5	5	5		Yes	"Nariz, el tobillo esta casi genial."
+2024-07-22	Lua	Good	145	114	55	4	9.5	5	5	5	No	No	
+2024-07-22	Adriana	Good	602	309	44	5	9	5	5	5	No	No	tofo perfect 
+2024-07-22	Laura	Okay	75.1	73.9	74.3	4	8	5	4	4	No	No	
+2024-07-22	Carlota	Good	47	55	64	5	8	5	5	5	No	No	
+2024-07-23	Iker	Good	39.3	55	60.2	4	9.2	3	4	4	No	No	
+2024-07-23	Vivi	Good	174	174	50	5	10.3	5	5	5	Yes	No	
+2024-07-23	Lua	Good	151	134	60	4	10.5	5	5	5	Yes	No	
+2024-07-23	Laura	Okay	209.9	160.9	52.2	4	8	4	4	4	No	No	
+2024-07-23	Fraile	Good	152.64	151.03	42	5	9	3	5	5		Yes	Nariz. Me despierto mucho por las noches ultimamente
+2024-07-23	Carlota	Good	100	73	55	5	8	5	5	5	No	No	
+2024-07-24	Laura	Good	112.8	143	62.9	4	8	3	4	4	No	No	
+2024-07-24	Fraile	Good	173.53	174.69	45	5	8	4	5	5		Yes	"Nariz, tobillo poco."
+2024-07-24	Lua	Good	166	122	52	4	9.5	5	5	5	No	No	
+2024-07-24	Vivi	Good	116	100	45	5	9	5	5	5	No	No	
+2024-07-24	Carlota	Good	70	100	61	5	9	5	5	5	No	No	
+2024-07-25	Laura	Good	137.9	130.6	54.1	4	25	4	4	4	No	No	
+2024-07-25	Vivi	Good	145	113	48	5	9.3	5	5	5	No	No	
+2024-07-25	Lua	Good	188	130	50	4	9.5	5	5	5	Yes	No	
+2024-07-25	Carlota	Good	61	48	59	5	8	5	5	5	No	Yes	tibias 
+2024-07-26	Lua	Good	239	178	53	4	8.5	5	5	5	No	No	
+2024-07-26	Vivi	Good	194	147	45	5	8	5	5	5	No	No	
+2024-07-27	Fraile	Good	165.16	141.88	39	5	7	5	5	5		Yes	"Nariz, tobillo (muy poco ya)"
+2024-07-27	Lua	Good	138	106	46	4	9	5	5	5	No	No	
+2024-07-27	Vivi	Good	162	146	47	5	9	5	5	5	No	No	
+2024-07-27	Carlota	Good	59	69	62	4	9	5	5	5	No	No	
+2024-07-28	Lua	Good	218	145	50	4	8.5	5	5	5	No	No	
+2024-07-29	Fraile	Good	128.75	128.41	40	5	6	5	5	4		Yes	Nariz
+2024-07-29	Vivi	Good	69	70	45	5	9.3	5	5	5	No	No	
+2024-07-29	Lua	Good	144	151	54	4	10	5	5	5	No	No	
+2024-07-29	Adriana	Good	686	450	50	5	9	5	5	5	No	No	"Los golpes todo bien, espalda me movió María ayer e isquio perfect"
+2024-07-29	Carlota	Okay	45	76	63	4	8	5	5	5	No	No	
+2024-07-29	Laura	Good	221.5	148	50.8	4	8	5	4	4	No	No	
+2024-07-30	Fraile	Good	134.06	138.31	39	5	5.3	3	5	4		Yes	Nariz
+2024-07-30	Lua	Good	128	110	45	4	8	5	5	5	No	No	
+2024-07-30	Vivi	Good	171	140	42	5	7	5	5	5	No	No	
+2024-07-31	Lua	Good	148	141	52	4	9	5	5	5	No	No	
+2024-07-31	Vivi	Good	256	207	50	5	8.3	5	5	5	No	No	
+2024-07-31	Fraile	Good	169.92	184.77	46	5	9	5	5	5		Yes	Nariz
+2024-08-01	Vivi	Good	198	152	54	5	9	5	5	5	No	No	
+2024-08-01	Lua	Good	67	82	55	4	9	5	5	5	No	No	
+2024-08-01	Fraile					5	6	4	5	5		Yes	"Tobillo derecho, ayer me lo volvi a torcer"
+2024-08-01	Laura	Good	110.7	133.7	56.4	4	7	5	4	4	No	No	
+2024-08-01	Adriana	Good	451	250	43	5	8.5	5	5	5	No	No	Un poquito el pie pero mucho mejor que días emteriored e isquio creo que bastante bien después de moverme la espalda ?????
+2024-07-02	Lua	Good	159	121	54	4	9	5	5	5	No	No	
+2024-08-02	Vivi	Good	172	142	53	5	8.3	5	5	5	No	No	
+2024-08-02	Fraile	Good	153.34	160.03	42	5	8	5	5	5		Yes	Tobillo
+2024-08-03	Fraile	Good	150.53	189.15	46	5	5	2	5	5		Yes	Tobillo 
+2024-07-03	Lua	Good	173	121	49	4	8	5	5	4	No	No	
+2024-08-03	Vivi	Good	105	72	43	5	8	5	5	5	No	No	
+2024-07-03	Carlota	Poor	58	44	61	5	8	5	5	4	Yes	No	
+2024-07-05	Lua	Good	173	137	53	4	6	5	5	5	No	No	
+2024-08-05	Vivi	Good	168	129	43	5	6	5	5	5	No	No	
+2024-08-06	Vivi	Good	226	174	54	5	9.15	5	5	5	No	No	
+2024-08-06	Lua	Good	143	123	56	4	9.15	5	5	5	No	No	
+2024-08-07	Vivi	Good	221	155	50	5	8.3	5	5	5	No	No	
+2024-08-08	Vivi	Good	158	108	51	5	9.3	5	5	5	No	No	
+2024-08-20	Fraile	Good	104.37	124.02	48	5	7	5	5	5		No	
+2024-08-21	Fraile	Good	115.4	154.67	57	5	7	5	3	5		No	
+2024-08-22	Fraile	Good	114.34	129.11	49	5	8	5	3	5		No	
+2024-08-26	Fraile	Good	158.71	171.72	40	5	6	3	5	5		No	
+2024-08-27	Fraile	Good	162.69	158.43	45	5	7	5	3	5		No	
+2024-08-29	Fraile	Good	146.51	133.05	42	5	8	5	4	5		No	
+2024-08-30	Fraile	Good	167.27	198.5	44	5	6	5	5	4		No	
+2024-09-02	Carlota	Good	142.34	151.87	36	5	7	5	5	5		No	
+2024-09-03	Fraile	Good	165.83	189.88	43	5	7	5	5	4		No	
+2024-09-03	Laura	Good	120.3	93.2	48.8	4	7	4	4	4	No	No	
+2024-09-03	Carlota	Good	53	46	60	4	8	5	4	4	No	No	
+2024-09-04	Fraile	Good	123.85	136.99	40	5	7	5	3	3		No	
+2024-09-04	Carlota	Good	61	53	58	4	7	4	3	4	No	No	
+2024-09-04	Laura	Good	130.8	112	53.5	4	7	4	4	4	No	No	
+2024-09-05	Laura	Okay	76.5	134.1	69.4	4	7	4	4	4	No	No	
+2024-09-05	Fraile	Good	122.18	128.55	40	5	6.3	3	2	3		No	
+2024-09-05	Carlota	Good	35	45	62	4	8	5	3	3	No	No	
+2024-09-06	Lua	Good	86	63	53	4	8	5	3	5	No	Yes	Isquio
+2024-09-06	Vivi	Good	102	71	51	5	8	5	5	5	No	No	
+2024-09-06	Carlota	Good	18	34	86	4	8	5	3	3	No	No	
+2024-09-07	Fraile	Good	116.22	113.79	42	5	7.3	5	5	4		No	
+2024-09-08	Fraile	Good	154.9	148.12	38	5	8.3	5	5	5		No	
+2024-09-09	Fraile	Good	148.15	147.54	33	5	7.3	5	5	5		No	
+2024-09-09	Vivi	Good	210	158	54	5	10	5	5	5	No	No	
+2024-09-09	Iker	Good	49	70.3	62.2	5	9.3	5	5	5	No	No	
+2024-09-09	Lua	Good	98	87	58	4	10	5	5	5	No	Yes	Isquio
+2024-09-09	Laura	Okay	54.3	64.5	73	4	7	4	4	4	No	No	
+2024-09-10	Fraile	Good	145.31	128.5	38	5	7	5	5	4		No	
+2024-09-10	Vivi	Good	144	119	46	5	8.3	5	4	5	No	Yes	Agujetas en los isquios 4/10
+2024-09-10	Lua	Good	116	93	55	4	9.5	5	4	5	No	No	
+2024-09-10	Carlota	Good	46	49	61	5	7	5	5	4	No	No	
+2024-09-11	Iker	Good	72.3	79.6	58.6	5	9	4	5	5	No	No	
+2024-09-11	Fraile	Good	202.5	161.67	34	5	8	5	5	4		No	
+2024-09-11	Vivi	Good	159	107	48	5	9	5	5	5	No	No	
+2024-09-11	Lua	Good	133	103	56	4	9.5	5	5	5	No	No	
+2024-09-12	Lua	Good	145	123	51	4	9.5	5	5	5	No	No	
+2024-09-12	Vivi	Good	173	153	48	5	9.3	5	5	5	No	No	
+2024-09-13	Vivi	Good	250	210	57	5	9	5	5	5	No	No	
+2024-09-14	Vivi	Good	219	193	58	5	9	5	5	5	No	No	
+2024-09-14	Lua	Good	145	124	57	4	9.5	5	5	5	No	No	
+2024-09-16	Lua	Good	131	126	52	4	8	5	5	5	No	No	
+2024-09-16	Vivi	Good	93	85	44	5	9	5	5	5	No	No	
+2024-09-17	Fraile	Good	162.17	137.19	35	5	6	5	5	5		Yes	Pie (golpe) y codo
+2024-09-17	Lua	Good	208	164	52	4	8	5	5	5	No	No	
+2024-09-17	Vivi	Good	116	96	46	5	7.3	5	5	5	No	No	
+2024-09-18	Iker	Good	71.8	89.9	59.6	4	8.3	4	4	5	No	Yes	"Sigo con la molestia del isquio, pero menos que ayer"
+2024-09-18	Lua	Good	132	111	55	4	9	5	5	5	No	No	
+2024-09-18	Vivi	Good	184	138	51	5	9	5	5	5	No	No	
+2024-09-18	Fraile	Good	179.2	148.33	36	5	9	5	5	5		Yes	Tobillo y codo (menos dolor en los dos)
+2024-09-18	Laura	Good	104	76	53	4	7	5	4	4	No	No	
+2024-09-18	Carlota	Good	29	54	67	3	8	5	2	5	No	Yes	"Periostitis, ayer corrí por la mañana y ya me molestaba un poco, y por la tarde me dolía bastante y tuve que para al final del entreno porque todo el rebote que hacía me iba doliendo cada vez más. Hoy no se como estaré entrenando, pero al andar me molesta, no es exagerado, pero lo noto bastante."
+2024-09-19	Laura	Good	94.9	71.9	51.8	4	6	5	4	4	No	No	
+2024-09-19	Vivi	Good	84	60	43	5	8	5	5	5	No	No	
+2024-09-19	Fraile	Good	153.23	174.5	37	5	6.3	4	5	5		Yes	Los golpes un poco todavia
+2024-09-19	Carlota	Good	62.1	54.6	60.2	5	8	5		5	No	Yes	igual que ayer
+2024-09-20	Fraile	Good	159.81	166.77	40	5	6.3	5	5	4		Yes	Muy poco el golpe del pie
+2024-09-20	Lua	Good	159	128	51	4	8.5	5	5	5	No	No	
+2024-09-20	Vivi	Good	83	80	44	5	9	5	5	5	No	No	
+2024-09-20	Iker	Good	73.3	85.2	57.2	5	8	3	4	5	No	No	
+2024-09-20	Laura	Okay	43.9	68.7	73.2	4	7	5	4	4	No	No	
+2024-09-21	Laura	Good	133.8	97.9	59.3	4	7	4	4	4	No	No	
+2024-09-21	Lua	Good	223	161	53	4	10	5	5	5	No	No	
+2024-09-21	Vivi	Good	186	132	46	5	9.2	5	5	5	No	No	
+2024-09-21	Carlota	Good	43	48	62	5	7	5	4	5	No	No	
+2024-09-23	Fraile	Good	144.63	154.27	37	5	8	5	5	5		No	
+2024-09-23	Vivi	Good	189	135	48	5	9.3	5	5	5	No	No	
+2024-09-23	Iker	Good	60.9	66.5	57.9	5	8.3	4	5	5	No	No	
+2024-09-23	Carlota	Good	81.8	61.5	57.5	3	7	4	5	4	No	No	
+2024-09-23	Lua	Good	177	125	48	4	10	5	5	5	No	No	
+2024-09-23	Laura	Good	84.9	80.4	58.9	4	7	5	4	4	No	No	
+2024-09-24	Iker	Good	61.2	70.8	62.4	5	7	3	4	5	No	No	
+2024-09-24	Vivi	Good	163	105	48	5	9.2	5	5	5	No	No	
+2024-09-24	Lua	Good	187	140	45	4	10	5	5	5	No	No	
+2024-09-24	Fraile	Good	145.22	157.07	42	5	7.3	5	5	5		No	
+2024-09-24	Laura	Good	128.6	88.2	59.1	4	7	4	4	4	No	No	
+2024-09-24	Carlota	Good	46.7	42.5	62.8	4	7	5	5	4	No	No	
+2024-09-25	Vivi	Good	184	113	47	5	7	5	5	5	No	No	
+2024-09-25	Fraile	Good	163.26	183.18	43	5	7.3	4	5	5		No	
+2024-09-25	Lua	Good	259	169	49	4	9	5	5	5	No	No	
+2024-09-25	Laura	Good	57.7	123.5	76.9	4	7	5	4	3	No	No	
+2024-09-26	Fraile	Good	152	215.93	55	5	5	2	4	4		No	
+2024-09-26	Lua	Good	200	148	49	4	10	5	5	5	No	No	
+2024-09-26	Laura	Good	123	152.1	63	4	6	4	4	3	No	No	
+2024-09-26	Carlota	Good	61	84	61	5	8	5	4	4	Yes	No	
+2024-09-27	Lua	Good	202	145	49	4	8.4	5	5	5	No	No	
+2024-09-27	Vivi	Good	139	104	46	5	8.3	5	5	5	No	No	
+2024-09-27	Carlota	Good	53	55	65	4	5	3	5	3	Yes	No	
+2024-09-27	Fraile	Good	120.09	149.62	56	5	8.3	3	3	4	No	No	
+2024-09-28	Lua	Good	130	106	43	4	9	5	5	5	No	No	
+2024-09-28	Vivi	Good	110	72	42	5	8.15	5	5	5	No	No	
+2024-09-29	Fraile	Good	133.66	140.19	42	5	7	5	5	5	No	No	
+2024-09-30	Vivi	Good	122	93	44	5	8.3	5	5	5	No	No	
+2024-09-30	Lua	Good	177	125	45	4	8.5	5	5	5	No	No	
+2024-09-30	Fraile	Good	143.59	145.45	38	5	7	5	5	5		No	
+2024-09-30	Laura	Good	61.2	72	59.1	4	7	5	4	4	No	No	
+2024-09-30	Iker	Good	81.2	92.3	58	4	8.3	4	5	5	No	No	
+2024-09-30	Carlota	Okay	74	71	58	5	8	5	3	5	No	Yes	caderitas de mi corason
+2024-10-01	Laura	Good	83.2	67.3	47.3	4	6	5	5	4	No	No	
+2024-10-01	Lua	Good	113	104	51	4	8	5	5	5	No	No	
+2024-10-01	Vivi	Good	294	194	46	5	7.5	5	5	5	No	No	
+2024-10-01	Iker	Good	61	60.9	63.3	5	8.3	5	5	5	No	No	
+2024-10-01	Fraile	Good	154.65	168.64	43		7.3	5	5	5		No	
+2024-10-01	Jack	Okay	4.68	176.53	60	4	8	3	4	4	No	No	
+2024-10-02	Laura	Good	69.3	64.3	68.3	4	6	5	4	4	No	No	
+2024-10-02	Fraile	Good	152.76	176.14	37	5	7	5	5	5		No	
+2024-10-02	Jack	Okay	93.92	154.81	62	4	8	3	2	3	No	No	
+2024-10-02	Lua	Good	191	130	50	4	9.5	5	5	5	No	No	
+2024-10-02	Vivi	Good	226	174	50	5	9.3	5	5	5	No	Yes	Agujetas isquio izquierdo 3/10
+2023-10-02	Iker	Good	67.8	59.8	63.3	4	8	4	4	4	No	No	
+2024-10-02	Carlota	Good	98	95	54	5	8	5	4	4	No	Yes	fuck caderas
+2024-10-03	Fraile	Good	162.86	172.82	39	5	6.3	4	5	2		No	
+2024-10-03	Lena	Good	85.74	107.31	66	4	7	5	4	3	Yes	No	
+2024-10-03	Iker	Good	53.9	73.5	64.9	4	8.3	5	4	4	No	No	
+2024-10-03	Lua	Good	122	136	54	4	10	5	5	5	No	No	
+2024-10-03	Vivi	Good	174	122	51	5	9.3	5	5	5	No	No	
+2024-10-03	Laura	Okay	46	61.3	70.3	4	7	5	4	4	No	No	
+2024-10-03	Carlota	Good	62	89	60	4	8	5	4	4	No	No	
+2024-10-03	Jack	Okay	113.86	129.06	57	4	8	4	2	2	No	No	
+2024-10-04	Carlota	Good	72	69	55	5	6	5	4	4	No	No	
+2024-10-04	Iker	Good	67	85.5	61.4	4	9	5	4	5	No	No	
+2024-10-04	Laura	Good	150	166.4	59.7	4	7	5	4	4	No	No	
+2024-10-04	Jack	Okay	106.66	148.65	63	3	8	3	4	3	No	No	
+2024-10-04	Vivi	Good	184	149	49	5	9.3	5	5	5	No	No	
+2024-10-04	Lua	Good	178	139	46	4	10	5	5	5	No	No	
+2024-10-04	Fraile	Good	157.29	162.63	41	5	7.3	5	4	5		Yes	Gemelo
+2024-10-05	Lua	Good	174	128	53	4	8	5	5	5	No	No	
+2024-10-05	Vivi	Good	233	155	50	5	7.3	5	5	5	No	No	
+2024-10-05	Fraile	Good	145.7	154.55	42	5	7	5	4	4		No	
+2024-10-05	Jack	Okay	98.26	151.38	59	4	8	4	3	4	No	No	
+2024-10-05	Laura	Good	100.8	75.5	58.7	4	7	5	4	4	No	No	
+2024-10-05	Carlota	Good	67	51	57	5	7	5	4	4	No	Yes	caderitas
+2024-10-06	Jack	Okay	75.56	110.26	65	4	10	4	3	3	No	No	
+2024-10-07	Lena	Good	77.27	73.84	70	5	7	3	5	5	No	No	
+2024-10-07	Iker	Good	78	68.7	57.7	4	8	4	5	5	No	No	
+2024-10-07	Fraile	Good	176.15	170.76	39	5	8	5	5	5		No	
+2024-10-07	Jack	Okay	108.28	164.18	59	4	8	4	2	2	No	No	
+2024-10-07	Lua	Good	174	161	46	4	10	5	5	5	No	No	
+2024-10-07	Laura	Good	98.3	91.3	56.3	4	7	4	4	4	No	No	
+2024-10-07	Vivi	Good	200	142	48	5	9.3	5	5	5	No	No	
+2024-10-07	Carlota	Good	78	65	56	5	8	5	5	5	No	No	
+2024-10-08	Iker	Good	60.2	52	58.1	4	9	5	4	4	No	No	
+2024-10-08	Carlota	Good	49	46	60	5	8	5	4	5	No	No	
+2024-10-08	Jack	Okay	87.13	120.12	60	3	7	2	3	3	No	No	
+2024-10-08	Vivi	Good	172	135	54	5	9	5	5	5	No	No	
+2024-10-08	Laura	Good	110	101.3	59.1	4	6	5	4	4	No	Yes	Un poco en la rodilla operada del test de ayer 
+2024-10-08	Fraile	Good	179.17	184.87	41	5	7.3	4	3	5		No	
+2024-10-08	Lua	Good	217	152	47	4	9.5	5	5	5	No	No	
+2024-10-09	Lena	Good	37.37	66.56	71	5	7	3	4	3	No	No	
+2024-10-09	Iker	Good	63.2	58	64.7	5	7	3	5	5	No	No	
+2024-10-09	Fraile	Good	148.61	158.45	42	5	8	4	4	5		No	
+2024-10-09	Laura	Good	97.4	96.6	63.8	4	7	5	4	4	No	No	
+2024-10-09	Jack	Okay	133	158.05	54	3	8	2	4	4	No	No	
+2024-10-09	Vivi	Good	192	138	50	5	9	5	3	5	No	Yes	Agujetas todo el cuerpo 3/10
+2024-10-09	Lua	Good	172	125	45	4	9.5	5	4	5	No	Yes	Agujetas: Aductor y pecho.    ….??????
+2024-10-09	Carlota	Good	42	58	72	4	8	4	3	4		Yes	hombros/cuello
+2024-10-10	Lena	Good	39.02	73.44	72	4	8	4	3	3	No	No	
+2024-10-10	Iker	Good	58	79.5	65	4	8.3	4	4	5	No	No	
+2024-10-10	Fraile	Good	163.68	149.51	39	5	7.3	5	5	5		Yes	Tobillo bastante
+2024-10-10	Vivi	Good	185	132	48	5	9	5	3	5	No	Yes	Agujetas en los gluteos 4/10
+2024-10-10	Lua	Good	173	128	48	4	9.3	5	4	5	No	No	
+2024-10-11	Lua	Good	155	121	46	4	8	5	4	4	No	No	
+2024-10-11	Vivi	Good	97	67	43	5	8.2	5	4	5	No	No	
+2024-10-11	Iker	Good	83.5	87.4	60.7	4	7.3	5	5	5	No	No	
+2024-10-11	Lena	Good	29.02	51.95	73	5	8	5	3	3	No	No	
+2024-10-11	Laura	Good	60	45.3	61.8	4	6	5	4	4	No	No	
+2024-10-11	Jack	Okay	166.53	206.36	54	4		4	3	3	No	No	
+2024-10-12	Lua	Good	175	144	42	4	9	5	4	3	No	No	
+2024-10-12	Vivi	Good	149	107	45	5	8	5	5	5	No	No	
+2024-10-12	Laura	Good	69.8	102	68.5	4	8	5	4	4	No	No	
+2024-10-12	Lena	Good	70.6	70.69	68	5	9	5	3	4	No	No	
+2024-10-12	Jack	Good	132.89	120.21	54	4	8	4	4	5	No	No	
+2024-10-13	Fraile					5	8	5	5	5		Yes	Va mejorando bastante bien el tobillo 
+2024-10-14	Laura	Good	91.9	75.5	57.8	4	6	5	4	4	No	No	
+2024-10-14	Fraile	Good	150.24	184.88	38	5	7.3	5	5	5		Yes	"Tobillo, va mejorando mucho"
+2024-10-14	Lena	Good	133.7	122.72	71	5	8	5	5	5	No	No	
+2024-10-14	Iker	Good	65.2	82.8	64.6	5	8	4	5	5	No	No	
+2024-10-14	Vivi	Good	100	127	45	5	9	5	5	5	Yes	No	
+2024-10-14	Lua	Good	151	135	46	4	9	5	5	5	No	No	
+2024-10-14	Jack	Okay	134.37	119	47	4	8	4	3	4	No	No	
+2024-10-15	Fraile	Good	151.26	160.22	37	5	7	5	5	5		Yes	"Tobillo, mejorando "
+2024-10-15	Lena	Good	71.33	83.46	76	5		3	5	5	No	No	
+2024-10-15	Laura	Good	122.4	139.9	61.8	4	6	4	4	4	No	No	
+2024-10-15	Vivi	Good	165	113	44	5	8.3	5	5	5	No	No	
+2024-10-15	Lua	Good	162	141	45	4	9	5	5	5	No	No	
+2024-10-16	Iker	Good	56	49	62.6	5	8.3	5	4	5	No	No	
+2024-10-16	Vivi	Good	246	187	48	5	8.15	5	5	5	Yes	No	
+2024-10-16	Lua	Good	112	81	45	4	8	5	4	4	No	Yes	Un punto en el muslo izquierdo me duele ( pueden ser agujetas) y el muslo derecho me duele por la cadera
+2024-10-16	Fraile	Good	188.53	194.32	41	5	7.3	5	5	5		Yes	Hoy me duele un poco mas el tobillo.
+2024-10-16	Jack	Okay	107.17	108.55	61	3	7	3	2	3	No	No	
+2024-10-16	Carlota	Good	41	52	63	3	7	5	2	4	No	Yes	caderas 
+2024-10-16	Laura	Good	99.4	88.3	56.8	4	7	5	4	4	No	No	
+2024-10-17	Fraile	Good	136	154.31	37	5	7.3	5	5	5		Yes	"Hoy me duele un poco tambien, menos que ayer"
+2024-10-17	Iker	Good	40.2	45.4	60.3	5	8.3	4	3	4	No	No	
+2024-10-17	Vivi	Good	94	87	45	5	8.5	5	5	5	Yes	No	
+2024-10-17	Lua	Good	174	123	47	4	9	5	4	5	No	No	
+2024-10-17	Carlota	Okay	71	73	78	4	8	5	3	5	No	Yes	caderitas :)
+2024-10-17	Laura	Good	84.3	95.5	66.1	4	7	5	4	3	No	No	
+2024-10-18	Iker	Good	60	85.4	60	5	8.3	4	4	4	No	No	
+2024-10-18	Fraile	Good	140.41	164.19	43	5	7	5	4	5		Yes	Mejor de dolor que los ultimos dias
+2024-10-18	Lua	Good	194	154	46	4	9.5	5	4	4	No	No	Me duele la lumbar un poco de la fuerza de ayer
+2024-10-18	Vivi	Good	164	114	43	5	9	5	5	5	Yes	No	
+2024-10-18	Laura	Good	90.5	102.4	71.2	4	9	5	4	5	No	No	
+2024-10-19	Vivi	Good	125	85	43	5	9	5	5	5	No	No	
+2024-10-19	Lua	Good	147	110	43	4	9	5	4	4	No	No	
+2024-10-21	Fraile	Good	171.75	163.89	35	5	8	5	5	5		Yes	"Casi sin dolor al mover el tobillo, solo un poco al forzarlo "
+2024-10-21	Lua	Good	116	106	41	4	8.5	5	5	5	No	No	
+2024-10-21	Vivi	Good	61	46	42	5	8.3	5	5	5	No	No	
+2024-10-21	Iker	Good	59.5	83.5	55	5	8	4	5	5	Yes	No	
+2024-10-21	Laura	Good	111.4	96	57	4	6	5	4	4	No	No	
+2024-10-21	Adriana	Good	265	194	52	5	8	4	5	5	No	No	"Wartortel empiezo hoy por si me echabas de menos ??. Nada de molestia durmiendo, en los isométricos al hacer el de las dos piernas sobre el cajón, un poco de molestia  cuando subo, pero creo que menos que lo"
+2024-10-22	Lua	Good	167	141	41	4	8.5	5	5	4	No	No	
+2024-10-22	Fraile	Good	149.58	143.32	41	5	7.3	5	5	5		Yes	"Muy poco dolor, solo si fuerzo el movimiento."
+2024-10-22	Vivi	Good	114	94	43	5	8.3	5	5	5	No	No	
+2024-10-22	Iker	Good	62	69.3	61.3	5	9	5	4	5	No	No	
+2024-10-22	Carlota	Good	35	51	66	5	8	5	5	5	No	Yes	
+2024-10-22	Adriana	Good	298	295	44	5	8.5	5	5	5	No	No	"En el isometrico de rodilla doblada, igual que ayer  "
+2024-10-22	Jack	Okay	180.55	218.55	55	4	8	3	3	3	No	No	
+2024-10-23	Lua	Good	142	127	43	4	8.5	5	4	5	No	No	
+2024-10-23	Fraile	Good	159.94	144.66	37	5	8	5	5	5		Yes	Un poco resentido de ayer pero muy poco.
+2024-10-23	Vivi	Good	112	119	42	5	9	5	5	5	No	No	
+2024-10-23	Lena	Good	94.2	140.08	68	3	8	3	3	4	No	No	
+2024-10-23	Laura	Good	122.4	92.2	52.7	4	7	5	4	4	No	No	
+2024-10-23	Adriana	Good	344	295	55	5	7.5	5	5	5	No	No	Todo perfect
+2024-10-23	Iker	Good	106.5	102.2	59.3	5	8	4	4	5	No	No	
+2024-10-24	Fraile	Good	154.57	172.62	37	5	7.3	5	5	5		Yes	Un poco dolorido hoy
+2024-10-24	Lua	Good	117	100	44	4	8.5	5	5	5	No	No	
+2024-10-24	Vivi	Good	139	99	44	5	8.3	5	5	5	No	No	
+2024-10-24	Carlota	Good	36	31	64	5	8	5	3	5	No	Yes	agujetas isquios
+2024-10-25	Fraile	Good	161.94	171.3	39	5	7	5	5	5		Yes	Hoy mucha mejora de dolor en el tobillo
+2024-10-25	Vivi	Good	235	158	47	5	8	5	5	5	No	No	
+2024-10-25	Laura	Good	170.1	158.7	60.2	4	7	5	4	4	No	No	
+2024-10-25	Lua	Good	125	121	45	4	8	5	5	4	No	No	
+2024-10-26	Vivi	Good	230	146	46	5	9.3	5	5	5	No	No	
+2024-10-26	Fraile	Good	129.23	135.77	47	5	8.3	5	5	3		Yes	Dolor casi nulo en el tobillo
+2024-10-27	Lua	Good	187	134	45	4	9	5	5	5	No	No	
+2024-10-27	Vivi	Good	238	176	51	5	9	5	5	5	No	No	
+2024-10-29	Fraile	Good	137.78	143.16	43	5	6	5	5	5		No	
+2024-10-29	Adriana	Good	393	272	56	5	7	5	5	5	No	No	Isid de palanca corta muy bien
+2024-10-29	Vivi	Good	120	98	43	5	9.3	5	5	5	No	No	
+2024-10-29	Lua	Good	123	111	52	4	9.5	5	4	3	No	No	
+2024-10-29	Carlota	Good	80	96	61	5	8	5	3	3	No	No	
+2024-10-29	Lena	Poor	148.83	165.37	63	5		5	5	5	Yes	No	
+2024-10-30	Laura	Good	110.2	127	52.7	4	7	5	4	4	No	Yes	Rodilla 
+2024-10-30	Fraile	Good	171.67	171.06	43	5	7	5	5	5		Yes	Tobillo y algun golpe
+2024-10-30	Iker	Good	89.8	90.4	57.4	4	7	4	3	4	No	No	
+2024-10-30	Vivi	Good	191	109	46	5	9.3	5	5	5	No	No	
+2024-10-30	Lua	Good	181	156	48	4	9.5	5	5	5	No	No	
+2024-10-30	Adriana	Good	343	214	44	5	7.5	5	5	5	No	No	
+2024-10-31	Iker	Good	51.8	52	62.2	4	9	4	3	3	No		
+2024-10-31	Adriana	Good	336	227	54	5	8	5	5	5		No	Un poco de molestia haciendo los isos l
+2024-10-31	Fraile	Good	192.99	192.07	42	5	9	5	5	5		Yes	El tobillo muy poco
+2024-10-31	Vivi	Good	124	87	45	5	8	5	5	5	No	No	
+2024-10-31	Lua	Good	164	122	50	4	9	5	5	5	No	No	
+2024-10-31	Laura	Good	96.9	131.4	70.7	4	8	5	4	4	No	No	
+2024-11-01	Iker	Good	69.4	92	57.5	4	7	4	3	3	No	No	
+2024-11-01	Fraile	Good	162.22	191.38	43	5	7.3	5	5	5		Yes	"Tobillo, poco dolor "
+2024-11-01	Vivi	Good	204	145	53	5	8.3	5	5	5	No	No	
+2024-11-01	Lua	Good	188	138	47	4	9	5	5	5	No	No	Estoy un poco resfriada con tos
+2024-11-01	Laura	Good	84.5	83.3	69.2	4	7	3	4	4	No	No	
+2024-11-01	Adriana	Good	335	211	50	5	8.5	5	5	5	No	Yes	Haciendo los usos muy bien pero todavía un poco de molestia en el tendón
+2024-11-02	Lua	Good	137	104	46	4	7.5	5	4	4	No	No	
+2024-11-02	Vivi	Good	143	120	45	5	8.2	5	5	5	No	No	
+2024-11-02	Adriana	Good	388	287	46	5	8.5	5	5	5	No	No	Creo que un poco mejor que ayer 
+2024-11-04	Fraile	Good	149.65	148.56	40	5	7	5	5	5		Yes	"Tobillo, muy muy poco"
+2024-11-04	Vivi	Good	93	97	41	5	8.45	5	5	5	No	No	
+2024-11-04	Lua	Good	166	116	48	4	9	5	5	5	No	No	
+2024-11-04	Laura	Good	67.4	52.6	53.9	4	8	5	4	4	Yes	No	
+2024-11-04	Adriana	Good	374	323	54	5	9	5	5	5	No	No	"Bastante menos irritada, y sin dolor haciendo los isométricos cortos"
+2024-11-05	Lena	Okay	162.72	237.32	140	5	6	5	5	4	No	No	
+2024-10-05	Fraile	Good	161.99	171.05	39	5	7	5	5	4		Yes	Un poco mas de dolor que ayer
+2024-11-05	Iker	Good	31.2	32.8	60.9	5	8.3	5	4	4	No	No	
+2024-11-05	Lua	Good	163	118	47	4	8	5	5	5	No	No	
+2024-11-05	Vivi	Good	140	100	43	5	8	5	5	5	No	No	
+2024-11-05	Laura	Good	101.8	84.8	62.3	4	8	5	4	4	No	No	
+2024-11-06	Lua	Good	154	112	46	4	7	5	5	4	No	No	
+2024-11-06	Fraile	Good	149.16	163.18	43	5	7	5	4	4		Yes	"Tobillo, mejor que ayer"
+2024-11-06	Iker	Good	80.5	69.9	56.2	5	8.3	5	5	4	No	No	
+2024-11-06	Lena	Okay	97.94	129.59	64	5		4	5	4	No	No	
+2024-11-06	Jack	Okay	124.38	157.34	58	3	9	3	3	3	No	Yes	Ankle injury
+2024-11-06	Adriana	Good	347	446	44	5	8.5	5	5	5	No	No	Sin irritación de ayer ???
+2024-11-06	Carlota	Good	52	59	63	4	8	5	4	4	No	No	
+2024-11-07	Fraile	Good	154.52	162.59	43	5	7.3	5	5	5		Yes	Muy muy poco en el tobillo
+2024-11-07	Iker	Good	71.2	87.7	59.8	4	8	4	4	4	No	No	
+2024-11-07	Jack	Okay	173.2	172.27	52	4	8	4	4	4	No	Yes	Ankle injury
+2024-11-07	Carlota	Good	79	57	65	4	8	3	4	3	No	Yes	inserción isquio izquierdo
+2024-11-07	Lena	Okay	90.46	103.06	67	5	6	5	5	5	No	No	
+2024-11-08	Laura	Good	81.2	64.3	52.3	4	7	5	4	4	No	No	
+2024-11-08	Fraile	Good	161.58	204.6	43	5	6	2	4	4		Yes	"Tobillo, un poco más que ayer"
+2024-11-08	Lua	Good	199	136	48	4	7	5	5	4	No	No	
+2024-11-08	Vivi	Good	205	136	45	5	7	5	5	4	No	No	
+2024-11-08	Iker	Good	62.9	62.6	55.9	4	8.3	4	4	4	No	No	
+2024-11-08	Adriana	Good	478	342	51	5	7	5	5	5	No	No	"Al hacer los isométricos, he hecho el de apretar la cama con el talón estando de. Lo he podido hacer, pero si me he quedado un pelín resentido durante un par de minutos"
+2024-11-08	Carlota	Good	61	46	66	5	5	3	3	3	No	Yes	isquio 
+2024-10-09	Fraile	Good	117.37	146.75	47	5	8	5	4	5		No	
+2024-11-11	Fraile	Good	131.91	141.5	37	5	8	5	5	5		No	
+2024-11-11	Lena	Good	114.74	125	65	5	8	5	5	5	No	No	
+2024-11-11	Laura	Good	57.4	65.8	66	4	7	5	4	4	No	No	
+2024-11-11	Carlota	Good	34	72	65	5	7	5	4	5		Yes	ISQUIO IZQ
+2024-11-11	Vivi	Good	127	93	48	5	8.3	5	5	5	No	No	
+2024-11-11	Jack	Okay	120.64	126.87	57	3	8	4	4	3	No	Yes	Ankle injury 
+2024-11-12	Laura	Good	123.6	90.8	61.2	4	6	4	4	4	No	No	
+2024-11-12	Fraile	Good	153.77	137.15	42	5	7.3	4	5	4		Yes	Hoy un poco el tobillo 
+2024-11-12	Iker	Good	68.7	71.2	54.2	5	7	4	5	5	No	No	
+2024-11-12	Lena	Good	48.28	78.37	72	5	8	5	5	5	No	No	
+2024-11-12	Vivi	Good	176	131	47	5	9	5	5	5	No	No	
+2024-11-12	Carlota	Good	37	88	69	4	8	5	4	5	No	Yes	isquio izq
+2024-11-12	Adriana	Good	420	302	54	5	7.5	5	5	5	No	No	"Un poco más incómoda con los isometrocos nuevos, peor ayer con Maria ya bastante mejorb"
+2024-11-12	Jack	Okay	133.11	158.09	58	3	8	4	3	3	No	Yes	Ankle injury 
+2024-11-12	Lua	Good	210	149	47	4	9.5	5	5	5	No	No	"Agujetas cuadriceps, 2/10"
+2024-11-13	Fraile	Good	147.86	169.96	37	5	8	5	4	3		Yes	El tobillo un poco de golpear mucho
+2024-11-13	Iker	Good	64.7	81.2	61.2	5	7	3	5	4	No	No	
+2024-11-13	Lena	Good	47.3	88.62	73	5	9	5	4	4	No	No	
+2024-11-13	Vivi	Good	165	126	44	5	9	5	5	5	No	No	
+2024-11-13	Lua	Good	167	152	52	4	9	5	4	5	No	No	
+2024-11-13	Laura	Good	82.6	68.5	55.8	4	7	5	4	4	No	No	
+2024-11-13	Carlota	Good	51	59	66	4	5	3	4	3	No	Yes	isquio :( pero va mejor
+2024-11-14	Iker	Good	73.8	93.9	59.8	4	7.3	3	4	4	No	Yes	Dolor de espalda en general
+2024-11-14	Adriana	Good	393	203	56	5	8	5	5	5	No	No	Muy buena sensaciones y los isométricos de la por la mañana
+2024-11-14	Fraile	Good	192.43	197.64	39	5	7.3	5	4	5		Yes	Tobillo un poco
+2024-11-14	Vivi	Good	124	83	45	5	9	5	5	5	No	No	
+2024-11-14	Lena	Good	68.2	82.58	67		8	5	3	5	No	No	
+2024-11-14	Lua	Good	227	170	47	4	9.5	5	4	5	No	No	Agujetas por todo el cuerpo
+2024-11-14	Carlota	Good	55	65	63	4	7	4	4	4	No	Yes	Isquio :( pero va mucho mejor!
+2024-11-14	Jack	Okay	104.93	139.57	59	4	8.5	4	3	4	No	Yes	Ankle injury 
+2024-11-15	AlexPR	Good	77.05	107.42	52	4	6	4	5	4	No	No	
+2024-11-14	AlexPR	Good	98.71	219.13	54	5	7	4	5	5	No	No	
+2024-11-15	Vivi	Good	84	94	43	5	8	5	4	5	Yes	Yes	Agujetas 3/10 todo el cuerpo
+2024-11-15	Iker	Good	69.3	71.3	59.8	5	8	5	4	4	No	Yes	"Un poco de dolor de espalda en general, menos que ayer "
+2024-11-15	Lua	Good	263	154	46	4	8	5	4	4	No	No	
+2024-11-15	Lena	Okay	118.54	154.38	70	5	8	5	4	4	Yes	No	
+2024-11-15	Fraile	Good				4	7	4	2	2		Yes	Tobillo algo más resentido
+2024-11-15	Laura	Good	60.3	55.7	73.4	4	6	5	4	4	No	No	
+2024-11-15	Adriana	Good	397	271	45	5	7.5	4	5	5	No	No	Buenas sensaciones en los isometrlcos
+2024-11-15	Jack	Okay	130.93	159.21	63	4	7.5	2	3	2	No	Yes	Ankle injury 
+2024-11-15	Carlota	Good	57	53	63	4	5	3	3	3	No	Yes	"agujetas cuádriceps , el isquio va cada día mejor "
+2024-11-17	AlexPR	Good	161.77	299.32	56	5	8	5	1	1	No	Yes	Zona interna de codo izquierdo
+2024-11-18	Fraile	Good	189.9	174.27	32	5	7	5	5	5		No	
+2024-11-18	AlexPR	Good	142.37	240.06	63	5	8.5	5	5	5	No	Yes	Codo izquierdo
+2024-11-18	Vivi	Good	206	163	45	5	9.1	5	5	5	Yes	No	
+2024-11-18	Lua	Good	184	132	54	4	10	5	5	5	No	No	
+2024-11-18	Lena	Good	75.59	81.16	68	5	9	5	5	5	No	No	
+2024-11-18	Adriana	Good	318	240	48	5	8.5	5	5	5	No	No	Buena sensación en los usos por la mañanan
+2024-11-18	Jack	Good	166.67	173.55	52	3	8	4	3	2	No	Yes	Ankle injury 2/10 - Also light headache / phlegm this morning 
+2024-11-19	AlexPR	Good	98.02	163.92	59	5	8	5	5	4	No	No	
+2024-11-19	Vivi	Good	198	103	43	5	9	5	5	5	No	No	
+2024-11-19	Lua	Good	198	169	52	4	9.5	5	5	5	No	No	
+2024-11-19	Jack	Good	163.14	174.7	50	4	8	4	3	3	No	Yes	Ankle injury 
+2024-11-19	Adriana	Good	495	250	40	5	8	5	5	5	No	Yes	Un poco más de molestia hoy 
+2024-11-19	Carlota	Good	52	44	68	5	6	5	4	4	No	No	"Ya se he dormido poco no te enfades, dormir siestecilla, que hoy me levantaba a las 6 :("
+2024-11-20	AlexPR	Good	120.15	155.36	51	3	7.5	3	5	5	No	No	
+2024-11-20	Vivi	Good	127	88	43	5	8.2	5	5	5	No	No	
+2024-11-20	Lua	Good	165	170	54	4	9	5	4	5	No	No	
+2024-11-20	Adriana	Good	495	250	40	5	7.5	5	4	5	No	No	"Te pongo cuatro en dolor muscular para que estés orgulloso, tengo unas ligeras agujetas en los aductores jajaja pero no te vengas arriba. En cuanto al Iskyo, un poco menos de molestia que ayer"
+2024-11-20	Jack	Okay	114.03	128.01	58	4	8	4	2	3	No	Yes	Ankle injury 2/10
+2024-11-20	Carlota	Good	91	88	57	5	8	5	4	5	No	No	un poco de agujetillas. He conseguido dormir 8 horas :) 
+2024-11-21	AlexPR	Good	88.34	135.06	52	4	8	4	5	4	No	No	
+2024-11-21	Adriana	Good	455	357	46	4	8.5	5	5	5	No	Yes	"Me he levantado con un poco de molestia, pero mucho mejor después de los isos"
+2024-11-21	Vivi	Good	146	96	45	5	8.15	5	5	5	No	No	
+2024-11-21	Carlota	Good	57	61	63	4	8	5	4	5	No	No	
+2024-11-21	Lua	Good	159	126	58	4	9	5	5	5	No	No	
+2024-11-21	Jack	Good	92.36	91.28	59	3	8	4	3	2	No	Yes	Ankle injury 3/10
+2024-11-22	AlexPR	Good	76.06	121.79	54	4	7	4	5	5	No	No	
+2024-11-22	Adriana	Good	470	359	45	5	8.5	5	5	5	No	Yes	Un poquito mejor que ayer 
+2024-11-23	Vivi	Good	188	122	44	5	10	5	5	5	No	No	
+2024-11-23	Lua	Good	197	164	55	4	10	5	5	5	No	No	
+2024-11-24	Lua	Good	208	157	59	4	9	5	5	5	No	No	
+2024-11-24	Vivi	Good	180	154	43	5	9	5	5	5	No	No	
+2024-11-24	AlexPR	Good	71.46	116.62	57	4	7	5	5	4	No	No	
+2024-11-25	Laura	Good	95	78.4	48.8	4	6	5	4	4	No	No	
+2024-11-25	Lua	Good	210	162	54	4	8.5	5	5	5	No	No	
+2024-11-25	AlexPR	Good	121.58	259.06	55	4	8	4	5	4	No	No	
+2024-11-25	Fraile	Good	103.65	100.19	44	5	8	5	5	5		No	
+2024-11-26	Laura	Good	101.8	78.7	49.7	4	7	5	4	4	No	No	
+2024-11-26	Lua	Good	139	110	58	4	7	5	4	4	Yes	Yes	
+2024-11-26	Fraile	Good	165.31	175.66	37	5	7.3	5	5	5		No	
+2024-11-26	Iker	Good	86.3	95	60.9	4	8	5	4	3	No	Yes	Isquios cargados
+2024-11-27	Lua	Good	244	168	49	4	7	5	4	4	Yes	Yes	Dedo de la mano y pie
+2024-11-27	Vivi	Good	165	158	49	5	8.15	5	2	5	No	Yes	"La mano hinchada 8/10, muslo con un golpe 6/10"
+2024-11-27	AlexPR	Good	60.32	119.09	60	4	7	5	5	4	No	Yes	Mandíbula 
+2024-11-27	Fraile	Good	141.69	159.11	37	5	7.3	3	4	4		No	
+2024-11-27	Laura	Good	92.4	69.6	50.5	5	8	5	4	4	No	No	
+2024-11-27	Adriana	Good	484	331	48	4	7.5	4	5	5	No	Yes	"Un poco de molestia por la noche, pero bastante mejor de dolor que ayer"
+2024-11-27	Iker	Good	68.6	67.4	62.6	4	8	5	4	4	No	Yes	Isquios cargados
+2024-11-28	Vivi	Good	160	103	45	5	7	5	3	5	No	Yes	"Rodilla, mano y el cuádriceps "
+2024-11-28	Lua	Good	185	148	51	4	7.4	5	4	4	No	No	
+2024-11-28	Laura	Good	84.3	71.6	51.4	4	7	5	4	4	No	No	
+2024-11-28	Iker	Good	66.9	78.2	62.7	4	8.3	4	4	4	No	Yes	Isquio izquierdo con algo de molestia y cargado
+2024-11-28	Fraile	Good	162.09	168.15	42	5	7	4	4	4		Yes	El tobillo hoy me duele más de lo normal
+2024-11-28	AlexPR	Good	79.99	173.36	61	4	9	4	5	5	No	No	
+2024-11-28	Adriana	Good	378	313	48	5	8	5	5	5	No	Yes	"Mucho mejor que estos días anteriores, más cómoda haciendo los isos "
+2024-11-28	Carlota	Good	44	85	65	3	9	5	5	4	Yes	No	este mes me duelen bastante los ovarios por la regla 
+2024-11-29	Laura	Good	81.7	171	70.8	4	7	5	5	4	No	No	
+2024-11-29	AlexPR	Good	72.19	141.51	56	4	8.5	4	5	4	No	No	
+2024-11-29	Iker	Good	56.5	72.8	65.5	4	9	4	4	3	No	No	
+2024-11-29	Lua	Good	147	117	53	4	10	5	5	5	No	No	
+2024-11-29	Vivi	Good	187	215	55	5	9.3	5	5	5	No	Yes	Rodilla 2/10
+2024-11-29	Fraile	Good	142.31	167.69	45	4	7.3	5	4	3		Yes	Un poco el tobillo
+2024-11-29	Adriana	Good	344	328	54	5	8	5	5	5	No	Yes	
+2024-11-29	Lena	Okay	144.49	121.31	63	5	10	5	5	5	No	No	
+2024-11-30	AlexPR	Good	93.28	111.68	50	5	5	5	5	5	No		
+2024-11-30	Lua	Good	178	141	51	4	8.5	5	4	4	No	No	
+2024-11-30	Vivi	Good	129	89	44	5	8	5	4	5	No	Yes	Rodilla 
+2024-11-30	Fraile					5	8.3	5	5	5		Yes	Tobillo muy poco
+2024-11-30	Adriana	Good	402	303	46	5	7.5	5	5	5	No	Yes	
+2024-12-01	Fraile	Good	146.32	151.05	36	4	7.3	5	5	5		No	
+2024-12-02	Laura	Good	98.1	73.9	52.6	4	6	5	5	4	No	No	
+2024-12-02	AlexPR	Good	111.97	127.72	49	4	7.5	4	5	4	No	No	
+2024-12-02	Adriana	Good	577	312	42	5	8	5	5	5	No	Yes	
+2024-12-03	AlexPR	Good	100.15	168.82	50	5	9	5	5	5	No	No	
+2024-12-03	Fraile	Good	146.22	144.28	42	5	8	5	5	5		No	
+2024-12-03	Laura	Good	99.1	91.2	56.2	4	8	5	5	4	No	No	
+2024-12-04	AlexPR	Good	79.27	106.51	50	4	3	3	2	4	No	Yes	Golpes en la tibia izquierda
+2024-12-04	Fraile	Good	132.04	154.47	42	5	8	2	2	2		Yes	"Talón sobretodo, sueño malo por eso"
+2024-12-04	Adriana	Good	362	263	57	5	6.5	5	5	5	No	Yes	Un poco más irritada por estar tanto tiempo  de pie 
+2024-12-06	Adriana	Good	368	277	47	5	8.5	5	5	5	No	Yes	
+2024-12-06	Fraile	Good	143.95	135.59	41	5	10	5	5	5		Yes	Talon y cuádriceps 
+2024-12-07	Fraile	Good	127.97	145.5	39	5	7.3	4	5	4		Yes	Talón y cuádriceps 
+2024-12-07	Laura	Good	150	93.8	49.5	4	7	5	4	4		Yes	Un poco el dedo jajaja
+2024-12-08	Fraile	Good	142.42	136.09	41	5	7	5	5	5		Yes	"Talón, tobillo y cuádriceps "
+2024-12-09	Fraile	Good	121.41	142.89	39	5	6.3	3	5	4		Yes	"Talón (menos), molestia tobillo y cuádriceps "
+2024-12-09	Laura	Good	104.9	84.8	54	4	7	5	4	4	No	No	
+2024-12-09	Jack	Good	132.18	174.33	60	4	8.5	4	4	4	No	No	
+2024-12-09	Adriana	Good	467	305	41	5	7	5	5	5	No	Yes	
+2024-12-09	Carlota	Good	71	59	72	4	8	5	2	4	No	Yes	agujetas isquios y hombros 
+2024-12-10	Jack	Good	100.15	110.31	62	3	8	4	3	3	No	No	
+2024-12-10	Carlota	Good	30	63	68	4	6	4	3	3	No	Yes	"isquios cargados, he dormido poco porque tenía examen hoy "
+2024-12-10	Fraile	Good	123.7	115.17	43	5	5	5	5	4		Yes	"Mucho mejor de dolores en general, solo queda un poco para estar perfecto "
+2024-12-10	Adriana		476	348	47	5	8	5	5	5	No	Yes	Creo que un poco mejor hoy al levantarme 
+2024-12-10	Laura	Good	110	88	51	4	7	5	5	4	No	No	
+2024-12-11	Jack	Okay	55.65	81.58	70	3	8	3	3	3	No	No	
+2024-12-11	Adriana	Good	385	297	52	5	8		5	5	No	Yes	
+2024-12-11	Laura	Good	101.3	76.7	53.4	4	7	4	4	4	No	No	
+2024-12-11	Carlota	Good	51	69	62	4	7	4	4	2	No	Yes	"isquio derecho esta mucho mejor que ayer, el izquierdo ya no me molesta"
+2024-12-12	Lua	Good	140	113	56	4	8	5	5	4	No	No	
+2024-12-12	Jack	Good	90.1	113.35	67	4	7	2	3	3	No	No	
+2024-12-12	Laura	Good	124	119	65.5	4	7	4	4	3	No	No	
+2024-12-12	Vivi	Good	196	145	53	5	9.3	5	5	5	No	No	
+2024-12-12	Lena	Good	90.53	83	64	5	9	5	5	3	No	No	
+2024-12-12	Adriana	Good	523	305	51	5	9	5	5	5	No	Yes	
+2024-12-13	Laura	Good	137.4	104.3	62.3	4	6	5	4	4	No	No	
+2024-12-13	Vivi	Good	181	146	49	5	7.3	5	5	5	No	No	
+2024-12-13	Iker	Good	63	56.1	60.9	4	9	4	5	5	No	No	
+2024-12-13	Fraile	Good	117.91	120.17	42	5	7	4	5	5		Yes	Un poco el talón y el tobillo
+2024-12-13	Lua	Good	227	151	58	4	10	5	5	5	No	No	
+2024-12-13	Adriana	Good	430	306	48	5	8.3	5	4	5	No	Yes	"No me preguntes porque, pero algo de agujetas en. Los gemelos ??"
+2024-12-13	Lena	Okay	81.82	97.82	78	5	9	5	5	4	No	No	
+2024-12-14	Fraile	Good	121.95	145	46	5	9	5	5	5		Yes	Talón y tobillo
+2024-12-14	Carlota	Good	62	57	58	5	9	5	4	4	No	No	
+2024-12-15	Fraile	Good	127.42	125.69	48	5	9.3	5	3	5		Yes	Tobillo y talón (bastante mejor hoy)
+2024-12-16	Lua	Good	135	144	58	4		5	5	5	No	No	
+2024-12-16	Fraile	Good	132.88	132.29	40	5	7	4	5	5		Yes	El talón muy poco ya
+2024-12-16	Vivi	Good	138	136	49	5	8	5	5	5	No	No	
+2024-12-16	Iker	Good	87.6	104.8	53.6	5	8.3	5	5	5	No	No	
+2024-12-16	Laura	Good	123.3	114.3	56.9	4	7	4	4	4	No	No	
+2024-12-16	Adriana	Good	415	368	41	5	8	4	5	5	No	Yes	Desdén el viernes con más molestia en comparación con los últimos días 
+2024-12-17	Fraile	Good	124.6	161.51	47	5	6	5	5	4		Yes	Talón. He dormido poco porque tengo que hacer la maleta y esas cosas.
+2024-12-17	Vivi	Good	153	126	60	5	9	5	5	5	No	No	
+2024-12-17	Lua	Good	89	93	65	4	10	5	5	4	No	No	
+2024-12-17	Carlota	Good	42	62	68	4	8	5	5	5	No	No	
+2024-12-17	Iker	Good	75.2	64.7	49	4	5	3	5	5	No	No	
+2024-12-17	Laura	Good	194.7	172	57	4	6	5	4	4	No	No	
+2024-12-17	Adriana	Good	397	217	46	5	8.3	5	5	5	No	Yes	
+2024-12-18	Vivi	Good	247	173	49	5	7.3	5	5	5	No	No	
+2024-12-18	Iker	Good	37.9	59.4	62.3	4	7	3	4	3	No	No	
+2024-12-18	Fraile	Good	137.67	173.64	46	5	6	2	4	3		Yes	Talon
+2024-12-18	Lua	Good	231	155	60	4	9	5	5	4	No	No	
+2024-12-18	Adriana	Good	448	298	50	5	8	5	5	5	No	Yes	
+2024-12-19	Vivi	Good	182	139	50	5	7.3	5	5	5	No	No	
+2024-12-19	Lua	Good	202	160	57	4	9.5	5	5	4	No	No	Estoy resfriada 
+2024-12-19	Iker	Good	47.7	81	68.7	4	9	4	4	4	No	No	
+2024-12-19	Fraile	Good	111.65	156.19	55	5	7	3	2	3		Yes	Talon
+2024-12-19	Adriana	Good	407	276	41	5	8.5	5	5	5	No	Yes	
+2024-12-19	Laura	Good	74.6	100.8	76.4	4	8	5	4	4	No	No	
+2024-12-20	Laura	Good	105.8	111.8	70.7	4	6	5	4	4	No	No	
+2024-12-20	Iker	Good	89.3	131.6	58.5	4	6	3	3	3	No	No	
+2024-12-20	Fraile	Good	132.31	195.91	43	4	7	4	3	3		Yes	Talon
+2024-12-20	Lua	Good	118	102	58	4	9.5	5	5	5	No	No	
+2024-12-20	Vivi	Good	195	134	52	5	9	5	5	5	No	No	
+2024-12-20	Adriana	Good	368	267	47	5	8	4	5	5	No		Muchísimo menos dolor en lo cotidiano    
+2024-12-21	Lua	Good	216	163	53	4	8	5	5	4	No	No	
+2024-12-21	Vivi	Good	144	142	48	5	8	5	5	5	No	No	
+2024-12-21	Fraile	Good	134.69	184.41	47	4	8	4	3	2		Yes	Talón 
+2024-12-21	Iker	Good	48.2	57.5	62.3	4	8	4	3	3	No	No	
+2024-12-21	Laura	Good	129.9	133	67.2	4	8	5	4	4	No	No	
+2024-12-23	Fraile	Good	144.6	167.83	43	5	8	5	4	4		Yes	Tobillo algo hoy y talón mucho menos
+2024-12-23	Laura	Good	42.7	80.8	52.2	4	8	5	4	3	No	No	
+2024-12-23	Lua	Good	157	123	53	4		5	5	5	No	No	
+2024-12-23	Vivi	Good	153	112	45	5	9.3	5	5	5	No	No	
+2024-12-23	Adriana	Good	503	389	48	5	9	4	5	5	No	Yes	"Poco a poco, a lo largo del fin de semana, vuelvo a ir teniendo las molestias, pero creo que aún así un poco mejor que normalmente"
+2024-12-24	Fraile	Good	130.45	143.61	42	5	8.3	5	4	3		Yes	"Talón, pero ya esta casi perfecto, un poco tobillo tambien"
+2024-12-24	Laura	Good	163.7	136.6	52.8	4	8	5	4	4	No	No	
+2024-12-24	Vivi	Good	234	159	47	5	9	5	5	5	Yes	No	
+2024-12-26	Vivi	Good	243	173	46	5	9	5	5	5	Yes	No	
+2024-12-26	Fraile	Good	92.02	103.02	43	5	7	5	5	5		Yes	Un poco talón
+2024-12-26	Laura	Good	105.1	71.7	50.7	4	7	5	4	4	No	No	
+2024-12-26	Adriana	Good	372	308	48	5	7.5	5	5	5	No	Yes	
+2024-12-26	Lua	Good	178	162	56	4	10	5	5	5	No	No	
+2024-12-27	Vivi	Good	146	107	47	5	7.3	5	5	5	Yes	No	
+2024-12-27	Laura	Good	117.3	89.4	48	4	7	4	4	3	No	No	
+2024-12-27	Fraile	Good	126.36	157.26	47	5	7	5	3	3		Yes	Talon
+2024-12-27	Lua	Good	129	125	58	4	10	5	5	4	No	No	
+2024-12-27	Lena	Good	46.42	68.67	71	5	9	5	4	4	No	No	
+2024-12-27	Adriana	Good	397	257	48	5	6	3	5	5	No	No	"Luego te llamo y te pongo un poco al día ja ja ja ja. He dormido fatal porque estaba un poco nerviosa después de ayer dando vueltas en la cama, pero me encuentro muy bien. Aunque hoy y mañana voy a tener que entrenar con Chevi y con María, porque me han pinchado corticoide. "
+2024-12-28	Lua	Good	71	68	63	4	10	5	5	4	No	No	
+2024-12-28	Fraile	Good	137.63	149.19	46	5	7.3	5	2	4		Yes	Tobillo (hoy más de lo normal) y talon
+2024-12-28	Iker	Good	62.6	76	67.7	4	9	4	2	2	No	Yes	"El dedo gordo del pie, muy inflamado e hinchado "
+2024-12-28	Vivi	Good	185	139	55	5	9.3	5	5	5	Yes	No	
+2024-12-29	Vivi	Good	77	67	68	3	7	2	4	4	No	Yes	Estoy muy mal con vómitos
+2024-12-29	Iker	Good	47	52.3	66.1	4	9	4	2	2	Yes	Yes	El dedo gordo del pie y los isquios muy cargados
+2024-12-29	Carlota	Good	43	78	67	4	9	4	4	4	Yes	Yes	pie derecho
+2024-12-29	Fraile	Good	117.69	135.69	49	5	9.3	5	2	3		Yes	Talón y tobillo
+2024-12-29	Adriana	Good	386	270	43	5	9	5	5	5	Yes		
+2024-12-29	Lua	Good	101	89	57	4	11	5	4	3	No	No	
+2025-01-02	Vivi	Good	104	75	44	5	8.3	5	5	5	No	No	
+2025-01-02	Iker	Good	90.5	76.9	60.5	4	9	4	5	4	No	Yes	El dedo gordo del pie 
+2025-01-02	Fraile	Good	118.38	125.69	45	5	7	5	5	5		Yes	Bastante el tobillo 
+2025-01-02	Lua	Good	130	121	52	4	10	5	4	4	No	No	"Hace dos dias estuve mala con vomitos, pero ya estoy mejor"
+2025-01-02	Carlota	Good	40	36	61	4	8	4	5	4	No	Yes	pie derecho 
+2025-01-02	Adriana	Good	365	250	40	5	8.5	5	5	5	No	No	Buena sensaciones en el Iskyo al levantarme por la mañana
+2025-01-03	Iker	Good	48	75.9	60.7	4	8	3	4	4	No	Yes	En la capsula del dedo gordo
+2025-01-03	Fraile	Good	139.33	156.75	46	5	7	5	5	4		Yes	Talón un poco todavia y tobillo
+2025-01-03	Lua	Good	141	112	53	4	9.5	5	5	5	No	No	
+2025-01-03	Vivi	Good	143	100	47	5	9	5	5	5	No	No	
+2025-01-03	Laura	Good	169	149	59.8	4	8	4	4	4	No	No	
+2025-01-03	Carlota	Good	36	75	61	4	8	5	4	3	No	Yes	"pie derecho, ayer haciendo combates me hice más daño porque me pusieron una rodilla."
+2025-01-03	Adriana	Good	489	303	44	5	8.5	5	5	5	No	No	"Buena sensaciones por la mañana, sobre todo en gesto explosivo"
+2025-01-04	Vivi	Good	122	87	46	5	8	5	5	5	No	No	
+2025-01-04	Fraile					5	7.3	5	3	4		Yes	Talón y el tobillo me está empezando a doler bastante
+2025-01-04	Iker	Good	96.2	127.7	60	4	9.15	5	4	4	No	Yes	El dedo gordo del pie
+2025-01-04	Laura	Good	107.1	97.4	60	4	7	4	4	4	No	No	
+2025-01-04	Carlota	Good	54	47	60	4	8	5	4	4	No	Yes	pie derecho
+2025-01-04	Lena	Good	50.29	55.89	74	4	7	3	4	3	No	No	
+2025-01-05	Fraile	Good	157.44	196.66	50	5	8.3	5	4	5		Yes	Talón y tobillo (menos)
+2025-01-06	Lua	Good	131	104	46	4	9	5	5	5	Yes	No	
+2025-01-06	Iker	Good	71.6	86	59.2	5	7	4	5	4	No	No	
+2025-01-06	Vivi	Good	160	108	45	5	8.2	5	5	5	No	No	
+2025-01-06	Laura	Good	107.9	86.1	57.9	4	7	5	5	4	No	No	
+2025-01-06	Fraile	Good	153.47	160.87	42	5	8	4	5	5		No	
+2025-01-06	Carlota	Good	42	53	61	5	7	4	5	4	No	Yes	pie derecho
+2025-01-07	Laura	Good	140.8	127.7	54.4	4	7	4	4	4	No	No	
+2025-01-07	Fraile	Good	140.32	144.26	38	5	7	5	5	5		No	
+2025-01-07	Lua	Good	199	145	50	4	9.5	5	5	5	Yes	No	
+2025-01-07	Iker	Good	72	89	59.2	5	8	5	5	4	No	No	
+2025-01-07	Vivi	Good	153	99	46	5	9	5	5	5	No	No	
+2025-01-07	Adriana	Good	444	292	51	5	8.5	5	5	5	No		"Con lo básico del día a día, desde que me he levantado, mínimo de dolor "
+2025-01-07	Lena	Okay	125.43	130.01	66	5	9	5	4	5	No	No	
+2025-01-08	Fraile	Good	144.42	207.14	43	5	7.3	5	5	4		Yes	Hoy me duele un poco más el talon
+2025-01-08	Lua	Good	191	168	53	4	8.15	5	5	5	Yes	No	
+2025-01-08	Iker	Good	54	53.8	59.2	4	8	4	4	4	No	No	
+2025-01-08	Vivi	Good	211	149	47	5	8.2	5	5	5	No	No	
+2025-01-08	Lena	Good	71.24	85.49	69	4	9	5	4	4	No	No	
+2025-01-08	Laura	Good	117.3	118	60.4	4	7	5	4	4	No	No	
+2025-01-08	Adriana	Good	437	320	41	5	8	5	5	5	No		Vida normal muy bien 
+2025-01-09	Vivi	Good	66	52	42	5	7	5	5	5	No	No	
+2025-01-09	Iker	Good	63.7	88	63.1	5	8.15	4	4	4	No	No	
+2025-01-09	Fraile	Good	156.65	200.15	45	5	7.3	3	3	4		Yes	Tobillo
+2025-01-09	Laura	Good	97.3	97.6	60.6	4	7	5	4	4	No	Yes	Ayer me llevé un rodillazo de Sofía en el gemelo y me duele bastante. 
+2025-01-09	Lua	Good	165	127	50	4	8.3	5	5	5	No	No	
+2025-01-08	Adriana	Good	394	333	45	5	7.5	5	5	5	No		Un pelín de sensación como de agujetas en el isquio de siempre 
+2025-01-09	Lena	Okay	82.18	121.38	78	3	8	3	4	3	No	No	
+2025-01-09	Carlota	Good	54	51	61	4	8	5	5	5	No	Yes	pie derecho
+2025-01-10	Vivi	Good	124	102	43	5	7.3	5	5	5	No	No	
+2025-01-10	Iker	Good	40	75	66.9	4	8.15	4	4	4	No	No	
+2025-01-10	Adriana	Good	483	289	41	5	7	5	5	5	No		Igual en cuanto a las buenas sensaciones en el isquio
+2025-01-10	Lua	Good	175	136	54	4	8.3	5	5	5	No	No	
+2025-01-10	Fraile					5	7.3	4	3	4		Yes	El tobillo bastante
+2025-01-10	Carlota	Good	75	59	56	4	8	5	4	5	No	Yes	pie derecho
+2025-01-10	Laura	Good	136.6	110.6	67.9	4	7	5	4	4	No	Yes	Un poco el gemelo 
+2025-01-11	Laura	Good	157.9	145.9	57	4	7	5	4	4	No	No	
+2025-01-11	Fraile	Good	156.23	168.66	45	5	7.3	5	3	4		Yes	Tobillo bastante
+2025-01-11	Lua	Good	133	94	46	4	8.5	5	4	4	No	No	
+2025-01-11	Vivi	Good	178	117	47	5	8	5	5	5	No	No	
+2025-01-12	Fraile	Good	154.15	159.16	44	5	9	5	4	5		Yes	Tobillo bastante
+2025-01-13	Laura	Good	79.3	99.7	60.1	4	7	4	4	4	No	No	
+2025-01-13	Fraile	Good	136.11	147.87	40	5	8	5	5	5		Yes	Tobillo muy poco
+2025-01-13	Iker	Good	76	79.3	59.9	4	7	3	5	5	No	No	
+2025-01-13	Carlota	Good	48	53	62	4	7	5	2	3	No	Yes	pie derecho y las piernas en general
+2025-01-13	Lena	Okay	90.59	111.27	71	5	9	5	5	4	No	No	
+2025-01-13	Adriana	Good	411	279	46	5	9	5	4	5	No	Yes	"Tanto ayer comoHoy, un poco más de molestia general en el isquio "
+2025-01-13	AlexPR					4	9	4	5	5	No	No	
+2025-01-14	AlexPR	Good	113.84	204.59	52	5	7	4	5	5	No	No	
+2025-01-14	Laura	Good	104.6	96.3	56.2	4	6	4	4	4	No	No	
+2025-01-14	Iker	Good	45.2	51.5	62.2	4	6	3	5	4	No	No	
+2025-01-14	Lena	Good	108.69	102.23	68	5	9	5	3	5	No	Yes	me molesta la cadera
+2025-01-14	Fraile	Good	136.78	141.58	44	5	7	4	4	4		Yes	Rodilla
+2025-01-14	Carlota	Good	74	87	64	5	8	5	3	4	No	Yes	"caderas, pie derecho"
+2025-01-14	Adriana	Good	418	238	48	5	8	5	5	5	No		"Creo que me ha vuelto a bajar, más o menos igual que la última semana "
+2024-01-15	Iker	Good	66.5	94	61.3	5	7	4	4	4	No	No	
+2025-01-15	AlexPR	Good	93.84	198.19	57	5	7.5	5	5	5	No	Yes	Lumbar
+2025-01-15	Laura	Good	135	123	62	4	7	4	4	4	No	No	
+2025-01-15	Lena	Good	118.06	116.55	64	4	9	5	4	5	No		
+2025-01-15	Vivi	Good	160	121	49	5	9.2	5	5	5	No	No	
+2025-01-15	Lua	Good	152	116	53	4	9.3	5	5	5	No	No	
+2025-01-15	Carlota	Good	43	59	68	4	8	5	4	4	No	Yes	pie :)
+2024-01-16	Vivi	Good	182	138	49	5	7	5	5	5	No	No	
+2025-01-16	AlexPR	Good	61.74	180.61	60	5	9.5	5	5	5	No	Yes	La parte superior de la espalda la tengo tiesa
+2025-01-16	Lua	Good	139	137	51	4	9	5	5	5	No	No	
+2025-01-16	Fraile	Good	113.53	137.39	44	3	8	5	5	5		Yes	Sigo enfermo
+2025-01-16	Carlota	Good	48	59	68	4	7	5	4	4	No	Yes	pie
+2025-01-16	Adriana	Good	501	398	43	5	7	4	5	5	No		"Calidad y horas de sueño, un pelín más bajas de lo normal, porque ayer por la noche me molestaba un poco el isquio , y me costó quedarme dormida. Pero me he vuelto a levantar con buena sensaciones, igual que el resto de días"
+2025-01-16	Laura	Good	83.2	75.2	57.1	4	7	5	4	4	No	No	
+2025-01-16	Lena	Good	55.63	68.64	71	5	9	5	4	3	Yes	No	
+2025-01-17	Vivi	Good	131	99	48	5	7.3	5	5	5	No	No	
+2025-01-17	Laura	Good	113.9	132	62.1	4	6	5	4	4	No	No	
+2025-01-17	Fraile	Good	116.7	220.83	47	3	9	5	5	5		Yes	Enfermo
+2025-01-17	AlexPR	Good	93.13	166.53	53	4	8	5	5	5	No	Yes	Hombro
+2025-01-17	Lua	Good	160	151	55	4	9.1	5	5	5	No	No	
+2025-01-17	Lena	Good	110.41	120.89	67	4	9	3	4	3	Yes	No	
+2025-01-17	Adriana	Good	442	311	41	5	8.5	5	5	5	No		"Muy buena sensaciones otra vez, al menos sin molestias al levantarme"
+2025-01-17	Iker	Good	77.9	100	58.9	5	6	3	4	4	No	No	
+2025-01-18	Vivi	Good	173	125	52	5	8	5	5	5	No	No	
+2025-01-18	Laura	Good	99.4	85.3	59.3	4	7	5	4	3	No	No	
+2025-01-18	Lua	Good	207	151	56	4	8	5	5	5	No	No	
+2025-01-18	AlexPR	Good	84.14		151.49	5	7	3	5	5	No	Yes	Hombro
+2025-01-18	Fraile	Good	135.55	123.2	40	4	8	5	5	5		No	
+2025-01-18	Lena	Good	78.86	97.85	66	4	7	3	4	2	Yes	No	
+2025-01-18	Carlota	Good	48	45	66	5	8	5	3	4	No	Yes	pie
+2025-01-19	AlexPR	Good	101.22	177.1	52	5	8	5	5	5	No	Yes	Hombro
+2025-01-20	Laura	Okay	210	181	54.3	4	6	5	4	4	No	No	
+2025-01-20	Fraile	Good	122.08	119.43	39	5	8	5	5	5		Yes	Tobillo un poco
+2025-01-20	AlexPR	Good	113.33	182.43	47	5	8	4	5	5	No	Yes	Hombro 3/10
+2025-01-20	Vivi	Good	157	123	48	5	9.15	5	5	5	No	No	
+2025-01-20	Lua	Good	160	139	48	4	9	4	5	5	No	No	
+2025-01-20	Adriana	Good	595	369	40	5	8.5	5	4	5	No	No	"Buenas sensaciones en el Iskyo, pero un poco de agujetas en los dos, de hacer el nórdico ??"
+2025-01-20	Lena	Good	83.44	115.62	66	5	9	5	5	5	Yes	No	
+2025-01-21	Laura	Good	161	141	56.3	4	6	4	3	4	No	No	Tengo los isquios un poco cargados 
+2025-01-21	Vivi	Good	122	104	46	5	8.3	5	5	5	No	No	
+2025-01-21	Fraile	Good	132.25	133.73	47	5	7	5	2	4		Yes	Tobillo y golpe en mano 
+2025-01-21	AlexPR	Good	110.72	166	47	4	9	5	5	5	No	Yes	Hombro 2/10
+2025-01-21	Lua	Good	136	133	48	4	9.15	5	5	5	No	No	
+2025-01-21	Lena	Good	89.64	111.98	66	5	9	3	5	4	Yes	No	
+2025-01-21	Adriana	Good	426	261	42	5	7	5	5	5	No		"Isquio, un pelín más resentido"
+2025-01-21	Iker	Good	75.6	87.3	60.3	4	8	4	5	5	No	No	
+2025-01-21	Carlota	Good	30	44	68	3	6	3	4	3	No	Yes	pie
+2025-01-22	Vivi	Good	64	58	43	5	7.4	5	4	5	No	Yes	Agujetas en glúteos 6/10
+2025-01-22	Fraile	Good	151.64	146.23	43	5	7.3	4	3	4		Yes	Tobillo bastante hoy
+2025-01-22	Laura	Good	85.1	108.4	58	4	6	5	3	4	No	Yes	Me duelen los isquios 
+2025-01-22	Iker	Good	95	88.2	57.9	4	8	4	4	4	No	No	
+2025-01-22	AlexPR	Good	78.3	190.95	56	5	8.5	5	5	5	No	Yes	Hombro 2/10
+2025-01-22	Lua	Good	164	137	44	4	9	5	4	5	No	No	
+2025-01-22	Carlota	Good	21	30	62	4	7	3	3	3	No	Yes	"pie, piernas cargadas"
+2025-01-22	Lena	Good	48.69	59.22	69	4	9	4	4	3	No	No	
+2025-01-22	Adriana	Good	526	284	43	5	7	5	2	5	No		"Un poco de molestia ayer después del entreno, pero me he vuelto a levantar bien"
+2025-01-23	Fraile	Good	133.38	136.39	45	5	7.3	5	4	3		Yes	Tobillo
+2025-01-23	Carlota	Good	130	122	55	4	7	4	3	4	No	Yes	pie 
+2025-01-23	Lua	Good	169	113	47	4	8.3	5	4	4	No	No	
+2025-01-23	AlexPR	Good	101.71	149.39	49	5	8.5	4	5	5	No	Yes	Hombro 2/10
+2025-01-23	Iker	Good	60.1	89.7	61.5	4	7	4	4	4	No	No	
+2025-01-23	Adriana	Good	490	317	44	5	8.5	5	5	5	No		Creo que muy buenas sensaciones después de la neuromodulación de ayer ????
+2025-01-23	Lena	Good	63.44	89.97	71	4	10	3	4	4	No	No	
+2025-01-23	Laura	Good	124.3	127.5	51.1	4	7	5	4	4	No	No	
+2025-01-24	Vivi	Good	184	150	47	5	7.3	5	5	5	Yes	No	
+2025-01-24	AlexPR	Good	67.92	104.32	55	5	8	5	5	5	No	Yes	Hombro 2/10
+2025-01-24	Iker	Good	67.8	98.8	62.2	4	7	4	4	4	No	No	
+2025-01-24	Fraile	Good	116.69	127.13	41	5	7.3	5	4	4		Yes	Tobillo
+2025-01-24	Lua	Good	180	189	48	4	9.5	5	4	5	No	No	
+2025-01-24	Lena	Okay	87.01	95.18	66	4	9	4	3	3	No	No	
+2025-01-24	Adriana	Good	486	292	41	5	8.5	5	5	5	No	Yes	"Ayer por la noche bastante molestia. Hoy me he levantado mucho mejor, pero con dolor en ciertos gestos."
+2025-01-25	AlexPR	Good	71.9	153.88	59	5	8	5	5	5	No	No	
+2025-01-25	Fraile	Good	139.35	140.66	43	5	7	5	4	4		Yes	Tobillo
+2024-01-25	Carlota	Good	79	61	58	4	9	5	3	4	Yes	Yes	"pie derecho, caderas un poco cargadas"
+2025-01-26	AlexPR	Good	102.78	142.51	53	5	10	5	5	5	No	No	
+2024-01-27	Fraile	Good	122.44	129.68	35	5	8	5	5	5		Yes	Tobillo
+2025-01-27	Lua	Good	124	107	43	4	9	5	5	5	No	No	
+2025-01-27	Vivi	Good	132	96	46	5	8	5	5	5	Yes	No	
+2025-01-27	AlexPR	Good	91.9	211.67	55	5	8	5	5	5	No	No	
+2025-01-27	Iker	Good	70.4	64.9	62.9	4	8	4	5	5	No	No	
+2025-01-27	Carlota	Good	46	50	59	5	8	5	4	5	Yes	Yes	"caderas cargadas, pie derecho as always"
+2025-01-27	Laura	Okay	300	336	59.6	4	7	5	5	4	No	No	
+2025-01-27	Adriana	Good	479	272	45	5	7	5	5	5	No		Buena sensación en el isquio
+2025-01-28	Laura	Good	90.4	192	66.5	4	6	5	4	4	No	No	
+2025-01-28	Fraile	Good	128.65	163.5	41	5	8	5	5	4		Yes	Tobillo
+2025-01-28	AlexPR	Good	99.15	137.9	52	5	8.5	5	5	5	No	No	
+2025-01-28	Vivi	Good	209	143	46	5	8.3	5	5	5	Yes	No	
+2025-01-28	Lua	Good	181	176	55	4	7.45	5	5	5	No	No	
+2025-01-28	Iker	Good	50	72.6	64.7	4	8.15	4	5	4	No	No	
+2025-01-28	Adriana	Good	413	317	42	5	7.5	5	5	5	No		
+2025-01-28	Lena	Good	61.13	58.6	66	5	10	5	4	4	No	No	
+2025-01-28	Carlota	Good	44	31	58	5	8	5	4	5	No	Yes	caderas cargadas y pie derecho
+2025-01-29	Laura	Good	96.3	104.4	54.8	4	7	5	4	4	No	No	
+2025-01-29	Iker	Good	52.3	53.8	69.5	4	7	4	4	4	No	No	
+2025-01-29	Fraile	Good	132.06	128.9	39	5	8	5	5	5		Yes	Tobillo
+2025-01-29	AlexPR	Good	104.39	151.52	50	5	8	5	5	5	No	No	
+2025-01-29	Lena	Good	45.03	66.99	70	4	10	4	3	3	No	No	
+2025-01-29	Carlota	Good	84	61	56	5	8	5	3	5	No	Yes	pie derecho
+2025-01-29	Adriana	Good	480	275	48	5	7.5	5	5	5	No		Un poco más resentido ayer durante el día y hoy al apretar el suelo con la pierna doblada
+2025-01-30	Lua	Good	122	100	44	4	8.5	5	5	5	No	No	
+2025-01-30	Vivi	Good	158	118	43	5	8.3	5	5	5	No	No	
+2025-01-30	Fraile	Good	135.14	124.37	40	5	7	5	5	4		Yes	Tobillo
+2025-01-30	AlexPR	Good	77.14	119.89	55	5	7	5	5	5	No	No	
+2025-01-30	Lena	Good	92.23	92.48	64	4	8	2	4	4	No	No	
+2025-01-30	Laura	Good	98.2	80.2	65.4	4	8	5	4	4	No	No	
+2025-01-31	Lua	Good	226	155	47	4	8	5	5	5	No	No	
+2025-01-31	Vivi	Good	68	47	43	5	8	5	5	5	No	No	
+2025-01-31	AlexPR	Good	110.75	124.75	48	5	9	4	5	5	No	No	
+2025-01-31	Fraile	Good	110.99	122.5	44	5	8.3	3	5	3		No	
+2025-01-31	Adriana	Good	455	394	52	5	8.5	5	4	5	No	Yes	"De mi dolor mejor, pero un poco de sobre cara en la zona de glúteo  y piramidal. Pero todo OK"
+2025-02-01	Lua	Good	151	111	44	4	8	5	5	5	No	No	
+2025-02-01	AlexPR	Good	116.15	174.89	46	5	7	4	5	5	No	No	
+2025-02-01	Fraile	Good	148.32	158.42	36	5	8	3	5	5		No	
+2025-02-03	AlexPR	Good	132.99	192.52	51	5	10	5	5	5	No	No	
+2025-02-03	Lua	Good	193	156	49	4	9.3	5	5	5	No	No	
+2025-02-03	Vivi	Good	160	105	45	5	9	5	5	5	No	No	
+2025-02-03	Fraile					5	8	4	4	4		No	
+2025-02-03	Laura	Good	121	154	66.6	4	7	5	4	4	No	Yes	Un poquito los isquios 
+2025-02-03	Iker	Good	66.8	76.7	58.6	3	9	4	2	3	No	Yes	El hombro derecho y el isquio
+2025-02-03	Adriana	Good	420	294	52	5	8.5	5	4	5	No		"Molestia más o menos controlada, teniendo en cuenta que venimos de campeonato, más localizada de nuevo en la zona del glúteo y piramidal"
+2025-02-03	Carlota	Good	67	81	55	3	8	5	2	3	No	Yes	"rodilla derecha, golpes"
+2025-02-04	Vivi	Good	118	97	44	5	7.2	5	5	5	No	No	
+2025-02-04	AlexPR	Good	68.43	120.72	54	4	7	4	5	4	No	No	
+2025-02-04	Fraile	Good	126.22	131.5	36	5	7	4	5	3		Yes	Hoy me duele el tobillo
+2025-02-04	Iker	Good	77.4	90	59.6	3	8.2	4	4	4	No	Yes	El hombro derecho algo menos que ayer
+2025-02-04	Carlota	Good	53	124	65	5	8	5	4	4	No	Yes	tibia derecha (golpes del campeonato) y pie derecho (ayer me hice un poco de daño en el entreno)
+2025-02-04	Lena	Good	69.31	87.83	73	5	10	5	3	3	No	No	
+2025-02-04	Adriana	Good	410	296	48	5	8.5	5	4	5	No		Un poco de tensión en la zona de piramidal y glúteo * el punto de siempre
+2025-02-05	Fraile	Good	152.75	169.8	36	5	8	4	5	4		Yes	Un poco tobillo
+2025-02-05	Lena	Good	62.38	72.25	68	4	8	5	4	4	No	No	
+2025-02-05	Laura	Good	150.4	119.5	53	4	7	5	4	4	No	No	
+2025-02-05	Lua	Good	182	113	48	4	9.1	5	5	5	No	No	
+2025-02-05	AlexPR	Good	94.22	142.72	56	5	8	5	5	5	No	Yes	Me lleve un calmante anoche 7/10
+2025-02-05	Vivi	Good	176	142	46	5	9	5	5	5	No	No	
+2024-02-05	Iker	Good	79	80.6	59.3	4	7	5	4	4	No	Yes	Hombro derecho resentido 
+2025-02-05	Adriana	Good	438	299	46	5	7.5	5	5	5	No		"Un poco de molestia del punto de siempre, pero mejor del glúteo y piramidal"
+2025-02-06	Fraile	Good	156.92	138.05	36	5	7	4	5	4		Yes	Tobillo
+2025-02-06	AlexPR	Good	85.64	142.62	57	5	7.8	5	5	5	No	Yes	Gemelo 6/10
+2025-02-06	Lua	Good	160	148	51	4	9.5	5	3	4	No	Yes	Tengo dolor de piernas un poco porque estan cargadas
+2025-02-06	Laura	Good	175.8	116.6	51	4	6	5	4	4	No	No	
+2025-02-06	Vivi	Good	152	100	46	5	9	5	5	5	No	No	
+2025-02-06	Carlota	Good	72	47	60	4	8	5	4	5	No	No	pie como siempre
+2025-02-06	Lena	Good	77.87	70.86	65	4	10	5	4	4	No	No	
+2025-02-06	Iker	Good	59.6	87.2	65.5	4	8.3	5	4	4	No	Yes	Hombro derecho
+2025-02-07	Vivi	Good	157	112	45	5	5	5	5	3	No	No	
+2025-02-07	Laura	Good	92.5	123.8	65.5	4	6	5	4	4	No	No	
+2025-02-07	Fraile	Good	195.54	195.16	40	5	8	5	5	5		Yes	Tobillo y tengo algún golpe fuerte
+2025-02-07	Iker	Good	91.7	94.7	59.2	4	8	5	4	5	No	Yes	Un poco insercion de isquio y el hombro resentido
+2025-02-07	Carlota	Good	45	43	61	4	5	4	4	3	No	No	
+2025-02-07	AlexPR	Good				3	7	4	5	5	No	Yes	Gemelo 3/10 ha soltado porque lo puedo mover más
+2025-02-07	Adriana		573	310	46	5	8.5	5	5	5	No	No	"Masa de dolor desde que me he levantado (sin forzar nada, solo andand, cama…)"
+2025-02-07	Lena	Good	67.68	75.83	70	4	7	3	4	4	No	No	
+2025-02-08	Lua	Good	146	94	39	4	7.5	5	5	5	No	No	
+2025-02-08	Vivi	Good	63	38	40	5	7.5	5	5	5	No	No	
+2025-02-08	Fraile	Good	133.61	122.83	41	5	7	4	4	4		Yes	Tobillo
+2025-02-08	AlexPR	Good	90.88	156.23	53	5	8	4	5	5	No	Yes	"Gemelo 3/10, hombro 3/10"
+2025-02-08	Laura	Good	100.9	83	57.8	4	8	5	4	4	No	No	
+2025-02-08	Lena	Good	50.61	71.89	71	5	10	5	3	4	No	No	
+2025-02-09	Lua	Good	91	54	37	4	8.5	5	5	5	No	No	
+2025-02-09	Vivi	Good	106	99	39	5	9	5	5	5	No	No	
+2025-02-09	AlexPR	Good	105.28	135.05	54	5	8	4	5	5	No	Yes	Gemelo 1/10
+2025-02-10	Lua	Good	195	184	40	4	8.1	5	5	5	No	No	
+2025-02-10	Fraile	Good	170.99	176.89	37	5	7.3	5	5	5		No	
+2025-02-10	Carlota	Good	60	101	65	5	7	5	5	4	No	No	
+2025-02-10	Laura	Okay	36	47.1	93.8	4	7	5	4	4	No	No	
+2025-02-10	AlexPR	Good	58.6	152.86	48	4	7.5	5	5	5	No	No	
+2025-02-10	Iker	Good	67.5	97.6	57.6	4	7	4	5	5	No	Yes	El hombro derecho pero algo menos que la semana pasada
+2025-02-10	Lena	Good	91.61	83.97	72	4	9	5	4	5	No	No	
+2025-02-10	Adriana	Good	430	255	40	3	7.5	4	5	5	No		Si sigo con buena sensaciones en el Iswui
+2025-02-11	Lua	Good	202	149	50	4	8.5	5	5	4	No	No	
+2025-02-11	Fraile	Good	155.98	158.91	38	5	7	4	3	4		Yes	Tobillo
+2025-02-11	Laura	Good	190.9	167.9	52	4	7	5	4	4	No	No	
+2025-02-11	AlexPR	Good	101.72	151.56	51	5	7	4	4	5	No	No	
+2025-02-11	Iker	Good	60.5	88.7	63.2	4	7	4	4	4	No	Yes	El hombro derecho
+2025-02-11	Adriana	Good	467	338	50	5	8.5	5	5	5	No		
+2025-02-11	Lena	Good	74.46	77.38	70	3	10	3	4	3	No	No	
+2025-02-11	Carlota	Good	49	62	72	4	8	5	5	5	No	No	
+2025-02-12	Carlota	Good	27	65	75	4	7	5	3	4	No	Yes	me duelen las dos caderas bastantes
+2025-02-12	Iker	Good	63	81.8	62.9	4	8.15	5	4	4	No	No	
+2025-02-12	Fraile	Good	152.63	139.63	40	5	8	4	3	4		Yes	Tobillo
+2025-02-12	AlexPR	Good	88.95	199.34	51	4	7.5	4	4	4	No	No	
+2025-02-12	Laura	Good	89.8	85.6	58.2	4	7	4	4	4	No	No	
+2025-02-12	Adriana	Good	471	334	55	4	8	5	4	5	No		"Los golpes, pero todo OK con eso. Al levantarme el Iskyo bien puede que haga un puntito en algún gesto, pero nada relevante"
+2025-02-12	Lena	Good	42.05	66.27	74	5	9	4	3	4	No	No	
+2025-02-13	Vivi	Good	295	189	52	5	8.15	5	4	5	No	No	
+2025-02-13	Fraile	Good	134.89	137.44	42	5	8	5	4	4		Yes	Tobillo y dedo gordo del pie bastante
+2025-02-13	Lua	Good	167	118	43	4	9	5	4	4	No	No	
+2025-02-13	Iker	Good	94.1	113.1	60.4	4	8	4	4	4	No	Yes	Un poco resentido el isquio izquierdo donde la zona de la insercion
+2025-02-13	AlexPR	Good	69.12	94.66	50	5		5	5	5	No	No	
+2025-02-13	Laura	Good	116.6	116.9	58.3	4	8	5	4	4	No	No	
+2025-02-13	Adriana	Good	411	277	37	5	8.5	5	5	5		No	Muy buenas sensaciones y nada de resentimiento ayer 
+2025-02-13	Lena	Good	69.17	96.18	71	4	9	5	3	3	No	No	
+2025-02-14	Fraile	Good	164.11	186.37	42	5	7.3	4	5	4		Yes	Tobillo y dedo del pie. Ayer por la mañana me di un baño de agua fria (10 min) Hoy me he quedado dormido en el sofá en vez de en la cama.
+2025-02-14	Laura	Good	105	99.7	61.5	4	7	5	4	4	No	No	
+2025-02-14	AlexPR	Good	64.01	94.55	54	5	8.5	4	5	5	No	Yes	Gemelo
+2025-02-14	Lua	Good	203	159	48	4	9	5	5	5	No	No	
+2025-02-14	Vivi	Good	233	150	49	5	9	5	5	5	No	No	
+2025-02-14	Adriana	Good	497	342	42	5	7.5	5	5	5	No		Buenas sensaciones isquio
+2025-02-14	Iker	Good	40.3	64.4	64.6	4	5	2	4	3	No	No	
+2025-02-14	Lena	Good	56.75	95.45	74	4	9	3	4	4	No	No	
+2024-02-15	Fraile	Good	128.35	126.23	41	5	7.3	5	5	5		Yes	Tobillo
+2025-02-15	Vivi	Good	187	133	49	5	8.5	5	5	5	No	No	
+2025-02-15	Lua	Good	174	139	48	4	10.5	5	5	5	No	No	
+2025-02-15	AlexPR	Good	93.42	125.43	49	5	8	5	5	5	No	Yes	Gemelo
+2025-02-15	Carlota	Good	40	34	66	5	7	5	4	3	No	Yes	caderas
+2025-02-15	Iker	Good	60	90	69	4	7	4	4	4	Yes	No	
+2025-02-15	Laura	Good	169	176	53.8	4	8	5	4	4	No	No	
+2025-02-15	Lena	Good	102.42	136.24	69	5	7	4	4	4	No	No	
+2025-02-16	Fraile	Good	135.77	144.26	38	5	8	5	5	5		Yes	Tobillo
+2025-02-16	AlexPR	Good	49.28	70.38	48	5	8	4	5	5	No	No	
+2025-02-17	Fraile	Good	135.62	149.31	39	5	7.3	5	5	5		Yes	Tobillo poco
+2025-02-17	Iker	Good	81.3	70.3	60.9	5	8.3	4	5	5	No	No	
+2025-02-17	AlexPR	Good	140.93	221.89	45	4		5	5	5	No	No	
+2025-02-17	Lua	Good	174	157	57	4	9	5	5	5	No	No	
+2025-02-17	Vivi	Good	142	141	47	5	9.2	5	5	5	No	No	
+2025-02-17	Laura	Good	113.4	107.8	48.1	4	7	5	4	4	No	No	
+2025-02-17	Carlota	Good	39	37	68	5	8.3	5	4	5	No	No	
+2025-02-17	Lena	Good	56.87	78.53	72	5	11	4	5	5	Yes	No	
+2025-02-17	Adriana	Good	448	326	42	5	8	5	5	5	No		Molestia al estar sentada. Quemazon
+2025-02-18	Fraile	Good	134.17	136.65	44	5	6	2	5	4		Yes	Tobillo. He dormido poco porque estuve media noche matando 4 mosquitos en mi habitación que no me dejaban dormir.
+2025-02-18	AlexPR	Good	55.32	97.13	57	4	8	5	5	5	No	No	
+2025-02-18	Lua	Good	228	168	50	4	9	5	5	5	No	No	
+2025-02-18	Laura	Good	145	107.5	51.6	4	7	5	4	4	No	No	
+2025-02-18	Vivi	Good	76	75	46	5	8.15	5	5	5	No	No	
+2025-02-18	Carlota	Good	36	44	68	5	8	3	4	4	No	Yes	empiezo a sentir la rodilla derecha inestable otra vez por la parte interna (creo que es porque no estoy haciendo fuerza)
+2024-02-18	Iker	Good	47.2	44.8	61.1	4	9	4	5	4	No	No	
+2025-02-18	Adriana	Good	446	319	45	5	7.5	5	5	5	No		"Un pelín de molestia al estar sentada y demás, me imagino que también de intentar movilizar la espalda ayer"
+2025-02-18	Lena	Good	63.5	71.53	67	4	8	4	5	4	Yes	No	
+2025-02-19	Vivi	Good	74	77	43	5	6.3	5	4	5	No	Yes	Agujetas en las piernas 5/10
+2025-02-19	Lua	Good	162	126	46	4	8	5	5	5	No	No	"Dolor de piernas muy poco, 1,5/10"
+2025-02-19	Carlota	Good	52	89	68	3	6	4	4	4	No	Yes	"rodillas resentidas, las caderas hoy van mejor"
+2025-02-19	AlexPR	Good	92.32	142.91	50	5	6.6	5	5	4	No	No	
+2025-02-19	Fraile	Good	173.4	175.98	41	5	7.3	5	5	5		No	He tomado el Sol y aire fresco por la ventana un par de minutos nada mas levantarme.
+2025-02-19	Laura	Okay	61.4	95.3	75.4	4	7	5	4	4	No	No	
+2025-02-19	Iker	Good	59.3	77.7	62	4	8	4	5	4	No	No	
+2025-02-19	Lena	Good	65.99	75.41	70	3	8	3	4	4	Yes	No	

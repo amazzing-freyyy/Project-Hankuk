@@ -1,0 +1,31 @@
+.date-widget{
+    display: flex;
+    flex-direction: column;
+}
+
+.date-input{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+}
+
+.date-btn{
+    justify-self: center;
+    align-self: center;
+    height: 65px;
+    width: 80px;
+    margin-top: 30px;
+    border-radius: 40px;
+}
+
+input#id_date_btn{
+    background-color: rgba(0, 0, 0, 0.126);
+    font-family: Agdasima;
+    font-size: 60%;
+    color: rgb(0, 170, 119);
+    height: 65px;
+    margin-top: 30px;
+    border: 0;
+    
+}

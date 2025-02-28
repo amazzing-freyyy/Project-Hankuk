@@ -1,0 +1,58 @@
+.chart{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.subcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.filter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.image-filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100vw;
+    align-items: center;
+}
+
+.subcontainer.header{
+    background-color: #007bff;
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    color: white;
+}
+
+a.nav{
+    background-color: rgb(153, 18, 0);
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    height: 50px;
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+    transition: background-color .5s;
+}
+a.nav:hover{
+    background-color: rgb(83, 0, 0);
+}
+    {% if avatar_url %}
+        <img src="{{ avatar_url }}" alt="Avatar" width="100">
+    {% else %}
+        <img src="{% static 'team_dashboard/images/deafault_avatar.png'%}" alt="Default Avatar>    {% endif %}
+div.subcontainer.filter{
+    margin: 20px;
+}

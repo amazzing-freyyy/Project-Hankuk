@@ -1,0 +1,28 @@
+{% extends 'base_template.html' %}
+
+{% block title %}Encuestas{% endblock %}
+
+{% load static %}
+{% block styleSheets %}
+<link rel="stylesheet" href="{% static 'team_dashboard/css/a_home.css' %}" type="text/css">
+{% endblock %}
+
+{% block main_content %}
+    <div class="subcontainer">
+        <button class="nav" onclick="window.location.href = '{% url 'wake_up_form' %}'">
+            <p class="red">Encuesta Mañanera</p>
+        </button>
+        <button class="nav" onclick="window.location.href = '{% url 'post_training_form' %}'">
+            <p class="yellow">Encuesta Post-entreno</p>
+        </button>
+        <button class="nav" onclick="window.location.href = '{% url 'wellness_dashboard' user=id %}'">
+            <p class="green">Panel de datos</p>
+        </button>
+        <form method="POST"  class="logout" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout">
+                <p>Logout</p>
+            </button>
+        </form>
+    </div>
+{% endblock %}

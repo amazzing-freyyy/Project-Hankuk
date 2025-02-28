@@ -1,0 +1,30 @@
+.training-type-widget{
+display: flex;
+flex-direction: column;
+align-items: start;
+}
+
+.not-selected{
+display: none;
+}
+
+.main, .selected{
+display: flex;
+flex-direction: column;
+align-times: center;
+justify-content: center;
+margin-top: 15px;
+}
+
+select#id_type_of_activity{
+    background-color: rgba(0, 0, 0, 0.126);
+    font-family: Agdasima;
+    font-size: large;
+    color: rgb(0, 170, 119);
+    border: 0;
+    margin-top: 10px;
+}
+
+label.ttype{
+font-size: larger;
+}

@@ -1,0 +1,11 @@
+<div class='tags'>
+    {%for tag in tags%}
+        <p class="tag">{{tag}}</p>
+    {%endfor%}
+</div>
+<div class='star-rating' data-name= '{{name}}'>
+    {%for i in range %}
+        <input type="radio" id="{{name}}-{{i}}" name="{{name}}" value="{{i}}" {%if value == i %} checked {%endif%}>
+        <label for="{{name}}-{{i}}" class="star">&#9733;</label>
+    {%endfor%}
+</div>

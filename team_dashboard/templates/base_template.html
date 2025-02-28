@@ -1,0 +1,19 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href='https://fonts.googleapis.com/css?family=Agdasima' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'team_dashboard/css/style.css' %}" type="text/css">
+    {% block styleSheets %}
+    {%endblock%}
+    
+</head>
+<body>
+        {% block main_content %}
+        {% endblock %}
+</body>
+</html>

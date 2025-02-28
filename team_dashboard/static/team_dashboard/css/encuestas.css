@@ -1,0 +1,163 @@
+.parent{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+
+
+a.nav{
+    background-color: rgb(153, 18, 0);
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    height: 10vh;
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+    transition: background-color .5s;
+    position:fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.errors{
+    position: fixed;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    background-color: rgb(224, 194, 0);
+    width: 100%;
+    height: 5vh;
+    padding-bottom: 5px;
+    margin:0;
+}
+
+.body-encuestas{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    z-index: 1;
+    background-color: rgb(53, 0, 123);
+}
+
+
+button.arrow{
+    width: 40px;
+}
+
+form.subcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    height: 100%;
+    flex: 1;
+    color:rgb(0, 170, 119);
+    margin: 5%;
+}
+
+a.nav:hover{
+    background-color: rgb(83, 0, 0);
+}
+
+div.form-group{
+    display: none;
+}
+
+div.form-group.active{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+
+div.form-group.image{
+    display: none;
+}
+
+div.form-group.image.active{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin:0;
+}
+
+div.form-group.text-area{
+    display: none;
+}
+
+div.form-group.text-area.active{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70vw;
+}
+
+button.encuesta{
+    justify-self: center;
+    align-self: center;
+    height: 40px;
+    width: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+}
+
+label{
+    font-weight:bolder;
+}
+
+button{
+    background-color: rgba(0, 0, 0, 0.126);
+    border-width: .2px;
+    border-color: black;
+    transition: background-color .7s;
+}
+button:hover{
+    background-color: rgba(0, 0, 0, 0.768);
+}
+
+button:disabled{
+    background-color: rgba(0, 0, 0, 0);
+    display: none;
+}
+
+select.form-select{
+    background-color: rgba(0, 0, 0, 0.126);
+    border-width: .2px;
+    border-color: black;
+    transition: background-color .7s;
+    margin-top: 30px;
+    font-family: Agdasima;
+    font-size: 22px;
+    color: rgb(0, 170, 119);
+}
+
+select.form-select:hover{
+    background-color: rgba(0, 0, 0, 0.768);
+}
+
+select.form-select:focus{
+    background-color: rgba(0, 0, 0, 0.768);
+}
+
+.form-control{
+    background-color: rgba(0, 0, 0, 0.126);
+    border-width: .2px;
+    border-color: black;
+    transition: background-color .7s;
+    margin-top: 30px;
+    font-family: Agdasima;
+    font-size: 22px;
+    color: rgb(0, 170, 119);
+}
+
+.form-control:hover{
+    background-color: rgba(0, 0, 0, 0.768);
+}

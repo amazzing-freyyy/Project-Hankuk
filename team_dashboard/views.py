@@ -1,0 +1,599 @@
+from django.http.response import HttpResponse as HttpResponse
+from django.views.generic.list import ListView
+from django.views.generic.edit import FormView, UpdateView
+from django.contrib.auth.models import User, Group
+from team_dashboard.models import Wake_Up_Data, Post_Training_Data, Profile
+from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
+from django.views.generic import TemplateView
+import plotly.graph_objs as go
+from django.db.models import Avg, F, Window, StdDev, RowRange
+from django.db.models.functions import Ln, RowNumber
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from datetime import datetime, timedelta
+import json
+from plotly.subplots import make_subplots
+import logging
+
+logger = logging.getLogger(__name__) 
+
+class RedirectView(LoginRequiredMixin, TemplateView):
+    template_name= 'redirect.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.groups.filter(name='coaches').exists():
+            return redirect('coach_home')
+        if request.user.groups.filter(name='athletes'):
+            return redirect('athlete_home')
+        else:
+            return redirect('admin:index')
+
+class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
+    template_name= 'wellness_dashboard.html'
+
+    def get_chart_data(self, start_date=datetime.now()):
+        #get selected athlete
+        athlete_id = self.kwargs.get('user')
+        athlete = User.objects.filter(id= athlete_id).first()
+
+#        if start_date == None:
+#            start_date = datetime.now() - timedelta(days=7)
+#            start_date = datetime.now()
+        #get all entries
+        row_data = Wake_Up_Data.objects.filter(user=athlete).annotate(
+            lnrmssd=Ln('RMSSD'),
+            row_num=Window(
+                expression=RowNumber(),
+                order_by=F('date').asc()
+            )
+
+        )
+        
+        #calculate values, then filter entries based on desired interval
+        interval = 30
+        graph_data= (
+            row_data
+            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain')
+            .annotate(
+                    rolling_avgs_lnrmssd= Window(
+                        expression=Avg('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()
+                    ), 
+                    rolling_stds_lnrmssd= Window(
+                        expression=StdDev('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+                    rolling_avg_sleep= Window(
+                        expression=Avg('hours_of_sleep'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc())
+            ).filter(date__lte= start_date).order_by('-date')
+        )
+
+        dates= sorted(set(measurement['date'] for measurement in graph_data))
+        s_sp_by_date = {date: 0 for date in dates}
+        lnrmssd_by_date = {date: 0 for date in dates}
+        linfrmssd_by_date = {date: 0 for date in dates}
+        lsuprmssd_by_date = {date: 0 for date in dates}
+        hrs_sleep = graph_data[0]['hours_of_sleep']
+        emo_wellness = graph_data[0]['emotional_wellness']
+        q_sleep = graph_data[0]['quality_of_sleep']
+        tiredness = graph_data[0]['tiredness']
+        muscle_pain= 5 - graph_data[0]['muscle_pain']
+        sum= emo_wellness + q_sleep + tiredness - muscle_pain
+        comments= graph_data[0]['comments']
+        menstruation= graph_data[0]['menstruation']
+        
+
+        def indicator(value, medium):
+            if value > medium*1.15:
+                return "&#128309;"
+            elif value < medium*.85:
+                return "&#128308;"
+            else:
+                return "&#128310;"
+            
+        def m_indicator(value):
+            if value == 'No' or value == 'no':
+                return "&#128309;"
+            else:
+                return "&#128310;"
+
+        for measurement in graph_data:
+            date = measurement['date']
+            lnrmssd = measurement['lnrmssd'] 
+            linfrmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
+            lsuprmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
+            sd1= 0.7071 * measurement['RMSSD']
+            sd2= (measurement['SDNN'] / 0.7995)+5.1174
+            ss = 1000 / sd2
+            s_sp = ss/sd1
+
+
+            lnrmssd_by_date[date] = lnrmssd
+            linfrmssd_by_date[date] = linfrmssd
+            lsuprmssd_by_date[date] = lsuprmssd
+            s_sp_by_date[date] = s_sp
+
+        fig = make_subplots(rows=5, cols=1,
+                            subplot_titles=("Radar de Wellness", "Tabla de Wellness", "Comentarios","LnRMSSD", "Stress Score"),
+                            specs=[[{'type':'polar'}],
+                                   [{'type':'table'}],
+                                   [{'type':'table'}],
+                                   [{'type':'xy'}],
+                                   [{'type':'xy'}]],
+                            row_heights=[0.2, 0.2, 0.2, 0.2, 0.2])
+        fig.update_layout(showlegend=False)
+
+        lnrmssd_trace= go.Scatter(
+            x=list(lnrmssd_by_date.keys()),
+            y=list(lnrmssd_by_date.values()),
+            mode='lines+markers',
+            name='LnRMSSD'
+        )
+        linfrmssd_trace= go.Scatter(
+            x=list(linfrmssd_by_date.keys()),
+            y=list(linfrmssd_by_date.values()),
+            mode='lines+markers',
+            name='Límite Inferior'
+        )
+        lsuprmssd_trace= go.Scatter(
+            x=list(lsuprmssd_by_date.keys()),
+            y=list(lsuprmssd_by_date.values()),
+            mode='lines+markers',
+            name='Límite Superior'
+        )
+
+        xaxis_layout=dict(
+                type="date",
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=14,
+                             label='1w',
+                             step="day",
+                             stepmode="backward"),
+                        dict(count=1.3,
+                             label='1m',
+                             step="month",
+                             stepmode="backward"),
+                        dict(count=6,
+                            label="6m",
+                            step="month",
+                            stepmode="backward"),
+                        dict(count=1,
+                            label="1y",
+                            step="year",
+                            stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+            )
+
+        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
+        fig.add_traces(data=lnrmssd_traces, rows=4, cols=1)
+        fig.update_layout(
+            xaxis=xaxis_layout,
+            xaxis_title="Fecha",
+            yaxis_title='LnRMSSD',
+        )
+
+        s_sp_trace= go.Scatter(
+            x=list(s_sp_by_date.keys()),
+            y=list(s_sp_by_date.values()),
+            mode='lines+markers',
+            name='SDNN',
+        )
+
+        fig.add_trace(trace=s_sp_trace, row=5, col=1)
+        fig.update_layout(
+            xaxis2=xaxis_layout,
+            xaxis2_title="Fecha",
+            yaxis2_title='SDNN',
+        )
+
+        radar_trace = go.Scatterpolar(
+            r= [q_sleep, emo_wellness, tiredness],
+            theta=['calidad de sueño','ánimo', 'recuperación'],
+            fill= 'toself',
+            name= 'Medida actual'
+        )
+
+        fig.add_traces(radar_trace, rows=1,cols=1)
+        fig.update_layout(
+            polar=dict(
+                radialaxis=dict(
+                    visible=True,
+                    range=[0, 5],
+                )),
+            margin=dict(
+                t=80, 
+            )
+        )
+        
+        lightgrey= 'aliceblue'
+        white= 'lightblue'
+        table_trace = go.Table(
+            header=dict(values=["Variable", "Valor", "Indicador"]),
+            cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'dolor', 'suma','horas de sueño', 'menstruación'],
+                                [ q_sleep, emo_wellness, tiredness, -muscle_pain, sum, hrs_sleep, menstruation],
+                                [indicator(q_sleep, 5/2), indicator(q_sleep, 5/2), indicator(tiredness, 5/2), indicator(muscle_pain, -5/2), indicator(sum, 15-((15+5)/2)), indicator(hrs_sleep, 7), m_indicator(menstruation)]],
+                        fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, white,white]],)
+        )
+        fig.add_trace(trace=table_trace, row=2, col=1)
+
+        comments_trace = go.Table(
+            cells= dict(values=[comments])
+        )
+        fig.add_trace(trace=comments_trace, row=3, col=1)
+
+        data = {'report': json.loads(fig.to_json())}
+
+        return data
+
+    def get_context_data(self, **kwargs): 
+        if self.request.user.is_authenticated: 
+            context = super().get_context_data(**kwargs)
+            context['chart_data'] = json.dumps(self.get_chart_data())
+            context['athlete'] = User.objects.filter(id= self.kwargs.get('user')).first()
+            context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
+
+        return context
+    
+    def post(self, request, *args, **kargs):
+        data = json.loads(request.body)
+        print(request)
+        start_date = data.get('start_date')
+        chart_data = self.get_chart_data(start_date=start_date)
+        return JsonResponse(chart_data)
+
+class Coach_Home(LoginRequiredMixin, ListView):
+    model = Wake_Up_Data
+    template_name= 'coach_home.html'
+    context_object_name= 'wake_up_data'
+  
+    def get_context_data(self, **kwargs): 
+        if self.request.user.is_authenticated:
+            context = super().get_context_data(**kwargs)
+            # get all athletes
+            athletes = Group.objects.get(name= 'athletes').user_set.all()
+            
+            context['data'] = []
+            #last three entries
+            for athlete in athletes:
+                query = Wake_Up_Data.objects.filter(user=athlete).order_by("-date")[:3]
+                if len(query) ==3:
+                    wellness_values = [entry.emotional_wellness for entry in query]
+                    date = query[0].date
+                    consecutives = 0
+                    for i in wellness_values:
+                        if i <= 2.0:
+                            consecutives = consecutives + 1
+
+                    if consecutives < 2:
+                        alert = 'green'
+                    elif consecutives == 2:
+                        alert = 'yellow'
+                    else:
+                        alert = 'red'  
+
+                    context['data'].append({'user': athlete, 'alert': alert, 'date':date})
+                    
+                context['full_name'] = self.request.user.get_full_name()
+        return context
+
+class WakeUpDetailView(LoginRequiredMixin, FormView):
+    template_name= 'wake_up_detail_template.html'
+    form_class= WakeUpForm
+    success_url= '/home/'
+
+    def get_initial(self):
+        initial = super().get_initial()
+        slug = self.kwargs.get('slug')
+        data = Wake_Up_Data.objects.filter(slug=slug).first()
+
+        initial['date'] = data.date
+        initial['measurement_quality'] = data.measurement_quality
+        initial['RMSSD'] = data.RMSSD
+        initial['SDNN'] = data.SDNN
+        initial['HR'] = data.HR
+        initial['emotional_wellness'] = f'{data.emotional_wellness:.1f}'
+        initial['hours_of_sleep'] = data.hours_of_sleep
+        initial['quality_of_sleep'] = f'{data.quality_of_sleep:.1f}'
+        initial['muscle_pain'] = f"{data.muscle_pain:.1f}"
+        initial['tiredness'] = f'{data.tiredness:.1f}'
+        initial['menstruation'] = data.menstruation
+        initial['injury'] = data.injury
+        initial['comments'] = data.comments
+
+        return initial
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            Wake_Up_Data.objects.update_or_create(
+                slug = self.kwargs.get('slug'),
+
+                defaults={
+                    "measurement_quality":form.cleaned_data['measurement_quality'],
+                    "RMSSD":form.cleaned_data['RMSSD'], 
+                    "SDNN":form.cleaned_data['SDNN'],
+                    "HR":form.cleaned_data['HR'],
+                    "emotional_wellness":form.cleaned_data['emotional_wellness'],
+                    "hours_of_sleep":form.cleaned_data['hours_of_sleep'],
+                    "quality_of_sleep":form.cleaned_data['quality_of_sleep'],
+                    "muscle_pain":form.cleaned_data['muscle_pain'],
+                    "tiredness":form.cleaned_data['tiredness'],
+                    "menstruation":form.cleaned_data['menstruation'],
+                    "injury":form.cleaned_data['injury'],
+                    "comments":form.cleaned_data['comments']
+                }
+            )
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+
+        if self.request.user.is_authenticated:
+            context['username'] = self.request.user.get_username()
+            context['full_name'] = self.request.user.get_full_name()
+        else:
+            context['username'] = ''
+            context['full_name'] = ''
+
+        return context
+        
+
+class WakeUpFormView(LoginRequiredMixin, FormView):
+    template_name= 'wake_up_form.html'
+    form_class= WakeUpForm
+    success_url= '/home/'
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            userObject= self.request.user
+
+            Wake_Up_Data.objects.update_or_create(
+                date= form.cleaned_data['date'],
+                user=userObject,
+
+                defaults={
+                    "measurement_quality":form.cleaned_data['measurement_quality'],
+                    "RMSSD":form.cleaned_data['RMSSD'], 
+                    "SDNN":form.cleaned_data['SDNN'],
+                    "HR":form.cleaned_data['HR'],
+                    "emotional_wellness":form.cleaned_data['emotional_wellness'],
+                    "hours_of_sleep":form.cleaned_data['hours_of_sleep'],
+                    "quality_of_sleep":form.cleaned_data['quality_of_sleep'],
+                    "muscle_pain":form.cleaned_data['muscle_pain'],
+                    "tiredness":form.cleaned_data['tiredness'],
+                    "menstruation":form.cleaned_data['menstruation'],
+                    "injury":form.cleaned_data['injury'],
+                    "comments":form.cleaned_data['comments']
+                }
+            )
+        return super().form_valid(form) 
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            context['username'] = self.request.user.get_username()
+            context['full_name'] = self.request.user.get_full_name()
+        else:
+            context['username'] = ''
+            context['full_name'] = ''
+
+        return context
+    
+class PostTrainingFormView(LoginRequiredMixin, FormView):
+    template_name= 'post_training_form.html'
+    form_class= PostTrainingForm
+    success_url= '/home/'
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            userObject= self.request.user
+
+            Post_Training_Data.objects.update_or_create(
+                    date=form.cleaned_data['date'],
+                    user=userObject,
+
+                    defaults={
+                        "type_of_activity":form.cleaned_data['type_of_activity'],
+                        "time_of_activity":form.cleaned_data['time_of_activity'],
+                        "perceived_strain_of_activity":form.cleaned_data['perceived_strain_of_activity'],
+                        "pain":form.cleaned_data['pain'],
+                        "comments":form.cleaned_data['comments']
+                    }
+            )
+
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated: 
+            context['username'] = self.request.user.get_username()
+            context['full_name'] = self.request.user.get_full_name()
+        else:
+            context['username'] = ''
+            context['full_name'] = ''
+
+        return context
+    
+class Athlete_Home(LoginRequiredMixin, TemplateView):
+    template_name= 'athlete_home.html'
+    
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated: 
+            context['username'] = self.request.user.get_username()
+            context['full_name'] = self.request.user.get_full_name()
+            context['user_group'] = str(self.request.user.groups.all()[0])
+            context['id'] = self.request.user.id 
+        
+        return context
+
+class ChartView(LoginRequiredMixin, TemplateView):
+    template_name = "RMSSD_chart.html"
+
+    def get_chart_data(self, user=None, interval=None):
+        if user:
+            user = User.objects.filter(username= user).first()
+        else:
+            user = User.objects.filter(id= 1).first()
+
+        interval = 30
+
+        row_data = Wake_Up_Data.objects.annotate(
+            lnrmssd=Ln('RMSSD'),
+            row_num=Window(
+                expression=RowNumber(),
+                order_by=F('date').asc()
+            )
+        )
+
+        graph_data= (
+            row_data
+            .filter(user=user.id)
+            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', )
+            .annotate(
+                    rolling_avgs_lnrmssd= Window(
+                        expression=Avg('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()
+                    ),
+                    rolling_stds_lnrmssd= Window(
+                        expression=StdDev('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+            )
+        )
+
+        dates= sorted(set(measurement['date'] for measurement in graph_data))
+        lnrmssd_by_date = {date: 0 for date in dates}
+        linfrmssd_by_date = {date: 0 for date in dates}
+        lsuprmssd_by_date = {date: 0 for date in dates}
+
+        for measurement in graph_data:
+            date = measurement['date']
+            lnrmssd = measurement['lnrmssd'] 
+            linfrmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
+            lsuprmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
+            sd1= 0.7071 * measurement['RMSSD']
+            sd2= (measurement['SDNN'] / 0.7995)+5.1174
+            ss = 1000 / sd2
+            s_sp = ss/sd1
+
+
+            lnrmssd_by_date[date] = lnrmssd
+            linfrmssd_by_date[date] = linfrmssd
+            lsuprmssd_by_date[date] = lsuprmssd
+
+        lnrmssd_trace= go.Scatter(
+            x=list(lnrmssd_by_date.keys()),
+            y=list(lnrmssd_by_date.values()),
+            mode='lines+markers',
+            name='LnRMSSD'
+        )
+        linfrmssd_trace= go.Scatter(
+            x=list(linfrmssd_by_date.keys()),
+            y=list(linfrmssd_by_date.values()),
+            mode='lines+markers',
+            name='Límite Inferior'
+        )
+        lsuprmssd_trace= go.Scatter(
+            x=list(lsuprmssd_by_date.keys()),
+            y=list(lsuprmssd_by_date.values()),
+            mode='lines+markers',
+            name='Límite Superior'
+        )
+
+        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
+
+        xaxis_layout=dict(
+                type="date",
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1,
+                             label='1m',
+                             step="month",
+                             stepmode="backward"),
+                        dict(count=6,
+                            label="6m",
+                            step="month",
+                            stepmode="backward"),
+                        dict(count=1,
+                            label="YTD",
+                            step="year",
+                            stepmode="todate"),
+                        dict(count=1,
+                            label="1y",
+                            step="year",
+                            stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+                rangeslider=dict(
+                    visible=True
+                )
+            )
+
+        fig = make_subplots(rows=1, cols=2, subplot_titles=("Scatter Plot", "Another Plot"))
+        for trace in lnrmssd_traces:
+            fig.add_trace(trace, row=1, col=1)
+            fig.add_trace(trace, row=1, col=2)
+
+        fig.update_layout(
+            xaxis=xaxis_layout,
+            xaxis2=xaxis_layout,
+            xaxis_title="Fecha",
+            yaxis_title='LnRMSSD',
+            xaxis2_title="Fecha",
+            yaxis2_title='LnRMSSD',
+            title_text="example"
+        )
+
+        fig.update_layout(title_text="example")
+
+        data = {'rmssd': json.loads(fig.to_json()),
+        }
+
+        return data
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chart_data'] = json.dumps(self.get_chart_data())
+        context['athletes'] = Group.objects.get(name='athletes').user_set.all()
+        return context
+    
+    def post(self, request, *args, **kargs):
+        data = json.loads(request.body)
+        user = data.get('user')
+        chart_data = self.get_chart_data(user=user)
+        return JsonResponse(chart_data)
+
+
+#class AvatarUpdateView(UpdateView):
+#    model = Profile
+#    form_class = AvatarUploadForm
+#    template_name = 'upload_avatar.html'
+#    success_url = reverse_lazy('athlete_home')
+
+#    def get_object(self, queryset=None):
+#        return self.request.user.profile
+
+def profile(request):
+    if request.method == 'POST':
+        form = AvatarUploadForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if form.is_valid():
+            form.save()
+            return redirect('admin')  # Redirect to profile page after upload
+    else:
+        form = AvatarUploadForm(instance=request.user.profile)
+
+    return render(request, 'upload_avatar.html', {'form': form})
