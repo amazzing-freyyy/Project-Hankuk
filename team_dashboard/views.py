@@ -38,9 +38,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         athlete_id = self.kwargs.get('user')
         athlete = User.objects.filter(id= athlete_id).first()
 
-#        if start_date == None:
-#            start_date = datetime.now() - timedelta(days=7)
-#            start_date = datetime.now()
         #get all entries
         row_data = Wake_Up_Data.objects.filter(user=athlete).annotate(
             lnrmssd=Ln('RMSSD'),
@@ -55,7 +52,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         interval = 30
         graph_data= (
             row_data
-            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain')
+            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa')
             .annotate(
                     rolling_avgs_lnrmssd= Window(
                         expression=Avg('lnrmssd'),
@@ -83,7 +80,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         q_sleep = graph_data[0]['quality_of_sleep']
         tiredness = graph_data[0]['tiredness']
         muscle_pain= 5 - graph_data[0]['muscle_pain']
-        sum= emo_wellness + q_sleep + tiredness - muscle_pain
+        chispa= graph_data[0]['chispa']
+        sum= emo_wellness + q_sleep + tiredness - muscle_pain + chispa
         comments= graph_data[0]['comments']
         menstruation= graph_data[0]['menstruation']
         
@@ -119,13 +117,14 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             s_sp_by_date[date] = s_sp
 
         fig = make_subplots(rows=5, cols=1,
-                            subplot_titles=("Radar de Wellness", "Tabla de Wellness", "Comentarios","LnRMSSD", "Stress Score"),
+                            subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","LnRMSSD", "Stress Score"),
                             specs=[[{'type':'polar'}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],
+                                   [{'type':'table'}],
                                    [{'type':'xy'}],
-                                   [{'type':'xy'}]],
-                            row_heights=[0.2, 0.2, 0.2, 0.2, 0.2])
+                                   [{'type':'xy'}]],)
+                            # row_heights=[0.2, 0.2, 0.2, 0.2, 0.2])
         fig.update_layout(showlegend=False)
 
         lnrmssd_trace= go.Scatter(
@@ -173,7 +172,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             )
 
         lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
-        fig.add_traces(data=lnrmssd_traces, rows=4, cols=1)
+        fig.add_traces(data=lnrmssd_traces, rows=5, cols=1)
         fig.update_layout(
             xaxis=xaxis_layout,
             xaxis_title="Fecha",
@@ -187,7 +186,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             name='SDNN',
         )
 
-        fig.add_trace(trace=s_sp_trace, row=5, col=1)
+        fig.add_trace(trace=s_sp_trace, row=6, col=1)
         fig.update_layout(
             xaxis2=xaxis_layout,
             xaxis2_title="Fecha",
@@ -195,8 +194,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         )
 
         radar_trace = go.Scatterpolar(
-            r= [q_sleep, emo_wellness, tiredness],
-            theta=['calidad de sueño','ánimo', 'recuperación'],
+            r= [q_sleep, emo_wellness, tiredness, chispa],
+            theta=['calidad de sueño','ánimo', 'recuperación', 'chispa'],
             fill= 'toself',
             name= 'Medida actual'
         )
@@ -217,17 +216,26 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         white= 'lightblue'
         table_trace = go.Table(
             header=dict(values=["Variable", "Valor", "Indicador"]),
-            cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'dolor', 'suma','horas de sueño', 'menstruación'],
-                                [ q_sleep, emo_wellness, tiredness, -muscle_pain, sum, hrs_sleep, menstruation],
-                                [indicator(q_sleep, 5/2), indicator(q_sleep, 5/2), indicator(tiredness, 5/2), indicator(muscle_pain, -5/2), indicator(sum, 15-((15+5)/2)), indicator(hrs_sleep, 7), m_indicator(menstruation)]],
-                        fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, white,white]],)
+            cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'chispa', 'dolor', 'suma'],
+                                [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, sum],
+                                [indicator(q_sleep, 5/2), indicator(emo_wellness, 5/2), indicator(tiredness, 5/2), indicator(chispa, 5/2), indicator(muscle_pain, -5/2), indicator(sum, 15-((15+5)/2))]],
+                        fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, lightgrey,white]],)
         )
         fig.add_trace(trace=table_trace, row=2, col=1)
+
+        table_trace = go.Table(
+            header=dict(values=["Variable", "Valor", "Indicador"]),
+            cells= dict(values=[['horas de sueño', 'menstruación'],
+                                [hrs_sleep, menstruation],
+                                [indicator(hrs_sleep, 7), m_indicator(menstruation)]],
+                        fill_color = [[lightgrey,lightgrey]],)
+        )
+        fig.add_trace(trace=table_trace, row=3, col=1)
 
         comments_trace = go.Table(
             cells= dict(values=[comments])
         )
-        fig.add_trace(trace=comments_trace, row=3, col=1)
+        fig.add_trace(trace=comments_trace, row=4, col=1)
 
         data = {'report': json.loads(fig.to_json())}
 
