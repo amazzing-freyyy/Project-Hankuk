@@ -75,12 +75,12 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         lnrmssd_by_date = {date: 0 for date in dates}
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
-        hrs_sleep = graph_data[0]['hours_of_sleep']
-        emo_wellness = graph_data[0]['emotional_wellness']
-        q_sleep = graph_data[0]['quality_of_sleep']
-        tiredness = graph_data[0]['tiredness']
-        muscle_pain= 5 - graph_data[0]['muscle_pain']
-        chispa= graph_data[0]['chispa']
+        hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
+        emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
+        q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
+        tiredness = graph_data[0]['tiredness'] if graph_data[0]['tiredness'] else 0
+        muscle_pain= 5 - graph_data[0]['muscle_pain'] if graph_data[0]['muscle_pain'] else 0
+        chispa= graph_data[0]['chispa'] if graph_data[0]['chispa'] else 0
         sum= emo_wellness + q_sleep + tiredness - muscle_pain + chispa
         comments= graph_data[0]['comments']
         menstruation= graph_data[0]['menstruation']
@@ -116,7 +116,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             lsuprmssd_by_date[date] = lsuprmssd
             s_sp_by_date[date] = s_sp
 
-        fig = make_subplots(rows=5, cols=1,
+        fig = make_subplots(rows=6, cols=1,
                             subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","LnRMSSD", "Stress Score"),
                             specs=[[{'type':'polar'}],
                                    [{'type':'table'}],
@@ -206,6 +206,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                 radialaxis=dict(
                     visible=True,
                     range=[0, 5],
+                ),angularaxis=dict(
+                    rotation=45
                 )),
             margin=dict(
                 t=80, 
