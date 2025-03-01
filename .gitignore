@@ -2,3 +2,4 @@ v-env/
 project_hankuk.sock
 
 logs/*.log
+.env
