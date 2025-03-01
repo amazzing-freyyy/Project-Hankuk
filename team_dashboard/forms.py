@@ -41,7 +41,7 @@ class PostTrainingForm(forms.Form):
     date= DateTimeField()
     type_of_activity= TrainingField(required=False, error_messages={'required':'Hace falta el tipo de actividad'} )
     time_of_activity= forms.DecimalField(widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de tiempo inválido.','required':'Hace falta la duración de la actividad'})
-    perceived_strain_of_activity= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, error_messages={'invalid':'Valor de esfuerzo inválido.','required':'Hace falta el valor de esfuerzo'}, max_stars=10, tags=['Max. Esfuerzo', 'Moderado', 'Leve']), required=True)
+    perceived_strain_of_activity= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=10, tags=['Max. Esfuerzo', 'Moderado', 'Leve']), error_messages={'invalid':'Valor de esfuerzo inválido.','required':'Hace falta el valor de esfuerzo'}, required=True)
     pain= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
     comments= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
 
