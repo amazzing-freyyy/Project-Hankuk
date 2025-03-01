@@ -52,6 +52,7 @@ class Wake_Up_Data(models.Model):
     SDNN= models.FloatField(blank=True, null=True)
     HR= models.FloatField(blank=True, null=True)
     emotional_wellness= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
+    chispa= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
     hours_of_sleep= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
     quality_of_sleep= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
     muscle_pain= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
