@@ -1,8 +1,8 @@
 from django.http.response import HttpResponse as HttpResponse
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import FormView
 from django.contrib.auth.models import User, Group
-from team_dashboard.models import Wake_Up_Data, Post_Training_Data, Profile
+from team_dashboard.models import Wake_Up_Data, Post_Training_Data
 from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
@@ -11,8 +11,7 @@ import plotly.graph_objs as go
 from django.db.models import Avg, F, Window, StdDev, RowRange
 from django.db.models.functions import Ln, RowNumber
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
-from datetime import datetime, timedelta
+from datetime import datetime
 import json
 from plotly.subplots import make_subplots
 import logging
@@ -85,6 +84,13 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         comments= graph_data[0]['comments']
         menstruation= graph_data[0]['menstruation']
         
+        def indicator_sleep(value):
+            if value > 7.5:
+                return "&#128309;"
+            elif value < 6.5:
+                return "&#128308;"
+            else:
+                return "&#128310;"
 
         def indicator(value, medium):
             if value > medium*1.15:
@@ -125,7 +131,12 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                                    [{'type':'xy'}],
                                    [{'type':'xy'}]],)
                             # row_heights=[0.2, 0.2, 0.2, 0.2, 0.2])
-        fig.update_layout(showlegend=False)
+        fig.update_layout(
+            showlegend=False,
+            autosize=True,
+            dragmode= 'pan',
+            hovermode='closest',
+        )
 
         lnrmssd_trace= go.Scatter(
             x=list(lnrmssd_by_date.keys()),
@@ -229,7 +240,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             header=dict(values=["Variable", "Valor", "Indicador"]),
             cells= dict(values=[['horas de sueño', 'menstruación'],
                                 [hrs_sleep, menstruation],
-                                [indicator(hrs_sleep, 7), m_indicator(menstruation)]],
+                                [indicator_sleep(hrs_sleep), m_indicator(menstruation)]],
                         fill_color = [[lightgrey,lightgrey]],)
         )
         fig.add_trace(trace=table_trace, row=3, col=1)
