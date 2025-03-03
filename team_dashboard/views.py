@@ -22,29 +22,12 @@ class RedirectView(LoginRequiredMixin, TemplateView):
     template_name= 'redirect.html'
 
     def get(self, request, *args, **kwargs):
-        if request.user.groups.filter(name='coaching_staff').exists():
-            return redirect('s_landing')
         if request.user.groups.filter(name='coaches').exists():
             return redirect('coach_home')
         if request.user.groups.filter(name='athletes'):
             return redirect('athlete_home')
         else:
             return redirect('admin:index')
-        
-class StaffLanding(LoginRequiredMixin, TemplateView):
-    template_name= 'staff_landing.html'
-
-    def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-
-        if self.request.user.is_authenticated: 
-            context['username'] = self.request.user.get_username()
-            context['full_name'] = self.request.user.get_full_name()
-            context['user_group'] = str(self.request.user.groups.all()[0])
-            context['id'] = self.request.user.id 
-        
-        return context
-
 
 class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
     template_name= 'wellness_dashboard.html'
@@ -320,6 +303,7 @@ class Coach_Home(LoginRequiredMixin, ListView):
                     context['data'].append({'user': athlete, 'alert': alert, 'date':date})
                     
                 context['full_name'] = self.request.user.get_full_name()
+                context['groups'] = self.request.user.groups
         return context
 
 class WakeUpDetailView(LoginRequiredMixin, FormView):

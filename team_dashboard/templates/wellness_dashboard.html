@@ -12,12 +12,6 @@
     <div class="subcontainer header">
         <h1>Atleta: {{athlete.get_full_name}}</h1>
         <a class="nav" href="{% url 'redirect' %}">Página Principal</a>
-        <!-- <form method="POST"  action="{% url 'logout' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" style="background:none; height: 100%; border:none; cursor:pointer;">
-                <a class="nav">Logout</a>
-            </button>
-        </form> -->
     </div>
     <div class='image-filter'>
         {% if avatar_url %}

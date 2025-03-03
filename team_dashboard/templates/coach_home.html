@@ -34,6 +34,14 @@
 </table>
 
 <div class="subcontainer logout">
+    {%if 'coaching_staff' in groups:%}
+        <form method="POST"  action="{% url 'admin:index' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">
+                <a class="nav">Logout</a>
+            </button>
+        </form>
+    {%endif%}
     <form method="POST"  action="{% url 'logout' %}" style="display:inline;">
         {% csrf_token %}
         <button type="submit">
