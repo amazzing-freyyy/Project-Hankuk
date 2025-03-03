@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from team_dashboard.views import ChartView, Athlete_Home, Coach_Home, WakeUpDetailView, WakeUpFormView, PostTrainingFormView, RedirectView, Wellness_Dashboard, profile
+from team_dashboard.views import Athlete_Home, Coach_Home, WakeUpDetailView, WakeUpFormView, PostTrainingFormView, RedirectView, Wellness_Dashboard, profile, StaffLanding
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 
     path("home/", RedirectView.as_view(), name='redirect'),
+    path("staff_landing/", StaffLanding.as_view(), name="s_landing"),
     path("athlete_home/", Athlete_Home.as_view(), name='athlete_home'),
     path("coach_home/", Coach_Home.as_view(), name="coach_home"),
     path("wellness_dashboard/<str:user>", Wellness_Dashboard.as_view(), name= "wellness_dashboard"),

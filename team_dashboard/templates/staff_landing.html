@@ -1,0 +1,25 @@
+{% extends 'base_template.html' %}
+
+{% block title %}Project Hankuk{% endblock %}
+
+{% load static %}
+{% block styleSheets %}
+<link rel="stylesheet" href="{% static 'team_dashboard/css/s_landing.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class="subcontainer">
+    <button class="nav" onclick="window.location.href = '{% url 'coach_home' %}'">
+        <p class="red">Tabla de atletas</p>
+    </button>
+    <button class="nav" onclick="window.location.href = '{% url 'admin:index' %}'">
+        <p class="yellow">Página Admin</p>
+    </button>
+    <form method="POST"  class="logout" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout">
+            <p>Logout</p>
+        </button>
+    </form>
+</div>
+{% endblock %}
