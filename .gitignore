@@ -5,4 +5,5 @@ logs/*.log
 .env
 project_hankuk/__pychache__/
 team_dashboard/__pychache__/
+team_dashbaord/migrations/__pycache__/
 *.pyc
