@@ -301,9 +301,9 @@ class Coach_Home(LoginRequiredMixin, ListView):
                         alert = 'red'  
 
                     context['data'].append({'user': athlete, 'alert': alert, 'date':date})
-                    
+
                 context['full_name'] = self.request.user.get_full_name()
-                context['groups'] = self.request.user.groups
+                context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()
         return context
 
 class WakeUpDetailView(LoginRequiredMixin, FormView):
