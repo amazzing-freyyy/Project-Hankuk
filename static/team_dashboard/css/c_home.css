@@ -3,12 +3,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width:100%
-    row-gap: 10px;
+    width:100%;
 }
 
 .subcontainer.header{
     background-color: #007bff;
+}
+
+.subcontainer.logout{
+    row-gap: 10px;
 }
 
 h1{
