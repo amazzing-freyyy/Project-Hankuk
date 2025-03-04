@@ -130,6 +130,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                                    [{'type':'table'}],
                                    [{'type':'xy'}],
                                    [{'type':'xy'}]],)
+                            # row_heights=[0.2, 0.2, 0.2, 0.2, 0.2])
         fig.update_layout(
             showlegend=False,
             autosize=True,
@@ -268,88 +269,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
-    
-class Post_Dashboard(LoginRequiredMixin, TemplateView):
-    template_name= 'post_dashboard.html'
-
-    def get_chart_data(self, day=datetime.now()):
-        #get selected athlete
-        athlete_id = self.kwargs.get('user')
-        athlete = User.objects.filter(id= athlete_id).first()
-
-        #get all entries
-        row_data = Post_Training_Data.objects.filter(user=athlete, date__date= day.date()).all()
-        
-        figs=[]
-        print(row_data)
-        for row in row_data:
-            fecha= row['date']
-            actividad = row['type_of_activity']
-            duracion= row['time_of_activity']
-            esfuerzo= row['perceived_strain_of_activity']
-            dolores= row['pain']
-            comentarios= row['comentarios']
-
-            fig = make_subplots(rows=3, cols=1,
-                                subplot_titles=("Datos de Entrenamiento", "Dolores", "Comentarios"),
-                                specs=[[{'type':'table'}],
-                                    [{'type':'table'}],
-                                    [{'type':'table'}]])
-            
-            fig.update_layout(
-                showlegend=False,
-                autosize=True,
-                dragmode= 'pan',
-                hovermode='closest',
-                title_text= fecha.strftime('%Y-%m-%d\n%H:%M')
-            )
-
-            lightgrey= 'aliceblue'
-            table_trace = go.Table(
-                header=dict(values=["Variable", "Valor"]),
-                cells= dict(values=[['Entrenamiento', 'Duración', 'Esfuerzo'],
-                                    [ actividad, duracion, esfuerzo]],
-                            fill_color = [[lightgrey,lightgrey,lightgrey]],)
-            )
-            fig.add_trace(trace=table_trace, row=1, col=1)
-
-            pain_trace = go.Table(
-                cells= dict(values=[dolores])
-            )
-            fig.add_trace(trace=pain_trace, row=2, col=1)
-
-            comments_trace = go.Table(
-                cells= dict(values=[comentarios])
-            )
-            fig.add_trace(trace=comments_trace, row=3, col=1)
-
-            figs.append(fig.to_html(full_html=False))
-
-        data = {'report': figs}
-
-        data={'report': []}
-
-        return data
-
-    def get_context_data(self, **kwargs): 
-        if self.request.user.is_authenticated: 
-            context = super().get_context_data(**kwargs)
-            
-            athlete_id = self.kwargs.get('user')
-            athlete = User.objects.filter(id= athlete_id).first()
-
-            context['chart_data'] = json.dumps(self.get_chart_data())
-            context['athlete'] = athlete
-            context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
-
-        return context
-    
-    def post(self, request, *args, **kargs):
-        data = json.loads(request.body)
-        print(request)
-        day = data.get('day')
-        chart_data = self.get_chart_data(day=day)
-        return JsonResponse(chart_data)
 
 class Coach_Home(LoginRequiredMixin, ListView):
     model = Wake_Up_Data
@@ -387,67 +306,66 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()
         return context
 
+class WakeUpDetailView(LoginRequiredMixin, FormView):
+    template_name= 'wake_up_detail_template.html'
+    form_class= WakeUpForm
+    success_url= '/home/'
 
-# class WakeUpDetailView(LoginRequiredMixin, FormView):
-#     template_name= 'wake_up_detail_template.html'
-#     form_class= WakeUpForm
-#     success_url= '/home/'
+    def get_initial(self):
+        initial = super().get_initial()
+        slug = self.kwargs.get('slug')
+        data = Wake_Up_Data.objects.filter(slug=slug).first()
 
-#     def get_initial(self):
-#         initial = super().get_initial()
-#         slug = self.kwargs.get('slug')
-#         data = Wake_Up_Data.objects.filter(slug=slug).first()
+        initial['date'] = data.date
+        initial['measurement_quality'] = data.measurement_quality
+        initial['RMSSD'] = data.RMSSD
+        initial['SDNN'] = data.SDNN
+        initial['HR'] = data.HR
+        initial['emotional_wellness'] = f'{data.emotional_wellness:.1f}'
+        initial['hours_of_sleep'] = data.hours_of_sleep
+        initial['quality_of_sleep'] = f'{data.quality_of_sleep:.1f}'
+        initial['muscle_pain'] = f"{data.muscle_pain:.1f}"
+        initial['tiredness'] = f'{data.tiredness:.1f}'
+        initial['menstruation'] = data.menstruation
+        initial['injury'] = data.injury
+        initial['comments'] = data.comments
 
-#         initial['date'] = data.date
-#         initial['measurement_quality'] = data.measurement_quality
-#         initial['RMSSD'] = data.RMSSD
-#         initial['SDNN'] = data.SDNN
-#         initial['HR'] = data.HR
-#         initial['emotional_wellness'] = f'{data.emotional_wellness:.1f}'
-#         initial['hours_of_sleep'] = data.hours_of_sleep
-#         initial['quality_of_sleep'] = f'{data.quality_of_sleep:.1f}'
-#         initial['muscle_pain'] = f"{data.muscle_pain:.1f}"
-#         initial['tiredness'] = f'{data.tiredness:.1f}'
-#         initial['menstruation'] = data.menstruation
-#         initial['injury'] = data.injury
-#         initial['comments'] = data.comments
+        return initial
 
-#         return initial
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            Wake_Up_Data.objects.update_or_create(
+                slug = self.kwargs.get('slug'),
 
-#     def form_valid(self, form):
-#         if self.request.user.is_authenticated:
-#             Wake_Up_Data.objects.update_or_create(
-#                 slug = self.kwargs.get('slug'),
-
-#                 defaults={
-#                     "measurement_quality":form.cleaned_data['measurement_quality'],
-#                     "RMSSD":form.cleaned_data['RMSSD'], 
-#                     "SDNN":form.cleaned_data['SDNN'],
-#                     "HR":form.cleaned_data['HR'],
-#                     "emotional_wellness":form.cleaned_data['emotional_wellness'],
-#                     "hours_of_sleep":form.cleaned_data['hours_of_sleep'],
-#                     "quality_of_sleep":form.cleaned_data['quality_of_sleep'],
-#                     "muscle_pain":form.cleaned_data['muscle_pain'],
-#                     "tiredness":form.cleaned_data['tiredness'],
-#                     "menstruation":form.cleaned_data['menstruation'],
-#                     "injury":form.cleaned_data['injury'],
-#                     "comments":form.cleaned_data['comments']
-#                 }
-#             )
-#         return super().form_valid(form)
+                defaults={
+                    "measurement_quality":form.cleaned_data['measurement_quality'],
+                    "RMSSD":form.cleaned_data['RMSSD'], 
+                    "SDNN":form.cleaned_data['SDNN'],
+                    "HR":form.cleaned_data['HR'],
+                    "emotional_wellness":form.cleaned_data['emotional_wellness'],
+                    "hours_of_sleep":form.cleaned_data['hours_of_sleep'],
+                    "quality_of_sleep":form.cleaned_data['quality_of_sleep'],
+                    "muscle_pain":form.cleaned_data['muscle_pain'],
+                    "tiredness":form.cleaned_data['tiredness'],
+                    "menstruation":form.cleaned_data['menstruation'],
+                    "injury":form.cleaned_data['injury'],
+                    "comments":form.cleaned_data['comments']
+                }
+            )
+        return super().form_valid(form)
     
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
 
-#         if self.request.user.is_authenticated:
-#             context['username'] = self.request.user.get_username()
-#             context['full_name'] = self.request.user.get_full_name()
-#         else:
-#             context['username'] = ''
-#             context['full_name'] = ''
+        if self.request.user.is_authenticated:
+            context['username'] = self.request.user.get_username()
+            context['full_name'] = self.request.user.get_full_name()
+        else:
+            context['username'] = ''
+            context['full_name'] = ''
 
-#         return context
+        return context
         
 
 class WakeUpFormView(LoginRequiredMixin, FormView):
@@ -542,144 +460,144 @@ class Athlete_Home(LoginRequiredMixin, TemplateView):
         
         return context
 
-# class ChartView(LoginRequiredMixin, TemplateView):
-#     template_name = "RMSSD_chart.html"
+class ChartView(LoginRequiredMixin, TemplateView):
+    template_name = "RMSSD_chart.html"
 
-#     def get_chart_data(self, user=None, interval=None):
-#         if user:
-#             user = User.objects.filter(username= user).first()
-#         else:
-#             user = User.objects.filter(id= 1).first()
+    def get_chart_data(self, user=None, interval=None):
+        if user:
+            user = User.objects.filter(username= user).first()
+        else:
+            user = User.objects.filter(id= 1).first()
 
-#         interval = 30
+        interval = 30
 
-#         row_data = Wake_Up_Data.objects.annotate(
-#             lnrmssd=Ln('RMSSD'),
-#             row_num=Window(
-#                 expression=RowNumber(),
-#                 order_by=F('date').asc()
-#             )
-#         )
+        row_data = Wake_Up_Data.objects.annotate(
+            lnrmssd=Ln('RMSSD'),
+            row_num=Window(
+                expression=RowNumber(),
+                order_by=F('date').asc()
+            )
+        )
 
-#         graph_data= (
-#             row_data
-#             .filter(user=user.id)
-#             .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', )
-#             .annotate(
-#                     rolling_avgs_lnrmssd= Window(
-#                         expression=Avg('lnrmssd'),
-#                         frame=RowRange(start=-interval, end=0),
-#                         order_by=F('date').asc()
-#                     ),
-#                     rolling_stds_lnrmssd= Window(
-#                         expression=StdDev('lnrmssd'),
-#                         frame=RowRange(start=-interval, end=0),
-#                         order_by=F('date').asc()),
-#             )
-#         )
+        graph_data= (
+            row_data
+            .filter(user=user.id)
+            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', )
+            .annotate(
+                    rolling_avgs_lnrmssd= Window(
+                        expression=Avg('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()
+                    ),
+                    rolling_stds_lnrmssd= Window(
+                        expression=StdDev('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+            )
+        )
 
-#         dates= sorted(set(measurement['date'] for measurement in graph_data))
-#         lnrmssd_by_date = {date: 0 for date in dates}
-#         linfrmssd_by_date = {date: 0 for date in dates}
-#         lsuprmssd_by_date = {date: 0 for date in dates}
+        dates= sorted(set(measurement['date'] for measurement in graph_data))
+        lnrmssd_by_date = {date: 0 for date in dates}
+        linfrmssd_by_date = {date: 0 for date in dates}
+        lsuprmssd_by_date = {date: 0 for date in dates}
 
-#         for measurement in graph_data:
-#             date = measurement['date']
-#             lnrmssd = measurement['lnrmssd'] 
-#             linfrmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
-#             lsuprmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
-#             sd1= 0.7071 * measurement['RMSSD']
-#             sd2= (measurement['SDNN'] / 0.7995)+5.1174
-#             ss = 1000 / sd2
-#             s_sp = ss/sd1
+        for measurement in graph_data:
+            date = measurement['date']
+            lnrmssd = measurement['lnrmssd'] 
+            linfrmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
+            lsuprmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
+            sd1= 0.7071 * measurement['RMSSD']
+            sd2= (measurement['SDNN'] / 0.7995)+5.1174
+            ss = 1000 / sd2
+            s_sp = ss/sd1
 
 
-#             lnrmssd_by_date[date] = lnrmssd
-#             linfrmssd_by_date[date] = linfrmssd
-#             lsuprmssd_by_date[date] = lsuprmssd
+            lnrmssd_by_date[date] = lnrmssd
+            linfrmssd_by_date[date] = linfrmssd
+            lsuprmssd_by_date[date] = lsuprmssd
 
-#         lnrmssd_trace= go.Scatter(
-#             x=list(lnrmssd_by_date.keys()),
-#             y=list(lnrmssd_by_date.values()),
-#             mode='lines+markers',
-#             name='LnRMSSD'
-#         )
-#         linfrmssd_trace= go.Scatter(
-#             x=list(linfrmssd_by_date.keys()),
-#             y=list(linfrmssd_by_date.values()),
-#             mode='lines+markers',
-#             name='Límite Inferior'
-#         )
-#         lsuprmssd_trace= go.Scatter(
-#             x=list(lsuprmssd_by_date.keys()),
-#             y=list(lsuprmssd_by_date.values()),
-#             mode='lines+markers',
-#             name='Límite Superior'
-#         )
+        lnrmssd_trace= go.Scatter(
+            x=list(lnrmssd_by_date.keys()),
+            y=list(lnrmssd_by_date.values()),
+            mode='lines+markers',
+            name='LnRMSSD'
+        )
+        linfrmssd_trace= go.Scatter(
+            x=list(linfrmssd_by_date.keys()),
+            y=list(linfrmssd_by_date.values()),
+            mode='lines+markers',
+            name='Límite Inferior'
+        )
+        lsuprmssd_trace= go.Scatter(
+            x=list(lsuprmssd_by_date.keys()),
+            y=list(lsuprmssd_by_date.values()),
+            mode='lines+markers',
+            name='Límite Superior'
+        )
 
-#         lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
+        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
 
-#         xaxis_layout=dict(
-#                 type="date",
-#                 rangeselector=dict(
-#                     buttons=list([
-#                         dict(count=1,
-#                              label='1m',
-#                              step="month",
-#                              stepmode="backward"),
-#                         dict(count=6,
-#                             label="6m",
-#                             step="month",
-#                             stepmode="backward"),
-#                         dict(count=1,
-#                             label="YTD",
-#                             step="year",
-#                             stepmode="todate"),
-#                         dict(count=1,
-#                             label="1y",
-#                             step="year",
-#                             stepmode="backward"),
-#                         dict(step="all")
-#                     ])
-#                 ),
-#                 rangeslider=dict(
-#                     visible=True
-#                 )
-#             )
+        xaxis_layout=dict(
+                type="date",
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1,
+                             label='1m',
+                             step="month",
+                             stepmode="backward"),
+                        dict(count=6,
+                            label="6m",
+                            step="month",
+                            stepmode="backward"),
+                        dict(count=1,
+                            label="YTD",
+                            step="year",
+                            stepmode="todate"),
+                        dict(count=1,
+                            label="1y",
+                            step="year",
+                            stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+                rangeslider=dict(
+                    visible=True
+                )
+            )
 
-#         fig = make_subplots(rows=1, cols=2, subplot_titles=("Scatter Plot", "Another Plot"))
-#         for trace in lnrmssd_traces:
-#             fig.add_trace(trace, row=1, col=1)
-#             fig.add_trace(trace, row=1, col=2)
+        fig = make_subplots(rows=1, cols=2, subplot_titles=("Scatter Plot", "Another Plot"))
+        for trace in lnrmssd_traces:
+            fig.add_trace(trace, row=1, col=1)
+            fig.add_trace(trace, row=1, col=2)
 
-#         fig.update_layout(
-#             xaxis=xaxis_layout,
-#             xaxis2=xaxis_layout,
-#             xaxis_title="Fecha",
-#             yaxis_title='LnRMSSD',
-#             xaxis2_title="Fecha",
-#             yaxis2_title='LnRMSSD',
-#             title_text="example"
-#         )
+        fig.update_layout(
+            xaxis=xaxis_layout,
+            xaxis2=xaxis_layout,
+            xaxis_title="Fecha",
+            yaxis_title='LnRMSSD',
+            xaxis2_title="Fecha",
+            yaxis2_title='LnRMSSD',
+            title_text="example"
+        )
 
-#         fig.update_layout(title_text="example")
+        fig.update_layout(title_text="example")
 
-#         data = {'rmssd': json.loads(fig.to_json()),
-#         }
+        data = {'rmssd': json.loads(fig.to_json()),
+        }
 
-#         return data
+        return data
     
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['chart_data'] = json.dumps(self.get_chart_data())
-#         context['athletes'] = Group.objects.get(name='athletes').user_set.all()
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chart_data'] = json.dumps(self.get_chart_data())
+        context['athletes'] = Group.objects.get(name='athletes').user_set.all()
+        return context
     
-#     def post(self, request, *args, **kargs):
-#         data = json.loads(request.body)
-#         user = data.get('user')
-#         chart_data = self.get_chart_data(user=user)
-#         return JsonResponse(chart_data)
+    def post(self, request, *args, **kargs):
+        data = json.loads(request.body)
+        user = data.get('user')
+        chart_data = self.get_chart_data(user=user)
+        return JsonResponse(chart_data)
 
 
 #class AvatarUpdateView(UpdateView):

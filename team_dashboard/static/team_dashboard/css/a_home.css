@@ -12,11 +12,16 @@
 .nav{
     margin:0;
     border-radius: 0;
-    height: 21vh;
+    height: 29vh;
     width: 100%;
     padding:0;
+/*    transition: height 5s cubic-bezier(0, 0, 0.82, 1.02); */
 }
-
+/*
+.nav:active{
+    height: 1000vh;
+}
+*/
 .logout button{
     height: 100%;
     width: 100%;

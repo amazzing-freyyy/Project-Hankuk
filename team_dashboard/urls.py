@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from team_dashboard.views import Athlete_Home, Coach_Home,  WakeUpFormView, PostTrainingFormView, RedirectView, Wellness_Dashboard, profile, Post_Dashboard
+from team_dashboard.views import Athlete_Home, Coach_Home, WakeUpDetailView, WakeUpFormView, PostTrainingFormView, RedirectView, Wellness_Dashboard, profile
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
@@ -10,8 +10,7 @@ urlpatterns = [
     path("athlete_home/", Athlete_Home.as_view(), name='athlete_home'),
     path("coach_home/", Coach_Home.as_view(), name="coach_home"),
     path("wellness_dashboard/<str:user>", Wellness_Dashboard.as_view(), name= "wellness_dashboard"),
-    path("post_dashboard/<str:user>", Post_Dashboard.as_view(), name= "post_dashboard"),
-    # path("wake_up_data/<slug:slug>/", WakeUpDetailView.as_view(), name= "wake_up_detail"),
+    path("wake_up_data/<slug:slug>/", WakeUpDetailView.as_view(), name= "wake_up_detail"),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
     path('wake_up_survey/', WakeUpFormView.as_view(), name='wake_up_form'),
