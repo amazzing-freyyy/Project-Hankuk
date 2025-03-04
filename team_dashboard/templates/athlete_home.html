@@ -16,7 +16,10 @@
             <p class="yellow">Encuesta Post-entreno</p>
         </button>
         <button class="nav" onclick="window.location.href = '{% url 'wellness_dashboard' user=id %}'">
-            <p class="green">Panel de datos</p>
+            <p class="green">Panel de Wellness</p>
+        </button>
+        <button class="nav" onclick="window.location.href = '{% url 'post_dashboard' user=id %}'">
+            <p class="green">Panel de Post</p>
         </button>
         <form method="POST"  class="logout" action="{% url 'logout' %}" style="display:inline;">
             {% csrf_token %}
