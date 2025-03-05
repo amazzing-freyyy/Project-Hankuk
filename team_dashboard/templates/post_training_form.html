@@ -13,20 +13,19 @@
 {% block main_content %}
 <div class="parent">
     <a href="{% url 'redirect' %}" class="nav">Página Principal</a>
-    {%if form.errors%}
-    <--    <div class="errors">
-            <ul class="error-list">
-                {% for field, errors in form.errors.items %}
-                <li>{{ errors|join:", " }}</li>
-                {% endfor %}
+
+    {%if form_errors%}
+        <div id="errores">
+            <h3>Errores</h3>
+            <ul>
+                {%for field, error in form_errors.items%}
+                    <li>{{ error|join:", " }}</li>
+                {%endfor%}
             </ul>
-        </div> -->
-        <ul class="errors">
-            {% for field, errors in form.errors.items %}
-            <li>{{field}}: {{errors}}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+            <button class="error" onclick="closePopUp()">Cerrar</button>
+        </div>
+    {%endif%}
+
     <div class="body-encuestas">
         <button id="back" class="arrow" onclick="prevParent()">&lt;</button>
         <form method="post" class="subcontainer">
@@ -63,13 +62,25 @@
                 {{ form.comments }}
             </div>
         
-            <button id="submit" type="submit" class="encuesta">Someter</button>
+            <button id="submit" type="submit" class="encuesta">Enviar</button>
         </form>
         <button id="next" class="arrow" onclick="nextParent()">&gt;</button>
     </div>
 </div>
 
-<script src="{% static 'team_dashboard/js/navform.js' %}">
+<script src="{% static 'team_dashboard/js/navform.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
+        let err = '{{form_errors.items}}'
+        if (err.length > 0){
+            document.getElementById("errores").style.display = "block";
+        }
+    });
+    
+
+    function closePopUp(){
+        document.getElementById("errores").style.display = "none";
+    };
 </script>
 {% endblock %}
 
