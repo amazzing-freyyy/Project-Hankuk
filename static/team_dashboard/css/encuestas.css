@@ -42,7 +42,7 @@ a.nav{
     flex-direction: column;
     padding-bottom: 5px;
     position: absolute;
-    left: 33%;
+    left: 5%;
     top: 10%;
     z-index: 2;
     background: yellow;
