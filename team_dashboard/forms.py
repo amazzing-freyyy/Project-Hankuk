@@ -22,7 +22,7 @@ class WakeUpForm(forms.Form):
         ('5', '5')
     ]
 
-    date= forms.DateField(widget=DateBtn(), error_messages={'required':'Hace falta la fecha'} ,)
+    date= forms.DateField(widget=DateBtn(), error_messages={'invalid':'La fecha está mal escrita.(es más fácil usar el botón)','required':'Hace falta la fecha'} ,)
     measurement_quality= forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-select'}), choices=MEASUREMENT_QUALITY, required=False)
     RMSSD= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de RMSSD inválido. (Usa punto, no coma.)'}, required=False)
     SDNN= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de SDNN inválido. (Usa punto, no coma)'}, required=False)
