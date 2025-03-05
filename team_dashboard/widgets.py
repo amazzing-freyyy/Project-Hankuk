@@ -94,7 +94,7 @@ class TimeSplit(MultiWidget):
             'name': name,
             'attrs': self.build_attrs(attrs),
         }
-        print(attrs)
+
         return render_to_string(self.template_name, context)
 
 class TrainingType(MultiWidget):
