@@ -336,6 +336,14 @@ class WakeUpFormView(LoginRequiredMixin, FormView):
             )
         return super().form_valid(form) 
     
+    def form_invalid(self, form):
+        # Call the parent class's method to maintain the normal behavior
+        response = super().form_invalid(form)
+        
+        # You can add any other context data you want here if needed
+        response.context_data['form_errors'] = form.errors
+        return response
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -371,6 +379,14 @@ class PostTrainingFormView(LoginRequiredMixin, FormView):
             )
 
         return super().form_valid(form)
+        
+    def form_invalid(self, form):
+        # Call the parent class's method to maintain the normal behavior
+        response = super().form_invalid(form)
+        print(form.errors)
+        # You can add any other context data you want here if needed
+        response.context_data['form_errors'] = form.errors
+        return response
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -383,6 +399,7 @@ class PostTrainingFormView(LoginRequiredMixin, FormView):
             context['full_name'] = ''
 
         return context
+
     
 class Athlete_Home(LoginRequiredMixin, TemplateView):
     template_name= 'athlete_home.html'

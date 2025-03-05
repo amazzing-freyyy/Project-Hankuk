@@ -14,13 +14,19 @@
 {% load static %}
 <div class="parent">
     <a href="{% url 'redirect' %}" class="nav">Página Principal</a>
-    {%if form.errors%}
-        <ul class="errors">
-            {% for field, errors in form.errors.items %}
-            <li>{{ errors|join:", " }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    
+    {%if form_errors%}
+        <div id="errores">
+            <h3>Errores</h3>
+            <ul>
+                {%for field, error in form_errors.items%}
+                    <li>{{ error|join:", " }}</li>
+                {%endfor%}
+            </ul>
+            <button class="error" onclick="closePopUp()">Cerrar</button>
+        </div>
+    {%endif%}
+
     <div class="body-encuestas">
         <button id="back" class="arrow disabled"  onclick="prevParent()">&lt;</button>
         <form method="post" class="subcontainer">
@@ -54,7 +60,6 @@
             <div class="form-group image">
                 <div class="minicontainer">
                     <label for="id_emotional_wellness">Estado de ánimo (1-5): </label>
-                    {{ form.emotional_wellness.errors }}
                 </div>
                 {{ form.emotional_wellness }}
             </div>
@@ -62,7 +67,6 @@
             <div class="form-group image">
                 <div class="minicontainer">
                     <label for="id_chispa">¿Cuanta chispa tienes? </label>
-                    {{ form.chispa.errors }}
                 </div>
                 {{ form.chispa }}
             </div>
@@ -75,7 +79,6 @@
             <div class="form-group image">
                 <div class="minicontainer">
                     <label for="id_quality_of_sleep">Calidad de sueño: </label>
-                    {{ form.quality_of_sleep.errors }}
                 </div>
                 {{ form.quality_of_sleep }}
 
@@ -91,7 +94,6 @@
             <div class="form-group image">
                 <div class="minicontainer">
                     <label for="id_tiredness">Recuperación: </label>
-                    {{ form.tiredness.errors }}
                 </div>
                 {{ form.tiredness }}
             </div>
@@ -111,18 +113,24 @@
                 {{ form.comments }}
             </div>
 
-            <button id="submit" type="submit" class="encuesta">Someter</button>
+            <button id="submit" type="submit" class="encuesta">Enviar</button>
         </form>
         <button id="next" class="arrow"  onclick="nextParent()">&gt;</button>
     </div>
 </div>
-<script src="{% static 'team_dashboard/js/navform.js' %}">
-document.getElementById("_0").addEventListener("input", function() {
-    console.log("Current value:", this.value);
-});
-document.getElementById("_1").addEventListener("input", function() {
-    console.log("Current value:", this.value);
-});
+<script src="{% static 'team_dashboard/js/navform.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
+        let err = '{{form_errors.items}}'
+        if (err.length > 0){
+            document.getElementById("errores").style.display = "block";
+        }
+    });
+    
+
+    function closePopUp(){
+        document.getElementById("errores").style.display = "none";
+    };
 </script>
 {% endblock %}
 
