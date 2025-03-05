@@ -24,9 +24,9 @@ class WakeUpForm(forms.Form):
 
     date= forms.DateField(widget=DateBtn(), error_messages={'invalid':'La fecha está mal escrita.(es más fácil usar el botón)','required':'Hace falta la fecha'} ,)
     measurement_quality= forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-select'}), choices=MEASUREMENT_QUALITY, required=False)
-    RMSSD= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de RMSSD inválido. (Usa punto, no coma.)'}, required=False)
-    SDNN= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de SDNN inválido. (Usa punto, no coma)'}, required=False)
-    HR= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de HR inválido'}, required=False)
+    RMSSD= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de RMSSD inválido. (Usa punto, no coma.)'}, required=False)
+    SDNN= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de SDNN inválido. (Usa punto, no coma)'}, required=False)
+    HR= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de HR inválido'}, required=False)
     emotional_wellness= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=5, tags=['Motivado', 'Normal', 'Desmotivado']), error_messages={'required':'Hace falta el ánimo','invalid':'Valor de ánimo inválido'} ,)
     chispa= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=5, tags=['Mucha', 'Moderada', 'Nada']), error_messages={'required':'Hace falta la chispa','invalid':'Valor de chispa inválido'})
     hours_of_sleep= TimeMultiField(error_messages={'required':'Hace falta un valor en las horas de sueño', 'invalid':'Las horas de sueño están mal escritas.(solo números)'})
@@ -40,7 +40,7 @@ class WakeUpForm(forms.Form):
 class PostTrainingForm(forms.Form):
     date= DateTimeField(error_messages={'required':'Hace falta la fecha', 'invalid':'La fecha está mal escrita. (es más fácil usar los botones)'})
     type_of_activity= TrainingField(required=False, error_messages={'required':'Hace falta el tipo de actividad'} )
-    time_of_activity= forms.DecimalField(widget=forms.TextInput(attrs={'class': 'form-control'}), error_messages={'invalid':'Valor de tiempo inválido.(solo números)','required':'Hace falta la tiempo de la actividad'})
+    time_of_activity= forms.DecimalField(widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de tiempo inválido.(solo números)','required':'Hace falta la tiempo de la actividad'})
     perceived_strain_of_activity= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=10, tags=['Max. Esfuerzo', 'Moderado', 'Leve']), error_messages={'invalid':'Valor de esfuerzo inválido.','required':'Hace falta el valor de esfuerzo'}, required=True)
     pain= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
     comments= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
