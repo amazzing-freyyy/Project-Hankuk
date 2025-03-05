@@ -6,7 +6,7 @@ class TimeMultiField(forms.MultiValueField):
     widget= TimeSplit
 
     def __init__(self, *args, **kwargs):
-        fields = [forms.IntegerField(min_value=0, attrs={'inputmode':'numeric'}), forms.IntegerField(min_value=0, max_value=59, attrs={'inputmode':'numeric'})]
+        fields = [forms.IntegerField(min_value=0), forms.IntegerField(min_value=0, max_value=59)]
         super().__init__(fields, *args, **kwargs)
 
     def compress(self, values):

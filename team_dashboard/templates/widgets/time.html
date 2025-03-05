@@ -9,13 +9,17 @@
             class="horas"
             id="{{ widget.attrs.id }}_0" 
             placeholder=0
-            min="0" max="23" />
+            min="0"
+            inputmode="numeric"
+             />
         :
         <input type="number" 
             name="{{ name }}_1" 
             class="minutos"
             id="{{ widget.attrs.id }}_1"
             placeholder=0
-            min="0" max="59" />
+            min="0" max="59"
+            inputmode="numeric"
+             />
     </div>
 </div>
