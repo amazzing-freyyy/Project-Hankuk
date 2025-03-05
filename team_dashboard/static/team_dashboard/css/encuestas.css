@@ -37,7 +37,17 @@ a.nav{
 } */
 
 #errores{
-    display: block;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 5px;
+    position: absolute;
+    left: 33%;
+    top: 10%;
+    z-index: 2;
+    background: yellow;
+    border-radius: 10px;
+    padding-right: 40px;
 }
 
 .body-encuestas{
