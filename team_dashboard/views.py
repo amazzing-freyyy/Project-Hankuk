@@ -325,6 +325,7 @@ class WakeUpFormView(LoginRequiredMixin, FormView):
                     "SDNN":form.cleaned_data['SDNN'],
                     "HR":form.cleaned_data['HR'],
                     "emotional_wellness":form.cleaned_data['emotional_wellness'],
+                    'chispa': form.cleaned_data['chispa'],
                     "hours_of_sleep":form.cleaned_data['hours_of_sleep'],
                     "quality_of_sleep":form.cleaned_data['quality_of_sleep'],
                     "muscle_pain":form.cleaned_data['muscle_pain'],
