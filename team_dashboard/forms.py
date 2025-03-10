@@ -47,11 +47,11 @@ class PostTrainingForm(forms.Form):
     comments= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
 
 class RememberMeForm(AuthenticationForm):
-    remember_me= forms.BooleanField(required=False, initial=True)
+    recuerda_mi_usuario= forms.BooleanField(required=False, initial=True)
 
     def confirm_login_allowed(self,user):
         super().confirm_login_allowed(user)
-        if self.cleaned_data("remember_me"):
+        if self.cleaned_data("recuerda_mi_usuario"):
             self.request.session.set_expiry(60 * 60 * 24 * 30)
         else:
             self.request.session.set_expiry(0)
