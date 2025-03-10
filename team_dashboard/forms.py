@@ -1,5 +1,6 @@
 from django import forms
-from team_dashboard.widgets import StarRating, DateTimeSplit, DateBtn, TimeSplit
+from django.contrib.auth.forms import AuthenticationForm
+from team_dashboard.widgets import StarRating, DateBtn
 from .models import Profile
 from .fields import TimeMultiField, DateTimeField, TrainingField, LocalDecField
 
@@ -44,6 +45,16 @@ class PostTrainingForm(forms.Form):
     perceived_strain_of_activity= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=10, tags=['Max. Esfuerzo', 'Moderado', 'Leve']), error_messages={'invalid':'Valor de esfuerzo inválido.','required':'Hace falta el valor de esfuerzo'}, required=True)
     pain= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
     comments= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
+
+class RememberMeForm(AuthenticationForm):
+    remember_me= forms.BooleanField(required=False, initial=True)
+
+    def confirm_login_allowed(self,user):
+        super().confirm_login_allowed(user)
+        if self.cleaned_data("remember_me"):
+            self.request.session.set_expiry(60 * 60 * 24 * 30)
+        else:
+            self.request.session.set_expiry(0)
 
 
 class AvatarUploadForm(forms.ModelForm):

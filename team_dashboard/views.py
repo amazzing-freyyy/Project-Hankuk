@@ -400,8 +400,7 @@ class PostTrainingFormView(LoginRequiredMixin, FormView):
             context['full_name'] = ''
 
         return context
-
-    
+   
 class Athlete_Home(LoginRequiredMixin, TemplateView):
     template_name= 'athlete_home.html'
     

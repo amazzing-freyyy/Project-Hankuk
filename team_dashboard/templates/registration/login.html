@@ -15,6 +15,10 @@
         <form method="post" class="login">
             {% csrf_token %}
             {{ form.as_p }}
+            <label for="id_remember_me">
+                <input type="checkbox" name="remember_me" id="id_remember_me" checked>
+                Acuérdame
+            </label>
             <button type="submit">Login</button>
         </form>
     </div>
