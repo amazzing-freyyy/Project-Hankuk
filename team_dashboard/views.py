@@ -418,7 +418,7 @@ class Athlete_Home(LoginRequiredMixin, TemplateView):
 
 class Login(LoginView):
     def get(self, request, *args, **kwargs):
-        if request.user.is_authencitcated:
+        if request.user.is_authenticated:
             return redirect('home')
         return super().get(request,*args, **kwargs)
 
