@@ -51,7 +51,7 @@ class RememberMeForm(AuthenticationForm):
 
     def confirm_login_allowed(self,user):
         super().confirm_login_allowed(user)
-        if self.cleaned_data("recuerda_mi_usuario"):
+        if self.cleaned_data["recuerda_mi_usuario"]:
             self.request.session.set_expiry(60 * 60 * 24 * 30)
         else:
             self.request.session.set_expiry(0)
