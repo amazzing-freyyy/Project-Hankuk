@@ -1,7 +1,7 @@
 from .forms import RememberMeForm
 from django.urls import path
 from team_dashboard.views import Athlete_Home, Coach_Home, WakeUpFormView, PostTrainingFormView, RedirectView, Wellness_Dashboard, profile, Login
-from django.contrib.auth import views as auth_views
+# from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [

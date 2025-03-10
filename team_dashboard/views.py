@@ -11,6 +11,7 @@ import plotly.graph_objs as go
 from django.db.models import Avg, F, Window, StdDev, RowRange
 from django.db.models.functions import Ln, RowNumber
 from django.shortcuts import redirect
+from django.contrib.auth.views import LoginView
 from datetime import datetime
 import json
 from plotly.subplots import make_subplots
