@@ -6,12 +6,14 @@ class TimeMultiField(forms.MultiValueField):
     widget= TimeSplit
 
     def __init__(self, *args, **kwargs):
-        fields = [forms.IntegerField(min_value=0), forms.IntegerField(min_value=0, max_value=59)]
+        fields = [forms.IntegerField(min_value=0, required=False), forms.IntegerField(min_value=0, max_value=59, required=False)]
         super().__init__(fields, *args, **kwargs)
 
     def compress(self, values):
         if values:
-            hours, minutes = values
+            hours = values[0] if values[0] is not None  else 0
+            minutes = values[1] if values[1]is not None  else 0
+
             return float(hours) + float(minutes)/60
         else:
             return 0
@@ -41,3 +43,9 @@ class TrainingField(forms.MultiValueField):
             return f'{values[0]}, {values[1]}, {values[2]}'
         else:
             return f' , , '
+
+class LocalDecField(forms.DecimalField):
+    def clean(self, value):
+        if isinstance(value, str):
+            value = value.replace(',', '.')  # Convert comma to dot
+        return super().clean(value)

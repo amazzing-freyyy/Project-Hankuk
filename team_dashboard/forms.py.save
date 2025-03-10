@@ -1,7 +1,7 @@
-from django import forms
+  from django import forms
 from team_dashboard.widgets import StarRating, DateTimeSplit, DateBtn, TimeSplit
 from .models import Profile
-from .fields import TimeMultiField, DateTimeField, TrainingField, LocalDecField
+from .fields import TimeMultiField, DateTimeField, TrainingField
 
 class WakeUpForm(forms.Form):
     YES_OR_NO=[
@@ -24,8 +24,8 @@ class WakeUpForm(forms.Form):
 
     date= forms.DateField(widget=DateBtn(), error_messages={'invalid':'La fecha está mal escrita.(es más fácil usar el botón)','required':'Hace falta la fecha'} ,)
     measurement_quality= forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-select'}), choices=MEASUREMENT_QUALITY, required=False)
-    RMSSD= LocalDecField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'decimal','localize':True}), error_messages={'invalid':'Valor de RMSSD inválido. (Usa punto, no coma.)'}, required=False)
-    SDNN= LocalDecField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'decimal','localize':True}), error_messages={'invalid':'Valor de SDNN inválido. (Usa punto, no coma)'}, required=False)
+    RMSSD= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'ic'}), error_messages={'invalid':'Valor de RMSSD inválido. (Usa punto, no coma.)'}, required=False)
+    SDNN= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de SDNN inválido. (Usa punto, no coma)'}, required=False)
     HR= forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de HR inválido'}, required=False)
     emotional_wellness= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=5, tags=['Motivado', 'Normal', 'Desmotivado']), error_messages={'required':'Hace falta el ánimo','invalid':'Valor de ánimo inválido'} ,)
     chispa= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=5, tags=['Mucha', 'Moderada', 'Nada']), error_messages={'required':'Hace falta la chispa','invalid':'Valor de chispa inválido'})
