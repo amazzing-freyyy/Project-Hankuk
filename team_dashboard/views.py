@@ -415,6 +415,11 @@ class Athlete_Home(LoginRequiredMixin, TemplateView):
         
         return context
 
+class Login(LoginView):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authencitcated:
+            return redirect('home')
+        return super().get(request,*args, **kwargs)
 
 #class AvatarUpdateView(UpdateView):
 #    model = Profile
