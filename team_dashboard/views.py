@@ -93,10 +93,10 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             else:
                 return "&#128310;"
 
-        def indicator(value, medium):
-            if value > medium*1.15:
+        def indicator(value, red=2, blue=4):
+            if value >= blue:
                 return "&#128309;"
-            elif value < medium*.85:
+            elif value <= red:
                 return "&#128308;"
             else:
                 return "&#128310;"
@@ -131,7 +131,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                                    [{'type':'table'}],
                                    [{'type':'xy'}],
                                    [{'type':'xy'}]],)
-                            # row_heights=[0.2, 0.2, 0.2, 0.2, 0.2])
         fig.update_layout(
             showlegend=False,
             autosize=True,
@@ -232,7 +231,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             header=dict(values=["Variable", "Valor", "Indicador"]),
             cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'chispa', 'dolor', 'suma'],
                                 [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, sum],
-                                [indicator(q_sleep, 5/2), indicator(emo_wellness, 5/2), indicator(tiredness, 5/2), indicator(chispa, 5/2), indicator(muscle_pain, -5/2), indicator(sum, 15-((15+5)/2))]],
+                                [indicator(q_sleep), indicator(emo_wellness), indicator(tiredness), indicator(chispa), indicator(muscle_pain+5), indicator(sum, red=9, blue=15)]],
                         fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, lightgrey,white]],)
         )
         fig.add_trace(trace=table_trace, row=2, col=1)
