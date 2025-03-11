@@ -56,7 +56,6 @@ class RememberMeForm(AuthenticationForm):
         else:
             self.request.session.set_expiry(0)
 
-
 class AvatarUploadForm(forms.ModelForm):
     class Meta:
         model = Profile

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.db.models import Avg
 from PIL import Image
 
 class Profile(models.Model):
@@ -65,8 +66,15 @@ class Wake_Up_Data(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.user.get_username() + str(self.date))
-        super().save(*args, **kwargs)
+        
+        fields_to_check = ['RMSSD', 'SDNN', 'HR']  # List of fields to check
 
+        for field in fields_to_check:
+            if getattr(self, field) is None:  # Check if field is empty
+                mean_value = Wake_Up_Data.objects.filter(user=self.user).aggregate(Avg(field))[f'{field}__avg']
+                setattr(self, field, mean_value if mean_value is not None else 0)  # Set mean or fallback
+
+        super().save(*args, **kwargs)
 
     class Meta:
         constraints = [
@@ -86,4 +94,12 @@ class Post_Training_Data(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.user.get_username() + str(self.date))
+
+        fields_to_check = ['time_of_activity', 'perceived_strain_of_activity']  # List of fields to check
+
+        for field in fields_to_check:
+            if getattr(self, field) is None:  # Check if field is empty
+                mean_value = Post_Training_Data.objects.filter(user=self.user).aggregate(Avg(field))[f'{field}__avg']
+                setattr(self, field, mean_value if mean_value is not None else 0)  # Set mean or fallback
+
         super().save(*args, **kwargs)
