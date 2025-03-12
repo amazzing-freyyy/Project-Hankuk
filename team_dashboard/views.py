@@ -300,7 +300,7 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 
                 date = query.date
                 animo= query.emotional_wellness if query.emotional_wellness else 0
-                dolor= -query.muscle_pain if query.muscle_pain else 0
+                dolor= query.muscle_pain-5 if query.muscle_pain else 0
                 chispa= query.chispa if query.chispa else 0
                 recuperacion= query.tiredness if query.tiredness else 0
                 calidad_s= query.quality_of_sleep if query.quality_of_sleep else 0
