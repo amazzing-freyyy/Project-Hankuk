@@ -307,13 +307,19 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 suma= animo + dolor + chispa + recuperacion + calidad_s
                 
                 if suma > 14:
-                    alert = 'green'
+                    if dolor > -3:
+                        alert = 'green'
+                    elif dolor < -3:
+                        alert = 'red'
+                    else:
+                        alert = 'yellow'
                 elif suma < 10:
                     alert = 'red'
                 else:
-                    alert = 'yellow'
-
-                
+                    if dolor < -3:
+                        alert= 'red'
+                    else:
+                        alert = 'yellow'
 
                 # if len(query) ==3:
                 #     wellness_values = [entry.emotional_wellness for entry in query]
