@@ -165,7 +165,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             x=list(hr_by_date.keys()),
             y=list(hr_by_date.values()),
             name= 'HR',
-            yaxis='y2'
+            yaxis='y2',
+            marker=dict(color='#5c2d02')
         )
 
         xaxis_layout=dict(
