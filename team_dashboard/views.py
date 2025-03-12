@@ -296,23 +296,39 @@ class Coach_Home(LoginRequiredMixin, ListView):
             context['data'] = []
             #last three entries
             for athlete in athletes:
-                query = Wake_Up_Data.objects.filter(user=athlete).order_by("-date")[:3]
-                if len(query) ==3:
-                    wellness_values = [entry.emotional_wellness for entry in query]
-                    date = query[0].date
-                    consecutives = 0
-                    for i in wellness_values:
-                        if i <= 2.0:
-                            consecutives = consecutives + 1
+                query = Wake_Up_Data.objects.filter(user=athlete).order_by("-date").first()
+                
+                date = query.date
+                animo= query.emotional_wellness if query.emotional_wellness else 0
+                dolor= -query.muscle_pain if query.muscle_pain else 0
+                chispa= query.chispa if query.chispa else 0
+                recuperacion= query.tiredness if query.tiredness else 0
+                calidad_s= query.quality_of_sleep if query.quality_of_sleep else 0
+                suma= animo + dolor + chispa + recuperacion + calidad_s
+                
+                if suma > 14:
+                    alert = 'green'
+                elif suma < 10:
+                    alert = 'red'
+                else:
+                    alert = 'yellow'
 
-                    if consecutives < 2:
-                        alert = 'green'
-                    elif consecutives == 2:
-                        alert = 'yellow'
-                    else:
-                        alert = 'red'  
+                # if len(query) ==3:
+                #     wellness_values = [entry.emotional_wellness for entry in query]
+                #     date = query[0].date
+                #     consecutives = 0
+                #     for i in wellness_values:
+                #         if i <= 2.0:
+                #             consecutives = consecutives + 1
 
-                    context['data'].append({'user': athlete, 'alert': alert, 'date':date})
+                #     if consecutives < 2:
+                #         alert = 'green'
+                #     elif consecutives == 2:
+                #         alert = 'yellow'
+                #     else:
+                #         alert = 'red'  
+
+                context['data'].append({'user': athlete, 'alert': alert, 'date':date})
 
                 context['full_name'] = self.request.user.get_full_name()
                 context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()
