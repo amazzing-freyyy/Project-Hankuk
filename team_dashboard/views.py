@@ -313,6 +313,8 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 else:
                     alert = 'yellow'
 
+                
+
                 # if len(query) ==3:
                 #     wellness_values = [entry.emotional_wellness for entry in query]
                 #     date = query[0].date
