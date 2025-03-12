@@ -39,7 +39,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         athlete = User.objects.filter(id= athlete_id).first()
 
         #get all entries
-        row_data = Wake_Up_Data.objects.filter(user=athlete).annotate(
+        row_data = Wake_Up_Data.objects.filter(user=athlete).all().annotate(
             lnrmssd=Ln('RMSSD'),
             row_num=Window(
                 expression=RowNumber(),
