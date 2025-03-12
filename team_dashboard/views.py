@@ -82,7 +82,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         tiredness = graph_data[0]['tiredness'] if graph_data[0]['tiredness'] else 0
         muscle_pain= 5 - graph_data[0]['muscle_pain'] if graph_data[0]['muscle_pain'] else 0
         chispa= graph_data[0]['chispa'] if graph_data[0]['chispa'] else 0
-        sum= emo_wellness + q_sleep + tiredness - muscle_pain + chispa
+        suma= emo_wellness + q_sleep + tiredness - muscle_pain + chispa
         comments= graph_data[0]['comments']
         menstruation= graph_data[0]['menstruation']
         
@@ -125,6 +125,10 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             s_sp_by_date[date] = s_sp
             hr_by_date[date] = measurement['HR']
 
+        
+        hr_media= sum(list(hr_by_date.values())) / len(list(hr_by_date.values()))
+        hr_colors= ['red' if hr > hr_media else 'green' for hr in list(hr_by_date.values())]
+
         fig = make_subplots(rows=6, cols=1,
                             subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","LnRMSSD", "Stress Score"),
                             specs=[[{'type':'polar'}],
@@ -145,28 +149,31 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             y=list(lnrmssd_by_date.values()),
             mode='lines+markers',
             name='LnRMSSD',
-            yaxis='y1'
+            yaxis='y1',
+            marker=dict(color='blue')
         )
         linfrmssd_trace= go.Scatter(
             x=list(linfrmssd_by_date.keys()),
             y=list(linfrmssd_by_date.values()),
             mode='lines+markers',
             name='Límite Inferior',
-            yaxis='y1'
+            yaxis='y1',
+            marker=dict(color='purple')
         )
         lsuprmssd_trace= go.Scatter(
             x=list(lsuprmssd_by_date.keys()),
             y=list(lsuprmssd_by_date.values()),
             mode='lines+markers',
             name='Límite Superior',
-            yaxis='y1'
+            yaxis='y1',
+            marker=dict(color='purple')
         )
         hr_trace= go.Bar(
             x=list(hr_by_date.keys()),
             y=list(hr_by_date.values()),
             name= 'HR',
             yaxis='y2',
-            marker=dict(color='#5c2d02')
+            marker=dict(color=hr_colors)
         )
 
         xaxis_layout=dict(
@@ -242,8 +249,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         table_trace = go.Table(
             header=dict(values=["Variable", "Valor", "Indicador"]),
             cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'chispa', 'dolor', 'suma'],
-                                [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, sum],
-                                [indicator(q_sleep), indicator(emo_wellness), indicator(tiredness), indicator(chispa), indicator(muscle_pain+5), indicator(sum, red=9, blue=15)]],
+                                [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, suma],
+                                [indicator(q_sleep), indicator(emo_wellness), indicator(tiredness), indicator(chispa), indicator(muscle_pain+5), indicator(suma, red=9, blue=15)]],
                         fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, lightgrey,white]],)
         )
         fig.add_trace(trace=table_trace, row=2, col=1)
@@ -320,21 +327,6 @@ class Coach_Home(LoginRequiredMixin, ListView):
                         alert= 'red'
                     else:
                         alert = 'yellow'
-
-                # if len(query) ==3:
-                #     wellness_values = [entry.emotional_wellness for entry in query]
-                #     date = query[0].date
-                #     consecutives = 0
-                #     for i in wellness_values:
-                #         if i <= 2.0:
-                #             consecutives = consecutives + 1
-
-                #     if consecutives < 2:
-                #         alert = 'green'
-                #     elif consecutives == 2:
-                #         alert = 'yellow'
-                #     else:
-                #         alert = 'red'  
 
                 context['data'].append({'user': athlete, 'alert': alert, 'date':date})
 
