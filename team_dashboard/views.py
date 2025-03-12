@@ -52,7 +52,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         interval = 30
         graph_data= (
             row_data
-            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa')
+            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'HR','hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa')
             .annotate(
                     rolling_avgs_lnrmssd= Window(
                         expression=Avg('lnrmssd'),
@@ -75,6 +75,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         lnrmssd_by_date = {date: 0 for date in dates}
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
+        hr_by_date = {date: 0 for date in dates}
         hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
         emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
         q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
@@ -122,6 +123,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             linfrmssd_by_date[date] = linfrmssd
             lsuprmssd_by_date[date] = lsuprmssd
             s_sp_by_date[date] = s_sp
+            hr_by_date[date] = measurement['HR']
 
         fig = make_subplots(rows=6, cols=1,
                             subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","LnRMSSD", "Stress Score"),
@@ -129,8 +131,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                                    [{'type':'table'}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],
-                                   [{'type':'xy'}],
-                                   [{'type':'xy'}]],)
+                                   [{'type':'xy', 'secondary_y': True}],
+                                   [{'type':'xy', 'secondary_y':False}]],)
         fig.update_layout(
             showlegend=False,
             autosize=True,
@@ -142,19 +144,28 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             x=list(lnrmssd_by_date.keys()),
             y=list(lnrmssd_by_date.values()),
             mode='lines+markers',
-            name='LnRMSSD'
+            name='LnRMSSD',
+            yaxis='y1'
         )
         linfrmssd_trace= go.Scatter(
             x=list(linfrmssd_by_date.keys()),
             y=list(linfrmssd_by_date.values()),
             mode='lines+markers',
-            name='Límite Inferior'
+            name='Límite Inferior',
+            yaxis='y1'
         )
         lsuprmssd_trace= go.Scatter(
             x=list(lsuprmssd_by_date.keys()),
             y=list(lsuprmssd_by_date.values()),
             mode='lines+markers',
-            name='Límite Superior'
+            name='Límite Superior',
+            yaxis='y1'
+        )
+        hr_trace= go.Bar(
+            x=list(hr_by_date.keys()),
+            y=list(hr_by_date.values()),
+            name= 'HR',
+            yaxis='y2'
         )
 
         xaxis_layout=dict(
@@ -181,13 +192,14 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                     ])
                 ),
             )
-
-        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
-        fig.add_traces(data=lnrmssd_traces, rows=5, cols=1)
+        
+        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
+        # lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
+        fig.add_traces(data=lnrmssd_traces, rows=5, cols=1, secondary_ys=[True,True,True,False])
         fig.update_layout(
             xaxis=xaxis_layout,
             xaxis_title="Fecha",
-            yaxis_title='LnRMSSD',
+            yaxis_title='LnRMSSD + HR'
         )
 
         s_sp_trace= go.Scatter(
@@ -201,7 +213,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         fig.update_layout(
             xaxis2=xaxis_layout,
             xaxis2_title="Fecha",
-            yaxis2_title='SDNN',
         )
 
         radar_trace = go.Scatterpolar(
