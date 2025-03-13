@@ -292,6 +292,116 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
 
+class Training_Dashboard(LoginRequiredMixin, TemplateView):
+    template_name= 'training_dashboard.html'
+    
+    def get_chart_data(self, start_date=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        if not start_date:
+            start_date= datetime.now()
+
+        #get selected athlete
+        athlete_id = self.kwargs.get('user')
+        athlete = User.objects.filter(id= athlete_id).first()
+
+        #get all entries
+        graph_data = Post_Training_Data.objects.filter(user=athlete).filter(date__lte= start_date).all().order_by('-date').values('date', 'time_of_activity', 'perceived_strain_of_activity', 'comments', 'pain')
+
+        dates= sorted(set(measurement['date'] for measurement in graph_data))
+        time_x_strain_by_date = {date: 0 for date in dates}
+        for measurement in graph_data:
+            date= measurement['date']
+
+            time_x_strain_by_date[date] = measurement['time_of_activity'] * measurement['perceived_strain_of_activity']
+
+        comments= graph_data.first()['comments']
+        pain= graph_data.first()['pain']
+        
+        fig = make_subplots(rows=3, cols=1,
+                            subplot_titles=("RPE x Minutos de Entreno", "Dolores", "Comentarios"),
+                            specs=[[{'type':'xy'}],
+                                   [{'type':'table'}],
+                                   [{'type':'table'}],])
+        fig.update_layout(
+            showlegend=False,
+            autosize=True,
+            dragmode= 'pan',
+            hovermode='closest',
+            title= f'Fecha: {graph_data.first()['date'].strftime("%m/%d/%Y")}',
+        )
+
+        time_x_rpe_trace= go.Scatter(
+            x=list(time_x_strain_by_date.keys()),
+            y=list(time_x_strain_by_date.values()),
+            mode='lines+markers',
+            name='Tiempo de entreno x RPE',
+            marker=dict(color='blue')
+        )
+
+        xaxis_layout=dict(
+                type="date",
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=14,
+                             label='1w',
+                             step="day",
+                             stepmode="backward"),
+                        dict(count=1.3,
+                             label='1m',
+                             step="month",
+                             stepmode="backward"),
+                        dict(count=6,
+                            label="6m",
+                            step="month",
+                            stepmode="backward"),
+                        dict(count=1,
+                            label="1y",
+                            step="year",
+                            stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+            )
+        
+        fig.add_trace(trace=time_x_rpe_trace, row=1, col=1)
+        fig.update_layout(
+            xaxis=xaxis_layout,
+            xaxis_title="Fecha",
+            yaxis_title='Tiempo x RPE'
+        )
+
+        
+        pain_trace = go.Table(
+            cells= dict(values=[pain])
+        )
+        fig.add_trace(trace=pain_trace, row=2, col=1)
+
+        comments_trace = go.Table(
+            cells= dict(values=[comments])
+        )
+        fig.add_trace(trace=comments_trace, row=3, col=1)
+
+        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
+
+        return data
+
+    def get_context_data(self, **kwargs): 
+        if self.request.user.is_authenticated: 
+            context = super().get_context_data(**kwargs)
+            context['chart_data'] = json.dumps(self.get_chart_data())
+            context['athlete'] = User.objects.filter(id= self.kwargs.get('user')).first()
+            context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
+
+        return context
+    
+    def post(self, request, *args, **kargs):
+        data = json.loads(request.body)
+        print(request)
+        start_date = data.get('start_date')
+        chart_data = self.get_chart_data(start_date=start_date)
+        return JsonResponse(chart_data)
+
 class Coach_Home(LoginRequiredMixin, ListView):
     model = Wake_Up_Data
     template_name= 'coach_home.html'
@@ -332,6 +442,30 @@ class Coach_Home(LoginRequiredMixin, ListView):
                         alert = 'yellow'
 
                 context['data'].append({'user': athlete, 'alert': alert, 'date':date})
+
+                context['full_name'] = self.request.user.get_full_name()
+                context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()
+        return context
+
+class Training_Data(LoginRequiredMixin, ListView):
+    model = Post_Training_Data
+    template_name= 'training_data.html'
+    context_object_name= 'post_training_data'
+  
+    def get_context_data(self, **kwargs): 
+        if self.request.user.is_authenticated and self.request.user.is_staff:
+            context = super().get_context_data(**kwargs)
+            # get all athletes
+            athletes = Group.objects.get(name= 'athletes').user_set.all()
+            
+            context['data'] = []
+            #last three entries
+            for athlete in athletes:
+                query = Post_Training_Data.objects.filter(user=athlete).order_by("-date").first()
+                
+                date = query.date
+                
+                context['data'].append({'user': athlete, 'date':date})
 
                 context['full_name'] = self.request.user.get_full_name()
                 context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()

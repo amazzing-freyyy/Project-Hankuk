@@ -11,7 +11,7 @@
 {% block main_content %}
     <div class="subcontainer header">
         <h1>Atleta: {{athlete.get_full_name}}</h1>
-        <a class="nav" href="{% url 'redirect' %}">Página Principal</a>
+        <a class="nav" href="{% url 'training_data' %}">Datos de Entreno</a>
     </div>
     <div class='image-filter'>
         {% if avatar_url %}
@@ -45,7 +45,7 @@
         document.getElementById('filterButton').addEventListener('click', function() {
             const startDate = document.getElementById('startDate').value;
             // AJAX request to filter data
-            fetch("{% url 'wellness_dashboard' user=athlete.id %}", {
+            fetch("{% url 'training_dashboard' user=athlete.id %}", {
                 method: "POST",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}",
