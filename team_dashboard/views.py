@@ -8,8 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
 from django.views.generic import TemplateView
 import plotly.graph_objs as go
-from django.db.models import Avg, F, Window, StdDev, RowRange
-from django.db.models.functions import Ln, RowNumber
+from django.db.models import Avg, F, Window, StdDev, RowRange, Sum
+from django.db.models.functions import Ln, RowNumber, TruncDate
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
 from datetime import datetime
@@ -295,9 +295,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
 class Training_Dashboard(LoginRequiredMixin, TemplateView):
     template_name= 'training_dashboard.html'
     
-    def get_chart_data(self, start_date=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
+    def get_chart_data(self, start_date=None):        
         if not start_date:
             start_date= datetime.now()
 
@@ -306,21 +304,49 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         athlete = User.objects.filter(id= athlete_id).first()
 
         #get all entries
-        graph_data = Post_Training_Data.objects.filter(user=athlete).filter(date__lte= start_date).all().order_by('-date').values('date', 'time_of_activity', 'perceived_strain_of_activity', 'comments', 'pain')
+        # row_data = Post_Training_Data.objects.filter(user=athlete, date__lte= start_date).exclude(type_of_activity__icontains='competición').annotate(
+        #                 time_x_rpe=
+        # graph_data = row_data.annotate(
+        #                 date_only=TruncDate("date")
+        #                 ).values("date_only").annotate(
+        #                 daily=Sum("amount")
+        #                 ).order_by("date_only")
+        
+        graph_data_daily = Post_Training_Data.objects.filter(user=athlete, date__lte= start_date).exclude(type_of_activity__icontains='competición').annotate(
+                                date_only=TruncDate("date")  # Extracts just the date from the DateTimeField
+                            ).annotate(
+                                time_x_rpe_per_day=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
+                            ).values("date_only", "time_x_rpe_per_day", 'pain', 'comments').order_by("date_only")
 
-        dates= sorted(set(measurement['date'] for measurement in graph_data))
-        time_x_strain_by_date = {date: 0 for date in dates}
-        for measurement in graph_data:
+        graph_data_training = Post_Training_Data.objects.filter(user=athlete, date__lte= start_date).exclude(type_of_activity__icontains='competición').annotate(
+                                time_x_rpe_per_training=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
+                            ).values("date", "time_x_rpe_per_training", 'type_of_activity').order_by("date")
+
+        dates_daily= sorted(set(measurement['date_only'] for measurement in graph_data_daily))
+        time_x_strain_daily_by_date = {date: 0 for date in dates_daily}
+        for measurement in graph_data_daily:
+            date= measurement['date_only']
+
+            time_x_strain_daily_by_date[date] = measurement['time_x_rpe_per_day']
+
+        activity_colors=[]
+        dates_training= sorted(set(measurement['date'] for measurement in graph_data_training))
+        time_x_strain_training_by_date = {date: 0 for date in dates_training}
+        for measurement in graph_data_training:
             date= measurement['date']
 
-            time_x_strain_by_date[date] = measurement['time_of_activity'] * measurement['perceived_strain_of_activity']
+            time_x_strain_training_by_date[date]= measurement['time_x_rpe_per_training']
 
-        comments= graph_data.first()['comments']
-        pain= graph_data.first()['pain']
+
+
+
+        comments= graph_data_daily.first()['comments']
+        pain= graph_data_daily.first()['pain']
         
-        fig = make_subplots(rows=3, cols=1,
-                            subplot_titles=("RPE x Minutos de Entreno", "Dolores", "Comentarios"),
+        fig = make_subplots(rows=4, cols=1,
+                            subplot_titles=("RPE x Minutos por Entreno", "RPE x Minutos por Día", "Dolores", "Comentarios"),
                             specs=[[{'type':'xy'}],
+                                   [{'type':'xy'}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],])
         fig.update_layout(
@@ -328,15 +354,13 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             autosize=True,
             dragmode= 'pan',
             hovermode='closest',
-            title= f'Fecha: {graph_data.first()['date'].strftime("%m/%d/%Y")}',
+            title= f'Fecha: {graph_data_daily.first()['date_only'].strftime("%m/%d/%Y")}',
         )
 
-        time_x_rpe_trace= go.Scatter(
-            x=list(time_x_strain_by_date.keys()),
-            y=list(time_x_strain_by_date.values()),
-            mode='lines+markers',
+        time_x_rpe_daily_trace= go.Bar(
+            x=list(time_x_strain_daily_by_date.keys()),
+            y=list(time_x_strain_daily_by_date.values()),
             name='Tiempo de entreno x RPE',
-            marker=dict(color='blue')
         )
 
         xaxis_layout=dict(
@@ -364,23 +388,33 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 ),
             )
         
-        fig.add_trace(trace=time_x_rpe_trace, row=1, col=1)
+        fig.add_trace(trace=time_x_rpe_daily_trace, row=2, col=1)
         fig.update_layout(
             xaxis=xaxis_layout,
             xaxis_title="Fecha",
-            yaxis_title='Tiempo x RPE'
         )
 
+        time_x_rpe_training_trace= go.Bar(
+            x=list(time_x_strain_training_by_date.keys()),
+            y=list(time_x_strain_training_by_date.values()),
+            name='Tiempo de entreno x RPE',
+        )
+
+        fig.add_trace(trace=time_x_rpe_training_trace, row=1, col=1)
+        fig.update_layout(
+            xaxis=xaxis_layout,
+            xaxis_title="Fecha",
+        )
         
         pain_trace = go.Table(
             cells= dict(values=[pain])
         )
-        fig.add_trace(trace=pain_trace, row=2, col=1)
+        fig.add_trace(trace=pain_trace, row=3, col=1)
 
         comments_trace = go.Table(
             cells= dict(values=[comments])
         )
-        fig.add_trace(trace=comments_trace, row=3, col=1)
+        fig.add_trace(trace=comments_trace, row=4, col=1)
 
         data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
 
