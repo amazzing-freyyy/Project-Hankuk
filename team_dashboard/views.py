@@ -33,7 +33,10 @@ class RedirectView(LoginRequiredMixin, TemplateView):
 class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
     template_name= 'wellness_dashboard.html'
 
-    def get_chart_data(self, start_date=datetime.now()):
+    def get_chart_data(self, start_date=None):
+        if not start_date:
+            start_date= datetime.now()
+
         #get selected athlete
         athlete_id = self.kwargs.get('user')
         athlete = User.objects.filter(id= athlete_id).first()
