@@ -145,6 +145,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             autosize=True,
             dragmode= 'pan',
             hovermode='closest',
+            title= f'Fecha: {start_date.strftime("%m/%d/%Y")}'
         )
 
         lnrmssd_trace= go.Scatter(
