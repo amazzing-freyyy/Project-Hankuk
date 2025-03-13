@@ -33,12 +33,12 @@
     <script>
         // Load initial chart data
         const initialData = {{ chart_data|safe }};
-        Plotly.newPlot('report', initialData.report.data, initialData.report.layout);
+        Plotly.newPlot('report', initialData.report.data, initialData.report.layout, initialData.config);
 
         // Function to update the chart with filtered data
         function updateChart(data) {
             console.log(data)
-            Plotly.react('report', data.report.data, data.report.layout);
+            Plotly.react('report', data.report.data, data.report.layout, data.config);
         }
 
         // Event listener for the filter button

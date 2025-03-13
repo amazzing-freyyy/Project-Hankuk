@@ -145,7 +145,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             autosize=True,
             dragmode= 'pan',
             hovermode='closest',
-            title= f'Fecha: {start_date.strftime("%m/%d/%Y")}'
+            title= f'Fecha: {start_date.strftime("%m/%d/%Y")}',
         )
 
         lnrmssd_trace= go.Scatter(
@@ -206,7 +206,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             )
         
         lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
-        # lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace]
         fig.add_traces(data=lnrmssd_traces, rows=5, cols=1, secondary_ys=[True,True,True,False])
         fig.update_layout(
             xaxis=xaxis_layout,
@@ -273,7 +272,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         )
         fig.add_trace(trace=comments_trace, row=4, col=1)
 
-        data = {'report': json.loads(fig.to_json())}
+        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
 
         return data
 
