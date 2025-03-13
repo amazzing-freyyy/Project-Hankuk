@@ -113,7 +113,7 @@ class TrainingType(MultiWidget):
         ('',' '),
         ('fuerza','Fuerza'),
         ('específico','Específico'),
-        ('alterofilia', 'Arterofilia'),
+        ('halterofilia', 'Halterofilia'),
         ('test','Test'),
     ]
 
