@@ -92,8 +92,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=StdDev('lnrmssd'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-                    rolling_avg_sleep= Window(
-                        expression=Avg('hours_of_sleep'),
+                    rolling_avg_hr= Window(
+                        expression=Avg('HR'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc())
             ).filter(date__lte= start_date).order_by('-date')
@@ -105,6 +105,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
         hr_by_date = {date: 0 for date in dates}
+        hr_mean_by_date = {date: 0 for date in dates}
         hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
         emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
         q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
@@ -153,10 +154,10 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             lsuprmssd_by_date[date] = lsuprmssd
             s_sp_by_date[date] = s_sp
             hr_by_date[date] = measurement['HR']
+            hr_mean_by_date[date] = measurement['rolling_avg_hr']
 
         
-        hr_media= sum(list(hr_by_date.values())) / len(list(hr_by_date.values()))
-        hr_colors= ['red' if hr > hr_media else 'green' for hr in list(hr_by_date.values())]
+        hr_colors= ['red' if hr_by_date[date] > hr_mean_by_date[date] else 'green' for date in list(hr_by_date.keys())]
 
         figs = {}
 
@@ -329,8 +330,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         if self.request.user.is_authenticated: 
             context = super().get_context_data(**kwargs)
             context['data'] = json.dumps(self.get_chart_data())
-            # print(context['data'])
-            # context['data'] = self.get_chart_data()
             context['athlete'] = User.objects.filter(id= self.kwargs.get('user')).first()
             context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
             context['config'] = json.dumps({'displayModeBar': False})
@@ -339,11 +338,9 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
     
     def post(self, request, *args, **kargs):
         data = json.loads(request.body)
-        # print(request)
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
-        # return chart_data
 
 class Training_Dashboard(LoginRequiredMixin, TemplateView):
     template_name= 'training_dashboard.html'
