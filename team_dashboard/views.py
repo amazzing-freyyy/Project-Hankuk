@@ -7,15 +7,15 @@ from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
 from django.views.generic import TemplateView
+import plotly.graph_objs as go
 from django.db.models import Avg, F, Window, StdDev, RowRange, Sum
 from django.db.models.functions import Ln, RowNumber, TruncDate
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
 from datetime import datetime, time
 import json
-import logging
 from plotly.subplots import make_subplots
-import plotly.graph_objs as go
+import logging
 import numpy as np
 
 logger = logging.getLogger(__name__) 
@@ -34,7 +34,7 @@ class RedirectView(LoginRequiredMixin, TemplateView):
 class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
     template_name= 'wellness_dashboard.html'
 
-    def get_chart_data(self, start_date=None, **kwargs):
+    def get_chart_data(self, start_date=None):
         if not start_date:
             start_date= datetime.now()
 
@@ -42,41 +42,16 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         athlete_id = self.kwargs.get('user')
         athlete = User.objects.filter(id= athlete_id).first()
 
-        # List of numeric fields to check for outliers
-        fields = ['SDNN', 'RMSSD', 'HR']  # Replace with actual field names
-
-        # Step 1: Retrieve all values for each field
-        data = {field: list(Wake_Up_Data.objects.filter(user=athlete).values_list(field, flat=True)) for field in fields}
-
-        # Step 2: Compute IQR dynamically for each field
-        bounds = {}
-        for field, values in data.items():
-            if values:  # Ensure there is data
-                q1 = np.percentile(values, 25)
-                q3 = np.percentile(values, 75)
-                iqr = q3 - q1
-                lower_bound = q1 - 1.5 * iqr
-                upper_bound = q3 + 1.5 * iqr
-                bounds[field] = (lower_bound, upper_bound)
-
-        # Step 3: Build dynamic filter conditions
-        filters = {}
-        for field, (lower, upper) in bounds.items():
-            filters[f"{field}__gte"] = lower
-            filters[f"{field}__lte"] = upper
-
-        # Step 4: Filter out outliers from the queryset
-        filtered_objects = Wake_Up_Data.objects.filter(**filters, user=athlete)
-
         #get all entries
-        row_data = filtered_objects.all().annotate(
+        row_data = Wake_Up_Data.objects.filter(user=athlete).all().annotate(
             lnrmssd=Ln('RMSSD'),
             row_num=Window(
                 expression=RowNumber(),
                 order_by=F('date').asc()
             )
-        )
 
+        )
+        
         #calculate values, then filter entries based on desired interval
         interval = 30
         graph_data= (
@@ -92,8 +67,8 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=StdDev('lnrmssd'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-                    rolling_avg_hr= Window(
-                        expression=Avg('HR'),
+                    rolling_avg_sleep= Window(
+                        expression=Avg('hours_of_sleep'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc())
             ).filter(date__lte= start_date).order_by('-date')
@@ -105,7 +80,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
         hr_by_date = {date: 0 for date in dates}
-        hr_mean_by_date = {date: 0 for date in dates}
         hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
         emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
         q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
@@ -154,12 +128,26 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             lsuprmssd_by_date[date] = lsuprmssd
             s_sp_by_date[date] = s_sp
             hr_by_date[date] = measurement['HR']
-            hr_mean_by_date[date] = measurement['rolling_avg_hr']
 
         
-        hr_colors= ['red' if hr_by_date[date] > hr_mean_by_date[date] else 'green' for date in list(hr_by_date.keys())]
+        hr_media= sum(list(hr_by_date.values())) / len(list(hr_by_date.values()))
+        hr_colors= ['red' if hr > hr_media else 'green' for hr in list(hr_by_date.values())]
 
-        figs = {}
+        fig = make_subplots(rows=6, cols=1,
+                            subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","LnRMSSD", "Stress Score"),
+                            specs=[[{'type':'polar'}],
+                                   [{'type':'table'}],
+                                   [{'type':'table'}],
+                                   [{'type':'table'}],
+                                   [{'type':'xy', 'secondary_y': True}],
+                                   [{'type':'xy', 'secondary_y':False}]],)
+        fig.update_layout(
+            showlegend=False,
+            autosize=True,
+            dragmode= 'pan',
+            hovermode='closest',
+            title= f'Fecha: {graph_data.first()['date'].strftime("%m/%d/%Y")}',
+        )
 
         lnrmssd_trace= go.Scatter(
             x=list(lnrmssd_by_date.keys()),
@@ -218,27 +206,13 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                 ),
             )
         
-        fig= make_subplots(
-            rows=1, cols=1,
-            shared_xaxes=True,
-            subplot_titles='LnRMSSD y HR',
-            specs=[[{'secondary_y': True}]],
-            )
-        fig.add_traces(
-            [hr_trace, lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace],
-            rows=1, cols=1,
-            secondary_ys= [True, False, False, False]
-        )
+        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
+        fig.add_traces(data=lnrmssd_traces, rows=5, cols=1, secondary_ys=[True,True,True,False])
         fig.update_layout(
             xaxis=xaxis_layout,
-            xaxis_title='Fecha',
-            dragmode= 'pan',
-            hovermode='closest',
-            autosize=True,
-            showlegend=False,
+            xaxis_title="Fecha",
+            yaxis_title='LnRMSSD + HR'
         )
-
-        figs['lnrmssd']= fig
 
         s_sp_trace= go.Scatter(
             x=list(s_sp_by_date.keys()),
@@ -247,19 +221,11 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             name='SDNN',
         )
 
-        fig= go.Figure(
-            data= s_sp_trace,
-            layout=dict(
-                xaxis=xaxis_layout,
-                xaxis_title='Fecha',
-                title= 'Stress Score', 
-                dragmode= 'pan',
-                hovermode='closest',
-                autosize=True,
-                showlegend=False
-            ), )
-
-        figs['stress_score']= fig
+        fig.add_trace(trace=s_sp_trace, row=6, col=1)
+        fig.update_layout(
+            xaxis2=xaxis_layout,
+            xaxis2_title="Fecha",
+        )
 
         radar_trace = go.Scatterpolar(
             r= [q_sleep, emo_wellness, tiredness, chispa],
@@ -268,76 +234,61 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             name= 'Medida actual'
         )
 
-        fig= go.Figure(
-            data=radar_trace,
-            layout=dict(
-                polar=dict(
-                    radialaxis=dict(
-                        visible=True,
-                        range=[0, 5],
-                    ),angularaxis=dict(
-                        rotation=45
-                    )
-                ),margin=dict(
-                    t=80, 
-                ),
-            ),
+        fig.add_traces(radar_trace, rows=1,cols=1)
+        fig.update_layout(
+            polar=dict(
+                radialaxis=dict(
+                    visible=True,
+                    range=[0, 5],
+                ),angularaxis=dict(
+                    rotation=45
+                )),
+            margin=dict(
+                t=80, 
             )
+        )
         
-        figs['radar'] = fig
-
         lightgrey= 'aliceblue'
         white= 'lightblue'
-        WI_trace = go.Table(
+        table_trace = go.Table(
             header=dict(values=["Variable", "Valor", "Indicador"]),
             cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'chispa', 'dolor', 'suma'],
                                 [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, suma],
                                 [indicator(q_sleep), indicator(emo_wellness), indicator(tiredness), indicator(chispa), indicator(muscle_pain+5), indicator(suma, red=9, blue=15)]],
                         fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, lightgrey,white]],)
         )
-        fig = go.Figure(
-            data= WI_trace,
-        )
+        fig.add_trace(trace=table_trace, row=2, col=1)
 
-        figs['wellness_table_I'] = fig
-
-        WII_trace = go.Table(
+        table_trace = go.Table(
             header=dict(values=["Variable", "Valor", "Indicador"]),
             cells= dict(values=[['horas de sueño', 'menstruación'],
                                 [hrs_sleep, menstruation],
                                 [indicator_sleep(hrs_sleep), m_indicator(menstruation)]],
                         fill_color = [[lightgrey,lightgrey]],)
         )
-        fig = go.Figure(
-            data= WII_trace
-        )
-
-        figs['wellness_table_II'] = fig
+        fig.add_trace(trace=table_trace, row=3, col=1)
 
         comments_trace = go.Table(
             cells= dict(values=[comments])
         )
-        fig = go.Figure(
-            data= comments_trace
-        )
-        figs['comments'] = fig
-        
-        pf= {key: json.loads(figure.to_json()) for key, figure in figs.items()}
+        fig.add_trace(trace=comments_trace, row=4, col=1)
 
-        return pf
+        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
+
+        return data
 
     def get_context_data(self, **kwargs): 
         if self.request.user.is_authenticated: 
             context = super().get_context_data(**kwargs)
-            context['data'] = json.dumps(self.get_chart_data())
+            context['chart_data'] = json.dumps(self.get_chart_data())
             context['athlete'] = User.objects.filter(id= self.kwargs.get('user')).first()
             context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
-            context['config'] = json.dumps({'displayModeBar': False})
 
         return context
     
     def post(self, request, *args, **kargs):
         data = json.loads(request.body)
+        print(request)
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
@@ -374,18 +325,18 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
 
         filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
                                 ).annotate(time_x_rpe_per_day=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
-                                ).values("date", "time_x_rpe_per_day", 'type_of_activity'
+                                ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
                                 ).order_by("date")
 
         time_threshold= time(13,0) 
         time_separated = [filtered_objects.filter(date__time__lt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
-            "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date'
+            "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
         ), filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
-            "date_only", "time_x_rpe_per_day", 'type_of_activity'
+            "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
         )]
 
         dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
@@ -405,12 +356,15 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 time_x_strain_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
                 activities_by_date[i][date] = measurement['type_of_activity']
 
-        figs={}
-
-        fig = make_subplots(rows=1, cols=1,
-                            subplot_titles=("RPE x Minutos", ),
-                            specs=[[{'type':'xy'}]],)
+        comments= filtered_objects.first()['comments']
+        pain= filtered_objects.first()['pain']
         
+        fig = make_subplots(rows=3, cols=1,
+                            subplot_titles=("RPE x Minutos", "Dolores", "Comentarios"),
+                            specs=[[{'type':'xy'}],
+                                   [{'type':'table'}],
+                                   [{'type':'table'}],])
+
         time_x_rpe_daily_trace= [go.Bar(
             x=list(time_x_strain_daily_by_date[0].keys()),
             y=list(time_x_strain_daily_by_date[0].values()),
@@ -462,23 +416,32 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             barmode= 'stack'
         )
         
-        figs['time_x_rpe'] = fig
+        pain_trace = go.Table(
+            cells= dict(values=[pain])
+        )
+        fig.add_trace(trace=pain_trace, row=2, col=1)
 
-        pf= {key: json.loads(figure.to_json()) for key, figure in figs.items()}
+        comments_trace = go.Table(
+            cells= dict(values=[comments])
+        )
+        fig.add_trace(trace=comments_trace, row=3, col=1)
 
-        return pf
+        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
+
+        return data
 
     def get_context_data(self, **kwargs): 
         if self.request.user.is_authenticated: 
             context = super().get_context_data(**kwargs)
-            context['data'] = json.dumps(self.get_chart_data())
+            context['chart_data'] = json.dumps(self.get_chart_data())
             context['athlete'] = User.objects.filter(id= self.kwargs.get('user')).first()
             context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
-            context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()
+
         return context
     
     def post(self, request, *args, **kargs):
         data = json.loads(request.body)
+        print(request)
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
