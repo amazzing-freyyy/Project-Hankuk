@@ -356,8 +356,8 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 time_x_strain_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
                 activities_by_date[i][date] = measurement['type_of_activity']
 
-        comments= filtered_objects.first()['comments']
-        pain= filtered_objects.first()['pain']
+        comments= filtered_objects.last()['comments']
+        pain= filtered_objects.last()['pain']
         
         fig = make_subplots(rows=3, cols=1,
                             subplot_titles=("RPE x Minutos", "Dolores", "Comentarios"),
@@ -410,7 +410,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             autosize=True,
             dragmode= 'pan',
             hovermode='closest',
-            title= f'Fecha: {filtered_objects.first()['date'].strftime("%m/%d/%Y")}',
+            title= f'Fecha: {filtered_objects.last()['date'].strftime("%m/%d/%Y")}',
             xaxis=xaxis_layout,
             xaxis_title="Fecha",
             barmode= 'stack'
