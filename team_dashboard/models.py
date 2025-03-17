@@ -60,7 +60,7 @@ class Wake_Up_Data(models.Model):
     tiredness= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
     menstruation= models.CharField(max_length=20, choices= YES_OR_NO, blank=True, null=True)
     injury= models.CharField(max_length=20, choices= YES_OR_NO, blank=True, null=True)
-    comments= models.TextField(blank=True, null=True)
+    comments= models.TextField()
 
 
     def save(self, *args, **kwargs):
@@ -84,9 +84,9 @@ class Wake_Up_Data(models.Model):
 class Post_Training_Data(models.Model):
     date= models.DateTimeField(null= False)
     user= models.ForeignKey(User, on_delete= models.CASCADE, null= False, related_name='user_post_training')
-    type_of_activity= models.TextField(null=True, blank=True)
-    time_of_activity= models.FloatField(null=False, default=60)
-    perceived_strain_of_activity= models.FloatField(blank=True, null=True)
+    type_of_activity= models.TextField(blank=True, null=True)
+    time_of_activity= models.DecimalField(max_digits= 10, decimal_places=2, blank=True, null=True)
+    perceived_strain_of_activity= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
     pain= models.TextField(null=True, blank=True)
     comments= models.TextField(null=True, blank=True)
     slug= models.SlugField(unique=True, blank=True)

@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
-    {% load django_bootstrap5 %}
+    <link href='https://fonts.googleapis.com/css?family=Agdasima' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'team_dashboard/css/style.css' %}" type="text/css">
     {% block styleSheets %}
     {%endblock%}
-    {% bootstrap_css %}
-</head>
-<body class="d-flex flex-column justify-content-center">
     
-    {% block main_content %}
-    {% endblock %}
-    {% bootstrap_javascript %}
+</head>
+<body>
+       
+        {% block main_content %}
+        {% endblock %}
 </body>
 </html>

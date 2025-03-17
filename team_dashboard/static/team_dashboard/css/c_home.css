@@ -1,0 +1,103 @@
+.subcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.subcontainer.header{
+    background-color: #007bff;
+}
+
+.subcontainer.logout{
+    row-gap: 10px;
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+a.table{
+    color: rgb(32, 4, 0);
+    width: 100%;
+}
+
+table{
+    border-collapse: collapse;
+    border:0;
+    padding-top: 25px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+thead{
+    background-color: darkblue;
+    width: 75%;
+}
+th{
+    color: white;
+}
+tbody{
+    width: 75%;
+}
+tr{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100%;
+}
+tr.body:nth-child(odd){
+    background-color: #e0dede;
+}
+tr.body:nth-child(even){
+    background-color: #eeeeee;
+}
+tr.body:hover {
+    background-color: #a8b5de;
+}
+
+td.flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.left{
+    width: 50%;
+}
+
+.middle{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+div.minicontainer{
+    width: 100%;
+}
+
+div.indicator{
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+}

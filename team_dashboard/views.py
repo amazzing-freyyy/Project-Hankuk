@@ -7,11 +7,11 @@ from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
 from django.views.generic import TemplateView
-from django.db.models import Avg, F, Window, StdDev, RowRange
+from django.db.models import Avg, F, Window, StdDev, RowRange, Sum
 from django.db.models.functions import Ln, RowNumber, TruncDate
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
-from datetime import datetime, time
+from datetime import datetime
 import json
 import logging
 from plotly.subplots import make_subplots
@@ -353,77 +353,65 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         athlete_id = self.kwargs.get('user')
         athlete = User.objects.filter(id= athlete_id).first()
 
-        fields = ['time_of_activity']
-
-        data = {field: list(Post_Training_Data.objects.filter(user=athlete).values_list(field, flat=True)) for field in fields}
+        #get all entries
+        # row_data = Post_Training_Data.objects.filter(user=athlete, date__lte= start_date).exclude(type_of_activity__icontains='competición').annotate(
+        #                 time_x_rpe=
+        # graph_data = row_data.annotate(
+        #                 date_only=TruncDate("date")
+        #                 ).values("date_only").annotate(
+        #                 daily=Sum("amount")
+        #                 ).order_by("date_only")
         
-        bounds = {}
-        for field, values in data.items():
-            if values:  # Ensure there is data
-                q1 = np.percentile(values, 25)
-                q3 = np.percentile(values, 75)
-                iqr = q3 - q1
-                lower_bound = q1 - 1.5 * iqr
-                upper_bound = q3 + 1.5 * iqr
-                bounds[field] = (lower_bound, upper_bound)
+        graph_data_daily = Post_Training_Data.objects.filter(user=athlete, date__lte= start_date).exclude(type_of_activity__icontains='competición').annotate(
+                                date_only=TruncDate("date")  # Extracts just the date from the DateTimeField
+                            ).annotate(
+                                time_x_rpe_per_day=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
+                            ).values("date_only", "time_x_rpe_per_day", 'pain', 'comments').order_by("date_only")
 
-        filters = {}
-        for field, (lower, upper) in bounds.items():
-            filters[f"{field}__gte"] = lower
-            filters[f"{field}__lte"] = upper
+        graph_data_training = Post_Training_Data.objects.filter(user=athlete, date__lte= start_date).exclude(type_of_activity__icontains='competición').annotate(
+                                time_x_rpe_per_training=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
+                            ).values("date", "time_x_rpe_per_training", 'type_of_activity').order_by("date")
 
-        filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
-                                ).annotate(time_x_rpe_per_day=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
-                                ).values("date", "time_x_rpe_per_day", 'type_of_activity'
-                                ).order_by("date")
+        dates_daily= sorted(set(measurement['date_only'] for measurement in graph_data_daily))
+        time_x_strain_daily_by_date = {date: 0 for date in dates_daily}
+        for measurement in graph_data_daily:
+            date= measurement['date_only']
 
-        time_threshold= time(13,0) 
-        time_separated = [filtered_objects.filter(date__time__lt=time_threshold).all().annotate(
-            date_only=TruncDate("date")
-        ).values(
-            "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date'
-        ), filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
-            date_only=TruncDate("date")
-        ).values(
-            "date_only", "time_x_rpe_per_day", 'type_of_activity'
-        )]
+            time_x_strain_daily_by_date[date] = measurement['time_x_rpe_per_day']
 
-        dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
-                       sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
+        activity_colors=[]
+        dates_training= sorted(set(measurement['date'] for measurement in graph_data_training))
+        time_x_strain_training_by_date = {date: 0 for date in dates_training}
+        for measurement in graph_data_training:
+            date= measurement['date']
+
+            time_x_strain_training_by_date[date]= measurement['time_x_rpe_per_training']
+
+
+
+
+        comments= graph_data_daily.first()['comments']
+        pain= graph_data_daily.first()['pain']
         
-        time_x_strain_daily_by_date = [{date: 0 for date in dates[0]},
-                                       {date: 0 for date in dates[1]}]
-        
-        activities_by_date = [{date: 0 for date in dates[0]},
-                            {date: 0 for date in dates[1]}]
-        
-        for workout  in time_separated:
-            i = time_separated.index(workout)
-            for measurement in workout:
-                date= measurement['date_only']
+        fig = make_subplots(rows=4, cols=1,
+                            subplot_titles=("RPE x Minutos por Entreno", "RPE x Minutos por Día", "Dolores", "Comentarios"),
+                            specs=[[{'type':'xy'}],
+                                   [{'type':'xy'}],
+                                   [{'type':'table'}],
+                                   [{'type':'table'}],])
+        fig.update_layout(
+            showlegend=False,
+            autosize=True,
+            dragmode= 'pan',
+            hovermode='closest',
+            title= f'Fecha: {graph_data_daily.first()['date_only'].strftime("%m/%d/%Y")}',
+        )
 
-                time_x_strain_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
-                activities_by_date[i][date] = measurement['type_of_activity']
-
-        figs={}
-
-        fig = make_subplots(rows=1, cols=1,
-                            subplot_titles=("RPE x Minutos", ),
-                            specs=[[{'type':'xy'}]],)
-        
-        time_x_rpe_daily_trace= [go.Bar(
-            x=list(time_x_strain_daily_by_date[0].keys()),
-            y=list(time_x_strain_daily_by_date[0].values()),
-            hovertext=list(activities_by_date[0].values()),
-            textposition='inside',
-            name='Mañana'
-        ),go.Bar(
-            x=list(time_x_strain_daily_by_date[1].keys()),
-            y=list(time_x_strain_daily_by_date[1].values()),
-            hovertext=list(activities_by_date[1].values()),
-            textposition='inside',
-            name='Tarde'
-        )]
+        time_x_rpe_daily_trace= go.Bar(
+            x=list(time_x_strain_daily_by_date.keys()),
+            y=list(time_x_strain_daily_by_date.values()),
+            name='Tiempo de entreno x RPE',
+        )
 
         xaxis_layout=dict(
                 type="date",
@@ -450,36 +438,50 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 ),
             )
         
-        fig.add_traces(data=time_x_rpe_daily_trace, rows=1, cols=1)
+        fig.add_trace(trace=time_x_rpe_daily_trace, row=2, col=1)
         fig.update_layout(
-            showlegend=False,
-            autosize=True,
-            dragmode= 'pan',
-            hovermode='closest',
-            title= f'Fecha: {filtered_objects.first()['date'].strftime("%m/%d/%Y")}',
             xaxis=xaxis_layout,
             xaxis_title="Fecha",
-            barmode= 'stack'
         )
 
-        figs['time_x_rpe'] = fig
+        time_x_rpe_training_trace= go.Bar(
+            x=list(time_x_strain_training_by_date.keys()),
+            y=list(time_x_strain_training_by_date.values()),
+            name='Tiempo de entreno x RPE',
+        )
 
-        pf= {key: json.loads(figure.to_json()) for key, figure in figs.items()}
+        fig.add_trace(trace=time_x_rpe_training_trace, row=1, col=1)
+        fig.update_layout(
+            xaxis=xaxis_layout,
+            xaxis_title="Fecha",
+        )
+        
+        pain_trace = go.Table(
+            cells= dict(values=[pain])
+        )
+        fig.add_trace(trace=pain_trace, row=3, col=1)
 
-        return pf
+        comments_trace = go.Table(
+            cells= dict(values=[comments])
+        )
+        fig.add_trace(trace=comments_trace, row=4, col=1)
+
+        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
+
+        return data
 
     def get_context_data(self, **kwargs): 
         if self.request.user.is_authenticated: 
             context = super().get_context_data(**kwargs)
-            context['data'] = json.dumps(self.get_chart_data())
+            context['chart_data'] = json.dumps(self.get_chart_data())
             context['athlete'] = User.objects.filter(id= self.kwargs.get('user')).first()
             context['avatar_url'] = User.objects.filter(id= self.kwargs.get('user')).first().profile.get_avatar_url()
-            context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()
 
         return context
     
     def post(self, request, *args, **kargs):
         data = json.loads(request.body)
+        print(request)
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
@@ -510,18 +512,18 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 
                 if suma > 14:
                     if dolor > -3:
-                        alert = 'bg-success'
+                        alert = 'green'
                     elif dolor < -3:
-                        alert = 'bg-danger'
+                        alert = 'red'
                     else:
-                        alert = 'bg-warning'
+                        alert = 'yellow'
                 elif suma < 10:
-                    alert = 'bg-danger'
+                    alert = 'red'
                 else:
                     if dolor < -3:
-                        alert= 'bg-danger'
+                        alert= 'red'
                     else:
-                        alert = 'bg-warning'
+                        alert = 'yellow'
 
                 context['data'].append({'user': athlete, 'alert': alert, 'date':date})
 
@@ -629,10 +631,11 @@ class PostTrainingFormView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
         
     def form_invalid(self, form):
-        print('hey')
         # Call the parent class's method to maintain the normal behavior
         response = super().form_invalid(form)
-        # response.context['form_errors'] = form.errors
+        print(form.errors)
+        # You can add any other context data you want here if needed
+        response.context_data['form_errors'] = form.errors
         return response
     
     def get_context_data(self, **kwargs):

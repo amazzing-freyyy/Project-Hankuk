@@ -4,28 +4,25 @@
 
 {% load static %}
 {% block styleSheets %}
-<!-- <link rel="stylesheet" href="{% static 'team_dashboard/css/a_home.css' %}" type="text/css"> -->
+<link rel="stylesheet" href="{% static 'team_dashboard/css/a_home.css' %}" type="text/css">
 {% endblock %}
 
 {% block main_content %}
-    <div class="d-flex flex-column" style="height: 85vh;">
-        <button class="btn btn-light h-25 border-0 rounded-0" style="background-color: rgb(232, 13, 13);" onclick="window.location.href = '{% url 'wake_up_form' %}'">
-            <p class="text-white font-weight-bold">Encuesta Mañanera</p>
+    <div class="subcontainer">
+        <button class="nav" onclick="window.location.href = '{% url 'wake_up_form' %}'">
+            <p class="red">Encuesta Mañanera</p>
         </button>
-        <button class="btn btn-light h-25 border-0 rounded-0" style="background-color: rgb(182, 9, 9);" onclick="window.location.href = '{% url 'post_training_form' %}'">
-            <p class="text-white font-weight-bold">Encuesta Post-entreno</p>
+        <button class="nav" onclick="window.location.href = '{% url 'post_training_form' %}'">
+            <p class="yellow">Encuesta Post-entreno</p>
         </button>
-        <button class="btn btn-light h-25 border-0 rounded-0" style="background-color: rgb(101, 6, 6);" onclick="window.location.href = '{% url 'wellness_dashboard' user=id %}'">
-            <p class="text-white font-weight-bold">Panel Wellness</p>
+        <button class="nav" onclick="window.location.href = '{% url 'wellness_dashboard' user=id %}'">
+            <p class="green">Panel de datos</p>
         </button>
-        <button class="btn btn-light h-25 border-0 rounded-0" style="background-color: rgb(64, 3, 3);" onclick="window.location.href = '{% url 'training_dashboard' user=id %}'">
-            <p class="text-white font-weight-bold">Panel de Entrenos</p>
-        </button>
+        <form method="POST"  class="logout" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout">
+                <p>Logout</p>
+            </button>
+        </form>
     </div>
-    <form method="POST"  class="bg-primary d-flex justify-content-center" action="{% url 'logout' %}" style="height: 15vh;">
-        {% csrf_token %}
-        <button type="submit" class="btn bg-primary w-100 h-100 text-white align-items-center rounded-0">
-            <p>Logout</p>
-        </button>
-    </form>
 {% endblock %}

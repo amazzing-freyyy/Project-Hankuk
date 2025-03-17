@@ -1,7 +1,9 @@
-    <div class="d-flex justify-content-around" style="width: 100vw;">
-        <input class="form-control w-25" type="date" id="id_date" name="date">
-        <button class="btn btn-lg btn-dark" type="button" onclick="setToday('id_date')" style="background-color: rgb(5, 143, 129);">Hoy</button>
+<div class="date-widget">
+    <div class="date-input">
+        <button class="date-btn" type="button" onclick="setToday('id_date_btn')">Hoy</button>
+        <input type="date" id="id_date_btn" name="date">
     </div>
+</div>
 
 <script>
     function setToday(name){
