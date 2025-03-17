@@ -358,7 +358,6 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
 
         comments= filtered_objects.first()['comments']
         pain= filtered_objects.first()['pain']
-        last_date= filtered_objects.first()['date'].strftime("%m/%d/%Y")
         
         fig = make_subplots(rows=3, cols=1,
                             subplot_titles=("RPE x Minutos", "Dolores", "Comentarios"),
