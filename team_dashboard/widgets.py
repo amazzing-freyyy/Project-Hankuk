@@ -1,5 +1,6 @@
-from django.forms.widgets import Widget, MultiWidget, DateInput, TimeInput, NumberInput, Select
+from django.forms.widgets import Widget, MultiWidget, DateInput, TimeInput, NumberInput
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 import logging
 
 logger = logging.getLogger(__name__)
@@ -31,8 +32,8 @@ class StarRating(Widget):
 class DateTimeSplit(MultiWidget):
     template_name= "widgets/timeDate.html"
     def __init__(self, widgets=None, attrs = None):
-        widgets=[DateInput(attrs={'type':'date'}),
-                 TimeInput(attrs={'type':'time'})]
+        widgets=[DateInput(attrs={'type':'date', 'class':'form-control w-25'}),
+                 TimeInput(attrs={'type':'time', 'class':'form-control w-25'})]
         super().__init__(widgets, attrs)
 
     def decompress(self, value):
@@ -95,59 +96,4 @@ class TimeSplit(MultiWidget):
             'attrs': self.build_attrs(attrs),
         }
 
-        return render_to_string(self.template_name, context)
-
-class TrainingType(MultiWidget):
-    template_name= 'widgets/trainingtype.html'
-
-    TYPE_OF_TRAINING=[
-        ('',''),
-        ('taekwondo', 'Taekwondo'),
-        ('físico', 'Físico'),
-        ('competición', 'Competición'),
-        ('recovery', 'Recovery'),
-        ('mental coaching', 'Mental Coaching'),
-    ]
-
-    PHYSICAL_TRAINING_TYPE=[
-        ('',' '),
-        ('fuerza','Fuerza'),
-        ('específico','Específico'),
-        ('halterofilia', 'Halterofilia'),
-        ('test','Test'),
-    ]
-
-    TAEKWONDO_TRAINING_TYPE=[
-        ('',' '),
-        ('velocidad','Velocidad'),
-        ('soltura','Soltura'),
-        ('libre','Libre'),
-        ('técnico táctico','Técnico Táctico'),
-        ('paos','Paos'),
-        ('combate', 'Combate'),
-    ]
-
-    def __init__(self, widgets=None, attrs= None):
-        widgets= [Select(choices=self.TYPE_OF_TRAINING),Select(choices=self.PHYSICAL_TRAINING_TYPE),Select(choices=self.TAEKWONDO_TRAINING_TYPE)]
-        super().__init__(widgets, attrs) 
-
-    def decompress(self, value):
-        if value:
-            [training, physical_training, tkd_training] = value.split(", ")
-            return [training, physical_training, tkd_training]
-        return ['', '','']
-
-    def render(self, name, value, attrs=None, renderer=None):
-        if value is None:
-            value=["", "", ""]
-        elif isinstance(value, (str, bytes)):
-            value = self.decompress(value)
-
-        rendered_widgets = [widget.render(f'{name}_{i}', value[i], attrs) for i, widget in enumerate(self.widgets)]
-
-        context = {
-            'widgets': rendered_widgets,
-            'name': name,
-            'attrs': self.build_attrs(attrs),
-        }
         return render_to_string(self.template_name, context)

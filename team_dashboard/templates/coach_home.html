@@ -4,56 +4,62 @@
 
 {% load static %}
 {% block styleSheets %}
-<link rel="stylesheet" href="{% static 'team_dashboard/css/c_home.css' %}">
 {% endblock %}
 
 {% block main_content %}
-<div class="subcontainer header">
-    <h1>Listado de atletas</h1>
+<div class="text-white w-100" style="background-color: rgb(25, 13, 85);">
+    <h1 class="text-center">Listado de atletas</h1>
 </div>
 
-<table class="subcontainer">
-    <thead>
+<table class="table table-hover w-75 align-self-center">
+    <thead class="thead-dark">
         <tr>
-            <th class="left">Atleta</th>
-            <th class="middle">Última Encuesta</th>
-            <th class="right">Alerta</th>
+            <th class="text-left">Atleta</th>
+            <th class="text-center">Última Encuesta</th>
+            <th class="text-right">Alerta</th>
         </tr>
     </thead>
     <tbody>
         {% for row in data %}
-            <tr class="body">
+            <tr onclick="window.location='{% url 'wellness_dashboard' user=row.user.id %}';" style="cursor: pointer;">
                 
-                <td class="left flex"><a class="table" href="{% url 'wellness_dashboard' user=row.user.id %}">{{ row.user.get_full_name}}</a></td>
-                <td class="middle flex"><a class="table middle" href="{% url 'wellness_dashboard' user=row.user.id %}">{{ row.date }}</a></td>
-                <td class="right flex" ><a class="table right" href="{% url 'wellness_dashboard' user=row.user.id %}"><div class="indicator"><div style="background-color: {{row.alert}}; width: 100%; height: 100%; boder-radius: 50%;"></div></div></a></td>
-
+                <td class="text-left">{{ row.user.get_full_name}}</td>
+                <td class="text-center">{{ row.date }}</td>
+                <td class="{{row.alert}}" style="width:5px;"></td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<div class="subcontainer logout">
-    {%if is_staff%}
-        <form method="GET"  action="{% url 'training_data' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit">
-                <a class="nav">Datos de Entreno</a>
-            </button>
-        </form>
-        <form method="GET"  action="{% url 'admin:index' %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit">
-                <a class="nav">Página Admin</a>
-            </button>
-        </form>
-    {%endif%}
-    <form method="POST"  action="{% url 'logout' %}" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">
-            <a class="nav">Logout</a>
-        </button>
-    </form>
-</div>
+<nav class="navbar navbar-expand-lg fixed-bottom navbar-dark" style="background-color: rgb(25, 13, 85);">
+    <p class="navbar-brand">Páginas</p>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        {%if is_staff%}
+        <li class="nav-item active">
+            <form method="GET"  class="" action="{% url 'training_data' %}" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn btn-link nav-link" type="submit">Datos de Entreno</button>
+            </form>
+        </li>
+        <li class="nav-item">
+            <form method="GET"  class="" action="{% url 'admin:index' %}" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn btn-link nav-link" type="submit">Página Admin</button>
+            </form>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+            <form method="POST"  class="" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn btn-link nav-link" type="submit">Logout</button>
+            </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
 {% endblock %}

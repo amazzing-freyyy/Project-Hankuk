@@ -1,5 +1,5 @@
 from django import forms
-from .widgets import TimeSplit, DateTimeSplit, TrainingType
+from .widgets import TimeSplit, DateTimeSplit
 import datetime
 
 class TimeMultiField(forms.MultiValueField):
@@ -30,19 +30,6 @@ class DateTimeField(forms.MultiValueField):
             return datetime.datetime.combine(values[0], values[1])
         else:
             return None
-
-class TrainingField(forms.MultiValueField):
-    widget= TrainingType
-
-    def __init__(self, *args, **kwargs):
-        fields = [forms.CharField(max_length=20, required=True), forms.CharField(max_length=20, required=False), forms.CharField(max_length=20, required=False)]
-        super().__init__(fields, *args, **kwargs)
-
-    def compress(self, values):
-        if values:
-            return f'{values[0]}, {values[1]}, {values[2]}'
-        else:
-            return f' , , '
 
 class LocalDecField(forms.DecimalField):
     def clean(self, value):

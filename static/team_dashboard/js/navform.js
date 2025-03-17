@@ -9,8 +9,8 @@ nextbtn.disabled = false;
 submitbtn.disabled = true;
 
 function showParent(index) {
-    parents.forEach(parent => parent.classList.remove("active"));
-    parents[index].classList.add("active");
+    parents.forEach(parent => parent.classList.add("d-none"));
+    parents[index].classList.remove("d-none");
 
     if (currentIndex == 0){
         backbtn.disabled = true;

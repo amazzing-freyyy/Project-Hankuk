@@ -1,12 +1,13 @@
 <div class="time-split-widget">
-    <div class="time-labels">
+    <div class="time-labels d-flex justify-content-around" style="width: 100vw;">
         <label for="{{ widget.attrs.id }}_0" class="label-hrs">Horas</label>
         <label for="{{ widget.attrs.id }}_1" class="label-min">Minutos</label>
     </div>
-    <div class="time-widgets">
+    <div class="d-flex justify-content-around" style="width: 100vw;">
         <input type="number" 
             name="{{ name }}_0" 
-            class="horas"
+            class="form-control"
+            style="width: 60px;"
             id="{{ widget.attrs.id }}_0" 
             placeholder=0
             min="0"
@@ -15,7 +16,8 @@
         :
         <input type="number" 
             name="{{ name }}_1" 
-            class="minutos"
+            class="form-control"
+            style="width: 60px;"
             id="{{ widget.attrs.id }}_1"
             placeholder=0
             min="0" max="59"

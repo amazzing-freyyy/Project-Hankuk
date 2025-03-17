@@ -1,9 +1,9 @@
-<div class='tags'>
+<div class='tags d-flex justify-content-around' style="width: 100vw;">
     {%for tag in tags%}
         <p class="tag">{{tag}}</p>
     {%endfor%}
 </div>
-<div class='star-rating' data-name= '{{name}}'>
+<div class='star-rating d-flex justify-content-around text-lg' style="width: 100vw;" data-name= '{{name}}'>
     {%for i in range %}
         <input type="radio" id="{{name}}-{{i}}" name="{{name}}" value="{{i}}" {%if value == i %} checked {%endif%}>
         <label for="{{name}}-{{i}}" class="star">&#9733;</label>

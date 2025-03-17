@@ -1,62 +1,107 @@
-<div class="training-type-widget">
-    <div class="main">
-        <label class="ttype" for="{{name}}_0">¿Qué tipo de entreno hiciste?</label>
-        {{widgets.0}}
+<div class="d-flex flex-column justify">
+    <label for="{{ widget.attrs.id }}_training">¿Qué tipo de entreno hiciste?</label>
+    <select id="{{ widget.attrs.id }}_training" name="{{ widget.name }}_training" onchange="updateSubtypes(this.value)">
+        <option value="">-- Select Training Type --</option>
+        {% for training, subtypes in widget.training_options.items %}
+            <option value="{{ training }}" {% if widget.value.training_type == training %}selected{% endif %}>
+                {{ training|capfirst }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="hidden" id="{{ widget.attrs.id }}" name="{{ widget.name }}" value="{{ widget.value.training_type }}, {{ widget.value.subtype }}">
+
+    <div id="{{ widget.attrs.id }}_subtype_container" {% if not widget.value.subtype %}style="display:none;"{% endif %}>
+        <label for="{{ widget.attrs.id }}_subtype">¿Puedes ser más específico?</label>
+        <select id="{{ widget.attrs.id }}_subtype" name="{{ widget.name }}_subtype">
+            {% if widget.value.training_type and widget.value.training_type in widget.training_options %}
+                {% for subtype in widget.training_options|get_item:widget.value.training_type %}
+                    <option value="{{ subtype }}" {% if widget.value.subtype == subtype %}selected{% endif %}>{{ subtype }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
     </div>
-    <div id="fisico" class="not-selected">
-        <label class="ttype" for="{{name}}_1">¿Qué hiciste de físico?</label>
-        {{widgets.1}}
-    </div>
-    <div id="taekwondo" class="not-selected">
-        <label class="ttype" for="{{name}}_2">¿Qué hiciste de taekwondo?</label>
-        {{widgets.2}}
-    </div>
-</div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let mainW = document.querySelector("[name={{name}}_0]");
-	let fW = document.querySelector("[name={{name}}_1]");
-        let tW = document.querySelector("[name={{name}}_2]");
-        let fisicoD = document.getElementById("fisico");
-        let tkdD = document.getElementById("taekwondo");
+const trainingOptions = {{ widget.training_options|safe }};
 
-        function toggleSubInputs() {
-            if (mainW.value === "físico") {
-                fisicoD.classList.add("selected");
-                tkdD.classList.add("not-selected");
+function updateSubtypes(trainingType) {
+  const subtypeContainer = document.getElementById("{{ widget.attrs.id }}_subtype_container");
+  const subtypeSelect = document.getElementById("{{ widget.attrs.id }}_subtype");
+  const hiddenInput = document.getElementById("{{ widget.attrs.id }}");
 
-                fisicoD.classList.remove("not-selected");
-                tkdD.classList.remove("selected");
+  subtypeSelect.innerHTML = "";
 
-		tW.value = " ";
-		tW.required = false;
-  
-                fW.required = true;
-            } else if (mainW.value === "taekwondo") {
-                fisicoD.classList.add("not-selected");
-                tkdD.classList.add("selected");
-
-                fisicoD.classList.remove("selected");
-                tkdD.classList.remove("not-selected");
-
-                fW.value = " ";
-                fW.required = false;
-
-		tW.required = true;
-            } else {
-                fisicoD.classList.add("not-selected");
-                tkdD.classList.add("not-selected");
-
-                fisicoD.classList.remove("selected");
-                tkdD.classList.remove("selected");
-
-		fW.required = false;
-		tW.required = false;
-            }
-        }
-
-        mainW.addEventListener("change", toggleSubInputs);
-        toggleSubInputs(); // Run on page load to set initial state
+  if (trainingType in trainingOptions) {
+    subtypeContainer.style.display = "block";
+    trainingOptions[trainingType].forEach(subtype => {
+      const option = document.createElement("option");
+      option.value = subtype.toLowerCase();
+      option.textContent = subtype;
+      subtypeSelect.appendChild(option);
     });
+  } else {
+    subtypeContainer.style.display = "none";
+  }
+
+  updateHiddenInput();
+}
+
+function updateHiddenInput() {
+  const trainingType = document.getElementById("{{ widget.attrs.id }}_training").value;
+  const subtype = document.getElementById("{{ widget.attrs.id }}_subtype")?.value || "";
+  document.getElementById("{{ widget.attrs.id }}").value = trainingType + "|" + subtype;
+}
+
+document.getElementById("{{ widget.attrs.id }}_subtype")?.addEventListener("change", updateHiddenInput);
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     let mainW = document.querySelector("[name={{name}}_0]");
+	// let fW = document.querySelector("[name={{name}}_1]");
+    //     let tW = document.querySelector("[name={{name}}_2]");
+    //     let fisicoD = document.getElementById("fisico");
+    //     let tkdD = document.getElementById("taekwondo");
+
+    //     function toggleSubInputs() {
+    //         if (mainW.value === "físico") {
+    //             fisicoD.classList.add("d-flex");
+    //             fisicoD.classList.add("justify-content-around");
+    //             tkdD.classList.add("d-none");
+
+    //             fisicoD.classList.remove("d-none");
+    //             tkdD.classList.remove("d-flex");
+    //             tkdD.classList.remove("justify-content-around");
+    //     		tW.value = " ";
+	// 	        tW.required = false;
+  
+    //             fW.required = true;
+    //         } else if (mainW.value === "taekwondo") {
+    //             fisicoD.classList.add("d-none");
+    //             tkdD.classList.add("d-flex");
+    //             tkdD.classList.add("justify-content-around");
+
+    //             fisicoD.classList.remove("d-flex");
+    //             fisicoD.classList.remove("justify-content-around");
+    //             tkdD.classList.remove("d-none");
+
+    //             fW.value = " ";
+    //             fW.required = false;
+
+	// 	tW.required = true;
+    //         } else {
+    //             fisicoD.classList.add("d-none");
+    //             tkdD.classList.add("d-none");
+
+    //             fisicoD.classList.remove("d-flex");
+    //             fisicoD.classList.remove("justify-content-around");
+    //             tkdD.classList.remove("d-flex");
+    //             tkdD.classList.remove("justify-content-around");
+
+    //             fW.required = false;
+    //             tW.required = false;
+    //         }
+    //     }
+
+    //     mainW.addEventListener("change", toggleSubInputs);
+    //     toggleSubInputs(); // Run on page load to set initial state
 </script>

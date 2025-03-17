@@ -1,18 +1,19 @@
-<div class="datetime-split-widget">
-    <div class="datetime-date">
-        <label for="{{name}}_0">Día:</label>
-        <div class="date-input">
+<div class="d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-around mb-5" style="width: 100vw;">
             {{widgets.0}}
-            <button type="button" class="date-time-btn" onclick="setToday('{{name}}_0')">Hoy</button>
+            <button type="button" class="btn btn-dark btn-lg" onclick="setToday('{{name}}_0')" style="background-color: rgb(5, 143, 129);">Hoy</button>
         </div>
-    </div>
-    <div class="datetime-time">
-        <label for="{{name}}_1">Hora de entreno:</label>
-        <div class="time-input">
+
+    <div class="d-flex flex-column align-items-center"  style="width: 100vw;">
+        <label class="h5" for="{{name}}_1">Hora de entreno</label>
+        <div class="d-flex justify-content-around" style="width: 100vw;">
             {{widgets.1}}
-            <button type="button" class="date-time-btn time" onclick="setTime('{{name}}_1', 11, 0)">11h</button>
-            <button type="button" class="date-time-btn time" onclick="setTime('{{name}}_1', 18, 0)">18h</button>
-            <button type="button" class="date-time-btn time" onclick="setTime('{{name}}_1', 19, 0)">19h</button>
+            <div class="d-flex justify-content-between" style="width: 50vw;">
+                <button type="button" class="btn btn-dark btn-lg" onclick="setTime('{{name}}_1', 11, 0)" style="background-color: rgb(5, 143, 129);">11h</button>
+                <button type="button" class="btn btn-dark btn-lg" onclick="setTime('{{name}}_1', 18, 0)" style="background-color: rgb(5, 143, 129);">18h</button>
+                <button type="button" class="btn btn-dark btn-lg" onclick="setTime('{{name}}_1', 19, 0)" style="background-color: rgb(5, 143, 129);">19h</button>
+            </div>
+            
         </div>
     </div>
 </div>

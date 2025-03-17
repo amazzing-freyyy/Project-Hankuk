@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from team_dashboard.widgets import StarRating, DateBtn
 from .models import Profile
-from .fields import TimeMultiField, DateTimeField, TrainingField, LocalDecField
+from .fields import TimeMultiField, DateTimeField, LocalDecField
 
 class WakeUpForm(forms.Form):
     YES_OR_NO=[
@@ -23,7 +23,7 @@ class WakeUpForm(forms.Form):
         ('5', '5')
     ]
 
-    date= forms.DateField(widget=DateBtn(), error_messages={'invalid':'La fecha está mal escrita.(es más fácil usar el botón)','required':'Hace falta la fecha'} ,)
+    date= forms.DateField(required=True, widget=DateBtn(), error_messages={'invalid':'La fecha está mal escrita.(es más fácil usar el botón)','required':'Hace falta la fecha'} ,)
     measurement_quality= forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-select'}), choices=MEASUREMENT_QUALITY, required=False)
     RMSSD= LocalDecField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'decimal','localize':True}), error_messages={'invalid':'Valor de RMSSD inválido. (Usa punto, no coma.)'}, required=False)
     SDNN= LocalDecField(max_digits=10, decimal_places=2, widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'decimal','localize':True}), error_messages={'invalid':'Valor de SDNN inválido. (Usa punto, no coma)'}, required=False)
@@ -39,9 +39,26 @@ class WakeUpForm(forms.Form):
     comments= forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}), required=False)
 
 class PostTrainingForm(forms.Form):
-    date= DateTimeField(error_messages={'required':'Hace falta la fecha', 'invalid':'La fecha está mal escrita. (es más fácil usar los botones)'})
-    type_of_activity= TrainingField(required=False, error_messages={'required':'Hace falta el tipo de actividad'} )
-    time_of_activity= forms.DecimalField(widget=forms.TextInput(attrs={'class': 'form-control', 'inputmode':'numeric'}), error_messages={'invalid':'Valor de tiempo inválido.(solo números)','required':'Hace falta la tiempo de la actividad'})
+    TRAINING_CHOICES= [
+        ('',  ''),
+        ('taekwondo, velocidad', 'Velocidad (tkd)'),
+        ('taekwondo, soltura', 'Soltura (tkd)'),
+        ('taekwondo, libre', 'Libre (tkd)'),
+        ('taekwondo, técnico táctico', 'Técnico Táctico (tkd)'),
+        ('taekwondo, paos', 'Paos (tkd)'),
+        ('taekwondo, combate', 'combate (tkd)'),
+        ('físico, fuerza', 'Fuerza (físico)'),
+        ('físico, específico', 'Específico (físico)'),
+        ('físico, halterofilia', 'Halterofilia (físico)'),
+        ('físico, test', 'Test (físico)'),
+        ('competición', 'Competición'),
+        ('recovery', 'Recovery'),
+        ('mental coaching', 'Mental Coaching'),
+    ]
+
+    date= DateTimeField(required=True, error_messages={'required':'Hace falta la fecha', 'invalid':'La fecha está mal escrita. (es más fácil usar los botones)'})
+    type_of_activity= forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-select'}), choices=TRAINING_CHOICES, error_messages={'required':'Hace falta el entreno'})
+    time_of_activity= forms.DecimalField(required=True, widget=forms.TextInput(attrs={'class': 'form-control w-25', 'inputmode':'numeric'}), error_messages={'required':'Hace falta la duración de entreno', 'invalid':'Valor de tiempo inválido.(solo números)','required':'Hace falta la tiempo de la actividad'})
     perceived_strain_of_activity= forms.IntegerField(widget=StarRating(attrs={'class':'star-rating'}, max_stars=10, tags=['Max. Esfuerzo', 'Moderado', 'Leve']), error_messages={'invalid':'Valor de esfuerzo inválido.','required':'Hace falta el valor de esfuerzo'}, required=True)
     pain= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
     comments= forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)

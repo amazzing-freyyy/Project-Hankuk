@@ -4,68 +4,74 @@
 
 {% load static %}
 {% block styleSheets %}
-<link rel="stylesheet" href="{% static 'team_dashboard/css/encuestas.css' %}">
 <link rel="stylesheet" href="{% static 'team_dashboard/css/widgets/starrating.css' %}">
-<link rel="stylesheet" href="{% static 'team_dashboard/css/widgets/timeDate.css' %}">
-<link rel="stylesheet" href="{% static 'team_dashboard/css/widgets/trainingtype.css' %}">
 {% endblock %}
 
 {% block main_content %}
-<div class="parent">
-    <a href="{% url 'redirect' %}" class="nav">Página Principal</a>
+<div class="d-flex flex-column justify-content-between" style="width: 100vw; height: 100vh;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style=" background-color: rgb(64, 3, 3);">
+        <p class="navbar-brand mb-0 h1">Páginas</p>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <form method="GET"  class="" action="{% url 'redirect' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-link nav-link" type="submit">Página Principal</button>
+                </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    {%if form_errors%}
-        <div id="errores">
-            <h3>Errores</h3>
-            <ul>
-                {%for field, error in form_errors.items%}
-                    <li>{{ error|join:", " }}</li>
-                {%endfor%}
-            </ul>
-            <button class="error" onclick="closePopUp()">Cerrar</button>
+    {%if form.errors%}
+        <div class="alert alert-warning mb-0 rounded-0" role="alert">
+            {%for field, error in form.errors.items%}
+                {{ error|join:", " }}<br>
+            {%endfor%}
         </div>
     {%endif%}
 
-    <div class="body-encuestas">
-        <button id="back" class="arrow" onclick="prevParent()">&lt;</button>
-        <form method="post" class="subcontainer">
+           <form method="post" class="d-flex flex-column  text-white align-items-center justify-content-around h-100" style="background-color: rgb(25, 13, 85);">
             {% csrf_token %}
-            <div id="form-group_1" class="form-group">
-                <label for="id_date">Fecha: </label>
+            <div class="form-group d-flex flex-column align-items-center justify-content-between h-25" id="step-1">
+                <label class="h3" for="id_date">Fecha</label>
                 {{ form.date }}
             </div>
         
-            <div id="form-group_2" class="form-group">
-                <label for="id_type_of_activity">Tipo de actividad: </label>
+            <div class="form-group d-flex flex-column align-items-center justify-content-between h-25 d-none" id="step-2">
+                <label class="h3" for="id_type_of_activity">Tipo de actividad</label>
                 {{ form.type_of_activity }}
             </div>
         
-            <div id="form-group_3" class="form-group">
-                <label for="id_time_of_activity">Duración de la actividad (min): </label>
+            <div class="form-group d-flex flex-column align-items-center justify-content-between h-25 d-none" id="step-3">
+                <label class="h3" for="id_time_of_activity">Duración de la actividad (min)</label>
                 {{ form.time_of_activity }}
             </div>
 
-            <div id="form-group_4" class="form-group image">
-                <div class="minicontainer">
-                    <label for="id_perceived_strain_of_activity">Esfuerzo ejercido: </label>
-                </div>
+            <div class="form-group d-flex flex-column align-items-center justify-content-between h-25 d-none" id="step-4">
+                <label class="h3" for="id_perceived_strain_of_activity">Esfuerzo ejercido</label>
                 {{ form.perceived_strain_of_activity }}
             </div>
 
-            <div id="form-group_5" class="form-group text-area">
-                <label for="id_pain">Describe algún dolor que tengas: </label>
+            <div class="form-group d-flex flex-column align-items-center justify-content-between h-25 d-none w-50" id="step-5">
+                <label class="h3" for="id_pain">Describe algún dolor que tengas: </label>
                 {{ form.pain }}
             </div>
 
-            <div id="form-group_6" class="form-group text-area">
-                <label for="id_comments">Comentarios: </label>
+            <div class="form-group d-flex flex-column align-items-center justify-content-between h-25 d-none w-50" id="step-6">
+                <label class="h3" for="id_comments">Comentarios</label>
                 {{ form.comments }}
             </div>
         
-            <button id="submit" type="submit" class="encuesta">Enviar</button>
+            <button id="submit" type="submit" class="btn btn-success btn-lg">Enviar</button>
         </form>
-        <button id="next" class="arrow" onclick="nextParent()">&gt;</button>
-    </div>
+        <div class="btn-group" style="height: 100px;">
+            <button id="back" class="btn btn-dark"  onclick="prevParent()" style="background-color: rgb(5, 143, 129); border-color: rgb(5, 143, 129);">&lt;</button>
+            <button id="next" class="btn btn-dark"  onclick="nextParent()" style="background-color: rgb(5, 143, 129); border-color: rgb(5, 143, 129);">&gt;</button>
+        </div>    </div>
 </div>
 
 <script src="{% static 'team_dashboard/js/navform.js' %}"></script>

@@ -1,9 +1,3 @@
-.star-rating{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
-
 .star-rating input{
     display: none;
 }
@@ -35,5 +29,5 @@ p.tag{
 }
 
 .star{
- font-size: 20vw;
+ font-size: 50vw;
 }

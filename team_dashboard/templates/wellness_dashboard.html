@@ -4,38 +4,54 @@
 
 {% load static %}
 {% block styleSheets %}
-<link rel="stylesheet" href="{% static 'team_dashboard/css/dashboard.css' %}">
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
 {% endblock %}
 
-{% block main_content %}
-    <div class="subcontainer header">
-        <h1>Atleta: {{athlete.get_full_name}}</h1>
-        <a class="nav" href="{% url 'redirect' %}">Página Principal</a>
-    </div>
-    <div class='image-filter'>
+{% block main_content %}   
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(25, 13, 85);">
+        <p class="navbar-brand mb-0 h1">{{athlete.get_full_name}}</p>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <form method="GET"  class="" action="{% url 'redirect' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-link nav-link" type="submit">Datos Wellness</button>
+                </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <div class="btn-group btn-group-toggle justify-content-centers mt-2" data-toggle="buttons" style="width: 75vw; align-self: center;">
+        <label for="wellness_table_I" class="btn btn-secondary text-white">
+          <input class="visually-hidden" type="radio" name="graph" id="wellness_table_I" value="wellness_table_I" autocomplete="off" checked> Wellness General
+        </label>
+        <label for="radar" class="btn btn-secondary text-white">
+          <input class="visually-hidden" type="radio" name="graph" id="radar" value="radar" autocomplete="off"> Radar de Wellness
+        </label>
+        <label for="lnrmssd" class="btn btn-secondary text-white">
+          <input class="visually-hidden" type="radio" name="graph" id="lnrmssd" value="lnrmssd" autocomplete="off"> LnRMSSD
+        </label>
+        <label for="stress_score" class="btn btn-secondary text-white">
+            <input class="visually-hidden" type="radio" name="graph" id="stress_score" value="stress_score" autocomplete="off"> Stress Score
+        </label>
+      </div>
+
+      <div class='d-flex justify-content-around mt-2 mb-2'>
         {% if avatar_url %}
-            <img src="{{ avatar_url }}" alt="Avatar" width="100">
+            <img class="img-thumbnail" src="{{ avatar_url }}" alt="Avatar"  style="height: 120px; width: 120px">
         {% else %}
-            <img src="{% static 'team_dashboard/images/deafault_avatar.png'%}" alt="Default Avatar>
+            <img class="img-thumbnail" src="{% static 'team_dashboard/images/deafault_avatar.png'%}" alt="Default Avatar"  style="height: 120px; width: 120px">
         {% endif %}
-        <div class="filter">
+        <div class="d-flex flex-column">
             <label for="startDate">Buscar reporte:</label>
-            <input type="date" id="startDate"><br>
-            <button id="filterButton">Filtrar</button>
+            <input  class="form-control" type="date" id="startDate"><br>
+            <button class="btn btn-info text-white" id="filterButton">Filtrar</button>
         </div>
     </div>
-    <div class="" data-toggle="buttons">
-        <label for="wellness_table_I" class=""></label>
-          <input type="radio" name="graph" id="wellness_table_I" value="wellness_table_I" autocomplete="off" checked> Wellness General
-        <label for="radar"></label>
-          <input type="radio" name="graph" id="radar" value="radar" autocomplete="off"> Radar de Wellness
-        <label for="lnrmssd" class=""></label>
-          <input type="radio" name="graph" id="lnrmssd" value="lnrmssd" autocomplete="off"> LnRMSSD
-        <label for="stress_score" class=""></label>
-            <input type="radio" name="graph" id="stress_score" value="stress_score" autocomplete="off"> Stress Score
-      </div>
 
     <div id="graph">
 
