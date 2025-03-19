@@ -85,7 +85,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NM'),  # Replace with your database name
         'USER': os.getenv('DB_USER'),  # Replace with your MySQL username
         'PASSWORD': os.getenv('DB_PASS'),  # Replace with your MySQL password
-        'HOST': 'localhost',  # Use '127.0.0.1' for local development
+        # 'HOST': os.getenv('DB_IP'),  # Use '127.0.0.1' for local development
+        'HOST': 'localhost',
         'PORT': '3306',  # Default MySQL port
         'OPTIONS': {
             'charset': 'utf8mb4',  # Supports full UTF-8 encoding

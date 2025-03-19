@@ -34,13 +34,14 @@
 </table>
 
 <div class="subcontainer logout">
-    {%if is_staff%}
+
         <form method="GET"  action="{% url 'training_data' %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit">
                 <a class="nav">Datos de Entreno</a>
             </button>
         </form>
+    {%if is_staff%}
         <form method="GET"  action="{% url 'admin:index' %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit">

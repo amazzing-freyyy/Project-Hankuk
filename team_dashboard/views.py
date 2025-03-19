@@ -8,8 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
 from django.views.generic import TemplateView
 import plotly.graph_objs as go
-from django.db.models import Avg, F, Window, StdDev, RowRange, Sum
-from django.db.models.functions import Ln, RowNumber, TruncDate
+from django.db.models import Avg, F, Window, StdDev, RowRange, Sum, Min, Max
+from django.db.models.functions import Ln, RowNumber, TruncDate, ExtractYear, ExtractWeek
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
 from datetime import datetime, time
@@ -324,7 +324,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             filters[f"{field}__lte"] = upper
 
         filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
-                                ).annotate(time_x_rpe_per_day=Avg(F("time_of_activity") * F("perceived_strain_of_activity"))  # Calculate the average of the product
+                                ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
                                 ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
                                 ).order_by("date")
 
@@ -344,7 +344,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         
         time_x_strain_daily_by_date = [{date: 0 for date in dates[0]},
                                        {date: 0 for date in dates[1]}]
-        
+
         activities_by_date = [{date: 0 for date in dates[0]},
                             {date: 0 for date in dates[1]}]
         
@@ -355,26 +355,56 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
 
                 time_x_strain_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
                 activities_by_date[i][date] = measurement['type_of_activity']
+        
+        weekly_data= (filtered_objects
+                .annotate(year=ExtractYear('date'), week= ExtractWeek('date'), date_only=TruncDate('date'))
+                .values('year', 'week')
+                .annotate(
+                    total=Sum(F('time_of_activity') * F('perceived_strain_of_activity')),
+                    start_date=Min('date_only'),
+                    end_date=Max('date_only')
+                ).order_by('start_date'))
+
+        weeks= sorted(set(entry['start_date'] for entry in weekly_data))
+
+        time_x_rpe_by_week= {week: 0 for week in weeks}
+        week_dates= {week: 0 for week in weeks}
+        percent_diff= {week: 0 for week in weeks}
+
+        prev_total = None
+        for measurement in weekly_data:
+            date= measurement['start_date']
+
+            time_x_rpe_by_week[date] = measurement['total']
+            week_dates[date]= f'{measurement['start_date'].strftime("%d-%b-%Y")} a {measurement['end_date'].strftime("%d-%b-%Y")}'
+
+            if prev_total is not None:
+                percent_diff[date] = ((measurement['total'] - prev_total)/ prev_total) * 100
+            else:
+                percent_diff[date] = 0
+            
+            prev_total= measurement['total']
 
         comments= filtered_objects.last()['comments']
         pain= filtered_objects.last()['pain']
         
-        fig = make_subplots(rows=3, cols=1,
-                            subplot_titles=("RPE x Minutos", "Dolores", "Comentarios"),
+        fig = make_subplots(rows=4, cols=1,
+                            subplot_titles=("RPE x Minutos Diario", "RPE x Minutos Semanal", "Dolores", "Comentarios"),
                             specs=[[{'type':'xy'}],
+                                   [{'type':'xy', 'secondary_y': True}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],])
 
         time_x_rpe_daily_trace= [go.Bar(
             x=list(time_x_strain_daily_by_date[0].keys()),
             y=list(time_x_strain_daily_by_date[0].values()),
-            hovertext=list(activities_by_date[0].values()),
+            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}' for i in list(time_x_strain_daily_by_date[0].keys())],
             textposition='inside',
             name='Mañana'
         ),go.Bar(
             x=list(time_x_strain_daily_by_date[1].keys()),
             y=list(time_x_strain_daily_by_date[1].values()),
-            hovertext=list(activities_by_date[1].values()),
+            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}' for i in list(time_x_strain_daily_by_date[1].keys())],
             textposition='inside',
             name='Tarde'
         )]
@@ -405,26 +435,43 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             )
         
         fig.add_traces(data=time_x_rpe_daily_trace, rows=1, cols=1)
-        fig.update_layout(
-            showlegend=False,
-            autosize=True,
-            dragmode= 'pan',
-            hovermode='closest',
-            title= f'Fecha: {filtered_objects.last()['date'].strftime("%m/%d/%Y")}',
-            xaxis=xaxis_layout,
-            xaxis_title="Fecha",
-            barmode= 'stack'
+
+        time_x_rpe_weekly_trace= go.Bar(
+            x=list(time_x_rpe_by_week.keys()),
+            y=list(time_x_rpe_by_week.values()),
+            width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe_by_week),
+            hovertemplate= [f'<b>Minutos x RPE:</b> {time_x_rpe_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe_by_week.keys())],
+            textposition='inside',
+        )
+        percent_diff_trace= go.Scatter(
+            x= list(percent_diff.keys()),
+            y= list(percent_diff.values()),
+            hovertemplate=[f'<b>Diferencia:</b> {percent_diff[i]:.2f}%' for i in list(percent_diff.keys())],
+            name='',
         )
         
+        fig.add_traces(data=[time_x_rpe_weekly_trace, percent_diff_trace], rows=2, cols=1, secondary_ys=[False, True])
+        fig.update_layout(
+                    showlegend=False,
+                    autosize=True,
+                    dragmode= 'pan',
+                    hovermode='closest',
+                    title= f'Fecha: {filtered_objects.last()['date'].strftime("%m/%d/%Y")}',
+                    xaxis=xaxis_layout,
+                    xaxis_title="Fecha",
+                    barmode= 'stack',
+                    xaxis2= dict(type='date')
+        )
+
         pain_trace = go.Table(
             cells= dict(values=[pain])
         )
-        fig.add_trace(trace=pain_trace, row=2, col=1)
+        fig.add_trace(trace=pain_trace, row=3, col=1)
 
         comments_trace = go.Table(
             cells= dict(values=[comments])
         )
-        fig.add_trace(trace=comments_trace, row=3, col=1)
+        fig.add_trace(trace=comments_trace, row=4, col=1)
 
         data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
 
