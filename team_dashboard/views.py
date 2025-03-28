@@ -71,7 +71,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=Avg('hours_of_sleep'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc())
-            ).filter(date__lte= start_date).order_by('-date')
+            ).filter(date__lte= start_date).order_by('-date')[:30]
         )
 
         dates= sorted(set(measurement['date'] for measurement in graph_data))
@@ -183,27 +183,27 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
 
         xaxis_layout=dict(
                 type="date",
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=14,
-                             label='1w',
-                             step="day",
-                             stepmode="backward"),
-                        dict(count=1.3,
-                             label='1m',
-                             step="month",
-                             stepmode="backward"),
-                        dict(count=6,
-                            label="6m",
-                            step="month",
-                            stepmode="backward"),
-                        dict(count=1,
-                            label="1y",
-                            step="year",
-                            stepmode="backward"),
-                        dict(step="all")
-                    ])
-                ),
+                # rangeselector=dict(
+                #     buttons=list([
+                #         dict(count=14,
+                #              label='1w',
+                #              step="day",
+                #              stepmode="backward"),
+                #         dict(count=1.3,
+                #              label='1m',
+                #              step="month",
+                #              stepmode="backward"),
+                #         dict(count=6,
+                #             label="6m",
+                #             step="month",
+                #             stepmode="backward"),
+                #         dict(count=1,
+                #             label="1y",
+                #             step="year",
+                #             stepmode="backward"),
+                #         dict(step="all")
+                #     ])
+                # ),
             )
         
         lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
@@ -326,18 +326,18 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
                                 ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
                                 ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
-                                ).order_by("date")
+                                ).order_by("-date")
 
         time_threshold= time(13,0) 
         time_separated = [filtered_objects.filter(date__time__lt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        ), filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
+        )[:30], filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )]
+        )[:30]]
 
         dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
                        sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
@@ -363,7 +363,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                     total=Sum(F('time_of_activity') * F('perceived_strain_of_activity')),
                     start_date=Min('date_only'),
                     end_date=Max('date_only')
-                ).order_by('start_date'))
+                ).order_by('-start_date')[:30])
 
         weeks= sorted(set(entry['start_date'] for entry in weekly_data))
 
@@ -411,27 +411,27 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
 
         xaxis_layout=dict(
                 type="date",
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=14,
-                             label='1w',
-                             step="day",
-                             stepmode="backward"),
-                        dict(count=1.3,
-                             label='1m',
-                             step="month",
-                             stepmode="backward"),
-                        dict(count=6,
-                            label="6m",
-                            step="month",
-                            stepmode="backward"),
-                        dict(count=1,
-                            label="1y",
-                            step="year",
-                            stepmode="backward"),
-                        dict(step="all")
-                    ])
-                ),
+                # rangeselector=dict(
+                #     buttons=list([
+                #         dict(count=7,
+                #              label='1w',
+                #              step="day",
+                #              stepmode="backward"),
+                #         dict(count=1.3,
+                #              label='1m',
+                #              step="month",
+                #              stepmode="backward"),
+                #         dict(count=6,
+                #             label="6m",
+                #             step="month",
+                #             stepmode="backward"),
+                #         dict(count=1,
+                #             label="1y",
+                #             step="year",
+                #             stepmode="backward"),
+                #         dict(step="all")
+                #     ])
+                # ),
             )
         
         fig.add_traces(data=time_x_rpe_daily_trace, rows=1, cols=1)
@@ -442,6 +442,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe_by_week),
             hovertemplate= [f'<b>Minutos x RPE:</b> {time_x_rpe_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe_by_week.keys())],
             textposition='inside',
+            name='',
         )
         percent_diff_trace= go.Scatter(
             x= list(percent_diff.keys()),
