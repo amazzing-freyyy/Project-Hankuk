@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.233.111.130', 'projecthankuk.com', 'www.projecthankuk.com']
 # ALLOWED_HOSTS = ['127.0.0.1']
@@ -85,8 +85,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NM'),  # Replace with your database name
         'USER': os.getenv('DB_USER'),  # Replace with your MySQL username
         'PASSWORD': os.getenv('DB_PASS'),  # Replace with your MySQL password
-        # 'HOST': os.getenv('DB_IP'),  # Use '127.0.0.1' for local development
-        'HOST': 'localhost',
+        'HOST': os.getenv('DB_IP'),  # Use '127.0.0.1' for local development
+        # 'HOST': 'localhost',
         'PORT': '3306',  # Default MySQL port
         'OPTIONS': {
             'charset': 'utf8mb4',  # Supports full UTF-8 encoding

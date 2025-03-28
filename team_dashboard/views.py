@@ -398,15 +398,15 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         time_x_rpe_daily_trace= [go.Bar(
             x=list(time_x_strain_daily_by_date[0].keys()),
             y=list(time_x_strain_daily_by_date[0].values()),
-            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}' for i in list(time_x_strain_daily_by_date[0].keys())],
+            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain_daily_by_date[0].keys())],
             textposition='inside',
-            name='Mañana'
+            name=''
         ),go.Bar(
             x=list(time_x_strain_daily_by_date[1].keys()),
             y=list(time_x_strain_daily_by_date[1].values()),
-            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}' for i in list(time_x_strain_daily_by_date[1].keys())],
+            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain_daily_by_date[1].keys())],
             textposition='inside',
-            name='Tarde'
+            name=''
         )]
 
         xaxis_layout=dict(
