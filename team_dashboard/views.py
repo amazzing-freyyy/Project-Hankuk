@@ -71,7 +71,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=Avg('hours_of_sleep'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc())
-            ).filter(date__lte= start_date).order_by('-date')[:30]
+            ).filter(date__lte= start_date).order_by('-date')[:15]
         )
 
         dates= sorted(set(measurement['date'] for measurement in graph_data))
@@ -333,11 +333,11 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )[:30], filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
+        )[:15], filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )[:30]]
+        )[:15]]
 
         dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
                        sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
@@ -363,7 +363,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                     total=Sum(F('time_of_activity') * F('perceived_strain_of_activity')),
                     start_date=Min('date_only'),
                     end_date=Max('date_only')
-                ).order_by('-start_date')[:30])
+                ).order_by('-start_date')[:15])
 
         weeks= sorted(set(entry['start_date'] for entry in weekly_data))
 
