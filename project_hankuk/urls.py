@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lambda request: redirect('login/', permanent=True)),
+    # path('', lambda request: redirect('login/', permanent=True)),
     path('', include('team_dashboard.urls')),
 ]
 

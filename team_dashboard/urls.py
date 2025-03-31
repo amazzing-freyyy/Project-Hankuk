@@ -1,20 +1,13 @@
-from .forms import RememberMeForm
 from django.urls import path
-from team_dashboard.views import Athlete_Home, Coach_Home, WakeUpFormView, PostTrainingFormView, RedirectView, Wellness_Dashboard, profile, Login, Training_Dashboard, Training_Data
-# from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LogoutView
+from team_dashboard.views import *
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 
-    path("home/", RedirectView.as_view(), name='redirect'),
-    path("athlete_home/", Athlete_Home.as_view(), name='athlete_home'),
-    path("coach_home/", Coach_Home.as_view(), name="coach_home"),
-    path("training_data/", Training_Data.as_view(), name="training_data"),
-    path("wellness_dashboard/<str:user>", Wellness_Dashboard.as_view(), name= "wellness_dashboard"),
-    path("training_dashboard/<str:user>", Training_Dashboard.as_view(), name= "training_dashboard"),
-    path('login/', Login.as_view(authentication_form=RememberMeForm), name='login'),
-    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
-    path('wake_up_survey/', WakeUpFormView.as_view(), name='wake_up_form'),
-    path('post_training_survey/', PostTrainingFormView.as_view(), name='post_training_form'),
-    path('upload-avatar/', profile, name='upload_avatar'),
+    path("api/login/", TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path("api/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
+    path("api/protected/", protected_view, name='protected'),
+    path("api/wake_up_data/", get_wakeUpData, name='get_wake_up'),
+    path("api/post_training_data/", get_postTrainingData, name='get_post_training'),
+    path('api/signup/', register_user, name='register'),
 ]  
