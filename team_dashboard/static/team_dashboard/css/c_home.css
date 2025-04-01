@@ -43,13 +43,13 @@ table{
 }
 thead{
     background-color: darkblue;
-    width: 90%;
+    width: 100%;
 }
 th{
     color: white;
 }
 tbody{
-    width: 90%;
+    width: 100%;
 }
 tr{
     width: 100%;
