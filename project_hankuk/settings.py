@@ -43,13 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'team_dashboard',
-    'webpush',
 ]
-WEBPUSH_SETTINGS={
-    'VAPID_PUBLIC_KEY': os.getenv('V_PUB_KEY'),
-    'VAPID_PRIVATE_KEY': os.getenv('V_PRIV_KEY'),
-    'VAPID_ADMIN_EMAIL': os.getenv('V_EMAIL'),
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

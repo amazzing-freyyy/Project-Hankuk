@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WakeUpForm, PostTrainingForm, AvatarUploadForm
 from django.views.generic import TemplateView
 import plotly.graph_objs as go
-from django.db.models import Avg, F, Window, StdDev, RowRange, Sum, Min, Max
+from django.db.models import Avg, F, Window, StdDev, RowRange, Sum, Min, Max, ExpressionWrapper, FloatField
 from django.db.models.functions import Ln, RowNumber, TruncDate, ExtractYear, ExtractWeek
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
@@ -45,41 +45,48 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         #get all entries
         row_data = Wake_Up_Data.objects.filter(user=athlete).all().annotate(
             lnrmssd=Ln('RMSSD'),
+            ss= ExpressionWrapper(
+                    1000 / (F('SDNN') / 0.7995) + 5.1174,
+                    output_field=FloatField()),
             row_num=Window(
                 expression=RowNumber(),
                 order_by=F('date').asc()
             )
-
         )
         
         #calculate values, then filter entries based on desired interval
         interval = 30
         graph_data= (
             row_data
-            .values('date', 'lnrmssd', 'SDNN', 'RMSSD', 'HR','hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa')
+            .values('date', 'lnrmssd', 'ss', 'SDNN', 'RMSSD', 'HR','hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa')
             .annotate(
                     rolling_avgs_lnrmssd= Window(
                         expression=Avg('lnrmssd'),
                         frame=RowRange(start=-interval, end=0),
-                        order_by=F('date').asc()
-                    ), 
+                        order_by=F('date').asc()), 
                     rolling_stds_lnrmssd= Window(
                         expression=StdDev('lnrmssd'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-                    rolling_avg_sleep= Window(
-                        expression=Avg('hours_of_sleep'),
+                    rolling_avg_hr= Window(
+                        expression=Avg('HR'),
                         frame=RowRange(start=-interval, end=0),
-                        order_by=F('date').asc())
+                        order_by=F('date').asc()),
+                    # rolling_avg_ss= Window(
+                    #     expression=Avg('ss'),
+                    #     frame=RowRange(start=-interval, end=0),
+                    #     order_by=F('date').asc()),
             ).filter(date__lte= start_date).order_by('-date')[:15]
         )
 
         dates= sorted(set(measurement['date'] for measurement in graph_data))
         s_sp_by_date = {date: 0 for date in dates}
+        ss_by_date = {date: 0 for date in dates}
         lnrmssd_by_date = {date: 0 for date in dates}
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
         hr_by_date = {date: 0 for date in dates}
+        hr_avg_by_date = {date: 0 for date in dates}
         hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
         emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
         q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
@@ -115,32 +122,31 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         for measurement in graph_data:
             date = measurement['date']
             lnrmssd = measurement['lnrmssd'] 
-            linfrmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
-            lsuprmssd = abs(0.6 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
+            linfrmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
+            lsuprmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
             sd1= 0.7071 * measurement['RMSSD']
-            sd2= (measurement['SDNN'] / 0.7995)+5.1174
-            ss = 1000 / sd2
+            ss = measurement['ss']
             s_sp = ss/sd1
 
 
             lnrmssd_by_date[date] = lnrmssd
             linfrmssd_by_date[date] = linfrmssd
             lsuprmssd_by_date[date] = lsuprmssd
+            ss_by_date[date] = ss
             s_sp_by_date[date] = s_sp
             hr_by_date[date] = measurement['HR']
+            hr_avg_by_date[date] = measurement['rolling_avg_hr']
 
-        
-        hr_media= sum(list(hr_by_date.values())) / len(list(hr_by_date.values()))
-        hr_colors= ['red' if hr > hr_media else 'green' for hr in list(hr_by_date.values())]
+        hr_colors= ['red' if hr_by_date[date] > hr_avg_by_date[date] else 'green' for date in list(hr_by_date.keys())]
 
         fig = make_subplots(rows=6, cols=1,
-                            subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","LnRMSSD", "Stress Score"),
+                            subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","HR + LnRMSSD", "S:SP + Stress Score"),
                             specs=[[{'type':'polar'}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],
                                    [{'type':'xy', 'secondary_y': True}],
-                                   [{'type':'xy', 'secondary_y':False}]],)
+                                   [{'type':'xy', 'secondary_y':True}]],)
         fig.update_layout(
             showlegend=False,
             autosize=True,
@@ -211,20 +217,32 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         fig.update_layout(
             xaxis=xaxis_layout,
             xaxis_title="Fecha",
-            yaxis_title='LnRMSSD + HR'
+            yaxis_title='HR',
+            yaxis2_title='LnRMSSD',
         )
 
-        s_sp_trace= go.Scatter(
+        ss_trace= go.Scatter(
+            x=list(ss_by_date.keys()),
+            y=list(ss_by_date.values()),
+            mode='lines+markers',
+            name='Stress Score',
+            yaxis='y3',
+        )
+
+        s_sp_trace= go.Bar(
             x=list(s_sp_by_date.keys()),
             y=list(s_sp_by_date.values()),
-            mode='lines+markers',
-            name='SDNN',
+            name='S:SP',
+            yaxis='y4',
         )
 
-        fig.add_trace(trace=s_sp_trace, row=6, col=1)
+        ss_sp_traces= [ss_trace, s_sp_trace]
+        fig.add_traces(data=ss_sp_traces, rows=6, cols=1, secondary_ys=[True,False])
         fig.update_layout(
-            xaxis2=xaxis_layout,
+            xaxis=xaxis_layout,
             xaxis2_title="Fecha",
+            yaxis4_title='Stress Score',
+            yaxis3_title='S:SP'
         )
 
         radar_trace = go.Scatterpolar(
@@ -505,11 +523,37 @@ class Coach_Home(LoginRequiredMixin, ListView):
             # get all athletes
             athletes = Group.objects.get(name= 'athletes').user_set.all()
             
+            interval = 30
             context['data'] = []
             #last three entries
             for athlete in athletes:
-                query = Wake_Up_Data.objects.filter(user=athlete).order_by("-date").first()
-                
+                query = Wake_Up_Data.objects.filter(user=athlete).order_by("-date").annotate(
+                lnrmssd=Ln('RMSSD'),
+                ss= ExpressionWrapper(
+                    1000 / (F('SDNN') / 0.7995) + 5.1174,
+                    output_field=FloatField()),
+                row_num=Window(
+                    expression=RowNumber(),
+                    order_by=F('date').asc())
+                ).annotate(
+                    rolling_avgs_lnrmssd= Window(
+                        expression=Avg('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()), 
+                    rolling_stds_lnrmssd= Window(
+                        expression=StdDev('lnrmssd'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+                    rolling_avg_hr= Window(
+                        expression=Avg('HR'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+                    rolling_avg_ss= Window(
+                        expression=Avg('ss'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+                ).first()
+
                 date = query.date
                 animo= query.emotional_wellness if query.emotional_wellness else 0
                 dolor= query.muscle_pain-5 if query.muscle_pain else 0
@@ -517,23 +561,46 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 recuperacion= query.tiredness if query.tiredness else 0
                 calidad_s= query.quality_of_sleep if query.quality_of_sleep else 0
                 suma= animo + dolor + chispa + recuperacion + calidad_s
-                
-                if suma > 14:
-                    if dolor > -3:
-                        alert = 'green'
-                    elif dolor < -3:
-                        alert = 'red'
-                    else:
-                        alert = 'yellow'
-                elif suma < 10:
-                    alert = 'red'
-                else:
-                    if dolor < -3:
-                        alert= 'red'
-                    else:
-                        alert = 'yellow'
 
-                context['data'].append({'user': athlete, 'alert': alert, 'date':date})
+                lnrmssd = query.lnrmssd
+                linfrmssd = abs(0.06 + query.rolling_stds_lnrmssd - query.rolling_avgs_lnrmssd)
+                lsuprmssd = abs(0.06 + query.rolling_stds_lnrmssd + query.rolling_avgs_lnrmssd)
+                hr = query.HR
+                hr_avg = query.rolling_avg_hr
+                ss = query.ss
+                ss_avg = query.rolling_avg_ss
+                
+                cause=[]
+                alert_counter = 0
+                if lnrmssd > lsuprmssd or lnrmssd < linfrmssd:
+                    alert_counter = alert_counter + 1
+                    cause.append('LnRMSSD')
+                    
+                if hr > hr_avg:
+                    alert_counter = alert_counter + 1
+                    cause.append('HR')
+
+                if suma < 10:
+                    alert_counter = alert_counter + 1
+                    cause.append('Suma')
+
+                if dolor < -2:
+                    alert_counter = alert_counter + 1
+                    cause.append('Dolor')
+                
+                if ss > ss_avg:
+                    alert_counter = alert_counter + 1
+                    cause.append('Stress Score')
+
+                alert = 'blue'
+                if alert_counter > 2:
+                    alert = 'red'
+                elif alert_counter == 2:
+                    alert = 'yellow'
+                elif alert_counter == 1:
+                    alert = 'green'
+
+                context['data'].append({'user': athlete, 'alert': alert, 'date':date, 'cause':', '.join(cause)})
 
                 context['full_name'] = self.request.user.get_full_name()
                 context['is_staff']= self.request.user.groups.filter(name='coaching_staff').exists()

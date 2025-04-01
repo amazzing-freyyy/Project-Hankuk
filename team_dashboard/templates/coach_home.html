@@ -17,7 +17,8 @@
         <tr>
             <th class="left">Atleta</th>
             <th class="middle">Última Encuesta</th>
-            <th class="right">Alerta</th>
+            <th class="middle">Alerta</th>
+            <th class="right">Causa de Alerta</th>
         </tr>
     </thead>
     <tbody>
@@ -26,8 +27,8 @@
                 
                 <td class="left flex"><a class="table" href="{% url 'wellness_dashboard' user=row.user.id %}">{{ row.user.get_full_name}}</a></td>
                 <td class="middle flex"><a class="table middle" href="{% url 'wellness_dashboard' user=row.user.id %}">{{ row.date }}</a></td>
-                <td class="right flex" ><a class="table right" href="{% url 'wellness_dashboard' user=row.user.id %}"><div class="indicator"><div style="background-color: {{row.alert}}; width: 100%; height: 100%; boder-radius: 50%;"></div></div></a></td>
-
+                <td class="middle flex" ><a class="table middle" href="{% url 'wellness_dashboard' user=row.user.id %}"><div class="indicator"><div style="background-color: {{row.alert}}; width: 100%; height: 100%; boder-radius: 50%;"></div></div></a></td>
+                <td class="right flex"><a class="table right" href="{% url 'wellness_dashboard' user=row.user.id %}">{{ row.cause }}</a></td>
             </tr>
         {% endfor %}
     </tbody>
