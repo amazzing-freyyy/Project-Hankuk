@@ -34,28 +34,28 @@ a.table{
 table{
     border-collapse: collapse;
     border:0;
-    padding-top: 25px;
+    /* padding-top: 25px; */
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 100vw;
 }
 thead{
     background-color: darkblue;
-    width: 75%;
+    width: 100%;
 }
 th{
     color: white;
 }
 tbody{
-    width: 75%;
+    width: 100%;
 }
 tr{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width:100%;
 }
 tr.body:nth-child(odd){
     background-color: #e0dede;
@@ -89,6 +89,7 @@ td.flex{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: small;
 }
 
 div.minicontainer{
