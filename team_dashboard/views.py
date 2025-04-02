@@ -72,16 +72,17 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=Avg('HR'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-                    # rolling_avg_ss= Window(
-                    #     expression=Avg('ss'),
-                    #     frame=RowRange(start=-interval, end=0),
-                    #     order_by=F('date').asc()),
-            ).filter(date__lte= start_date).order_by('-date')[:15]
+                    rolling_avg_ss= Window(
+                        expression=Avg('ss'),
+                        frame=RowRange(start=-interval, end=0),
+                        order_by=F('date').asc()),
+            ).filter(date__lte= start_date).order_by('-date')[:interval]
         )
 
         dates= sorted(set(measurement['date'] for measurement in graph_data))
         s_sp_by_date = {date: 0 for date in dates}
         ss_by_date = {date: 0 for date in dates}
+        ss_rolling_avg_by_date = {date: 0 for date in dates}
         lnrmssd_by_date = {date: 0 for date in dates}
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
@@ -133,11 +134,14 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             linfrmssd_by_date[date] = linfrmssd
             lsuprmssd_by_date[date] = lsuprmssd
             ss_by_date[date] = ss
+
             s_sp_by_date[date] = s_sp
             hr_by_date[date] = measurement['HR']
             hr_avg_by_date[date] = measurement['rolling_avg_hr']
+            ss_rolling_avg_by_date[date] = measurement['rolling_avg_ss']
 
-        hr_colors= ['red' if hr_by_date[date] > hr_avg_by_date[date] else 'green' for date in list(hr_by_date.keys())]
+        ss_colors = ['red' if ss_by_date[date] > ss_rolling_avg_by_date[date] else 'cyan' for date in list(ss_by_date.keys())]
+        hr_colors= ['red' if hr_by_date[date] > hr_avg_by_date[date] else 'cyan' for date in list(hr_by_date.keys())]
 
         fig = make_subplots(rows=6, cols=1,
                             subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","HR + LnRMSSD", "S:SP + Stress Score"),
@@ -221,22 +225,24 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             yaxis2_title='LnRMSSD',
         )
 
-        ss_trace= go.Scatter(
-            x=list(ss_by_date.keys()),
-            y=list(ss_by_date.values()),
-            mode='lines+markers',
-            name='Stress Score',
-            yaxis='y3',
-        )
-
-        s_sp_trace= go.Bar(
+        s_sp_trace= go.Scatter(
             x=list(s_sp_by_date.keys()),
             y=list(s_sp_by_date.values()),
+            mode='lines+markers',
             name='S:SP',
-            yaxis='y4',
+            yaxis='y3',
+            marker=dict(color='blue')
         )
 
-        ss_sp_traces= [ss_trace, s_sp_trace]
+        ss_trace= go.Bar(
+            x=list(ss_by_date.keys()),
+            y=list(ss_by_date.values()),
+            name='Stress Score',
+            yaxis='y4',
+            marker=dict(color=ss_colors)
+        )
+
+        ss_sp_traces= [s_sp_trace, ss_trace]
         fig.add_traces(data=ss_sp_traces, rows=6, cols=1, secondary_ys=[True,False])
         fig.update_layout(
             xaxis=xaxis_layout,
@@ -318,6 +324,8 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         if not start_date:
             start_date= datetime.now()
 
+        interval= 30
+
         #get selected athlete
         athlete_id = self.kwargs.get('user')
         athlete = User.objects.filter(id= athlete_id).first()
@@ -351,11 +359,11 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )[:15], filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
+        )[:interval], filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )[:15]]
+        )[:interval]]
 
         dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
                        sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
@@ -381,7 +389,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                     total=Sum(F('time_of_activity') * F('perceived_strain_of_activity')),
                     start_date=Min('date_only'),
                     end_date=Max('date_only')
-                ).order_by('-start_date')[:15])
+                ).order_by('-start_date')[:interval])
 
         weeks= sorted(set(entry['start_date'] for entry in weekly_data))
 
