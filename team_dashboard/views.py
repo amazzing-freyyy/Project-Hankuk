@@ -12,7 +12,7 @@ from django.db.models import Avg, F, Window, StdDev, RowRange, Sum, Min, Max, Ex
 from django.db.models.functions import Ln, RowNumber, TruncDate, ExtractYear, ExtractWeek
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 import json
 from plotly.subplots import make_subplots
 import logging
@@ -76,7 +76,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=Avg('ss'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-            ).filter(date__lte= start_date).order_by('-date')[:interval]
+            ).filter(date__lte= start_date).order_by('-date')
         )
 
         dates= sorted(set(measurement['date'] for measurement in graph_data))
@@ -193,27 +193,15 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
 
         xaxis_layout=dict(
                 type="date",
-                # rangeselector=dict(
-                #     buttons=list([
-                #         dict(count=14,
-                #              label='1w',
-                #              step="day",
-                #              stepmode="backward"),
-                #         dict(count=1.3,
-                #              label='1m',
-                #              step="month",
-                #              stepmode="backward"),
-                #         dict(count=6,
-                #             label="6m",
-                #             step="month",
-                #             stepmode="backward"),
-                #         dict(count=1,
-                #             label="1y",
-                #             step="year",
-                #             stepmode="backward"),
-                #         dict(step="all")
-                #     ])
-                # ),
+                range=[dates[-1]-timedelta(days=15), dates[-1]+timedelta(days=1)],
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=15, label="2W", step="day", stepmode="todate"),   # Last 7 days
+                        dict(count=30, label="1M", step="day", stepmode="todate"),
+                        dict(count=6, label="6M", step="month", stepmode="todate"),
+                        dict(count=1, label="1Y", step="year", stepmode="todate"),
+                    ])
+                ),
             )
         
         lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
@@ -245,7 +233,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         ss_sp_traces= [s_sp_trace, ss_trace]
         fig.add_traces(data=ss_sp_traces, rows=6, cols=1, secondary_ys=[True,False])
         fig.update_layout(
-            xaxis=xaxis_layout,
+            xaxis2=xaxis_layout,
             xaxis2_title="Fecha",
             yaxis4_title='Stress Score',
             yaxis3_title='S:SP'
@@ -297,7 +285,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         )
         fig.add_trace(trace=comments_trace, row=4, col=1)
 
-        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
+        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False, "responsive": True}}
 
         return data
 
@@ -359,11 +347,11 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )[:interval], filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
+        ), filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
             date_only=TruncDate("date")
         ).values(
             "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )[:interval]]
+        )]
 
         dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
                        sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
@@ -389,7 +377,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                     total=Sum(F('time_of_activity') * F('perceived_strain_of_activity')),
                     start_date=Min('date_only'),
                     end_date=Max('date_only')
-                ).order_by('-start_date')[:interval])
+                ).order_by('-start_date'))
 
         weeks= sorted(set(entry['start_date'] for entry in weekly_data))
 
@@ -426,38 +414,28 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             y=list(time_x_strain_daily_by_date[0].values()),
             hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain_daily_by_date[0].keys())],
             textposition='inside',
-            name=''
+            name='',
+            marker=dict(color="cyan")
         ),go.Bar(
             x=list(time_x_strain_daily_by_date[1].keys()),
             y=list(time_x_strain_daily_by_date[1].values()),
             hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain_daily_by_date[1].keys())],
             textposition='inside',
-            name=''
+            name='',
+            marker=dict(color="magenta")
         )]
 
         xaxis_layout=dict(
                 type="date",
-                # rangeselector=dict(
-                #     buttons=list([
-                #         dict(count=7,
-                #              label='1w',
-                #              step="day",
-                #              stepmode="backward"),
-                #         dict(count=1.3,
-                #              label='1m',
-                #              step="month",
-                #              stepmode="backward"),
-                #         dict(count=6,
-                #             label="6m",
-                #             step="month",
-                #             stepmode="backward"),
-                #         dict(count=1,
-                #             label="1y",
-                #             step="year",
-                #             stepmode="backward"),
-                #         dict(step="all")
-                #     ])
-                # ),
+                range=[dates[0][-1]-timedelta(days=15), dates[0][-1]+timedelta(days=1)],
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=15, label="2W", step="day", stepmode="todate"),   # Last 7 days
+                        dict(count=30, label="1M", step="day", stepmode="todate"),
+                        dict(count=6, label="6M", step="month", stepmode="todate"),
+                        dict(count=1, label="1Y", step="year", stepmode="todate"),
+                    ])
+                ),
             )
         
         fig.add_traces(data=time_x_rpe_daily_trace, rows=1, cols=1)
@@ -487,7 +465,14 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                     xaxis=xaxis_layout,
                     xaxis_title="Fecha",
                     barmode= 'stack',
-                    xaxis2= dict(type='date')
+                    xaxis2= dict(type='date', range=[weeks[-1]-timedelta(days=60), weeks[-1]+timedelta(days=4)],
+                                 rangeselector=dict(
+                                    buttons=list([
+                                        dict(count=60, label="2M", step="day", stepmode="todate"),
+                                        dict(count=180, label="6M", step="day", stepmode="todate"),
+                                        dict(count=365, label="1Y", step="day", stepmode="todate"),
+                                    ])
+                ),)
         )
 
         pain_trace = go.Table(
