@@ -1,4 +1,3 @@
-from django.http.response import HttpResponse as HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User, Group
@@ -10,7 +9,7 @@ from django.views.generic import TemplateView
 import plotly.graph_objs as go
 from django.db.models import Avg, F, Window, StdDev, RowRange, Sum, Min, Max, ExpressionWrapper, FloatField
 from django.db.models.functions import Ln, RowNumber, TruncDate, ExtractYear, ExtractWeek
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth.views import LoginView
 from datetime import datetime, time, timedelta
 import json
@@ -55,7 +54,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
         )
         
         #calculate values, then filter entries based on desired interval
-        interval = 30
+        interval = 7
         graph_data= (
             row_data
             .values('date', 'lnrmssd', 'ss', 'SDNN', 'RMSSD', 'HR','hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa')
@@ -68,26 +67,25 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         expression=StdDev('lnrmssd'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-                    rolling_avg_hr= Window(
-                        expression=Avg('HR'),
-                        frame=RowRange(start=-interval, end=0),
-                        order_by=F('date').asc()),
-                    rolling_avg_ss= Window(
-                        expression=Avg('ss'),
-                        frame=RowRange(start=-interval, end=0),
-                        order_by=F('date').asc()),
+                    hr_z_score= ExpressionWrapper(
+                        (F('HR') - Window(expression=Avg('HR'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc())) / Window(expression=StdDev('HR'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc()),
+                        output_field=FloatField()),
+                    ss_z_score= ExpressionWrapper(
+                        (F('ss') - Window(expression=Avg('ss'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc())) / Window(expression=StdDev('ss'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc()),
+                        output_field=FloatField())
             ).filter(date__lte= start_date).order_by('-date')
         )
 
         dates= sorted(set(measurement['date'] for measurement in graph_data))
         s_sp_by_date = {date: 0 for date in dates}
         ss_by_date = {date: 0 for date in dates}
-        ss_rolling_avg_by_date = {date: 0 for date in dates}
+        ss_z_by_date = {date: 0 for date in dates}
         lnrmssd_by_date = {date: 0 for date in dates}
         linfrmssd_by_date = {date: 0 for date in dates}
         lsuprmssd_by_date = {date: 0 for date in dates}
         hr_by_date = {date: 0 for date in dates}
-        hr_avg_by_date = {date: 0 for date in dates}
+        hr_z_by_date = {date: 0 for date in dates}
+
         hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
         emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
         q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
@@ -137,11 +135,19 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
 
             s_sp_by_date[date] = s_sp
             hr_by_date[date] = measurement['HR']
-            hr_avg_by_date[date] = measurement['rolling_avg_hr']
-            ss_rolling_avg_by_date[date] = measurement['rolling_avg_ss']
+            hr_z_by_date[date] = measurement['hr_z_score']
+            ss_z_by_date[date] = measurement['ss_z_score']
 
-        ss_colors = ['red' if ss_by_date[date] > ss_rolling_avg_by_date[date] else 'cyan' for date in list(ss_by_date.keys())]
-        hr_colors= ['red' if hr_by_date[date] > hr_avg_by_date[date] else 'cyan' for date in list(hr_by_date.keys())]
+            def check_z_score(value):
+                if abs(value) >=2 and abs(value) < 3:
+                    return '#86CE00'
+                elif abs(value) >= 3:
+                    return 'red'
+                else:
+                    return 'cyan'
+
+        ss_colors = [check_z_score(ss_z_by_date[date]) if not ss_z_by_date[date] == None else 'cyan' for date in list(ss_by_date.keys())]
+        hr_colors= [check_z_score(hr_z_by_date[date]) if not hr_z_by_date[date] == None else 'cyan' for date in list(hr_by_date.keys())]
 
         fig = make_subplots(rows=6, cols=1,
                             subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","HR + LnRMSSD", "S:SP + Stress Score"),
@@ -516,7 +522,7 @@ class Coach_Home(LoginRequiredMixin, ListView):
             # get all athletes
             athletes = Group.objects.get(name= 'athletes').user_set.all()
             
-            interval = 30
+            interval = 7
             context['data'] = []
             #last three entries
             for athlete in athletes:
@@ -537,14 +543,12 @@ class Coach_Home(LoginRequiredMixin, ListView):
                         expression=StdDev('lnrmssd'),
                         frame=RowRange(start=-interval, end=0),
                         order_by=F('date').asc()),
-                    rolling_avg_hr= Window(
-                        expression=Avg('HR'),
-                        frame=RowRange(start=-interval, end=0),
-                        order_by=F('date').asc()),
-                    rolling_avg_ss= Window(
-                        expression=Avg('ss'),
-                        frame=RowRange(start=-interval, end=0),
-                        order_by=F('date').asc()),
+                    hr_z_score= ExpressionWrapper(
+                        (F('HR') - Window(expression=Avg('HR'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc())) / Window(expression=StdDev('HR'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc()),
+                        output_field=FloatField()),
+                    ss_z_score= ExpressionWrapper(
+                        (F('ss') - Window(expression=Avg('ss'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc())) / Window(expression=StdDev('ss'), frame=RowRange(start=-interval, end=0), order_by=F('date').asc()),
+                        output_field=FloatField())
                 ).first()
 
                 date = query.date
@@ -558,10 +562,8 @@ class Coach_Home(LoginRequiredMixin, ListView):
                 lnrmssd = query.lnrmssd
                 linfrmssd = abs(0.06 + query.rolling_stds_lnrmssd - query.rolling_avgs_lnrmssd)
                 lsuprmssd = abs(0.06 + query.rolling_stds_lnrmssd + query.rolling_avgs_lnrmssd)
-                hr = query.HR
-                hr_avg = query.rolling_avg_hr
-                ss = query.ss
-                ss_avg = query.rolling_avg_ss
+                hr_z = query.hr_z_score
+                ss_z = query.ss_z_score
                 
                 cause=[]
                 alert_counter = 0
@@ -569,7 +571,7 @@ class Coach_Home(LoginRequiredMixin, ListView):
                     alert_counter = alert_counter + 1
                     cause.append('LnRMSSD')
                     
-                if hr > hr_avg:
+                if abs(hr_z) >= 2.5:
                     alert_counter = alert_counter + 1
                     cause.append('HR')
 
@@ -581,7 +583,7 @@ class Coach_Home(LoginRequiredMixin, ListView):
                     alert_counter = alert_counter + 1
                     cause.append('Dolor')
                 
-                if ss > ss_avg:
+                if abs(ss_z) >= 2.5:
                     alert_counter = alert_counter + 1
                     cause.append('Stress Score')
 
