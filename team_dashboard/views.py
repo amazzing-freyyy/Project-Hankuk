@@ -16,6 +16,7 @@ import json
 from plotly.subplots import make_subplots
 import logging
 import numpy as np
+from collections import Counter
 
 logger = logging.getLogger(__name__) 
 
@@ -344,7 +345,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             filters[f"{field}__lte"] = upper
 
         filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
-                                ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
+                                ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
                                 ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
                                 ).order_by("-date")
 
@@ -380,7 +381,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 .annotate(year=ExtractYear('date'), week= ExtractWeek('date'), date_only=TruncDate('date'))
                 .values('year', 'week')
                 .annotate(
-                    total=Sum(F('time_of_activity') * F('perceived_strain_of_activity')),
+                    total=Sum(F('time_of_activity') * F('perceived_strain_of_activity') * F('perceived_strain_of_activity')),
                     start_date=Min('date_only'),
                     end_date=Max('date_only')
                 ).order_by('-start_date'))
@@ -405,30 +406,52 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             
             prev_total= measurement['total']
 
-        comments= filtered_objects.last()['comments']
-        pain= filtered_objects.last()['pain']
+        last_week= datetime.now() - timedelta(days=7)
+        last_week_activities= Post_Training_Data.objects.filter(user=athlete, date__gte=last_week).values('type_of_activity', 'time_of_activity').all()
+
+        activities= {"Fuerza": last_week_activities.filter(type_of_activity__contains="fuerza").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Específico": last_week_activities.filter(type_of_activity__contains="específico").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Halterofilia": last_week_activities.filter(type_of_activity__contains="halterofilia").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Test": last_week_activities.filter(type_of_activity__contains="test").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Velocidad": last_week_activities.filter(type_of_activity__contains="velocidad").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Soltura": last_week_activities.filter(type_of_activity__contains="soltura").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Libre": last_week_activities.filter(type_of_activity__contains="libre").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Téc. táctico": last_week_activities.filter(type_of_activity__contains="técnico táctico").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Técnico": last_week_activities.filter(type_of_activity__contains="tecnico").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Paos": last_week_activities.filter(type_of_activity__contains="paos").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Combate": last_week_activities.filter(type_of_activity__contains="combate").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Competición": last_week_activities.filter(type_of_activity__contains="competición").aggregate(time=Sum('time_of_activity'))['time'],
+                     "Recovery": last_week_activities.filter(type_of_activity__contains="recovery").aggregate(time=Sum('time_of_activity'))['time'],}
         
-        fig = make_subplots(rows=4, cols=1,
-                            subplot_titles=("RPE x Minutos Diario", "RPE x Minutos Semanal", "Dolores", "Comentarios"),
+        print(activities)
+
+        comments= filtered_objects.first()['comments']
+        pain= filtered_objects.first()['pain']
+        
+        fig = make_subplots(rows=5, cols=1,
+                            subplot_titles=("RPE^2 x Minutos Diario", "RPE^2 x Minutos Semanal", "Resumen de entrenos en la semana",  "Dolores", "Comentarios"),
                             specs=[[{'type':'xy'}],
                                    [{'type':'xy', 'secondary_y': True}],
+                                   [{'type':'domain'}],
                                    [{'type':'table'}],
                                    [{'type':'table'}],])
 
         time_x_rpe_daily_trace= [go.Bar(
             x=list(time_x_strain_daily_by_date[0].keys()),
             y=list(time_x_strain_daily_by_date[0].values()),
-            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain_daily_by_date[0].keys())],
+            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain_daily_by_date[0].keys())],
             textposition='inside',
             name='',
-            marker=dict(color="cyan")
+            marker=dict(color="cyan"),
+            showlegend=False
         ),go.Bar(
             x=list(time_x_strain_daily_by_date[1].keys()),
             y=list(time_x_strain_daily_by_date[1].values()),
-            hovertemplate=[f'<b>Minutos x RPE:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain_daily_by_date[1].keys())],
+            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain_daily_by_date[1].keys())],
             textposition='inside',
             name='',
-            marker=dict(color="magenta")
+            marker=dict(color="magenta"),
+            showlegend=False
         )]
 
         xaxis_layout=dict(
@@ -450,20 +473,21 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             x=list(time_x_rpe_by_week.keys()),
             y=list(time_x_rpe_by_week.values()),
             width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe_by_week),
-            hovertemplate= [f'<b>Minutos x RPE:</b> {time_x_rpe_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe_by_week.keys())],
+            hovertemplate= [f'<b>Minutos x RPE^2:</b> {time_x_rpe_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe_by_week.keys())],
             textposition='inside',
             name='',
+            showlegend=False
         )
         percent_diff_trace= go.Scatter(
             x= list(percent_diff.keys()),
             y= list(percent_diff.values()),
             hovertemplate=[f'<b>Diferencia:</b> {percent_diff[i]:.2f}%' for i in list(percent_diff.keys())],
             name='',
+            showlegend=False
         )
         
         fig.add_traces(data=[time_x_rpe_weekly_trace, percent_diff_trace], rows=2, cols=1, secondary_ys=[False, True])
         fig.update_layout(
-                    showlegend=False,
                     autosize=True,
                     dragmode= 'pan',
                     hovermode='closest',
@@ -481,15 +505,27 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 ),)
         )
 
-        pain_trace = go.Table(
-            cells= dict(values=[pain])
+        weekly_summary_trace = go.Pie(
+            labels=list(activities.keys()),
+            values=list(activities.values()),
+            textposition='inside',
+            hovertemplate=[f'<b>Actividad:</b> {i}<br><b>Tiempo:</b> {activities[i]}min' for i in list(activities.keys())],
+            name='',
+            textinfo= 'label+percent',
+            insidetextorientation='radial',
+            showlegend=False
         )
-        fig.add_trace(trace=pain_trace, row=3, col=1)
+        fig.add_trace(trace=weekly_summary_trace, row=3, col=1)
+
+        pain_trace = go.Table(
+            cells= dict(values=[pain]),
+        )
+        fig.add_trace(trace=pain_trace, row=4, col=1)
 
         comments_trace = go.Table(
-            cells= dict(values=[comments])
+            cells= dict(values=[comments]),
         )
-        fig.add_trace(trace=comments_trace, row=4, col=1)
+        fig.add_trace(trace=comments_trace, row=5, col=1)
 
         data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
 

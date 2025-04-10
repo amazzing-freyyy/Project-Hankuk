@@ -106,7 +106,6 @@ class TrainingType(MultiWidget):
         ('físico', 'Físico'),
         ('competición', 'Competición'),
         ('recovery', 'Recovery'),
-        ('mental coaching', 'Mental Coaching'),
     ]
 
     PHYSICAL_TRAINING_TYPE=[
@@ -123,6 +122,7 @@ class TrainingType(MultiWidget):
         ('soltura','Soltura'),
         ('libre','Libre'),
         ('técnico táctico','Técnico Táctico'),
+        ('tecnico','Técnico'),
         ('paos','Paos'),
         ('combate', 'Combate'),
     ]

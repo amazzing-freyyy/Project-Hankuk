@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Wake_Up_Data, Post_Training_Data
+from .models import *
 
 class Wake_Up_Data_Admin(admin.ModelAdmin):
     list_display = ('date', 'user')  # Fields to display in the list view
