@@ -18,9 +18,27 @@ logger = logging.getLogger(__name__)
 def protected_view(request):
     return Response({'message': f'Hello, {request.user.username}! This is a protected route.'})
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def new_WUD(request):
+    serializer = WUDSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def new_PT(request):
+    serializer = PTDSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_wakeUpData(request):
+def get_allWakeUpData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
         data = Wake_Up_Data.objects.filter(user=user).all()
@@ -134,7 +152,7 @@ def get_wellnessData(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_postTrainingData(request):
+def get_allPostTrainingData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
         data = Post_Training_Data.objects.filter(user=user).all()
@@ -152,23 +170,61 @@ def get_postTrainingData(request):
 def get_rpe2XtimeData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
-        data = Post_Training_Data.objects.filter(user=user).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all()
+        time_threshold= datetime.time(12,0)
+        data = [Post_Training_Data.objects.filter(user=user, date__time__lt=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),
+                Post_Training_Data.objects.filter(user=user, date__time__gte=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),]
         username = user.username
     else:
         username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
         data = Post_Training_Data.objects.filter(user=user).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all()
     
+    dates= [list(data[0].values_list('date', flat=True)), 
+            list(data[1].values_list('date', flat=True))]
+
+    rpe= [np.array(list(data[0].values_list('perceived_strain_of_activity'))).flatten(),
+          np.array(list(data[1].values_list('perceived_strain_of_activity'))).flatten()]
+
+    time= [np.array(list(data[0].values_list('time_of_activity'))).flatten(),
+           np.array(list(data[1].values_list('time_of_activity'))).flatten()]
+
+    rpe2Xtime=  [rpe[0] * rpe[0] * time[0],
+                 rpe[1] * rpe[1] * time[1]]
+
+    activity= [np.array(list(data[0].values_list('type_of_activity'))).flatten(),
+               np.array(list(data[1].values_list('type_of_activity'))).flatten()]
+
+    graph_data = {'morning': {dates[0][i].strftime('%d, %b, %Y %H:%M'): {'rpe2Xtime': rpe2Xtime[0][i], 'activity':activity[0][i]} for i in range(len(dates[0]))},
+                  'afternoon': {dates[1][i].strftime('%d, %b, %Y %H:%M'): {'rpe2Xtime': rpe2Xtime[1][i], 'activity':activity[1][i]} for i in range(len(dates[1]))}}
+
+    return Response({'athleteUserName':username, 'graph_data':graph_data})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_lastWeeksTrainings(request):
+    user = request.user
+
+    date_str = request.data.get('date')
+    if date_str:
+        date= datetime.date.fromisoformat(date_str)
+    else:
+        date= datetime.date.today()
+
+    if user.groups.filter(name='athletes').exists():
+        username = user.username
+    else:
+        username= request.data.get('athleteUserName')
+        user = User.objects.filter(username=username).first()
+
+    data = Post_Training_Data.objects.filter(user=user, date__gte= date-datetime.timedelta(days=7), date__lte= date).values('date', 'type_of_activity', 'time_of_activity').all()
+    
     dates= list(data.values_list('date', flat=True))
 
-    rpe= np.array(list(data.values_list('perceived_strain_of_activity'))).flatten()
     time= np.array(list(data.values_list('time_of_activity'))).flatten()
-
-    rpe2Xtime=  rpe * rpe * time
 
     activity= np.array(list(data.values_list('type_of_activity'))).flatten()
 
-    graph_data = {dates[i].strftime('%d, %b, %Y'): {'rpe2Xtime': rpe2Xtime[i], 'activity':activity[i]} for i in range(len(dates))}
+    graph_data = {dates[i].strftime('%d, %b, %Y %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
@@ -224,3 +280,93 @@ def register_user(request):
     user.profile.gender = gender
     user.profile.save()
     return Response({"message": "User registered successfully!"}, status=status.HTTP_201_CREATED)
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def update_user(request, username):
+    try:
+        instance = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    partial = request.method == 'PATCH'
+    serializer = UserSerializer(instance, data=request.data, partial=partial)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def update_WUD(request, slug):
+    try:
+        instance = Wake_Up_Data.objects.get(slug=slug)
+    except Wake_Up_Data.DoesNotExist:
+        return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    partial = request.method == 'PATCH'
+    serializer = WUDSerializer(instance, data=request.data, partial=partial)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def update_PT(request, slug):
+    try:
+        instance = Post_Training_Data.objects.get(slug=slug)
+    except Post_Training_Data.DoesNotExist:
+        return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    partial = request.method == 'PATCH'
+    serializer = PTDSerializer(instance, data=request.data, partial=partial)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_user(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Check if the requesting user is the author of the post
+    if request.user != user and not request.user.is_staff:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+
+    user.delete()
+    return Response({'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_WUD(request, slug):
+    try:
+        data = Wake_Up_Data.objects.get(slug=slug)
+    except Wake_Up_Data.DoesNotExist:
+        return Response({'error': 'Data not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Check if the requesting user is the author of the post
+    if request.user != data.user and not request.user.is_staff:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+
+    data.delete()
+    return Response({'message': 'Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_PT(request, slug):
+    try:
+        data = Post_Training_Data.objects.get(slug=slug)
+    except Post_Training_Data.DoesNotExist:
+        return Response({'error': 'Data not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Check if the requesting user is the author of the post
+    if request.user != data.user and not request.user.is_staff:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+
+    data.delete()
+    return Response({'message': 'Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
