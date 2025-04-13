@@ -307,7 +307,6 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
     
     def post(self, request, *args, **kargs):
         data = json.loads(request.body)
-        print(request)
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
@@ -319,7 +318,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         if not start_date:
             start_date= datetime.now()
 
-        interval= 30
+        interval= 7
 
         #get selected athlete
         athlete_id = self.kwargs.get('user')
@@ -363,7 +362,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
                        sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
         
-        time_x_strain_daily_by_date = [{date: 0 for date in dates[0]},
+        time_x_strain2_daily_by_date = [{date: 0 for date in dates[0]},
                                        {date: 0 for date in dates[1]}]
 
         activities_by_date = [{date: 0 for date in dates[0]},
@@ -374,7 +373,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             for measurement in workout:
                 date= measurement['date_only']
 
-                time_x_strain_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
+                time_x_strain2_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
                 activities_by_date[i][date] = measurement['type_of_activity']
         
         weekly_data= (filtered_objects
@@ -388,15 +387,15 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
 
         weeks= sorted(set(entry['start_date'] for entry in weekly_data))
 
-        time_x_rpe_by_week= {week: 0 for week in weeks}
+        time_x_rpe2_by_week= {week: 0 for week in weeks}
         week_dates= {week: 0 for week in weeks}
         percent_diff= {week: 0 for week in weeks}
 
         prev_total = None
-        for measurement in weekly_data:
+        for measurement in weekly_data.order_by('start_date'):
             date= measurement['start_date']
 
-            time_x_rpe_by_week[date] = measurement['total']
+            time_x_rpe2_by_week[date] = measurement['total']
             week_dates[date]= f'{measurement['start_date'].strftime("%d-%b-%Y")} a {measurement['end_date'].strftime("%d-%b-%Y")}'
 
             if prev_total is not None:
@@ -423,8 +422,6 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                      "Competición": last_week_activities.filter(type_of_activity__contains="competición").aggregate(time=Sum('time_of_activity'))['time'],
                      "Recovery": last_week_activities.filter(type_of_activity__contains="recovery").aggregate(time=Sum('time_of_activity'))['time'],}
         
-        print(activities)
-
         comments= filtered_objects.first()['comments']
         pain= filtered_objects.first()['pain']
         
@@ -436,18 +433,18 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                                    [{'type':'table'}],
                                    [{'type':'table'}],])
 
-        time_x_rpe_daily_trace= [go.Bar(
-            x=list(time_x_strain_daily_by_date[0].keys()),
-            y=list(time_x_strain_daily_by_date[0].values()),
-            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain_daily_by_date[0].keys())],
+        time_x_rpe2_daily_trace= [go.Bar(
+            x=list(time_x_strain2_daily_by_date[0].keys()),
+            y=list(time_x_strain2_daily_by_date[0].values()),
+            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain2_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain2_daily_by_date[0].keys())],
             textposition='inside',
             name='',
             marker=dict(color="cyan"),
             showlegend=False
         ),go.Bar(
-            x=list(time_x_strain_daily_by_date[1].keys()),
-            y=list(time_x_strain_daily_by_date[1].values()),
-            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain_daily_by_date[1].keys())],
+            x=list(time_x_strain2_daily_by_date[1].keys()),
+            y=list(time_x_strain2_daily_by_date[1].values()),
+            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain2_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain2_daily_by_date[1].keys())],
             textposition='inside',
             name='',
             marker=dict(color="magenta"),
@@ -467,13 +464,13 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                 ),
             )
         
-        fig.add_traces(data=time_x_rpe_daily_trace, rows=1, cols=1)
+        fig.add_traces(data=time_x_rpe2_daily_trace, rows=1, cols=1)
 
-        time_x_rpe_weekly_trace= go.Bar(
-            x=list(time_x_rpe_by_week.keys()),
-            y=list(time_x_rpe_by_week.values()),
-            width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe_by_week),
-            hovertemplate= [f'<b>Minutos x RPE^2:</b> {time_x_rpe_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe_by_week.keys())],
+        time_x_rpe2_weekly_trace= go.Bar(
+            x=list(time_x_rpe2_by_week.keys()),
+            y=list(time_x_rpe2_by_week.values()),
+            width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe2_by_week),
+            hovertemplate= [f'<b>Minutos x RPE^2:</b> {time_x_rpe2_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe2_by_week.keys())],
             textposition='inside',
             name='',
             showlegend=False
@@ -486,7 +483,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
             showlegend=False
         )
         
-        fig.add_traces(data=[time_x_rpe_weekly_trace, percent_diff_trace], rows=2, cols=1, secondary_ys=[False, True])
+        fig.add_traces(data=[time_x_rpe2_weekly_trace, percent_diff_trace], rows=2, cols=1, secondary_ys=[False, True])
         fig.update_layout(
                     autosize=True,
                     dragmode= 'pan',
@@ -542,7 +539,6 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
     
     def post(self, request, *args, **kargs):
         data = json.loads(request.body)
-        print(request)
         start_date = data.get('start_date')
         chart_data = self.get_chart_data(start_date=start_date)
         return JsonResponse(chart_data)
@@ -739,7 +735,6 @@ class PostTrainingFormView(LoginRequiredMixin, FormView):
     def form_invalid(self, form):
         # Call the parent class's method to maintain the normal behavior
         response = super().form_invalid(form)
-        print(form.errors)
         # You can add any other context data you want here if needed
         response.context_data['form_errors'] = form.errors
         return response
