@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'team_dashboard',
+    # 'team_dashboard.apps.TeamDashboardConfig',
     'rest_framework',
     'rest_framework_simplejwt',
     'django_extensions',
+    'channels',
 ]
 
 REST_FRAMEWORK = {
@@ -82,8 +84,22 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project_hankuk.wsgi.application'
+ASGI_APPLICATION =  'project_hankuk.asgi.application'
+# WSGI_APPLICATION = 'project_hankuk.wsgi.application'
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("localhost", 6379)],
+#         },
+#     },
+# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
