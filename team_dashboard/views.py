@@ -89,7 +89,7 @@ def get_lnrmssdData(request):
 
     p_z_score= np.concatenate([np.full(p_len, 'NaN'), z_score])
 
-    graph_data= {dates[i].strftime('%d, %b, %Y'): {'hr':hr[i], 'hr_z_score':p_z_score[i],'lnrmssd': lnrmssd[i], 'linfrmssd':p_linfrmssd[i], 'lsuprmssd':p_lsuprmssd[i]} for i in range(len(dates))}
+    graph_data= {dates[i].strftime('%Y-%m-%d'): {'hr':hr[i], 'hr_z_score':p_z_score[i],'lnrmssd': lnrmssd[i], 'linfrmssd':p_linfrmssd[i], 'lsuprmssd':p_lsuprmssd[i]} for i in range(len(dates))}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
@@ -123,7 +123,7 @@ def get_ssData(request):
     p_len= interval-1
     p_z_score= np.concatenate([np.full(p_len, 'NaN'), z_score])
 
-    graph_data= graph_data= {dates[i].strftime('%d, %b, %Y'): {'ss': ss[i], 'sp':sp[i], 'ss_z_score':p_z_score[i]} for i in range(len(dates))}
+    graph_data= graph_data= {dates[i].strftime('%Y-%m-%d'): {'ss': ss[i], 'sp':sp[i], 'ss_z_score':p_z_score[i]} for i in range(len(dates))}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
@@ -147,7 +147,7 @@ def get_wellnessData(request):
     else:
         data = Wake_Up_Data.objects.filter(user=user).values('date', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa').order_by('-date').first()
     
-    graph_data={'date':data['date'].strftime('%d, %b, %Y'), 'h_sleep':data['hours_of_sleep'], 'wellness':data['emotional_wellness'], 'q_sleep':data['quality_of_sleep'], 'recovery':data['tiredness'], 'comments':data['comments'], 'menstruation':data['menstruation'], 'pain':data['muscle_pain'], 'chispa':data['chispa']}
+    graph_data={'date':data['date'].strftime('%Y-%m-%d'), 'h_sleep':data['hours_of_sleep'], 'wellness':data['emotional_wellness'], 'q_sleep':data['quality_of_sleep'], 'recovery':data['tiredness'], 'comments':data['comments'], 'menstruation':data['menstruation'], 'pain':data['muscle_pain'], 'chispa':data['chispa']}
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
 @api_view(['GET'])
@@ -194,8 +194,8 @@ def get_rpe2XtimeData(request):
     activity= [np.array(list(data[0].values_list('type_of_activity'))).flatten(),
                np.array(list(data[1].values_list('type_of_activity'))).flatten()]
 
-    graph_data = {'morning': {dates[0][i].strftime('%d, %b, %Y %H:%M'): {'rpe2Xtime': rpe2Xtime[0][i], 'activity':activity[0][i]} for i in range(len(dates[0]))},
-                  'afternoon': {dates[1][i].strftime('%d, %b, %Y %H:%M'): {'rpe2Xtime': rpe2Xtime[1][i], 'activity':activity[1][i]} for i in range(len(dates[1]))}}
+    graph_data = {'morning': {dates[0][i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[0][i], 'activity':activity[0][i]} for i in range(len(dates[0]))},
+                  'afternoon': {dates[1][i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[1][i], 'activity':activity[1][i]} for i in range(len(dates[1]))}}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
@@ -224,7 +224,7 @@ def get_lastWeeksTrainings(request):
 
     activity= np.array(list(data.values_list('type_of_activity'))).flatten()
 
-    graph_data = {dates[i].strftime('%d, %b, %Y %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
+    graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
@@ -257,7 +257,7 @@ def get_PTData(request):
 
     comments =list(data.values_list('comments', flat=True))
 
-    graph_data= {dates[i].strftime('%d, %b, %Y %H:%M'): {'pain':pain[i], 'comments':comments[i]} for i in range(len(dates))}
+    graph_data= {dates[i].strftime('%Y-%m-%d %H:%M'): {'pain':pain[i], 'comments':comments[i]} for i in range(len(dates))}
     
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
