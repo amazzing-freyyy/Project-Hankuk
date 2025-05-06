@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -215,4 +216,12 @@ LOGGING = {
             "propagate": True,
         },
     },
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),        # short-lived access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),          # longer-lived refresh token
+    'ROTATE_REFRESH_TOKENS': True,                        # enables refresh rotation
+    'BLACKLIST_AFTER_ROTATION': True,                     # invalidates used refresh tokens
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
