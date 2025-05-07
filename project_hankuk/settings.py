@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -110,8 +111,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NM'),  # Replace with your database name
         'USER': os.getenv('DB_USER'),  # Replace with your MySQL username
         'PASSWORD': os.getenv('DB_PASS'),  # Replace with your MySQL password
-        'HOST': os.getenv('DB_IP'),  # Use '127.0.0.1' for local development
-        # 'HOST': 'localhost',
+#        'HOST': os.getenv('DB_IP'),  # Use '127.0.0.1' for local development
+         'HOST': 'localhost',
         'PORT': '3306',  # Default MySQL port
         'OPTIONS': {
             'charset': 'utf8mb4',  # Supports full UTF-8 encoding
@@ -215,4 +216,13 @@ LOGGING = {
             "propagate": True,
         },
     },
+}
+
+
+SIMPLE_JWT = {
+	'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+	'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+	'ROTATE_REFRESH_TOKENS': True,
+	'BLACKLIST_AFTER_ROTATION': True,
+	'AUTH_HEADER_TYPES': ('Bearer',),
 }
