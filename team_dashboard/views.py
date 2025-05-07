@@ -21,7 +21,12 @@ def protected_view(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def new_WUD(request):
-    serializer = WUDSerializer(data=request.data)
+    user= request.user
+
+    data = request.data.copy()
+    data['user'] = user
+
+    serializer = WUDSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -30,7 +35,12 @@ def new_WUD(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def new_PT(request):
-    serializer = PTDSerializer(data=request.data)
+    user= request.user
+
+    data = request.data.copy()
+    data['user'] = user
+
+    serializer = WUDSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
