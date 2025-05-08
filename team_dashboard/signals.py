@@ -35,7 +35,7 @@ def new_WUD(sender, instance, created, **kwargs):
             }
         )
 
-        data = Wake_Up_Data.objects.filter(user=user, date=date).order_by(-date).all()[-7:].values('date', 'HR', 'RMSSD', 'SDNN')
+        data = Wake_Up_Data.objects.filter(user=user, date=date).order_by('-date').all()[-7:].values('date', 'HR', 'RMSSD', 'SDNN')
 
         hr= np.array(list(data.values_list('HR',flat=True)))
 
