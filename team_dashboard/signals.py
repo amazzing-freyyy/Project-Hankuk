@@ -35,7 +35,7 @@ def new_WUD(sender, instance, created, **kwargs):
             }
         )
 
-        data = Wake_Up_Data.objects.filter(user=user, date=date).order_by('-date').all()[-7:].values('date', 'HR', 'RMSSD', 'SDNN')
+        data = Wake_Up_Data.objects.filter(user=user, date=date).order_by('-date').all()[0:7].values('date', 'HR', 'RMSSD', 'SDNN')
 
         hr= np.array(list(data.values_list('HR',flat=True)))
 
@@ -51,14 +51,14 @@ def new_WUD(sender, instance, created, **kwargs):
 
         hr_mean= np.mean(hr)
         hr_std= np.std(hr)
-        hr_target= hr[-1]
+        hr_target= hr[0]
         hr_z_score= (hr_target - hr_mean) / hr_std
 
         ss= 1000 / (sdnn / 0.7995) + 5.1174
 
         ss_mean= np.mean(ss)
         ss_std= np.std(ss)
-        ss_target= ss[-1]
+        ss_target= ss[0]
         ss_z_score= (ss_target + ss_mean) / ss_std
 
         lnrmssd_alert=lnrmssd_target > lsuprmssd or lnrmssd_target < linfrmssd
