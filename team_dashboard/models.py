@@ -60,7 +60,7 @@ class Wake_Up_Data(models.Model):
     tiredness= models.DecimalField(max_digits= 10, decimal_places=2,blank=True, null=True)
     menstruation= models.CharField(max_length=20, choices= YES_OR_NO, blank=True, null=True)
     injury= models.CharField(max_length=20, choices= YES_OR_NO, blank=True, null=True)
-    comments= models.TextField()
+    comments= models.TextField(blank=True, null=True)
 
 
     def save(self, *args, **kwargs):
