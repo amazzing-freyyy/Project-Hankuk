@@ -22,13 +22,11 @@ def protected_view(request):
 @permission_classes([IsAuthenticated])
 def new_WUD(request):
     user= request.user
-
-    data = request.data.copy()
-    data['user'] = user
+    data= request.data.copy() 
 
     serializer = WUDSerializer(data=data)
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(user = user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -36,13 +34,11 @@ def new_WUD(request):
 @permission_classes([IsAuthenticated])
 def new_PT(request):
     user= request.user
-
-    data = request.data.copy()
-    data['user'] = user
+    data= request.data.copy() 
 
     serializer = WUDSerializer(data=data)
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(user = user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
