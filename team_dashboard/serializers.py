@@ -8,6 +8,8 @@ class WUDSerializer(serializers.ModelSerializer):
         read_only_fields = ['slug', 'user']
 
 class PTDSerializer(serializers.ModelSerializer):
+    date = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S", input_formats=["%Y-%m-%dT%H:%M:%S"])
+    
     class Meta:
         model = Post_Training_Data
         fields = '__all__'
