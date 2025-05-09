@@ -163,7 +163,7 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
             autosize=True,
             dragmode= 'pan',
             hovermode='closest',
-            title= f'Fecha: {graph_data.last()['date'].strftime("%m/%d/%Y")}',
+            title= f'Fecha: {graph_data.first()['date'].strftime("%m/%d/%Y")}',
         )
 
         lnrmssd_trace= go.Scatter(
@@ -488,7 +488,7 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
                     autosize=True,
                     dragmode= 'pan',
                     hovermode='closest',
-                    title= f'Fecha: {filtered_objects.last()['date'].strftime("%m/%d/%Y")}',
+                    title= f'Fecha: {filtered_objects.first()['date'].strftime("%m/%d/%Y")}',
                     xaxis=xaxis_layout,
                     xaxis_title="Fecha",
                     barmode= 'stack',
