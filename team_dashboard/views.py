@@ -36,7 +36,7 @@ def new_PT(request):
     user= request.user
     data= request.data.copy() 
 
-    serializer = WUDSerializer(data=data)
+    serializer = PTDSerializer(data=data)
     if serializer.is_valid():
         serializer.save(user = user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
