@@ -56,5 +56,5 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         # Add custom claims
-        token['group'] = user.profile.group  # Adjust based on your user model
+        token['group'] = user.group  # Adjust based on your user model
         return token
