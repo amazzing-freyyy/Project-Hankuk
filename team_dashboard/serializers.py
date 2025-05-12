@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
 
 class WUDSerializer(serializers.ModelSerializer):
@@ -48,3 +49,12 @@ class UserSerializer(serializers.ModelSerializer):
             profile.save()
 
         return instance
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['group'] = user.profile.group  # Adjust based on your user model
+        return token

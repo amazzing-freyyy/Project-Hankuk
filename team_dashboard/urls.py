@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 
-    path("api/login/", TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path("api/login/", MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path("api/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
     path("api/protected/", protected_view, name='protected'),
     path("api/wake_up/", get_allWakeUpData, name='get_wake_up'),
