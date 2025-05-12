@@ -56,5 +56,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         # Add custom claims
-        token['group'] = user.group  # Adjust based on your user model
+        if 'athletes' in user.groups.values_list('name', flat=True):
+            token['group'] = 'athletes'  # Adjust based on your user model
+        elif 'coaches' in user.groups.values_list('name', flat=True):
+            token['group'] = 'coaches'
+        else:
+            token['group'] = None
         return token
