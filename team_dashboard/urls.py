@@ -21,7 +21,7 @@ urlpatterns = [
     path('api/post_training/<slug:slug>/delete', delete_PT, name='delete_PT'),
     path("api/post_training/latestactivities", get_lastWeeksTrainings, name='get_lastWeeksTrainings'),
     path('api/signup/', register_user, name='register'),
-    path('user/<str:username>/update/', update_user, name='update_user'),
-    path('user/<str:username>/delete/', delete_user, name='delete_user'),
-    path('users/<str:group_name>/', users_in_group, name='users_in_group'),
+    path('api/user/<str:username>/update/', update_user, name='update_user'),
+    path('api/user/<str:username>/delete/', delete_user, name='delete_user'),
+    path('api/users/<str:group_name>/', users_in_group, name='users_in_group'),
 ]  
