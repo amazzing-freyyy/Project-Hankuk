@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/signup/', register_user, name='register'),
     path('user/<str:username>/update/', update_user, name='update_user'),
     path('user/<str:username>/delete/', delete_user, name='delete_user'),
+    path('users/<str:group_name>/', users_in_group, name='users_in_group'),
 ]  
