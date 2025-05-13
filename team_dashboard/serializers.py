@@ -24,10 +24,15 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     profile = ProfileSerializer(required=False)
+    groups = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'profile']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'profile', 'groups']
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)

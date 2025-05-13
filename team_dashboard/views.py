@@ -380,3 +380,15 @@ def delete_PT(request, slug):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def users_in_group(request, group_name):
+    try:
+        group = Group.objects.get(name=group_name)
+    except Group.DoesNotExist:
+        return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    users = group.user_set.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
