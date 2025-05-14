@@ -163,7 +163,7 @@ def get_wellnessData(request):
     else:
         data = Wake_Up_Data.objects.filter(user=user).values('date', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa').order_by('-date').first()
 
-    if not data.exists():
+    if not data:
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
     graph_data={'date':data['date'].strftime('%Y-%m-%d'), 'h_sleep':data['hours_of_sleep'], 'wellness':data['emotional_wellness'], 'q_sleep':data['quality_of_sleep'], 'recovery':data['tiredness'], 'comments':data['comments'], 'menstruation':data['menstruation'], 'pain':data['muscle_pain'], 'chispa':data['chispa']}
