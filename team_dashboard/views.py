@@ -153,8 +153,7 @@ def get_wellnessData(request):
     if is_athlete:
         username=user.username
     else:
-        if not username:
-            return Response({'error': 'Missing "athleteUserName" field'}, status=status.HTTP_400_BAD_REQUEST)
+        username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
 
     date_str = request.data.get('date')
