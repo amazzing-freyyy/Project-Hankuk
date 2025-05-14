@@ -76,223 +76,228 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
                         output_field=FloatField())
             ).filter(date__lte= start_date).order_by('-date')
         )
+        if graph_data.exists():
 
-        dates= sorted(set(measurement['date'] for measurement in graph_data))
-        s_sp_by_date = {date: 0 for date in dates}
-        ss_by_date = {date: 0 for date in dates}
-        ss_z_by_date = {date: 0 for date in dates}
-        lnrmssd_by_date = {date: 0 for date in dates}
-        linfrmssd_by_date = {date: 0 for date in dates}
-        lsuprmssd_by_date = {date: 0 for date in dates}
-        hr_by_date = {date: 0 for date in dates}
-        hr_z_by_date = {date: 0 for date in dates}
+            dates= sorted(set(measurement['date'] for measurement in graph_data))
+            s_sp_by_date = {date: 0 for date in dates}
+            ss_by_date = {date: 0 for date in dates}
+            ss_z_by_date = {date: 0 for date in dates}
+            lnrmssd_by_date = {date: 0 for date in dates}
+            linfrmssd_by_date = {date: 0 for date in dates}
+            lsuprmssd_by_date = {date: 0 for date in dates}
+            hr_by_date = {date: 0 for date in dates}
+            hr_z_by_date = {date: 0 for date in dates}
 
-        hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
-        emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
-        q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
-        tiredness = graph_data[0]['tiredness'] if graph_data[0]['tiredness'] else 0
-        muscle_pain= 5 - graph_data[0]['muscle_pain'] if graph_data[0]['muscle_pain'] else 0
-        chispa= graph_data[0]['chispa'] if graph_data[0]['chispa'] else 0
-        suma= emo_wellness + q_sleep + tiredness - muscle_pain + chispa
-        comments= graph_data[0]['comments']
-        menstruation= graph_data[0]['menstruation']
-        
-        def indicator_sleep(value):
-            if value > 7.5:
-                return "&#128309;"
-            elif value < 6.5:
-                return "&#128308;"
-            else:
-                return "&#128310;"
-
-        def indicator(value, red=2, blue=4):
-            if value >= blue:
-                return "&#128309;"
-            elif value <= red:
-                return "&#128308;"
-            else:
-                return "&#128310;"
+            hrs_sleep = graph_data[0]['hours_of_sleep'] if graph_data[0]['hours_of_sleep'] else 0
+            emo_wellness = graph_data[0]['emotional_wellness'] if graph_data[0]['emotional_wellness'] else 0
+            q_sleep = graph_data[0]['quality_of_sleep'] if graph_data[0]['quality_of_sleep'] else 0
+            tiredness = graph_data[0]['tiredness'] if graph_data[0]['tiredness'] else 0
+            muscle_pain= 5 - graph_data[0]['muscle_pain'] if graph_data[0]['muscle_pain'] else 0
+            chispa= graph_data[0]['chispa'] if graph_data[0]['chispa'] else 0
+            suma= emo_wellness + q_sleep + tiredness - muscle_pain + chispa
+            comments= graph_data[0]['comments']
+            menstruation= graph_data[0]['menstruation']
             
-        def m_indicator(value):
-            if value == 'No' or value == 'no':
-                return "&#128309;"
-            else:
-                return "&#128310;"
-
-        for measurement in graph_data:
-            date = measurement['date']
-            lnrmssd = measurement['lnrmssd'] 
-            linfrmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
-            lsuprmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
-            sd1= 0.7071 * measurement['RMSSD']
-            ss = measurement['ss']
-            s_sp = ss/sd1
-
-
-            lnrmssd_by_date[date] = lnrmssd
-            linfrmssd_by_date[date] = linfrmssd
-            lsuprmssd_by_date[date] = lsuprmssd
-            ss_by_date[date] = ss
-
-            s_sp_by_date[date] = s_sp
-            hr_by_date[date] = measurement['HR']
-            hr_z_by_date[date] = measurement['hr_z_score']
-            ss_z_by_date[date] = measurement['ss_z_score']
-
-            def check_z_score(value):
-                if abs(value) >=2 and abs(value) < 3:
-                    return '#86CE00'
-                elif abs(value) >= 3:
-                    return 'red'
+            def indicator_sleep(value):
+                if value > 7.5:
+                    return "&#128309;"
+                elif value < 6.5:
+                    return "&#128308;"
                 else:
-                    return 'cyan'
+                    return "&#128310;"
 
-        ss_colors = [check_z_score(ss_z_by_date[date]) if not ss_z_by_date[date] == None else 'cyan' for date in list(ss_by_date.keys())]
-        hr_colors= [check_z_score(hr_z_by_date[date]) if not hr_z_by_date[date] == None else 'cyan' for date in list(hr_by_date.keys())]
+            def indicator(value, red=2, blue=4):
+                if value >= blue:
+                    return "&#128309;"
+                elif value <= red:
+                    return "&#128308;"
+                else:
+                    return "&#128310;"
+                
+            def m_indicator(value):
+                if value == 'No' or value == 'no':
+                    return "&#128309;"
+                else:
+                    return "&#128310;"
 
-        fig = make_subplots(rows=6, cols=1,
-                            subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","HR + LnRMSSD", "S:SP + Stress Score"),
-                            specs=[[{'type':'polar'}],
-                                   [{'type':'table'}],
-                                   [{'type':'table'}],
-                                   [{'type':'table'}],
-                                   [{'type':'xy', 'secondary_y': True}],
-                                   [{'type':'xy', 'secondary_y':True}]],)
-        fig.update_layout(
-            showlegend=False,
-            autosize=True,
-            dragmode= 'pan',
-            hovermode='closest',
-            title= f'Fecha: {graph_data.first()['date'].strftime("%m/%d/%Y")}',
-        )
+            for measurement in graph_data:
+                date = measurement['date']
+                lnrmssd = measurement['lnrmssd'] 
+                linfrmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
+                lsuprmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
+                sd1= 0.7071 * measurement['RMSSD']
+                ss = measurement['ss']
+                s_sp = ss/sd1
 
-        lnrmssd_trace= go.Scatter(
-            x=list(lnrmssd_by_date.keys()),
-            y=list(lnrmssd_by_date.values()),
-            mode='lines+markers',
-            name='LnRMSSD',
-            yaxis='y1',
-            marker=dict(color='blue')
-        )
-        linfrmssd_trace= go.Scatter(
-            x=list(linfrmssd_by_date.keys()),
-            y=list(linfrmssd_by_date.values()),
-            mode='lines+markers',
-            name='Límite Inferior',
-            yaxis='y1',
-            marker=dict(color='purple')
-        )
-        lsuprmssd_trace= go.Scatter(
-            x=list(lsuprmssd_by_date.keys()),
-            y=list(lsuprmssd_by_date.values()),
-            mode='lines+markers',
-            name='Límite Superior',
-            yaxis='y1',
-            marker=dict(color='purple')
-        )
-        hr_trace= go.Bar(
-            x=list(hr_by_date.keys()),
-            y=list(hr_by_date.values()),
-            name= 'HR',
-            yaxis='y2',
-            marker=dict(color=hr_colors)
-        )
 
-        xaxis_layout=dict(
-                type="date",
-                range=[dates[-1]-timedelta(days=15), dates[-1]+timedelta(days=1)],
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=15, label="2W", step="day", stepmode="todate"),   # Last 7 days
-                        dict(count=30, label="1M", step="day", stepmode="todate"),
-                        dict(count=6, label="6M", step="month", stepmode="todate"),
-                        dict(count=1, label="1Y", step="year", stepmode="todate"),
-                    ])
-                ),
+                lnrmssd_by_date[date] = lnrmssd
+                linfrmssd_by_date[date] = linfrmssd
+                lsuprmssd_by_date[date] = lsuprmssd
+                ss_by_date[date] = ss
+
+                s_sp_by_date[date] = s_sp
+                hr_by_date[date] = measurement['HR']
+                hr_z_by_date[date] = measurement['hr_z_score']
+                ss_z_by_date[date] = measurement['ss_z_score']
+
+                def check_z_score(value):
+                    if abs(value) >=2 and abs(value) < 3:
+                        return '#86CE00'
+                    elif abs(value) >= 3:
+                        return 'red'
+                    else:
+                        return 'cyan'
+
+            ss_colors = [check_z_score(ss_z_by_date[date]) if not ss_z_by_date[date] == None else 'cyan' for date in list(ss_by_date.keys())]
+            hr_colors= [check_z_score(hr_z_by_date[date]) if not hr_z_by_date[date] == None else 'cyan' for date in list(hr_by_date.keys())]
+
+            fig = make_subplots(rows=6, cols=1,
+                                subplot_titles=("Radar de Wellness", "Tabla de Wellness I", "Tabla de Wellness II", "Comentarios","HR + LnRMSSD", "S:SP + Stress Score"),
+                                specs=[[{'type':'polar'}],
+                                    [{'type':'table'}],
+                                    [{'type':'table'}],
+                                    [{'type':'table'}],
+                                    [{'type':'xy', 'secondary_y': True}],
+                                    [{'type':'xy', 'secondary_y':True}]],)
+            fig.update_layout(
+                showlegend=False,
+                autosize=True,
+                dragmode= 'pan',
+                hovermode='closest',
+                title= f'Fecha: {graph_data.first()['date'].strftime("%m/%d/%Y")}',
             )
-        
-        lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
-        fig.add_traces(data=lnrmssd_traces, rows=5, cols=1, secondary_ys=[True,True,True,False])
-        fig.update_layout(
-            xaxis=xaxis_layout,
-            xaxis_title="Fecha",
-            yaxis_title='HR',
-            yaxis2_title='LnRMSSD',
-        )
 
-        s_sp_trace= go.Scatter(
-            x=list(s_sp_by_date.keys()),
-            y=list(s_sp_by_date.values()),
-            mode='lines+markers',
-            name='S:SP',
-            yaxis='y3',
-            marker=dict(color='blue')
-        )
-
-        ss_trace= go.Bar(
-            x=list(ss_by_date.keys()),
-            y=list(ss_by_date.values()),
-            name='Stress Score',
-            yaxis='y4',
-            marker=dict(color=ss_colors)
-        )
-
-        ss_sp_traces= [s_sp_trace, ss_trace]
-        fig.add_traces(data=ss_sp_traces, rows=6, cols=1, secondary_ys=[True,False])
-        fig.update_layout(
-            xaxis2=xaxis_layout,
-            xaxis2_title="Fecha",
-            yaxis4_title='Stress Score',
-            yaxis3_title='S:SP'
-        )
-
-        radar_trace = go.Scatterpolar(
-            r= [q_sleep, emo_wellness, tiredness, chispa],
-            theta=['calidad de sueño','ánimo', 'recuperación', 'chispa'],
-            fill= 'toself',
-            name= 'Medida actual'
-        )
-
-        fig.add_traces(radar_trace, rows=1,cols=1)
-        fig.update_layout(
-            polar=dict(
-                radialaxis=dict(
-                    visible=True,
-                    range=[0, 5],
-                ),angularaxis=dict(
-                    rotation=45
-                )),
-            margin=dict(
-                t=80, 
+            lnrmssd_trace= go.Scatter(
+                x=list(lnrmssd_by_date.keys()),
+                y=list(lnrmssd_by_date.values()),
+                mode='lines+markers',
+                name='LnRMSSD',
+                yaxis='y1',
+                marker=dict(color='blue')
             )
-        )
+            linfrmssd_trace= go.Scatter(
+                x=list(linfrmssd_by_date.keys()),
+                y=list(linfrmssd_by_date.values()),
+                mode='lines+markers',
+                name='Límite Inferior',
+                yaxis='y1',
+                marker=dict(color='purple')
+            )
+            lsuprmssd_trace= go.Scatter(
+                x=list(lsuprmssd_by_date.keys()),
+                y=list(lsuprmssd_by_date.values()),
+                mode='lines+markers',
+                name='Límite Superior',
+                yaxis='y1',
+                marker=dict(color='purple')
+            )
+            hr_trace= go.Bar(
+                x=list(hr_by_date.keys()),
+                y=list(hr_by_date.values()),
+                name= 'HR',
+                yaxis='y2',
+                marker=dict(color=hr_colors)
+            )
+
+            xaxis_layout=dict(
+                    type="date",
+                    range=[dates[-1]-timedelta(days=15), dates[-1]+timedelta(days=1)],
+                    rangeselector=dict(
+                        buttons=list([
+                            dict(count=15, label="2W", step="day", stepmode="todate"),   # Last 7 days
+                            dict(count=30, label="1M", step="day", stepmode="todate"),
+                            dict(count=6, label="6M", step="month", stepmode="todate"),
+                            dict(count=1, label="1Y", step="year", stepmode="todate"),
+                        ])
+                    ),
+                )
+            
+            lnrmssd_traces= [lnrmssd_trace, linfrmssd_trace, lsuprmssd_trace, hr_trace]
+            fig.add_traces(data=lnrmssd_traces, rows=5, cols=1, secondary_ys=[True,True,True,False])
+            fig.update_layout(
+                xaxis=xaxis_layout,
+                xaxis_title="Fecha",
+                yaxis_title='HR',
+                yaxis2_title='LnRMSSD',
+            )
+
+            s_sp_trace= go.Scatter(
+                x=list(s_sp_by_date.keys()),
+                y=list(s_sp_by_date.values()),
+                mode='lines+markers',
+                name='S:SP',
+                yaxis='y3',
+                marker=dict(color='blue')
+            )
+
+            ss_trace= go.Bar(
+                x=list(ss_by_date.keys()),
+                y=list(ss_by_date.values()),
+                name='Stress Score',
+                yaxis='y4',
+                marker=dict(color=ss_colors)
+            )
+
+            ss_sp_traces= [s_sp_trace, ss_trace]
+            fig.add_traces(data=ss_sp_traces, rows=6, cols=1, secondary_ys=[True,False])
+            fig.update_layout(
+                xaxis2=xaxis_layout,
+                xaxis2_title="Fecha",
+                yaxis4_title='Stress Score',
+                yaxis3_title='S:SP'
+            )
+
+            radar_trace = go.Scatterpolar(
+                r= [q_sleep, emo_wellness, tiredness, chispa],
+                theta=['calidad de sueño','ánimo', 'recuperación', 'chispa'],
+                fill= 'toself',
+                name= 'Medida actual'
+            )
+
+            fig.add_traces(radar_trace, rows=1,cols=1)
+            fig.update_layout(
+                polar=dict(
+                    radialaxis=dict(
+                        visible=True,
+                        range=[0, 5],
+                    ),angularaxis=dict(
+                        rotation=45
+                    )),
+                margin=dict(
+                    t=80, 
+                )
+            )
+            
+            lightgrey= 'aliceblue'
+            white= 'lightblue'
+            table_trace = go.Table(
+                header=dict(values=["Variable", "Valor", "Indicador"]),
+                cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'chispa', 'dolor', 'suma'],
+                                    [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, suma],
+                                    [indicator(q_sleep), indicator(emo_wellness), indicator(tiredness), indicator(chispa), indicator(muscle_pain+5), indicator(suma, red=9, blue=15)]],
+                            fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, lightgrey,white]],)
+            )
+            fig.add_trace(trace=table_trace, row=2, col=1)
+
+            table_trace = go.Table(
+                header=dict(values=["Variable", "Valor", "Indicador"]),
+                cells= dict(values=[['horas de sueño', 'menstruación'],
+                                    [hrs_sleep, menstruation],
+                                    [indicator_sleep(hrs_sleep), m_indicator(menstruation)]],
+                            fill_color = [[lightgrey,lightgrey]],)
+            )
+            fig.add_trace(trace=table_trace, row=3, col=1)
+
+            comments_trace = go.Table(
+                cells= dict(values=[comments])
+            )
+            fig.add_trace(trace=comments_trace, row=4, col=1)
+
+            data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False, "responsive": True}}
+        else:
+            
+            data= {'report': '', 'config': ''}
         
-        lightgrey= 'aliceblue'
-        white= 'lightblue'
-        table_trace = go.Table(
-            header=dict(values=["Variable", "Valor", "Indicador"]),
-            cells= dict(values=[['calidad de sueño', 'ánimo', 'recuperación', 'chispa', 'dolor', 'suma'],
-                                [ q_sleep, emo_wellness, tiredness, chispa, muscle_pain, suma],
-                                [indicator(q_sleep), indicator(emo_wellness), indicator(tiredness), indicator(chispa), indicator(muscle_pain+5), indicator(suma, red=9, blue=15)]],
-                        fill_color = [[lightgrey,lightgrey,lightgrey,lightgrey, lightgrey,white]],)
-        )
-        fig.add_trace(trace=table_trace, row=2, col=1)
-
-        table_trace = go.Table(
-            header=dict(values=["Variable", "Valor", "Indicador"]),
-            cells= dict(values=[['horas de sueño', 'menstruación'],
-                                [hrs_sleep, menstruation],
-                                [indicator_sleep(hrs_sleep), m_indicator(menstruation)]],
-                        fill_color = [[lightgrey,lightgrey]],)
-        )
-        fig.add_trace(trace=table_trace, row=3, col=1)
-
-        comments_trace = go.Table(
-            cells= dict(values=[comments])
-        )
-        fig.add_trace(trace=comments_trace, row=4, col=1)
-
-        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False, "responsive": True}}
 
         return data
 
