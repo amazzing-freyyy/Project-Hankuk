@@ -583,7 +583,7 @@ class Coach_Home(LoginRequiredMixin, ListView):
                         output_field=FloatField())
                 ).first()
 
-                if query.exists():
+                if query:
 
                     date = query.date
                     animo= query.emotional_wellness if query.emotional_wellness else 0
