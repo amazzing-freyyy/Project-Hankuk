@@ -583,49 +583,56 @@ class Coach_Home(LoginRequiredMixin, ListView):
                         output_field=FloatField())
                 ).first()
 
-                date = query.date
-                animo= query.emotional_wellness if query.emotional_wellness else 0
-                dolor= query.muscle_pain-5 if query.muscle_pain else 0
-                chispa= query.chispa if query.chispa else 0
-                recuperacion= query.tiredness if query.tiredness else 0
-                calidad_s= query.quality_of_sleep if query.quality_of_sleep else 0
-                suma= animo + dolor + chispa + recuperacion + calidad_s
+                if query.exists():
 
-                lnrmssd = query.lnrmssd
-                linfrmssd = abs(0.06 + query.rolling_stds_lnrmssd - query.rolling_avgs_lnrmssd)
-                lsuprmssd = abs(0.06 + query.rolling_stds_lnrmssd + query.rolling_avgs_lnrmssd)
-                hr_z = query.hr_z_score
-                ss_z = query.ss_z_score
-                
-                cause=[]
-                alert_counter = 0
-                if lnrmssd > lsuprmssd or lnrmssd < linfrmssd:
-                    alert_counter = alert_counter + 1
-                    cause.append('LnRMSSD')
+                    date = query.date
+                    animo= query.emotional_wellness if query.emotional_wellness else 0
+                    dolor= query.muscle_pain-5 if query.muscle_pain else 0
+                    chispa= query.chispa if query.chispa else 0
+                    recuperacion= query.tiredness if query.tiredness else 0
+                    calidad_s= query.quality_of_sleep if query.quality_of_sleep else 0
+                    suma= animo + dolor + chispa + recuperacion + calidad_s
+
+                    lnrmssd = query.lnrmssd
+                    linfrmssd = abs(0.06 + query.rolling_stds_lnrmssd - query.rolling_avgs_lnrmssd)
+                    lsuprmssd = abs(0.06 + query.rolling_stds_lnrmssd + query.rolling_avgs_lnrmssd)
+                    hr_z = query.hr_z_score
+                    ss_z = query.ss_z_score
                     
-                if abs(hr_z) >= 2.5:
-                    alert_counter = alert_counter + 1
-                    cause.append('HR')
+                    cause=[]
+                    alert_counter = 0
+                    if lnrmssd > lsuprmssd or lnrmssd < linfrmssd:
+                        alert_counter = alert_counter + 1
+                        cause.append('LnRMSSD')
+                        
+                    if abs(hr_z) >= 2.5:
+                        alert_counter = alert_counter + 1
+                        cause.append('HR')
 
-                if suma < 10:
-                    alert_counter = alert_counter + 1
-                    cause.append('Suma')
+                    if suma < 10:
+                        alert_counter = alert_counter + 1
+                        cause.append('Suma')
 
-                if dolor < -2:
-                    alert_counter = alert_counter + 1
-                    cause.append('Dolor')
+                    if dolor < -2:
+                        alert_counter = alert_counter + 1
+                        cause.append('Dolor')
+                    
+                    if abs(ss_z) >= 2.5:
+                        alert_counter = alert_counter + 1
+                        cause.append('Stress Score')
+
+                    alert = 'blue'
+                    if alert_counter > 2:
+                        alert = 'red'
+                    elif alert_counter == 2:
+                        alert = 'yellow'
+                    elif alert_counter == 1:
+                        alert = 'green'
                 
-                if abs(ss_z) >= 2.5:
-                    alert_counter = alert_counter + 1
-                    cause.append('Stress Score')
-
-                alert = 'blue'
-                if alert_counter > 2:
-                    alert = 'red'
-                elif alert_counter == 2:
-                    alert = 'yellow'
-                elif alert_counter == 1:
-                    alert = 'green'
+                else: 
+                    alert= 'grey'
+                    date= ''
+                    cause=''
 
                 context['data'].append({'user': athlete, 'alert': alert, 'date':date, 'cause':', '.join(cause)})
 
