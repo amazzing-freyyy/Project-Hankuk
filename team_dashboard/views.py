@@ -48,12 +48,15 @@ def new_PT(request):
 def get_allWakeUpData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
-        data = Wake_Up_Data.objects.filter(user=user).all()
         username = user.username
     else:
         username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
-        data = Wake_Up_Data.objects.filter(user=user).all()
+
+    data = Wake_Up_Data.objects.filter(user=user).all()
+
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
     serializer= WUDSerializer(data, many=True)
     return Response({'athleteUserName':username, 'graph_data':serializer.data})
@@ -68,8 +71,12 @@ def get_lnrmssdData(request):
     else:
         username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
-        data = Wake_Up_Data.objects.filter(user=user).values('date', 'RMSSD', 'HR').all()
-    
+
+    data = Wake_Up_Data.objects.filter(user=user).values('date', 'RMSSD', 'HR').all()
+
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
+
     dates= list(data.values_list('date', flat=True))
 
     hr= np.array(list(data.values_list('HR',flat=True)))
@@ -105,12 +112,15 @@ def get_lnrmssdData(request):
 def get_ssData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
-        data = Wake_Up_Data.objects.filter(user=user).values('date', 'SDNN', 'RMSSD').all()
         username = user.username
     else:
         username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
-        data = Wake_Up_Data.objects.filter(user=user).values('date', 'SDNN', 'RMSSD').all()
+
+    data = Wake_Up_Data.objects.filter(user=user).values('date', 'SDNN', 'RMSSD').all()
+
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
 
     dates= list(data.values_list('date', flat=True))
 
@@ -153,6 +163,9 @@ def get_wellnessData(request):
         data = Wake_Up_Data.objects.filter(user=user, date=date).values('date', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa').order_by('-date').first()
     else:
         data = Wake_Up_Data.objects.filter(user=user).values('date', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa').order_by('-date').first()
+
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
     graph_data={'date':data['date'].strftime('%Y-%m-%d'), 'h_sleep':data['hours_of_sleep'], 'wellness':data['emotional_wellness'], 'q_sleep':data['quality_of_sleep'], 'recovery':data['tiredness'], 'comments':data['comments'], 'menstruation':data['menstruation'], 'pain':data['muscle_pain'], 'chispa':data['chispa']}
     return Response({'athleteUserName':username, 'graph_data':graph_data})
@@ -162,13 +175,16 @@ def get_wellnessData(request):
 def get_allPostTrainingData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
-        data = Post_Training_Data.objects.filter(user=user).all()
         username = user.username
     else:
         username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
-        data = Post_Training_Data.objects.filter(user=user).all()
-    
+
+    data = Post_Training_Data.objects.filter(user=user).all()
+
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
+
     serializer= PTDSerializer(data, many=True)
     return Response({'athleteUserName':username, 'graph_data':serializer.data})
 
@@ -177,14 +193,17 @@ def get_allPostTrainingData(request):
 def get_rpe2XtimeData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
-        time_threshold= datetime.time(12,0)
-        data = [Post_Training_Data.objects.filter(user=user, date__time__lt=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),
-                Post_Training_Data.objects.filter(user=user, date__time__gte=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),]
         username = user.username
     else:
         username= request.data.get('athleteUserName')
         user = User.objects.filter(username=username).first()
-        data = Post_Training_Data.objects.filter(user=user).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all()
+
+    time_threshold= datetime.time(12,0)
+    data = [Post_Training_Data.objects.filter(user=user, date__time__lt=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),
+                Post_Training_Data.objects.filter(user=user, date__time__gte=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),]
+
+    if not data[0].exists() and not data[1].exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
     dates= [list(data[0].values_list('date', flat=True)), 
             list(data[1].values_list('date', flat=True))]
@@ -225,6 +244,9 @@ def get_lastWeeksTrainings(request):
 
     data = Post_Training_Data.objects.filter(user=user, date__gte= date-datetime.timedelta(days=7), date__lte= date).values('date', 'type_of_activity', 'time_of_activity').all()
     
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
+
     dates= list(data.values_list('date', flat=True))
 
     time= np.array(list(data.values_list('time_of_activity'))).flatten()
@@ -255,8 +277,8 @@ def get_PTData(request):
     else:
         data = Post_Training_Data.objects.filter(user=user, date__gte=datetime.date.today()).values('date', 'pain', 'comments').order_by('date').all()
 
-    if not data:
-        return Response({'error': 'No training data found'}, status=status.HTTP_404_NOT_FOUND)
+    if not data.exists():
+        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
     dates = list(data.values_list('date', flat=True))
 
