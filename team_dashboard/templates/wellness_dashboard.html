@@ -34,7 +34,9 @@
     <script>
         // Load initial chart data
         const initialData = {{ chart_data|safe }};
-        Plotly.newPlot('report', initialData.report.data, initialData.report.layout, initialData.config);
+        if (initialData.report) {
+            Plotly.newPlot('report', initialData.report.data, initialData.report.layout, initialData.config);
+        }
 
         // Function to update the chart with filtered data
         function updateChart(data) {
