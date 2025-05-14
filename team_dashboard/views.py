@@ -43,7 +43,7 @@ def new_PT(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_allWakeUpData(request):
     user = request.user
@@ -58,7 +58,7 @@ def get_allWakeUpData(request):
     serializer= WUDSerializer(data, many=True)
     return Response({'athleteUserName':username, 'graph_data':serializer.data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_lnrmssdData(request):
     user = request.user
@@ -100,7 +100,7 @@ def get_lnrmssdData(request):
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_ssData(request):
     user = request.user
@@ -134,7 +134,7 @@ def get_ssData(request):
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_wellnessData(request):
     user = request.user
@@ -157,7 +157,7 @@ def get_wellnessData(request):
     graph_data={'date':data['date'].strftime('%Y-%m-%d'), 'h_sleep':data['hours_of_sleep'], 'wellness':data['emotional_wellness'], 'q_sleep':data['quality_of_sleep'], 'recovery':data['tiredness'], 'comments':data['comments'], 'menstruation':data['menstruation'], 'pain':data['muscle_pain'], 'chispa':data['chispa']}
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_allPostTrainingData(request):
     user = request.user
@@ -172,7 +172,7 @@ def get_allPostTrainingData(request):
     serializer= PTDSerializer(data, many=True)
     return Response({'athleteUserName':username, 'graph_data':serializer.data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_rpe2XtimeData(request):
     user = request.user
@@ -206,7 +206,7 @@ def get_rpe2XtimeData(request):
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_lastWeeksTrainings(request):
     user = request.user
@@ -235,7 +235,7 @@ def get_lastWeeksTrainings(request):
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def get_PTData(request):
     user = request.user
