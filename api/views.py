@@ -7,6 +7,7 @@ from .permissions import *
 from django.shortcuts import get_object_or_404
 from uuid import uuid4
 import copy, operator, math
+from asteval import Interpreter  # pip install asteval
 
 class PostTableView(APIView):
     permission_classes = [IsCoachOrAdmin]
@@ -75,38 +76,75 @@ class UpdateDataView(APIView):
         return Response(serializer.errors, status=400)
 
 class ProcessDataView(APIView):
-    permission_classes = [IsCoachOrAdmin]
+    permission_classes = [IsAthleteCoachOrAdmin]
 
     def post(self, request):
         serializer = ProcessDataSerializer(data=request.data)
-        if serializer.is_valid():
-            table = get_object_or_404(DynamicTable, title=serializer.validated_data['Title'])
-            if request.user.userprofile.project != table.project:
-                return Response({'error': 'No permission'}, status=403)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            result_schema = copy.deepcopy(table.schema)
-            result_data = []
-            raw_data = DynamicData.objects.filter(table=table)
+        table = get_object_or_404(DynamicTable, title=serializer.validated_data['Title'])
+        if request.user.userprofile.project != table.project:
+            return Response({'error': 'No permission'}, status=status.HTTP_403_FORBIDDEN)
 
-            for row_obj in raw_data:
-                row_result = copy.deepcopy(row_obj.row)
-                for key, val in serializer.validated_data['data'].items():
+        result_schema = copy.deepcopy(table.schema)
+        result_data = []
+        raw_data = DynamicData.objects.filter(table=table)
+
+        aeval = Interpreter()
+
+        for row_obj in raw_data:
+            row_result = copy.deepcopy(row_obj.row)
+
+            for item in serializer.validated_data['data']:
+                for key, val in item.items():
                     label = val.get("Label") or key
                     expr = val.get("Expression")
+                    expected_type = val.get("Type", "unknown")
+
                     if expr:
                         try:
-                            local_env = {k: float(v['Value']) for k, v in row_result.items() if 'Value' in v}
-                            value = eval(expr, {"__builtins__": {}}, local_env)
-                            row_result[key] = {"Label": label, "Value": value, "Type": "processed"}
+                            local_env = {
+                                k: float(v['Value']) for k, v in row_result.items()
+                                if isinstance(v, dict) and 'Value' in v and
+                                isinstance(v['Value'], (int, float, str)) and
+                                str(v['Value']).replace('.', '', 1).isdigit()
+                            }
+                            aeval.symtable.clear()
+                            aeval.symtable.update(local_env)
+
+                            value = aeval(expr)
+
+                            # Convert to expected type if specified
+                            if expected_type.lower() == 'int':
+                                value = int(value)
+                            elif expected_type.lower() == 'float':
+                                value = float(value)
+                            elif expected_type.lower() == 'str':
+                                value = str(value)
+
+                            row_result[key] = {"Label": label, "Value": value, "Type": expected_type}
                         except Exception as e:
                             row_result[key] = {"Label": label, "Value": f"error: {str(e)}", "Type": "error"}
                     else:
-                        row_result[key] = {"Label": label, **row_result.get(key, {})}
-                result_data.append(row_result)
+                        existing = row_result.get(key, {})
+                        row_result[key] = {
+                            "Label": label,
+                            "Value": existing.get("Value"),
+                            "Type": existing.get("Type", expected_type)
+                        }
 
-            for key, val in serializer.validated_data['data'].items():
+            result_data.append(row_result)
+
+        for item in serializer.validated_data['data']:
+            for key, val in item.items():
                 label = val.get("Label") or key
-                result_schema[key] = {"Label": label, "Type": "processed"}
+                expected_type = val.get("Type", "unknown")
+                result_schema[key] = {"Label": label, "Type": expected_type}
 
-            return Response({"Title": table.title, "project": table.project.name, "data": result_schema, "results": result_data})
-        return Response(serializer.errors, status=400)
+        return Response({
+            "Title": table.title,
+            "project": table.project.name,
+            "data": result_schema,
+            "results": result_data
+        })

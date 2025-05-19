@@ -16,7 +16,16 @@ class TableStructureSerializer(serializers.Serializer):
 
 class ProcessDataSerializer(serializers.Serializer):
     Title = serializers.CharField()
-    data = serializers.DictField(child=serializers.DictField())
+
+    # data is a list of dicts, each key has a dict with Label, Expression, optional Type
+    data = serializers.ListField(
+        child=serializers.DictField(
+            child=serializers.DictField(
+                child=serializers.CharField(allow_blank=True),
+                required=False
+            )
+        )
+    )
 
 class DataUpdateSerializer(serializers.Serializer):
     Title = serializers.CharField()
