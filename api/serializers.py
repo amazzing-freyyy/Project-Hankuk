@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
+from api.models import UserProfile, Project
 
 class TableCreateSerializer(serializers.Serializer):
     Title = serializers.CharField()
@@ -16,17 +18,23 @@ class TableStructureSerializer(serializers.Serializer):
 
 class ProcessDataSerializer(serializers.Serializer):
     Title = serializers.CharField()
-
-    # data is a list of dicts, each key has a dict with Label, Expression, optional Type
-    data = serializers.ListField(
-        child=serializers.DictField(
-            child=serializers.DictField(
-                child=serializers.CharField(allow_blank=True),
-                required=False
-            )
-        )
-    )
+    data = serializers.DictField(child=serializers.DictField())
 
 class DataUpdateSerializer(serializers.Serializer):
     Title = serializers.CharField()
     data = serializers.DictField()
+
+class UserSignupSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+    project = serializers.CharField()
+    role = serializers.ChoiceField(choices=UserProfile.ROLE_CHOICES)
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            password=validated_data['password']
+        )
+        project, _ = Project.objects.get_or_create(name=validated_data['project'])
+        UserProfile.objects.create(user=user, project=project, role=validated_data['role'])
+        return user

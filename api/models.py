@@ -23,3 +23,4 @@ class DynamicData(models.Model):
     table = models.ForeignKey(DynamicTable, on_delete=models.CASCADE)
     row = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
+    submitted_by = models.ForeignKey(User, on_delete=models.CASCADE)

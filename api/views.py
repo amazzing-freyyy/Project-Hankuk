@@ -1,13 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.contrib.auth.models import User
 from .models import Project, DynamicTable, DynamicData
 from .serializers import *
 from .permissions import *
 from django.shortcuts import get_object_or_404
 from uuid import uuid4
-import copy, operator, math
-from asteval import Interpreter  # pip install asteval
+import copy
+from django.utils.dateparse import parse_date
+from asteval import Interpreter
 
 class PostTableView(APIView):
     permission_classes = [IsCoachOrAdmin]
@@ -39,7 +44,7 @@ class PostDataView(APIView):
                 entry = copy.deepcopy(row)
                 for k in entry:
                     entry[k]['Id'] = str(uuid4())
-                DynamicData.objects.create(table=table, row=entry)
+                DynamicData.objects.create(table=table, row=entry, submitted_by=request.user)
             return Response({'message': 'Data submitted'})
         return Response(serializer.errors, status=400)
 
@@ -48,7 +53,40 @@ class GetTableDataView(APIView):
         table = get_object_or_404(DynamicTable, title=title)
         if request.user.userprofile.project != table.project:
             return Response({'error': 'No permission'}, status=403)
-        data = [entry.row for entry in DynamicData.objects.filter(table=table)]
+
+        role = request.user.userprofile.role
+        data_qs = DynamicData.objects.filter(table=table)
+
+        # Optional filters
+        start_date = request.query_params.get('start_date')
+        end_date = request.query_params.get('end_date')
+        athlete_username = request.query_params.get('athlete')
+
+        if role == 'athlete':
+            data_qs = data_qs.filter(submitted_by=request.user)
+        elif role in ['coach', 'admin'] and athlete_username:
+            athlete_user = get_object_or_404(User, username=athlete_username)
+            if not hasattr(athlete_user, 'userprofile') or athlete_user.userprofile.project != table.project:
+                return Response({'error': 'Athlete not in project'}, status=403)
+            data_qs = data_qs.filter(submitted_by=athlete_user)
+
+        # Apply date filtering if provided
+        if start_date:
+            try:
+                start = parse_date(start_date)
+                if start:
+                    data_qs = data_qs.filter(created_at__date__gte=start)
+            except ValueError:
+                return Response({'error': 'Invalid start_date format. Use YYYY-MM-DD'}, status=400)
+        if end_date:
+            try:
+                end = parse_date(end_date)
+                if end:
+                    data_qs = data_qs.filter(created_at__date__lte=end)
+            except ValueError:
+                return Response({'error': 'Invalid end_date format. Use YYYY-MM-DD'}, status=400)
+
+        data = [entry.row for entry in data_qs]
         return Response({"Title": table.title, "data": data})
 
 class GetTableStructureView(APIView):
@@ -70,13 +108,16 @@ class UpdateDataView(APIView):
             for row in DynamicData.objects.filter(table=table):
                 for key, val in serializer.validated_data['data'].items():
                     if key in row.row:
-                        row.row[key].update(val)
+                        if isinstance(val, dict) and isinstance(row.row[key], dict):
+                            row.row[key].update(val)
+                        else:
+                            row.row[key] = val
                         row.save()
             return Response({'message': 'Data updated'})
         return Response(serializer.errors, status=400)
 
 class ProcessDataView(APIView):
-    permission_classes = [IsAthleteCoachOrAdmin]
+    permission_classes = [IsCoachOrAdmin]
 
     def post(self, request):
         serializer = ProcessDataSerializer(data=request.data)
@@ -115,7 +156,6 @@ class ProcessDataView(APIView):
 
                             value = aeval(expr)
 
-                            # Convert to expected type if specified
                             if expected_type.lower() == 'int':
                                 value = int(value)
                             elif expected_type.lower() == 'float':
@@ -148,3 +188,23 @@ class ProcessDataView(APIView):
             "data": result_schema,
             "results": result_data
         })
+
+class SignupView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = UserSignupSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token)
+            })
+        return Response(serializer.errors, status=400)
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    permission_classes = [AllowAny]
+
+class CustomTokenRefreshView(TokenRefreshView):
+    permission_classes = [AllowAny]
