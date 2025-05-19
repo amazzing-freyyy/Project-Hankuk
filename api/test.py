@@ -1,0 +1,112 @@
+from rest_framework.test import APITestCase
+from rest_framework import status
+from django.contrib.auth.models import User
+from api.models import Project, UserProfile, DynamicTable, DynamicData
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import login
+
+class APITestSetup(APITestCase):
+    def setUp(self):
+        self.project = Project.objects.create(name="TeamAlpha")
+        self.admin = User.objects.create_user(username="admin", password="pass1234")
+        UserProfile.objects.create(user=self.admin, project=self.project, role="admin")
+        self.refresh = RefreshToken.for_user(self.admin)
+        self.access_token = str(self.refresh.access_token)
+
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+
+class UserSignupTests(APITestCase):
+    def test_user_signup(self):
+        payload = {
+            "username": "testuser",
+            "password": "securepass",
+            "project": "TeamAlpha",
+            "role": "athlete"
+        }
+        response = self.client.post("/api/signup/", payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+
+class TokenTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username="tokenuser", password="12345678")
+        UserProfile.objects.create(user=self.user, project=Project.objects.create(name="TeamX"), role="athlete")
+
+    def test_token_obtain(self):
+        response = self.client.post("/api/token/", {"username": "tokenuser", "password": "12345678"})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+
+    def test_token_refresh(self):
+        refresh = RefreshToken.for_user(self.user)
+        response = self.client.post("/api/token/refresh/", {"refresh": str(refresh)})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+
+class TableDataTests(APITestSetup):
+    def setUp(self):
+        self.project = Project.objects.create(name="TeamAlpha")
+
+        # Coach user
+        self.coach_user = User.objects.create_user(username='coachuser', password='password')
+        UserProfile.objects.create(user=self.coach_user, project=self.project, role="coach")
+
+        # Athlete user
+        self.athlete_user = User.objects.create_user(username='athleteuser', password='password')
+        UserProfile.objects.create(user=self.athlete_user, project=self.project, role="athlete")
+
+        self.client.force_authenticate(user=self.coach_user)  # Login as coach
+        self.response = self.client.post('/api/tables/', {
+            "Title": "test_metrics",
+            "project":"TeamAlpha",
+            "data":{
+                "score": {"label": "score", "type": "float"},
+                "rating": {"label": "rating", "type": "int"}
+            }
+        }, format='json')
+        self.client.force_authenticate(user=None)
+
+    def test_create_table(self):
+        print("Response data:", self.response.data)
+        self.assertEqual(self.response.status_code, status.HTTP_200_OK)
+
+    def test_submit_data(self):
+        self.client.force_authenticate(user=self.athlete_user)
+        # Submit data to the table (assume it exists)
+        response = self.client.post('/api/submit-data/', {
+            "Title": "test_metrics",
+            "data": {
+                "score": 85.5,
+                "rating": 4
+            }
+        }, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.client.force_authenticate(user=None)
+
+    def test_get_data(self):
+        self.client.force_authenticate(user=self.coach_user)
+        
+        # Assuming table "test_metrics" exists and is linked to the project
+        response = self.client.get('/api/tables/test_metrics/data/')
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # Optionally check response content
+        self.assertIn('data', response.data)
+        print("Response data:", self.response.data)
+        self.client.force_authenticate(user=None)
+
+    def test_process_data(self):
+        self.client.force_authenticate(user=self.coach_user)
+        
+        # Example payload for processing data, adjust keys as per your API
+        payload = {
+            "title": "test_metrics",
+            "expression": "average(score)",  # whatever your API expects
+        }
+        
+        response = self.client.post('/api/tables/process/', payload, format='json')
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # Optionally check the processed result returned by the API
+        self.assertIn('result', response.data)
+        self.client.force_authenticate(user=None)
