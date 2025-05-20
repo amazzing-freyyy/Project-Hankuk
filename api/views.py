@@ -40,11 +40,10 @@ class PostDataView(APIView):
             table = get_object_or_404(DynamicTable, title=serializer.validated_data['Title'])
             if request.user.userprofile.project != table.project:
                 return Response({'error': 'No permission'}, status=403)
-            for row in serializer.validated_data['data']:
-                entry = copy.deepcopy(row)
-                for k in entry:
-                    entry[k]['Id'] = str(uuid4())
-                DynamicData.objects.create(table=table, row=entry, submitted_by=request.user)
+            entry = copy.deepcopy(serializer.validated_data['data'])
+            for k in entry:
+                entry[k]['Id'] = str(uuid4())
+            DynamicData.objects.create(table=table, row=entry, submitted_by=request.user)
             return Response({'message': 'Data submitted'})
         return Response(serializer.errors, status=400)
 
@@ -137,50 +136,50 @@ class ProcessDataView(APIView):
         for row_obj in raw_data:
             row_result = copy.deepcopy(row_obj.row)
 
-            for item in serializer.validated_data['data']:
-                for key, val in item.items():
-                    label = val.get("Label") or key
-                    expr = val.get("Expression")
-                    expected_type = val.get("Type", "unknown")
+            for key, val in serializer.validated_data['data'].items():
+                label = val.get("Label") or key
+                expr = val.get("Expression")
+                expected_type = val.get("Type", "unknown")
 
-                    if expr:
-                        try:
-                            local_env = {
-                                k: float(v['Value']) for k, v in row_result.items()
-                                if isinstance(v, dict) and 'Value' in v and
-                                isinstance(v['Value'], (int, float, str)) and
-                                str(v['Value']).replace('.', '', 1).isdigit()
-                            }
-                            aeval.symtable.clear()
-                            aeval.symtable.update(local_env)
+                if expr:
+                    try:
+                        local_env = {}
+                        for k, v in row_result.items():
+                            if isinstance(v, dict):
+                                val = v.get("value")
+                                try:
+                                    local_env[k] = float(val)
+                                except (ValueError, TypeError):
+                                    pass
+                        aeval.symtable.clear()
+                        aeval.symtable.update(local_env)
 
-                            value = aeval(expr)
+                        value = aeval(expr)
 
-                            if expected_type.lower() == 'int':
-                                value = int(value)
-                            elif expected_type.lower() == 'float':
-                                value = float(value)
-                            elif expected_type.lower() == 'str':
-                                value = str(value)
+                        if expected_type.lower() == 'int':
+                            value = int(value)
+                        elif expected_type.lower() == 'float':
+                            value = float(value)
+                        elif expected_type.lower() == 'str':
+                            value = str(value)
 
-                            row_result[key] = {"Label": label, "Value": value, "Type": expected_type}
-                        except Exception as e:
-                            row_result[key] = {"Label": label, "Value": f"error: {str(e)}", "Type": "error"}
-                    else:
-                        existing = row_result.get(key, {})
-                        row_result[key] = {
-                            "Label": label,
-                            "Value": existing.get("Value"),
-                            "Type": existing.get("Type", expected_type)
-                        }
+                        row_result[key] = {"Label": label, "value": value, "Type": expected_type}
+                    except Exception as e:
+                        row_result[key] = {"Label": label, "value": f"error: {str(e)}", "Type": "error"}
+                else:
+                    existing = row_result.get(key, {})
+                    row_result[key] = {
+                        "Label": label,
+                        "value": existing.get("value"),
+                        "Type": existing.get("Type", expected_type)
+                    }
 
             result_data.append(row_result)
 
-        for item in serializer.validated_data['data']:
-            for key, val in item.items():
-                label = val.get("Label") or key
-                expected_type = val.get("Type", "unknown")
-                result_schema[key] = {"Label": label, "Type": expected_type}
+        for key, val in serializer.validated_data['data'].items():
+            label = val.get("Label") or key
+            expected_type = val.get("Type", "unknown")
+            result_schema[key] = {"Label": label, "Type": expected_type}
 
         return Response({
             "Title": table.title,

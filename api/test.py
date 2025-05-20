@@ -73,40 +73,70 @@ class TableDataTests(APITestSetup):
     def test_submit_data(self):
         self.client.force_authenticate(user=self.athlete_user)
         # Submit data to the table (assume it exists)
-        response = self.client.post('/api/submit-data/', {
+        response = self.client.post('/api/data/', {
             "Title": "test_metrics",
             "data": {
-                "score": 85.5,
-                "rating": 4
+                "score": {"value":85.5},
+                "rating": {"value":4}
             }
         }, format='json')
+        print("Response data:", response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.client.force_authenticate(user=None)
 
     def test_get_data(self):
+        self.client.force_authenticate(user=self.athlete_user)
+        # Submit data to the table (assume it exists)
+        response = self.client.post('/api/data/', {
+            "Title": "test_metrics",
+            "data": {
+                "score": {"value":85.5},
+                "rating": {"value":4}
+            }
+        }, format='json')
+        print("Response data:", response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.client.force_authenticate(user=None)
+
         self.client.force_authenticate(user=self.coach_user)
-        
         # Assuming table "test_metrics" exists and is linked to the project
         response = self.client.get('/api/tables/test_metrics/data/')
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Optionally check response content
         self.assertIn('data', response.data)
-        print("Response data:", self.response.data)
+        print("Response data:", response.data)
         self.client.force_authenticate(user=None)
 
     def test_process_data(self):
+        self.client.force_authenticate(user=self.athlete_user)
+        # Submit data to the table (assume it exists)
+        response = self.client.post('/api/data/', {
+            "Title": "test_metrics",
+            "data": {
+                "score": {"value":85.5},
+                "rating": {"value":4}
+            }
+        }, format='json')
+        self.client.force_authenticate(user=None)
+
         self.client.force_authenticate(user=self.coach_user)
-        
         # Example payload for processing data, adjust keys as per your API
         payload = {
-            "title": "test_metrics",
-            "expression": "average(score)",  # whatever your API expects
+            "Title": "test_metrics",
+            "data": {
+                "squared_score": {
+                    "Label": "Score square",
+                    "Expression": "score * score",
+                    "Type": "float"
+                }
+            }
         }
         
         response = self.client.post('/api/tables/process/', payload, format='json')
-        
+        print("Response data:", response.data)
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Optionally check the processed result returned by the API
-        self.assertIn('result', response.data)
+        self.assertIn('results', response.data)
         self.client.force_authenticate(user=None)

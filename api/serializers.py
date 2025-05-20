@@ -9,7 +9,7 @@ class TableCreateSerializer(serializers.Serializer):
 
 class DataSubmitSerializer(serializers.Serializer):
     Title = serializers.CharField()
-    data = serializers.ListField(child=serializers.DictField())
+    data = serializers.DictField()
 
 class TableStructureSerializer(serializers.Serializer):
     Title = serializers.CharField()
