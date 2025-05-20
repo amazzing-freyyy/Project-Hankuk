@@ -90,7 +90,7 @@ class TableDataTests(APITestSetup):
             "Title": "test_metrics",
             "data": {
                 "score": {"value":85.5},
-                "rating": {"value":4}
+                "rating": {"value":-3}
             }
         }, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -108,13 +108,16 @@ class TableDataTests(APITestSetup):
     def test_process_data(self):
         self.client.force_authenticate(user=self.athlete_user)
         # Submit data to the table (assume it exists)
-        response = self.client.post('/api/data/', {
-            "Title": "test_metrics",
-            "data": {
-                "score": {"value":85.5},
-                "rating": {"value":4}
-            }
-        }, format='json')
+        
+        for i in range(4):
+            response = self.client.post('/api/data/', {
+                "Title": "test_metrics",
+                "data": {
+                    "score": {"value":85.5+i},
+                    "rating": {"value":-4+i}
+                }
+            }, format='json')
+
         self.client.force_authenticate(user=None)
 
         self.client.force_authenticate(user=self.coach_user)
@@ -122,10 +125,20 @@ class TableDataTests(APITestSetup):
         payload = {
             "Title": "test_metrics",
             "data": {
-                "squared_score": {
-                    "Label": "Score square",
-                    "Expression": "score * score",
+                "ave_score": {
+                    "Label": "Average score",
+                    "Expression": "rolling_avg(score, 2)",
                     "Type": "float"
+                },
+                "log_score": {
+                    "Label": "Log score",
+                    "Expression": "ln(score)",
+                    "Type": "float"
+                },
+                "abs_rating":{
+                    "Label": "Abs rating",
+                    "Expression": "abs(rating)",
+                    "Type": "int"
                 }
             }
         }
@@ -134,7 +147,13 @@ class TableDataTests(APITestSetup):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Optionally check the processed result returned by the API
-        self.assertIn('results', response.data)
+        self.assertIn("ave_score", response.data["results"][0])
+        print(f'''
+              Average score: {response.data['results'][0]['ave_score']['value']}, {response.data['results'][1]['ave_score']['value']}, {response.data['results'][2]['ave_score']['value']}, {response.data['results'][3]['ave_score']['value']}
+              score: {response.data['results'][0]['score']['value']}, {response.data['results'][1]['score']['value']}, {response.data['results'][2]['score']['value']}, {response.data['results'][3]['score']['value']}
+              Log score: {response.data['results'][0]['log_score']['value']:.2f}, {response.data['results'][1]['log_score']['value']:.2f}, {response.data['results'][2]['log_score']['value']:.2f}, {response.data['results'][3]['log_score']['value']:.2f}
+              Abs rating: {response.data['results'][0]['abs_rating']['value']}
+              rating: {response.data['results'][0]['rating']['value']}''')
         self.client.force_authenticate(user=None)
 
 class FormAPITestCase(APITestCase):

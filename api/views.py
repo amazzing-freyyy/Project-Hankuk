@@ -12,7 +12,9 @@ from django.shortcuts import get_object_or_404
 from uuid import uuid4
 import copy
 from django.utils.dateparse import parse_date
-from asteval import Interpreter
+from collections import defaultdict
+import pandas as pd
+import math
 
 class PostTableView(APIView):
     permission_classes = [IsCoachOrAdmin]
@@ -115,6 +117,28 @@ class UpdateDataView(APIView):
             return Response({'message': 'Data updated'})
         return Response(serializer.errors, status=400)
 
+def parse_expression(expr):
+    """
+    Parse expressions like:
+      - average(score)
+      - sum(score)
+      - stddev(score)
+      - ln(score)
+      - rolling_avg(score, 3)
+      - rolling_stddev(score, 5)
+      - abs(score)
+    Returns function name and list of arguments.
+    """
+    expr = expr.strip()
+    if '(' not in expr or not expr.endswith(')'):
+        return expr, []
+    func_name, arg_str = expr.split('(', 1)
+    func_name = func_name.strip().lower()
+    arg_str = arg_str[:-1]  # remove trailing ')'
+    args = [a.strip() for a in arg_str.split(',')]
+    return func_name, args
+
+
 class ProcessDataView(APIView):
     permission_classes = [IsCoachOrAdmin]
 
@@ -127,55 +151,76 @@ class ProcessDataView(APIView):
         if request.user.userprofile.project != table.project:
             return Response({'error': 'No permission'}, status=status.HTTP_403_FORBIDDEN)
 
-        result_schema = copy.deepcopy(table.schema)
-        result_data = []
         raw_data = DynamicData.objects.filter(table=table)
 
-        aeval = Interpreter()
-
+        # Convert raw_data rows to list of dicts: key -> float value or None
+        data_rows = []
         for row_obj in raw_data:
-            row_result = copy.deepcopy(row_obj.row)
+            simple_row = {}
+            for k, v in row_obj.row.items():
+                try:
+                    simple_row[k] = float(v.get('value'))
+                except Exception:
+                    simple_row[k] = None
+            data_rows.append(simple_row)
 
-            for key, val in serializer.validated_data['data'].items():
-                label = val.get("Label") or key
-                expr = val.get("Expression")
-                expected_type = val.get("Type", "unknown")
+        if not data_rows:
+            return Response({'error': 'No data found in table'}, status=status.HTTP_400_BAD_REQUEST)
 
-                if expr:
-                    try:
-                        local_env = {}
-                        for k, v in row_result.items():
-                            if isinstance(v, dict):
-                                val = v.get("value")
-                                try:
-                                    local_env[k] = float(val)
-                                except (ValueError, TypeError):
-                                    pass
-                        aeval.symtable.clear()
-                        aeval.symtable.update(local_env)
+        df = pd.DataFrame(data_rows)
 
-                        value = aeval(expr)
+        # Prepare result columns
+        for key, val in serializer.validated_data['data'].items():
+            label = val.get("Label") or key
+            expr = val.get("Expression")
+            expected_type = val.get("Type", "unknown")
 
-                        if expected_type.lower() == 'int':
-                            value = int(value)
-                        elif expected_type.lower() == 'float':
-                            value = float(value)
-                        elif expected_type.lower() == 'str':
-                            value = str(value)
+            if expr:
+                func_name, args = parse_expression(expr)
 
-                        row_result[key] = {"Label": label, "value": value, "Type": expected_type}
-                    except Exception as e:
-                        row_result[key] = {"Label": label, "value": f"error: {str(e)}", "Type": "error"}
+                if func_name == "average" and len(args) == 1:
+                    df[key] = df[args[0]].mean()
+                elif func_name == "sum" and len(args) == 1:
+                    df[key] = df[args[0]].sum()
+                elif func_name == "stddev" and len(args) == 1:
+                    df[key] = df[args[0]].std()
+                elif func_name == "ln" and len(args) == 1:
+                    df[key] = df[args[0]].apply(lambda x: math.log(x) if x is not None and x > 0 else None)
+                elif func_name == "rolling_avg" and len(args) >= 1:
+                    window = int(args[1]) if len(args) > 1 else 3
+                    df[key] = df[args[0]].rolling(window=window).mean()
+                elif func_name == "rolling_stddev" and len(args) >= 1:
+                    window = int(args[1]) if len(args) > 1 else 3
+                    df[key] = df[args[0]].rolling(window=window).std()
+                elif func_name == 'abs' and len(args) == 1:
+                    df[key] = df[args[0]].abs()
                 else:
-                    existing = row_result.get(key, {})
-                    row_result[key] = {
-                        "Label": label,
-                        "value": existing.get("value"),
-                        "Type": existing.get("Type", expected_type)
-                    }
+                    # Fallback: try pandas eval for more complex expressions
+                    try:
+                        # Replace function names with pandas equivalents if needed
+                        # or simply try evaluating expression directly on df
+                        df[key] = df.eval(expr)
+                    except Exception as e:
+                        return Response({'error': f'Failed to evaluate expression "{expr}": {str(e)}'},
+                                        status=status.HTTP_400_BAD_REQUEST)
+            else:
+                # If no expression, keep existing or fill with NaN
+                df[key] = None
 
+        # Build the result_data for response
+        result_data = []
+        for _, row in df.iterrows():
+            row_result = {}
+            for col in df.columns:
+                row_result[col] = {
+                    "Label": serializer.validated_data['data'].get(col, {}).get("Label", col),
+                    "value": row[col] if not pd.isna(row[col]) else None,
+                    "Type": serializer.validated_data['data'].get(col, {}).get("Type", "unknown"),
+                }
             result_data.append(row_result)
 
+        # Update schema to include new keys
+        result_schema = copy.deepcopy(table.schema)
         for key, val in serializer.validated_data['data'].items():
             label = val.get("Label") or key
             expected_type = val.get("Type", "unknown")
