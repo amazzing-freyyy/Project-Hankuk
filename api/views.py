@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.contrib.auth.models import User
@@ -12,7 +12,6 @@ from django.shortcuts import get_object_or_404
 from uuid import uuid4
 import copy
 from django.utils.dateparse import parse_date
-from collections import defaultdict
 import pandas as pd
 import math
 
@@ -50,6 +49,8 @@ class PostDataView(APIView):
         return Response(serializer.errors, status=400)
 
 class GetTableDataView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, title):
         table = get_object_or_404(DynamicTable, title=title)
         if request.user.userprofile.project != table.project:
@@ -91,6 +92,8 @@ class GetTableDataView(APIView):
         return Response({"Title": table.title, "data": data})
 
 class GetTableStructureView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, title):
         table = get_object_or_404(DynamicTable, title=title)
         if request.user.userprofile.project != table.project:
@@ -98,7 +101,7 @@ class GetTableStructureView(APIView):
         return Response({"Title": table.title, "project": table.project.name, "data": table.schema})
 
 class UpdateDataView(APIView):
-    permission_classes = [IsCoachOrAdmin]
+    permission_classes = [IsAthleteOrAdmin]
 
     def post(self, request):
         serializer = DataUpdateSerializer(data=request.data)
@@ -138,9 +141,8 @@ def parse_expression(expr):
     args = [a.strip() for a in arg_str.split(',')]
     return func_name, args
 
-
 class ProcessDataView(APIView):
-    permission_classes = [IsCoachOrAdmin]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = ProcessDataSerializer(data=request.data)
@@ -254,6 +256,7 @@ class CustomTokenRefreshView(TokenRefreshView):
     permission_classes = [AllowAny]
 
 class FormViewSet(viewsets.ModelViewSet):
+    
     serializer_class = FormSerializer
 
     def get_permissions(self):
