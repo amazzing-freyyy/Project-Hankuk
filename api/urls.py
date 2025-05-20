@@ -1,5 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'forms', FormViewSet, basename='form')
 
 urlpatterns = [
     path('signup/', SignupView.as_view(), name='signup'),
@@ -11,4 +15,5 @@ urlpatterns = [
     path('tables/<str:title>/structure/', GetTableStructureView.as_view(), name='get-table-structure'),
     path('tables/<str:title>/data/', GetTableDataView.as_view(), name='get-data'),
     path('tables/process/', ProcessDataView.as_view(), name='process-data'),
+    path('', include(router.urls)),
 ]

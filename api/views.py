@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -207,3 +207,18 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 class CustomTokenRefreshView(TokenRefreshView):
     permission_classes = [AllowAny]
+
+class FormViewSet(viewsets.ModelViewSet):
+    serializer_class = FormSerializer
+
+    def get_permissions(self):
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            return [IsCoachOrAdmin()]
+        return [IsInProject()]
+
+    def get_queryset(self):
+        user_project = self.request.user.userprofile.project
+        return Form.objects.filter(project=user_project)
+
+    def perform_create(self, serializer):
+        serializer.save(project=self.request.user.userprofile.project)
