@@ -36,6 +36,8 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.233.111.130', 'projecthankuk.com
 
 # Application definition
 
+AUTH_USER_MODEL = 'api.User'  # Use your custom User model
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

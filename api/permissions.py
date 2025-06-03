@@ -1,13 +1,22 @@
+# permissions.py
 from rest_framework.permissions import BasePermission
+from .models import Project
 
-class IsInProject(BasePermission):
+class IsProjectCoach(BasePermission):
     def has_object_permission(self, request, view, obj):
-        return hasattr(request.user, 'userprofile') and request.user.userprofile.project == obj.project
+        return request.user in obj.project.users.filter(is_coach=True)
 
-class IsCoachOrAdmin(BasePermission):
-    def has_permission(self, request, view):
-        return request.user.userprofile.role in ['coach', 'admin']
+class IsProjectAthlete(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return request.user in obj.project.users.filter(is_athlete=True)
 
-class IsAthleteOrAdmin(BasePermission):
+class IsProjectCoachOrReadOnlyGraph(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in ('GET', 'HEAD', 'OPTIONS'):
+            return request.user in obj.project.users.all()
+        return request.user in obj.project.users.filter(is_coach=True)
+
+class IsAdminUser(BasePermission):
     def has_permission(self, request, view):
-        return request.user.userprofile.role in ['athlete', 'admin']
+        return request.user and request.user.is_authenticated and request.user.is_admin
+

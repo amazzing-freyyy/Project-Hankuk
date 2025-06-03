@@ -1,19 +1,25 @@
+# urls.py
 from django.urls import path, include
-from .views import *
 from rest_framework.routers import DefaultRouter
+from .views import (
+    UserViewSet,
+    ProjectViewSet,
+    FormSchemaViewSet,
+    FormSubmissionViewSet,
+    TableConfigViewSet,
+    GraphConfigViewSet,
+    GraphDataView,
+)
 
 router = DefaultRouter()
-router.register(r'forms', FormViewSet, basename='form')
+router.register(r'users', UserViewSet)
+router.register(r'projects', ProjectViewSet)
+router.register(r'formschemas', FormSchemaViewSet)
+router.register(r'formsubmissions', FormSubmissionViewSet)
+router.register(r'tableconfigs', TableConfigViewSet)
+router.register(r'graphconfigs', GraphConfigViewSet)
 
 urlpatterns = [
-    path('signup/', SignupView.as_view(), name='signup'),
-    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
-    path('tables/', PostTableView.as_view(), name='table-create'),
-    path('data/', PostDataView.as_view(), name='submit-data'),
-    path('data/update/', UpdateDataView.as_view(), name='update-data'),
-    path('tables/<str:title>/structure/', GetTableStructureView.as_view(), name='get-table-structure'),
-    path('tables/<str:title>/data/', GetTableDataView.as_view(), name='get-data'),
-    path('tables/process/', ProcessDataView.as_view(), name='process-data'),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('api/graph-data/<int:graph_id>/', GraphDataView.as_view(), name='graph-data'),
 ]
