@@ -605,26 +605,29 @@ class Coach_Home(LoginRequiredMixin, ListView):
                     ss_z = query.ss_z_score
                     
                     cause=[]
-                    alert_counter = 0
-                    if lnrmssd > lsuprmssd or lnrmssd < linfrmssd:
-                        alert_counter = alert_counter + 1
-                        cause.append('LnRMSSD')
+                    try:
+                        alert_counter = 0
+                        if lnrmssd > lsuprmssd or lnrmssd < linfrmssd:
+                            alert_counter = alert_counter + 1
+                            cause.append('LnRMSSD')
+                            
+                        if abs(hr_z) >= 2.5:
+                            alert_counter = alert_counter + 1
+                            cause.append('HR')
+
+                        if suma < 10:
+                            alert_counter = alert_counter + 1
+                            cause.append('Suma')
+
+                        if dolor < -2:
+                            alert_counter = alert_counter + 1
+                            cause.append('Dolor')
                         
-                    if abs(hr_z) >= 2.5:
-                        alert_counter = alert_counter + 1
-                        cause.append('HR')
-
-                    if suma < 10:
-                        alert_counter = alert_counter + 1
-                        cause.append('Suma')
-
-                    if dolor < -2:
-                        alert_counter = alert_counter + 1
-                        cause.append('Dolor')
-                    
-                    if abs(ss_z) >= 2.5:
-                        alert_counter = alert_counter + 1
-                        cause.append('Stress Score')
+                        if abs(ss_z) >= 2.5:
+                            alert_counter = alert_counter + 1
+                            cause.append('Stress Score')
+                    except Exception as e:
+                        logger.error(e)
 
                     alert = 'blue'
                     if alert_counter > 2:
