@@ -663,8 +663,12 @@ class Training_Data(LoginRequiredMixin, ListView):
             #last three entries
             for athlete in athletes:
                 query = Post_Training_Data.objects.filter(user=athlete).order_by("-date").first()
-                
-                date = query.date
+
+                try:
+                    date = query.date
+                except Exception as e:
+                    logger.error(e)
+                    date = ""
                 
                 context['data'].append({'user': athlete, 'date':date})
 
