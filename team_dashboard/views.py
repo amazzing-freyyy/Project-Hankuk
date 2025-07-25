@@ -332,27 +332,29 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         fields = ['time_of_activity']
 
         data = {field: list(Post_Training_Data.objects.filter(user=athlete).values_list(field, flat=True)) for field in fields}
-        if data.exists():
         
-            bounds = {}
-            for field, values in data.items():
-                if values:  # Ensure there is data
-                    q1 = np.percentile(values, 25)
-                    q3 = np.percentile(values, 75)
-                    iqr = q3 - q1
-                    lower_bound = q1 - 1.5 * iqr
-                    upper_bound = q3 + 1.5 * iqr
-                    bounds[field] = (lower_bound, upper_bound)
-    
-            filters = {}
-            for field, (lower, upper) in bounds.items():
-                filters[f"{field}__gte"] = lower
-                filters[f"{field}__lte"] = upper
-    
-            filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
-                                    ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
-                                    ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
-                                    ).order_by("-date")
+        
+        bounds = {}
+        for field, values in data.items():
+            if values:  # Ensure there is data
+                q1 = np.percentile(values, 25)
+                q3 = np.percentile(values, 75)
+                iqr = q3 - q1
+                lower_bound = q1 - 1.5 * iqr
+                upper_bound = q3 + 1.5 * iqr
+                bounds[field] = (lower_bound, upper_bound)
+
+        filters = {}
+        for field, (lower, upper) in bounds.items():
+            filters[f"{field}__gte"] = lower
+            filters[f"{field}__lte"] = upper
+
+        filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
+                                ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
+                                ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
+                                ).order_by("-date")
+        
+        if filtered_objects.exists():
     
             time_threshold= time(13,0) 
             time_separated = [filtered_objects.filter(date__time__lt=time_threshold).all().annotate(
