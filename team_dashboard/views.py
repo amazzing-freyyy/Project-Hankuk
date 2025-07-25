@@ -332,205 +332,208 @@ class Training_Dashboard(LoginRequiredMixin, TemplateView):
         fields = ['time_of_activity']
 
         data = {field: list(Post_Training_Data.objects.filter(user=athlete).values_list(field, flat=True)) for field in fields}
+        if data.exists():
         
-        bounds = {}
-        for field, values in data.items():
-            if values:  # Ensure there is data
-                q1 = np.percentile(values, 25)
-                q3 = np.percentile(values, 75)
-                iqr = q3 - q1
-                lower_bound = q1 - 1.5 * iqr
-                upper_bound = q3 + 1.5 * iqr
-                bounds[field] = (lower_bound, upper_bound)
-
-        filters = {}
-        for field, (lower, upper) in bounds.items():
-            filters[f"{field}__gte"] = lower
-            filters[f"{field}__lte"] = upper
-
-        filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
-                                ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
-                                ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
-                                ).order_by("-date")
-
-        time_threshold= time(13,0) 
-        time_separated = [filtered_objects.filter(date__time__lt=time_threshold).all().annotate(
-            date_only=TruncDate("date")
-        ).values(
-            "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        ), filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
-            date_only=TruncDate("date")
-        ).values(
-            "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
-        )]
-
-        dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
-                       sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
-        
-        time_x_strain2_daily_by_date = [{date: 0 for date in dates[0]},
-                                       {date: 0 for date in dates[1]}]
-
-        activities_by_date = [{date: 0 for date in dates[0]},
-                            {date: 0 for date in dates[1]}]
-        
-        for workout  in time_separated:
-            i = time_separated.index(workout)
-            for measurement in workout:
-                date= measurement['date_only']
-
-                time_x_strain2_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
-                activities_by_date[i][date] = measurement['type_of_activity']
-        
-        weekly_data= (filtered_objects
-                .annotate(year=ExtractYear('date'), week= ExtractWeek('date'), date_only=TruncDate('date'))
-                .values('year', 'week')
-                .annotate(
-                    total=Sum(F('time_of_activity') * F('perceived_strain_of_activity') * F('perceived_strain_of_activity')),
-                    start_date=Min('date_only'),
-                    end_date=Max('date_only')
-                ).order_by('-start_date'))
-
-        weeks= sorted(set(entry['start_date'] for entry in weekly_data))
-
-        time_x_rpe2_by_week= {week: 0 for week in weeks}
-        week_dates= {week: 0 for week in weeks}
-        percent_diff= {week: 0 for week in weeks}
-
-        prev_total = None
-        for measurement in weekly_data.order_by('start_date'):
-            date= measurement['start_date']
-
-            time_x_rpe2_by_week[date] = measurement['total']
-            week_dates[date]= f'{measurement['start_date'].strftime("%d-%b-%Y")} a {measurement['end_date'].strftime("%d-%b-%Y")}'
-
-            if prev_total is not None:
-                percent_diff[date] = ((measurement['total'] - prev_total)/ prev_total) * 100
-            else:
-                percent_diff[date] = 0
+            bounds = {}
+            for field, values in data.items():
+                if values:  # Ensure there is data
+                    q1 = np.percentile(values, 25)
+                    q3 = np.percentile(values, 75)
+                    iqr = q3 - q1
+                    lower_bound = q1 - 1.5 * iqr
+                    upper_bound = q3 + 1.5 * iqr
+                    bounds[field] = (lower_bound, upper_bound)
+    
+            filters = {}
+            for field, (lower, upper) in bounds.items():
+                filters[f"{field}__gte"] = lower
+                filters[f"{field}__lte"] = upper
+    
+            filtered_objects = Post_Training_Data.objects.filter(**filters, user=athlete
+                                    ).annotate(time_x_rpe_per_day=F("time_of_activity") * F("perceived_strain_of_activity") * F("perceived_strain_of_activity")  # Calculate the average of the product
+                                    ).values("date", "time_x_rpe_per_day", 'type_of_activity','pain', 'comments'
+                                    ).order_by("-date")
+    
+            time_threshold= time(13,0) 
+            time_separated = [filtered_objects.filter(date__time__lt=time_threshold).all().annotate(
+                date_only=TruncDate("date")
+            ).values(
+                "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
+            ), filtered_objects.filter(date__time__gt=time_threshold).all().annotate(
+                date_only=TruncDate("date")
+            ).values(
+                "date_only", "time_x_rpe_per_day", 'type_of_activity', 'date','pain', 'comments'
+            )]
+    
+            dates= [sorted(set(measurement['date_only'] for measurement in time_separated[0])),
+                           sorted(set(measurement['date_only'] for measurement in time_separated[1]))]
             
-            prev_total= measurement['total']
-
-        last_week= datetime.now() - timedelta(days=7)
-        last_week_activities= Post_Training_Data.objects.filter(user=athlete, date__gte=last_week).values('type_of_activity', 'time_of_activity').all()
-
-        activities= {"Fuerza": last_week_activities.filter(type_of_activity__contains="fuerza").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Específico": last_week_activities.filter(type_of_activity__contains="específico").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Halterofilia": last_week_activities.filter(type_of_activity__contains="halterofilia").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Test": last_week_activities.filter(type_of_activity__contains="test").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Velocidad": last_week_activities.filter(type_of_activity__contains="velocidad").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Soltura": last_week_activities.filter(type_of_activity__contains="soltura").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Libre": last_week_activities.filter(type_of_activity__contains="libre").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Téc. táctico": last_week_activities.filter(type_of_activity__contains="técnico táctico").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Técnico": last_week_activities.filter(type_of_activity__contains="tecnico").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Paos": last_week_activities.filter(type_of_activity__contains="paos").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Combate": last_week_activities.filter(type_of_activity__contains="combate").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Competición": last_week_activities.filter(type_of_activity__contains="competición").aggregate(time=Sum('time_of_activity'))['time'],
-                     "Recovery": last_week_activities.filter(type_of_activity__contains="recovery").aggregate(time=Sum('time_of_activity'))['time'],}
-        
-        comments= filtered_objects.first()['comments']
-        pain= filtered_objects.first()['pain']
-        
-        fig = make_subplots(rows=5, cols=1,
-                            subplot_titles=("RPE^2 x Minutos Diario", "RPE^2 x Minutos Semanal", "Resumen de entrenos en la semana",  "Dolores", "Comentarios"),
-                            specs=[[{'type':'xy'}],
-                                   [{'type':'xy', 'secondary_y': True}],
-                                   [{'type':'domain'}],
-                                   [{'type':'table'}],
-                                   [{'type':'table'}],])
-
-        time_x_rpe2_daily_trace= [go.Bar(
-            x=list(time_x_strain2_daily_by_date[0].keys()),
-            y=list(time_x_strain2_daily_by_date[0].values()),
-            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain2_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain2_daily_by_date[0].keys())],
-            textposition='inside',
-            name='',
-            marker=dict(color="cyan"),
-            showlegend=False
-        ),go.Bar(
-            x=list(time_x_strain2_daily_by_date[1].keys()),
-            y=list(time_x_strain2_daily_by_date[1].values()),
-            hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain2_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain2_daily_by_date[1].keys())],
-            textposition='inside',
-            name='',
-            marker=dict(color="magenta"),
-            showlegend=False
-        )]
-
-        xaxis_layout=dict(
-                type="date",
-                range=[dates[0][-1]-timedelta(days=15), dates[0][-1]+timedelta(days=1)],
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=15, label="2W", step="day", stepmode="todate"),   # Last 7 days
-                        dict(count=30, label="1M", step="day", stepmode="todate"),
-                        dict(count=6, label="6M", step="month", stepmode="todate"),
-                        dict(count=1, label="1Y", step="year", stepmode="todate"),
-                    ])
-                ),
+            time_x_strain2_daily_by_date = [{date: 0 for date in dates[0]},
+                                           {date: 0 for date in dates[1]}]
+    
+            activities_by_date = [{date: 0 for date in dates[0]},
+                                {date: 0 for date in dates[1]}]
+            
+            for workout  in time_separated:
+                i = time_separated.index(workout)
+                for measurement in workout:
+                    date= measurement['date_only']
+    
+                    time_x_strain2_daily_by_date[i][date] = measurement['time_x_rpe_per_day']
+                    activities_by_date[i][date] = measurement['type_of_activity']
+            
+            weekly_data= (filtered_objects
+                    .annotate(year=ExtractYear('date'), week= ExtractWeek('date'), date_only=TruncDate('date'))
+                    .values('year', 'week')
+                    .annotate(
+                        total=Sum(F('time_of_activity') * F('perceived_strain_of_activity') * F('perceived_strain_of_activity')),
+                        start_date=Min('date_only'),
+                        end_date=Max('date_only')
+                    ).order_by('-start_date'))
+    
+            weeks= sorted(set(entry['start_date'] for entry in weekly_data))
+    
+            time_x_rpe2_by_week= {week: 0 for week in weeks}
+            week_dates= {week: 0 for week in weeks}
+            percent_diff= {week: 0 for week in weeks}
+    
+            prev_total = None
+            for measurement in weekly_data.order_by('start_date'):
+                date= measurement['start_date']
+    
+                time_x_rpe2_by_week[date] = measurement['total']
+                week_dates[date]= f'{measurement['start_date'].strftime("%d-%b-%Y")} a {measurement['end_date'].strftime("%d-%b-%Y")}'
+    
+                if prev_total is not None:
+                    percent_diff[date] = ((measurement['total'] - prev_total)/ prev_total) * 100
+                else:
+                    percent_diff[date] = 0
+                
+                prev_total= measurement['total']
+    
+            last_week= datetime.now() - timedelta(days=7)
+            last_week_activities= Post_Training_Data.objects.filter(user=athlete, date__gte=last_week).values('type_of_activity', 'time_of_activity').all()
+    
+            activities= {"Fuerza": last_week_activities.filter(type_of_activity__contains="fuerza").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Específico": last_week_activities.filter(type_of_activity__contains="específico").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Halterofilia": last_week_activities.filter(type_of_activity__contains="halterofilia").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Test": last_week_activities.filter(type_of_activity__contains="test").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Velocidad": last_week_activities.filter(type_of_activity__contains="velocidad").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Soltura": last_week_activities.filter(type_of_activity__contains="soltura").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Libre": last_week_activities.filter(type_of_activity__contains="libre").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Téc. táctico": last_week_activities.filter(type_of_activity__contains="técnico táctico").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Técnico": last_week_activities.filter(type_of_activity__contains="tecnico").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Paos": last_week_activities.filter(type_of_activity__contains="paos").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Combate": last_week_activities.filter(type_of_activity__contains="combate").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Competición": last_week_activities.filter(type_of_activity__contains="competición").aggregate(time=Sum('time_of_activity'))['time'],
+                         "Recovery": last_week_activities.filter(type_of_activity__contains="recovery").aggregate(time=Sum('time_of_activity'))['time'],}
+            
+            comments= filtered_objects.first()['comments']
+            pain= filtered_objects.first()['pain']
+            
+            fig = make_subplots(rows=5, cols=1,
+                                subplot_titles=("RPE^2 x Minutos Diario", "RPE^2 x Minutos Semanal", "Resumen de entrenos en la semana",  "Dolores", "Comentarios"),
+                                specs=[[{'type':'xy'}],
+                                       [{'type':'xy', 'secondary_y': True}],
+                                       [{'type':'domain'}],
+                                       [{'type':'table'}],
+                                       [{'type':'table'}],])
+    
+            time_x_rpe2_daily_trace= [go.Bar(
+                x=list(time_x_strain2_daily_by_date[0].keys()),
+                y=list(time_x_strain2_daily_by_date[0].values()),
+                hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain2_daily_by_date[0][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[0][i]}' for i in list(time_x_strain2_daily_by_date[0].keys())],
+                textposition='inside',
+                name='',
+                marker=dict(color="cyan"),
+                showlegend=False
+            ),go.Bar(
+                x=list(time_x_strain2_daily_by_date[1].keys()),
+                y=list(time_x_strain2_daily_by_date[1].values()),
+                hovertemplate=[f'<b>Minutos x RPE^2:</b> {time_x_strain2_daily_by_date[1][i]}<br><b>Fecha:</b> {i.strftime("%d-%b-%Y")}<br><b>Actividad:</b> {activities_by_date[1][i]}' for i in list(time_x_strain2_daily_by_date[1].keys())],
+                textposition='inside',
+                name='',
+                marker=dict(color="magenta"),
+                showlegend=False
+            )]
+    
+            xaxis_layout=dict(
+                    type="date",
+                    range=[dates[0][-1]-timedelta(days=15), dates[0][-1]+timedelta(days=1)],
+                    rangeselector=dict(
+                        buttons=list([
+                            dict(count=15, label="2W", step="day", stepmode="todate"),   # Last 7 days
+                            dict(count=30, label="1M", step="day", stepmode="todate"),
+                            dict(count=6, label="6M", step="month", stepmode="todate"),
+                            dict(count=1, label="1Y", step="year", stepmode="todate"),
+                        ])
+                    ),
+                )
+            
+            fig.add_traces(data=time_x_rpe2_daily_trace, rows=1, cols=1)
+    
+            time_x_rpe2_weekly_trace= go.Bar(
+                x=list(time_x_rpe2_by_week.keys()),
+                y=list(time_x_rpe2_by_week.values()),
+                width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe2_by_week),
+                hovertemplate= [f'<b>Minutos x RPE^2:</b> {time_x_rpe2_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe2_by_week.keys())],
+                textposition='inside',
+                name='',
+                showlegend=False
             )
-        
-        fig.add_traces(data=time_x_rpe2_daily_trace, rows=1, cols=1)
+            percent_diff_trace= go.Scatter(
+                x= list(percent_diff.keys()),
+                y= list(percent_diff.values()),
+                hovertemplate=[f'<b>Diferencia:</b> {percent_diff[i]:.2f}%' for i in list(percent_diff.keys())],
+                name='',
+                showlegend=False
+            )
+            
+            fig.add_traces(data=[time_x_rpe2_weekly_trace, percent_diff_trace], rows=2, cols=1, secondary_ys=[False, True])
+            fig.update_layout(
+                        autosize=True,
+                        dragmode= 'pan',
+                        hovermode='closest',
+                        title= f'Fecha: {filtered_objects.first()['date'].strftime("%m/%d/%Y")}',
+                        xaxis=xaxis_layout,
+                        xaxis_title="Fecha",
+                        barmode= 'stack',
+                        xaxis2= dict(type='date', range=[weeks[-1]-timedelta(days=60), weeks[-1]+timedelta(days=4)],
+                                     rangeselector=dict(
+                                        buttons=list([
+                                            dict(count=60, label="2M", step="day", stepmode="todate"),
+                                            dict(count=180, label="6M", step="day", stepmode="todate"),
+                                            dict(count=365, label="1Y", step="day", stepmode="todate"),
+                                        ])
+                    ),)
+            )
+    
+            weekly_summary_trace = go.Pie(
+                labels=list(activities.keys()),
+                values=list(activities.values()),
+                textposition='inside',
+                hovertemplate=[f'<b>Actividad:</b> {i}<br><b>Tiempo:</b> {activities[i]}min' for i in list(activities.keys())],
+                name='',
+                textinfo= 'label+percent',
+                insidetextorientation='radial',
+                showlegend=False
+            )
+            fig.add_trace(trace=weekly_summary_trace, row=3, col=1)
+    
+            pain_trace = go.Table(
+                cells= dict(values=[pain]),
+            )
+            fig.add_trace(trace=pain_trace, row=4, col=1)
+    
+            comments_trace = go.Table(
+                cells= dict(values=[comments]),
+            )
+            fig.add_trace(trace=comments_trace, row=5, col=1)
 
-        time_x_rpe2_weekly_trace= go.Bar(
-            x=list(time_x_rpe2_by_week.keys()),
-            y=list(time_x_rpe2_by_week.values()),
-            width= [1000 * 60 * 60 * 24 * 7] * len(time_x_rpe2_by_week),
-            hovertemplate= [f'<b>Minutos x RPE^2:</b> {time_x_rpe2_by_week[i]}<br><b>Fechas:</b> {week_dates[i]}' for i in list(time_x_rpe2_by_week.keys())],
-            textposition='inside',
-            name='',
-            showlegend=False
-        )
-        percent_diff_trace= go.Scatter(
-            x= list(percent_diff.keys()),
-            y= list(percent_diff.values()),
-            hovertemplate=[f'<b>Diferencia:</b> {percent_diff[i]:.2f}%' for i in list(percent_diff.keys())],
-            name='',
-            showlegend=False
-        )
-        
-        fig.add_traces(data=[time_x_rpe2_weekly_trace, percent_diff_trace], rows=2, cols=1, secondary_ys=[False, True])
-        fig.update_layout(
-                    autosize=True,
-                    dragmode= 'pan',
-                    hovermode='closest',
-                    title= f'Fecha: {filtered_objects.first()['date'].strftime("%m/%d/%Y")}',
-                    xaxis=xaxis_layout,
-                    xaxis_title="Fecha",
-                    barmode= 'stack',
-                    xaxis2= dict(type='date', range=[weeks[-1]-timedelta(days=60), weeks[-1]+timedelta(days=4)],
-                                 rangeselector=dict(
-                                    buttons=list([
-                                        dict(count=60, label="2M", step="day", stepmode="todate"),
-                                        dict(count=180, label="6M", step="day", stepmode="todate"),
-                                        dict(count=365, label="1Y", step="day", stepmode="todate"),
-                                    ])
-                ),)
-        )
-
-        weekly_summary_trace = go.Pie(
-            labels=list(activities.keys()),
-            values=list(activities.values()),
-            textposition='inside',
-            hovertemplate=[f'<b>Actividad:</b> {i}<br><b>Tiempo:</b> {activities[i]}min' for i in list(activities.keys())],
-            name='',
-            textinfo= 'label+percent',
-            insidetextorientation='radial',
-            showlegend=False
-        )
-        fig.add_trace(trace=weekly_summary_trace, row=3, col=1)
-
-        pain_trace = go.Table(
-            cells= dict(values=[pain]),
-        )
-        fig.add_trace(trace=pain_trace, row=4, col=1)
-
-        comments_trace = go.Table(
-            cells= dict(values=[comments]),
-        )
-        fig.add_trace(trace=comments_trace, row=5, col=1)
-
-        data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
-
+            data = {'report': json.loads(fig.to_json()), 'config': {'displayModeBar': False}}
+        else:
+            data = {'report': {}}
+            
         return data
 
     def get_context_data(self, **kwargs): 
