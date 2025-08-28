@@ -32,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'profile', 'groups']
+        fields = "__all__"
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
@@ -59,12 +59,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-
-        # Add custom claims
-        if 'athletes' in user.groups.values_list('name', flat=True):
-            token['group'] = 'athletes'  # Adjust based on your user model
-        elif 'coaches' in user.groups.values_list('name', flat=True):
-            token['group'] = 'coaches'
-        else:
-            token['group'] = None
+        token['username'] = user.username
+        token['groups'] = [group.name for group in user.groups.all()]
         return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        # Add extra response data
+        data['username'] = self.user.username
+        data['groups'] = [group.name for group in self.user.groups.all()]
+        return data

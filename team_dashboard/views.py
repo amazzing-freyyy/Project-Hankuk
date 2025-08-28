@@ -4,62 +4,42 @@ import logging
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializers import *
+from .permissions import *
 import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 import datetime
 
 logger = logging.getLogger(__name__) 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def protected_view(request):
-    return Response({'message': f'Hello, {request.user.username}! This is a protected route.'})
+class WUDViewSet(ModelViewSet):
+    queryset = Wake_Up_Data.objects.all()
+    serializer_class = WUDSerializer
+    permission_classes = [IsAuthenticated, IsCoachOrOwner, IsInGroup('admin')]
+    lookup_field = 'slug'
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def new_WUD(request):
-    user= request.user
-    data= request.data.copy() 
+class PTDViewSet(ModelViewSet):
+    queryset = Post_Training_Data.objects.all()
+    serializer_class = PTDSerializer
+    permission_classes = [IsAuthenticated, IsCoachOrOwner, IsInGroup('admin')]
+    lookup_field = 'slug'
 
-    serializer = WUDSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save(user = user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def new_PT(request):
-    user= request.user
-    data= request.data.copy() 
-
-    serializer = PTDSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save(user = user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def get_allWakeUpData(request):
-    user = request.user
-    if user.groups.filter(name='athletes').exists():
-        username = user.username
-    else:
-        username= request.data.get('athleteUserName')
-        user = User.objects.filter(username=username).first()
-
-    data = Wake_Up_Data.objects.filter(user=user).all()
-
-    if not data.exists():
-        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'username'
     
-    serializer= WUDSerializer(data, many=True)
-    return Response({'athleteUserName':username, 'graph_data':serializer.data})
+    def get_permissions(self):
+        if self.action in ['update', 'partial_update', 'destroy']:
+            return [IsAuthenticated()]
+        return [AllowAny()]
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class= MyTokenObtainPairSerializer
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -171,24 +151,6 @@ def get_wellnessData(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def get_allPostTrainingData(request):
-    user = request.user
-    if user.groups.filter(name='athletes').exists():
-        username = user.username
-    else:
-        username= request.data.get('athleteUserName')
-        user = User.objects.filter(username=username).first()
-
-    data = Post_Training_Data.objects.filter(user=user).all()
-
-    if not data.exists():
-        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
-
-    serializer= PTDSerializer(data, many=True)
-    return Response({'athleteUserName':username, 'graph_data':serializer.data})
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def get_rpe2XtimeData(request):
     user = request.user
     if user.groups.filter(name='athletes').exists():
@@ -255,152 +217,6 @@ def get_lastWeeksTrainings(request):
     graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def get_PTData(request):
-    user = request.user
-    is_athlete = user.groups.filter(name='athletes').exists()
-
-    if is_athlete:
-        username=user.username
-    else:
-        if not username:
-            return Response({'error': 'Missing "athleteUserName" field'}, status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.filter(username=username).first()
-
-    date_str = request.data.get('date')
-    if date_str:
-        date = datetime.datetime.fromisoformat(date_str)
-        data = Post_Training_Data.objects.filter(user=user, date__gte=date, date__lt=date+datetime.timedelta(days=1)).values('date', 'pain', 'comments').order_by('date').all()
-    else:
-        data = Post_Training_Data.objects.filter(user=user, date__gte=datetime.date.today()).values('date', 'pain', 'comments').order_by('date').all()
-
-    if not data.exists():
-        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
-    
-    dates = list(data.values_list('date', flat=True))
-
-    pain = list(data.values_list('pain', flat=True))
-
-    comments =list(data.values_list('comments', flat=True))
-
-    graph_data= {dates[i].strftime('%Y-%m-%d %H:%M'): {'pain':pain[i], 'comments':comments[i]} for i in range(len(dates))}
-    
-    return Response({'athleteUserName':username, 'graph_data':graph_data})
-
-@api_view(['POST'])
-def register_user(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
-    group = request.data.get('group')
-    gender = request.data.get('gender')
-
-    if not username or not password:
-        return Response({"error": "Usuario y contraseña son necesarios."}, status=status.HTTP_400_BAD_REQUEST)
-
-    if User.objects.filter(username=username).exists():
-        return Response({"error": "Usuario ya existe."}, status=status.HTTP_400_BAD_REQUEST)
-
-    user = User.objects.create_user(username=username, password=password)
-    user_group, _ = Group.objects.get_or_create(name=group)
-    user.groups.add(user_group)
-    user.profile.gender = gender
-    user.profile.save()
-    return Response({"message": "User registered successfully!"}, status=status.HTTP_201_CREATED)
-
-@api_view(['PUT', 'PATCH'])
-@permission_classes([IsAuthenticated])
-def update_user(request, username):
-    try:
-        instance = User.objects.get(username=username)
-    except User.DoesNotExist:
-        return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    partial = request.method == 'PATCH'
-    serializer = UserSerializer(instance, data=request.data, partial=partial)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['PUT', 'PATCH'])
-@permission_classes([IsAuthenticated])
-def update_WUD(request, slug):
-    try:
-        instance = Wake_Up_Data.objects.get(slug=slug)
-    except Wake_Up_Data.DoesNotExist:
-        return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    partial = request.method == 'PATCH'
-    serializer = WUDSerializer(instance, data=request.data, partial=partial)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['PUT', 'PATCH'])
-@permission_classes([IsAuthenticated])
-def update_PT(request, slug):
-    try:
-        instance = Post_Training_Data.objects.get(slug=slug)
-    except Post_Training_Data.DoesNotExist:
-        return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    partial = request.method == 'PATCH'
-    serializer = PTDSerializer(instance, data=request.data, partial=partial)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
-def delete_user(request, username):
-    try:
-        user = User.objects.get(username=username)
-    except User.DoesNotExist:
-        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    # Check if the requesting user is the author of the post
-    if request.user != user and not request.user.is_staff:
-        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
-
-    user.delete()
-    return Response({'message': 'User deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
-def delete_WUD(request, slug):
-    try:
-        data = Wake_Up_Data.objects.get(slug=slug)
-    except Wake_Up_Data.DoesNotExist:
-        return Response({'error': 'Data not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    # Check if the requesting user is the author of the post
-    if request.user != data.user and not request.user.is_staff:
-        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
-
-    data.delete()
-    return Response({'message': 'Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
-def delete_PT(request, slug):
-    try:
-        data = Post_Training_Data.objects.get(slug=slug)
-    except Post_Training_Data.DoesNotExist:
-        return Response({'error': 'Data not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    # Check if the requesting user is the author of the post
-    if request.user != data.user and not request.user.is_staff:
-        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
-
-    data.delete()
-    return Response({'message': 'Data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
