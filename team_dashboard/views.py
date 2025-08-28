@@ -19,24 +19,41 @@ logger = logging.getLogger(__name__)
 class WUDViewSet(ModelViewSet):
     queryset = Wake_Up_Data.objects.all()
     serializer_class = WUDSerializer
-    permission_classes = [IsAuthenticated, IsCoachOrOwner, IsInGroup('admin')]
+    permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'slug'
+
+    def perform_create(self, serializer):
+        user = User.objects.get(username=self.request.data["username"])
+
+        return serializer.save(user=user)
 
 class PTDViewSet(ModelViewSet):
     queryset = Post_Training_Data.objects.all()
     serializer_class = PTDSerializer
-    permission_classes = [IsAuthenticated, IsCoachOrOwner, IsInGroup('admin')]
+    permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'slug'
+
+    def perform_create(self, serializer):
+        user = User.objects.get(username=self.request.data["username"])
+
+        return serializer.save(user=user)
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
+    pagination_class= []
     
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAuthenticated()]
+            return [IsCoachOrOwner(), IsAuthenticated()]
         return [AllowAny()]
+    
+class ProfileViewSet(ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated, IsCoachOrOwner]
+    lookup_field = 'user__username'
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer

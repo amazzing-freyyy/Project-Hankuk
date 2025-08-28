@@ -1,12 +1,15 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
+from django.contrib.auth.models import User, Group
 
 class WUDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wake_Up_Data
         fields = '__all__'
         read_only_fields = ['slug', 'user']
+        lookupfield = 'slug'
+
 
 class PTDSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S", input_formats=["%Y-%m-%dT%H:%M:%S"])
@@ -15,19 +18,20 @@ class PTDSerializer(serializers.ModelSerializer):
         model = Post_Training_Data
         fields = '__all__'
         read_only_fields = ['slug', 'user']
+        lookupfield = 'slug'
     
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = "__all__"
+        fields = ['gender']
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     profile = ProfileSerializer(required=False)
-    groups = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='name'
+    groups = serializers.ListField(
+        child=serializers.CharField(),  # group names
+        required=False,
+        write_only=True  # we usually don’t expose groups on read here
     )
 
     class Meta:
@@ -54,6 +58,26 @@ class UserSerializer(serializers.ModelSerializer):
             profile.save()
 
         return instance
+    
+    def create(self, validated_data):
+        profile_data = validated_data.pop("profile", None)  # take out profile info if present
+        group_data = validated_data.pop("groups", [])  # take out group info if present
+
+        user = User.objects.create_user(**validated_data)
+
+        # If client included profile data, create it
+        if profile_data:
+            Profile.objects.create(user=user, **profile_data)
+        else:
+            Profile.objects.create(user=user)
+        
+        if group_data:
+            for group_name in group_data:
+                group, created = Group.objects.get_or_create(name=group_name)
+                user.groups.add(group)
+            user.save()
+
+        return user
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod

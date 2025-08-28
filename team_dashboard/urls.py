@@ -1,12 +1,12 @@
 from django.urls import path, include
 from team_dashboard.views import *
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
-router.register(r'wake_up', WUDViewSet)
-router.register(r'port_training', PTDViewSet)
-router.register(r'user', UserViewSet)
+router.register(r'wake_up', WUDViewSet, basename='wake_up_data')
+router.register(r'post_training', PTDViewSet, basename='post_training')
+router.register(r'user', UserViewSet, basename='user')
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 
