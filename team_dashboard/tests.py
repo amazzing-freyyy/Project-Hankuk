@@ -361,3 +361,53 @@ class PTDcoachCRUDTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         self.assertFalse(Wake_Up_Data.objects.filter(slug=post_training_data["slug"]).exists())
+
+class UserFilterTestCase(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username="ctest", password="test", is_staff=True)
+        self.profile = Profile.objects.create(user=self.user, gender="m")
+        self.group = Group.objects.create(name="coaches")
+        self.user.groups.add(self.group)
+        self.user.save()
+        print("Setup user:", self.user)
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_filter_by_group(self):
+        response = self.client.get("/api/user/?groups__name=coaches")
+        # self.assertEqual(response.status_code, 200)
+        data = response.json()
+        print(data)
+
+class WUDFilterTestCase(APITestCase):
+    def setUp(self):
+        self.user_list_url = reverse("user-list")
+        self.wud_list_url = reverse("wake_up_data-list")
+        
+        self.athlete = User.objects.create_user(username="atest", password="test")
+        Profile.objects.create(user=self.athlete, gender="m")
+        group = Group.objects.create(name="athletes")
+        self.athlete.groups.add(group)
+        self.athlete.save()
+
+        self.coach = User.objects.create_user(username="ctest", password="test")
+        Profile.objects.create(user=self.coach, gender="m")
+        group = Group.objects.create(name="coaches")
+        self.coach.groups.add(group)
+        self.coach.save()
+
+        print("Setup user:", self.coach)
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.coach)
+
+        data = {
+            "date": "2023-10-01",
+            "username": self.athlete.username
+        }
+        self.client.post(self.wud_list_url, data, format="json")
+
+    def test(self):
+        response = self.client.get("/api/wake_up/?user__username=atest")
+        # self.assertEqual(response.status_code, 200)
+        data = response.json()
+        print(data)

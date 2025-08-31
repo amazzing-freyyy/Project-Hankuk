@@ -13,6 +13,7 @@ from .permissions import *
 import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 import datetime
+from django_filters.rest_framework import DjangoFilterBackend
 
 logger = logging.getLogger(__name__) 
 
@@ -21,6 +22,10 @@ class WUDViewSet(ModelViewSet):
     serializer_class = WUDSerializer
     permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'slug'
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['date', 'user__username']
+    ordering_fields = ['date']
+    ordering = ['-date']
 
     def perform_create(self, serializer):
         user = User.objects.get(username=self.request.data["username"])
@@ -32,6 +37,8 @@ class PTDViewSet(ModelViewSet):
     serializer_class = PTDSerializer
     permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'slug'
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['date', 'user__username']
 
     def perform_create(self, serializer):
         user = User.objects.get(username=self.request.data["username"])
@@ -42,7 +49,9 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
-    pagination_class= []
+    filter_backends = [DjangoFilterBackend]
+
+    filterset_fields = ['username', 'first_name', 'last_name', 'email', 'groups__name', 'is_active']
     
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
