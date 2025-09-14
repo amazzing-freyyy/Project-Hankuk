@@ -31,6 +31,15 @@ class WUDViewSet(ModelViewSet):
         user = User.objects.get(username=self.request.data["username"])
 
         return serializer.save(user=user)
+    
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()  # fetch the object
+            self.perform_destroy(instance)  # delete it
+            return Response({"detail": "Deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+        except Wake_Up_Data.DoesNotExist:
+            # Already deleted
+            return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
 class PTDViewSet(ModelViewSet):
     queryset = Post_Training_Data.objects.all()
@@ -44,6 +53,15 @@ class PTDViewSet(ModelViewSet):
         user = User.objects.get(username=self.request.data["username"])
 
         return serializer.save(user=user)
+    
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()  # fetch the object
+            self.perform_destroy(instance)  # delete it
+            return Response({"detail": "Deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+        except Post_Training_Data.DoesNotExist:
+            # Already deleted
+            return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
