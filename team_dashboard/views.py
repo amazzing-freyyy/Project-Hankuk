@@ -122,13 +122,23 @@ class Wellness_Dashboard(LoginRequiredMixin, TemplateView):
 
             for measurement in graph_data:
                 date = measurement['date']
-                lnrmssd = measurement['lnrmssd'] 
-                linfrmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
-                lsuprmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
-                sd1= 0.7071 * measurement['RMSSD']
-                ss = measurement['ss']
-                s_sp = ss/sd1
+                try:
+                    lnrmssd = measurement['lnrmssd'] 
+                    linfrmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] - measurement['rolling_avgs_lnrmssd'])
+                    lsuprmssd = abs(0.06 + measurement['rolling_stds_lnrmssd'] + measurement['rolling_avgs_lnrmssd'])
+                except Exception as e:
+                    lnrmssd = 0
+                    linfrmssd = 0
+                    lsuprmssd = 0
 
+                try:
+                    sd1= 0.7071 * measurement['RMSSD']
+                    ss = measurement['ss']
+                    s_sp = ss/sd1
+                except Exception as e:
+                    sd1= 0
+                    ss= 0
+                    s_sp= 0
 
                 lnrmssd_by_date[date] = lnrmssd
                 linfrmssd_by_date[date] = linfrmssd
