@@ -103,3 +103,25 @@ class Post_Training_Data(models.Model):
                 setattr(self, field, mean_value if mean_value is not None else 0)  # Set mean or fallback
 
         super().save(*args, **kwargs)
+
+class Main_data(models.Model):
+    collections= [
+        ('wellness', 'Wake Up Data'),
+        ('training', 'Post Training Data')
+    ]
+
+    date= models.DateTimeField(null=False)
+    user= models.ForeignKey(User, on_delete=models.CASCADE, null=False, related_name='user_main_data')
+    data_collection= models.CharField(blank=True, null=True, choices=collections, max_length=10)
+    slug= models.SlugField(unique=True, blank=True)
+    data= models.JSONField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.user.get_username() + str(self.date)+ self.data_collection)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['date', 'user', 'data_collection'], name='cpk')
+        ]

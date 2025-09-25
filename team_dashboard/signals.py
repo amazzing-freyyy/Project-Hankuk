@@ -1,10 +1,12 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import Profile, Wake_Up_Data
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 import numpy as np
+from team_dashboard.models import *
+from django.forms.models import model_to_dict
+from decimal import Decimal
 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
@@ -84,3 +86,52 @@ import numpy as np
 #                 }
 #             }
 #         )
+
+def is_instance(self, dict, type):
+        for key, value in dict.items():
+            if isinstance(value, type):
+                dict[key] = float(value)
+        return dict
+
+@receiver(post_save, sender=Wake_Up_Data)
+def new_wellness_main_data(sender, instance, created, **kwargs):
+    if not created:
+        return
+    
+    user= instance.user
+    date= instance.date
+
+    dict = model_to_dict(instance,exclude=['user','slug', 'date'])
+
+    dict = is_instance(dict, Decimal)
+
+    Main_data.objects.update_or_create(
+        date=date,
+        user=user,
+        data_collection='wellness',
+        defaults={
+            "data": dict
+        }
+    )
+
+
+@receiver(post_save, sender=Post_Training_Data)
+def new_wellness_main_data(sender, instance, created, **kwargs):
+    if not created:
+        return
+    
+    user= instance.user
+    date= instance.date
+
+    dict = model_to_dict(instance,exclude=['user','slug', 'date'])
+
+    dict = is_instance(dict, Decimal)
+
+    Main_data.objects.update_or_create(
+        date=date,
+        user=user,
+        data_collection='training',
+        defaults={
+            "data": dict
+        }
+    )
