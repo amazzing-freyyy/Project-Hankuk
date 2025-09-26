@@ -18,8 +18,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 logger = logging.getLogger(__name__) 
 
 class WUDViewSet(ModelViewSet):
-    queryset = Wake_Up_Data.objects.all()
-    serializer_class = WUDSerializer
+    queryset = Main_data.objects.all().filter(data_collection='wellness')
+    serializer_class = MainDataSerializer
     permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'slug'
     filter_backends = [DjangoFilterBackend]
@@ -37,32 +37,13 @@ class WUDViewSet(ModelViewSet):
             instance = self.get_object()  # fetch the object
             self.perform_destroy(instance)  # delete it
             return Response({"detail": "Deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
-        except Wake_Up_Data.DoesNotExist:
+        except Main_data.DoesNotExist:
             # Already deleted
             return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
-class PTDViewSet(ModelViewSet):
-    queryset = Post_Training_Data.objects.all()
-    serializer_class = PTDSerializer
-    permission_classes = [IsAuthenticated, IsCoachOrOwner]
-    lookup_field = 'slug'
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['date', 'user__username']
-
-    def perform_create(self, serializer):
-        user = User.objects.get(username=self.request.data["username"])
-
-        return serializer.save(user=user)
+class PTDViewSet(WUDViewSet):
+    queryset = Main_data.objects.all().filter(data_collection='training')
     
-    def destroy(self, request, *args, **kwargs):
-        try:
-            instance = self.get_object()  # fetch the object
-            self.perform_destroy(instance)  # delete it
-            return Response({"detail": "Deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
-        except Post_Training_Data.DoesNotExist:
-            # Already deleted
-            return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
-
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -85,27 +66,26 @@ class ProfileViewSet(ModelViewSet):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_lnrmssdData(request):
-    user = request.user
-    if user.groups.filter(name='athletes').exists():
-        data = Wake_Up_Data.objects.filter(user=user).values('date', 'RMSSD', 'HR').all()
-        username = user.username
-    else:
-        username= request.data.get('athleteUserName')
+def get_lnrmssdData(request, username):
+    if User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username).first()
+        if not user.groups.filter(name='athletes').exists():
+            return Response({'error': 'User is not an athlete'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    data = Wake_Up_Data.objects.filter(user=user).values('date', 'RMSSD', 'HR').all()
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all()
 
-    if not data.exists():
+    if not query.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
 
-    dates= list(data.values_list('date', flat=True))
+    dates= list(query.values_list('date', flat=True))
 
-    hr= np.array(list(data.values_list('HR',flat=True)))
+    hr= np.array([obj.data['HR'] for obj in query]).flatten()
 
-    rmssd= np.array(list(data.values_list('RMSSD'))).flatten()
+    rmssd= np.array([obj.data['RMSSD'] for obj in query]).flatten()
     
     lnrmssd= np.log(rmssd)
 
@@ -131,25 +111,25 @@ def get_lnrmssdData(request):
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_ssData(request):
-    user = request.user
-    if user.groups.filter(name='athletes').exists():
-        username = user.username
-    else:
-        username= request.data.get('athleteUserName')
+def get_ssData(request,username):
+    if User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username).first()
+        if not user.groups.filter(name='athletes').exists():
+            return Response({'error': 'User is not an athlete'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    data = Wake_Up_Data.objects.filter(user=user).values('date', 'SDNN', 'RMSSD').all()
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all()
 
-    if not data.exists():
+    if not query.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
 
-    dates= list(data.values_list('date', flat=True))
+    dates= list(query.values_list('date', flat=True))
 
-    rmssd= np.array(list(data.values_list('RMSSD'))).flatten()
-    sdnn= np.array(list(data.values_list('SDNN'))).flatten()
+    rmssd= np.array([obj.data['RMSSD'] for obj in query]).flatten()
+    sdnn= np.array([obj.data['SDNN'] for obj in query]).flatten()
 
     ss= 1000 / (sdnn / 0.7995) + 5.1174
     sp= ss / (0.7071 * rmssd)
@@ -168,44 +148,48 @@ def get_ssData(request):
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_wellnessData(request):
-    user = request.user
-    is_athlete = user.groups.filter(name='athletes').exists()
-
-    if is_athlete:
-        username=user.username
+    username = request.GET.get('username')
+    date = request.GET.get('date')
+    if not username:
+        return Response({'error': 'Username parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
     else:
-        username= request.data.get('athleteUserName')
-        user = User.objects.filter(username=username).first()
+        if User.objects.filter(username=username).exists():
+            user = User.objects.filter(username=username).first()
+            if not user.groups.filter(name='athletes').exists():
+                Response({'error': 'User is not an athlete'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    date_str = request.data.get('date')
-    if date_str:
-        date = datetime.date.fromisoformat(date_str)
-        data = Wake_Up_Data.objects.filter(user=user, date=date).values('date', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa').order_by('-date').first()
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all()
+
+    if date:
+        dateobj = datetime.date.fromisoformat(date)
+        data = query.filter(date=dateobj).values('date', 'data__hours_of_sleep', 'data__emotional_wellness', 'data__quality_of_sleep', 'data__tiredness', 'data__comments', 'data__menstruation', 'data__muscle_pain', 'data__chispa').order_by('-date').first()
     else:
-        data = Wake_Up_Data.objects.filter(user=user).values('date', 'hours_of_sleep', 'emotional_wellness', 'quality_of_sleep', 'tiredness', 'comments', 'menstruation', 'muscle_pain', 'chispa').order_by('-date').first()
+        data = query.all().values('date', 'data__hours_of_sleep', 'data__emotional_wellness', 'data__quality_of_sleep', 'data__tiredness', 'data__comments', 'data__menstruation', 'data__muscle_pain', 'data__chispa').order_by('-date').first()
 
     if not data:
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
-    graph_data={'date':data['date'].strftime('%Y-%m-%d'), 'h_sleep':data['hours_of_sleep'], 'wellness':data['emotional_wellness'], 'q_sleep':data['quality_of_sleep'], 'recovery':data['tiredness'], 'comments':data['comments'], 'menstruation':data['menstruation'], 'pain':data['muscle_pain'], 'chispa':data['chispa']}
+    graph_data={'date':data['date'].strftime('%Y-%m-%d'), 'h_sleep':data['data__hours_of_sleep'], 'wellness':data['data__emotional_wellness'], 'q_sleep':data['data__quality_of_sleep'], 'recovery':data['data__tiredness'], 'comments':data['data__comments'], 'menstruation':data['data__menstruation'], 'pain':data['data__muscle_pain'], 'chispa':data['data__chispa']}
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_rpe2XtimeData(request):
-    user = request.user
-    if user.groups.filter(name='athletes').exists():
-        username = user.username
-    else:
-        username= request.data.get('athleteUserName')
+def get_rpe2XtimeData(request, username):
+    if User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username).first()
+        if not user.groups.filter(name='athletes').exists():
+            return Response({'error': 'User is not an athlete'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
     time_threshold= datetime.time(12,0)
-    data = [Post_Training_Data.objects.filter(user=user, date__time__lt=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),
-                Post_Training_Data.objects.filter(user=user, date__time__gte=time_threshold).values('date', 'perceived_strain_of_activity', 'time_of_activity', 'type_of_activity').all(),]
+    data = [Main_data.objects.filter(user=user, date__time__lt=time_threshold, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity'),
+                Main_data.objects.filter(user=user, date__time__gte=time_threshold, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity'),]
 
     if not data[0].exists() and not data[1].exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
@@ -213,54 +197,54 @@ def get_rpe2XtimeData(request):
     dates= [list(data[0].values_list('date', flat=True)), 
             list(data[1].values_list('date', flat=True))]
 
-    rpe= [np.array(list(data[0].values_list('perceived_strain_of_activity'))).flatten(),
-          np.array(list(data[1].values_list('perceived_strain_of_activity'))).flatten()]
+    rpe= [np.array(list(data[0].values_list('data__perceived_strain_of_activity'))).flatten(),
+          np.array(list(data[1].values_list('data__perceived_strain_of_activity'))).flatten()]
 
-    time= [np.array(list(data[0].values_list('time_of_activity'))).flatten(),
-           np.array(list(data[1].values_list('time_of_activity'))).flatten()]
+    time= [np.array(list(data[0].values_list('data__time_of_activity'))).flatten(),
+           np.array(list(data[1].values_list('data__time_of_activity'))).flatten()]
 
     rpe2Xtime=  [rpe[0] * rpe[0] * time[0],
                  rpe[1] * rpe[1] * time[1]]
 
-    activity= [np.array(list(data[0].values_list('type_of_activity'))).flatten(),
-               np.array(list(data[1].values_list('type_of_activity'))).flatten()]
+    activity= [np.array(list(data[0].values_list('data__type_of_activity'))).flatten(),
+               np.array(list(data[1].values_list('data__type_of_activity'))).flatten()]
 
     graph_data = {'morning': {dates[0][i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[0][i], 'activity':activity[0][i]} for i in range(len(dates[0]))},
                   'afternoon': {dates[1][i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[1][i], 'activity':activity[1][i]} for i in range(len(dates[1]))}}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def get_lastWeeksTrainings(request):
-    user = request.user
+# @api_view(['get'])
+# @permission_classes([IsAuthenticated])
+# def get_lastWeeksTrainings(request):
+#     user = request.user
 
-    date_str = request.data.get('date')
-    if date_str:
-        date= datetime.date.fromisoformat(date_str)
-    else:
-        date= datetime.date.today()
+#     date_str = request.data.get('date')
+#     if date_str:
+#         date= datetime.date.fromisoformat(date_str)
+#     else:
+#         date= datetime.date.today()
 
-    if user.groups.filter(name='athletes').exists():
-        username = user.username
-    else:
-        username= request.data.get('athleteUserName')
-        user = User.objects.filter(username=username).first()
+#     if user.groups.filter(name='athletes').exists():
+#         username = user.username
+#     else:
+#         username= request.data.get('athleteUserName')
+#         user = User.objects.filter(username=username).first()
 
-    data = Post_Training_Data.objects.filter(user=user, date__gte= date-datetime.timedelta(days=7), date__lte= date).values('date', 'type_of_activity', 'time_of_activity').all()
+#     data = Post_Training_Data.objects.filter(user=user, date__gte= date-datetime.timedelta(days=7), date__lte= date).values('date', 'type_of_activity', 'time_of_activity').all()
     
-    if not data.exists():
-        return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
+#     if not data.exists():
+#         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
 
-    dates= list(data.values_list('date', flat=True))
+#     dates= list(data.values_list('date', flat=True))
 
-    time= np.array(list(data.values_list('time_of_activity'))).flatten()
+#     time= np.array(list(data.values_list('time_of_activity'))).flatten()
 
-    activity= np.array(list(data.values_list('type_of_activity'))).flatten()
+#     activity= np.array(list(data.values_list('type_of_activity'))).flatten()
 
-    graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
+#     graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
 
-    return Response({'athleteUserName':username, 'graph_data':graph_data})
+#     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
