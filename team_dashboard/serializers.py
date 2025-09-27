@@ -5,9 +5,9 @@ from django.contrib.auth.models import User, Group
 
 class MainDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Wake_Up_Data
+        model = Main_data
         fields = '__all__'
-        read_only_fields = ['slug', 'user', 'date', 'data_collection']
+        read_only_fields = ['slug', 'user']
         lookupfield = 'slug'
 
 class WUDSerializer(serializers.ModelSerializer):

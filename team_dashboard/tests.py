@@ -5,6 +5,74 @@ from rest_framework import status
 from .models import *
 from rest_framework.test import APIClient
 
+class MainDataTest(APITestCase):
+    def setUp(self):
+        self.user_list_url = reverse("user-list")
+        self.list_url = reverse("wake_up_data-list")
+        self.user = User.objects.create_user(username="atest", password="test")
+        self.profile = Profile.objects.create(user=self.user, gender="m")
+        self.group = Group.objects.create(name="athletes")
+        self.user.groups.add(self.group)
+        self.user.save()
+        print("Setup user:", self.user)
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_create_WUD(self):
+        data = {
+            "date": "2023-10-01",
+            "username": self.user.username
+        }
+        response = self.client.post(self.list_url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_read_WUD(self):
+        new = {
+            "date": "2023-10-01",
+            "username": self.user.username,
+            "data_collection": 'wellness',
+            "data":{
+                "mood": 3,
+                "energy": 4,
+                "sleep_quality": 2,
+                "soreness": 1
+            }
+        }
+        response = self.client.post(self.list_url, new, format="json")
+        wake_up_data = response.data
+        print("Created WUD:", wake_up_data)
+        detail_url = reverse("wake_up_data-detail", args=[wake_up_data["slug"]])
+        response = self.client.get(detail_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_update_WUD(self):
+        data = {
+            "date": "2023-10-01",
+            "username": self.user.username
+        }
+
+        response = self.client.post(self.list_url, data, format="json")
+        wake_up_data = response.data
+        detail_url = reverse("wake_up_data-detail", args=[wake_up_data["slug"]])
+        response = self.client.patch(detail_url, {"HR": 60}, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["HR"], 60)
+
+    def test_delete_WUD(self):
+        data = {
+            "date": "2023-10-01",
+            "username": self.user.username
+        }
+
+        response = self.client.post(self.list_url, data, format="json")
+        wake_up_data = response.data
+        detail_url = reverse("wake_up_data-detail", args=[wake_up_data["slug"]])
+
+        response = self.client.delete(detail_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        self.assertFalse(Wake_Up_Data.objects.filter(slug=wake_up_data["slug"]).exists())
+
 class UserCRUDTest(APITestCase):
     def setUp(self):
         self.user_list_url = reverse("user-list")
