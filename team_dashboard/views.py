@@ -83,9 +83,9 @@ def get_lnrmssdData(request, username):
 
     dates= list(query.values_list('date', flat=True))
 
-    hr= np.array([obj.data['HR'] for obj in query]).flatten()
+    hr= np.array([obj['data']['HR'] for obj in query]).flatten()
 
-    rmssd= np.array([obj.data['RMSSD'] for obj in query]).flatten()
+    rmssd= np.array([obj['data']['RMSSD'] for obj in query]).flatten()
     
     lnrmssd= np.log(rmssd)
 
@@ -128,8 +128,8 @@ def get_ssData(request,username):
 
     dates= list(query.values_list('date', flat=True))
 
-    rmssd= np.array([obj.data['RMSSD'] for obj in query]).flatten()
-    sdnn= np.array([obj.data['SDNN'] for obj in query]).flatten()
+    rmssd= np.array([obj['data']['RMSSD'] for obj in query]).flatten()
+    sdnn= np.array([obj['data']['SDNN'] for obj in query]).flatten()
 
     ss= 1000 / (sdnn / 0.7995) + 5.1174
     sp= ss / (0.7071 * rmssd)
