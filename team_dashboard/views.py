@@ -187,30 +187,22 @@ def get_rpe2XtimeData(request, username):
     else:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    time_threshold= datetime.time(12,0)
-    data = [Main_data.objects.filter(user=user, date__time__lt=time_threshold, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity'),
-                Main_data.objects.filter(user=user, date__time__gte=time_threshold, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity'),]
+    data = Main_data.objects.filter(user=user, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity')
 
-    if not data[0].exists() and not data[1].exists():
+    if not data.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
     
-    dates= [list(data[0].values_list('date', flat=True)), 
-            list(data[1].values_list('date', flat=True))]
+    dates= list(data.values_list('date', flat=True))
 
-    rpe= [np.array(list(data[0].values_list('data__perceived_strain_of_activity'))).flatten(),
-          np.array(list(data[1].values_list('data__perceived_strain_of_activity'))).flatten()]
+    rpe= np.array(list(data.values_list('data__perceived_strain_of_activity'))).flatten()
 
-    time= [np.array(list(data[0].values_list('data__time_of_activity'))).flatten(),
-           np.array(list(data[1].values_list('data__time_of_activity'))).flatten()]
+    time= np.array(list(data.values_list('data__time_of_activity'))).flatten()
 
-    rpe2Xtime=  [rpe[0] * rpe[0] * time[0],
-                 rpe[1] * rpe[1] * time[1]]
+    rpe2Xtime=  rpe * rpe * time
 
-    activity= [np.array(list(data[0].values_list('data__type_of_activity'))).flatten(),
-               np.array(list(data[1].values_list('data__type_of_activity'))).flatten()]
+    activity= np.array(list(data.values_list('data__type_of_activity'))).flatten()
 
-    graph_data = {'morning': {dates[0][i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[0][i], 'activity':activity[0][i]} for i in range(len(dates[0]))},
-                  'afternoon': {dates[1][i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[1][i], 'activity':activity[1][i]} for i in range(len(dates[1]))}}
+    graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[i], 'activity':activity[i]} for i in range(len(dates))}
 
     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
