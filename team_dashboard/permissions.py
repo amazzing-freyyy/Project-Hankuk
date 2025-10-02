@@ -16,6 +16,30 @@ class IsCoachOrOwner(BasePermission):
             is_owner = obj == request.user
         return is_coach or is_owner
     
+class IsCoach(BasePermission):
+    """
+    Allows access only to coaches.
+    """
+
+    def has_permission(self, request, view):
+        return (
+            request.user and
+            request.user.is_authenticated and
+            request.user.groups.filter(name='coaches').exists()
+        )
+    
+class IsAdmin(BasePermission):
+    """
+    Allows access only to admin.
+    """
+
+    def has_permission(self, request, view):
+        return (
+            request.user and
+            request.user.is_authenticated and
+            request.user.is_superuser
+        )
+    
 # class IsInGroup(BasePermission):
 #     def __init__(self, group_name):
 #         self.group_name = group_name

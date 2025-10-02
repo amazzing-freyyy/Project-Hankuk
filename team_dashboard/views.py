@@ -17,8 +17,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 logger = logging.getLogger(__name__) 
 
-class WUDViewSet(ModelViewSet):
-    queryset = Main_data.objects.all().filter(data_collection='wellness')
+class _MainDataViewSet(ModelViewSet):
+    queryset = Main_data.objects.all()
     serializer_class = MainDataSerializer
     permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'slug'
@@ -41,7 +41,10 @@ class WUDViewSet(ModelViewSet):
             # Already deleted
             return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
-class PTDViewSet(WUDViewSet):
+class WUDViewSet(_MainDataViewSet):
+    queryset = Main_data.objects.all().filter(data_collection='wellness')
+
+class PTDViewSet(_MainDataViewSet):
     queryset = Main_data.objects.all().filter(data_collection='training')
     
 class UserViewSet(ModelViewSet):
@@ -49,14 +52,30 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     lookup_field = 'username'
     filter_backends = [DjangoFilterBackend]
-
-    filterset_fields = ['username', 'first_name', 'last_name', 'email', 'groups__name', 'is_active']
     
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsCoachOrOwner(), IsAuthenticated()]
+            return [IsAuthenticated(), IsAdmin()]
         return [AllowAny()]
-    
+
+class AthleteViewSet(UserViewSet):
+    queryset = User.objects.filter(groups__name='athletes')
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'username'
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active']
+
+class CoachViewSet(UserViewSet):
+    queryset = User.objects.filter(groups__name='coaches')
+    permission_classes = [IsAuthenticated, IsCoach]
+    filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff']
+
+class AdminViewSet(UserViewSet):
+    queryset = User.objects.filter(is_superuser=True)
+    permission_classes = [IsAuthenticated, IsAdmin]
+    filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff']
+
 class ProfileViewSet(ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer

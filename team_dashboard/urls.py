@@ -6,7 +6,10 @@ from rest_framework_simplejwt.views import TokenRefreshView
 router = DefaultRouter()
 router.register(r'wake_up', WUDViewSet, basename='wake_up_data')
 router.register(r'post_training', PTDViewSet, basename='post_training')
-router.register(r'user', UserViewSet, basename='user')
+router.register(r'athletes', AthleteViewSet, basename='athletes')
+router.register(r'coaches', CoachViewSet, basename='coaches')
+router.register(r'admins', AdminViewSet, basename='admins')
+router.register(r'users', UserViewSet, basename='users')
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 
