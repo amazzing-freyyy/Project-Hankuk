@@ -61,7 +61,7 @@ class UserViewSet(ModelViewSet):
 class AthleteViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='athletes')
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsCoachOrOwner]
     lookup_field = 'username'
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active']
