@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 'team_dashboard.apps.TeamDashboardConfig',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'django_extensions',
     'channels',
     'django_filters',
