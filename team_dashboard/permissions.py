@@ -40,6 +40,19 @@ class IsAdmin(BasePermission):
             request.user.is_superuser
         )
     
+class IsOwner(BasePermission):
+    """
+    Allows access only to the owner of the object.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        try:
+            if type(obj) == 'User':
+                return obj == request.user
+            return obj.user == request.user
+        except AttributeError as e:
+            return obj == request.user
+
 # class IsInGroup(BasePermission):
 #     def __init__(self, group_name):
 #         self.group_name = group_name
