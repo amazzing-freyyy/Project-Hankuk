@@ -57,6 +57,11 @@ class UserViewSet(ModelViewSet):
         if self.action in ['update', 'partial_update', 'destroy']:
             return [IsAuthenticated, IsOwner]
         return [AllowAny]
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
 class AthleteViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='athletes')
