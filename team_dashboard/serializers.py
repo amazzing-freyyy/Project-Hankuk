@@ -34,11 +34,11 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     profile = ProfileSerializer(required=False)
-    groups = serializers.ListField(
-        child=serializers.CharField(),
-        required=False,
-        write_only=True
-    )
+    # groups = serializers.ListField(
+    #     child=serializers.CharField(),
+    #     required=False,
+    #     write_only=True
+    # )
 
     class Meta:
         model = User
