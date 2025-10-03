@@ -57,11 +57,6 @@ class UserViewSet(ModelViewSet):
         if self.action in ['update', 'partial_update', 'destroy']:
             return [IsAuthenticated, IsOwner]
         return [AllowAny]
-    
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
 
 class AthleteViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='athletes')
@@ -262,14 +257,14 @@ def get_rpe2XtimeData(request, username):
 
 #     return Response({'athleteUserName':username, 'graph_data':graph_data})
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def users_in_group(request, group_name):
-    try:
-        group = Group.objects.get(name=group_name)
-    except Group.DoesNotExist:
-        return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def users_in_group(request, group_name):
+#     try:
+#         group = Group.objects.get(name=group_name)
+#     except Group.DoesNotExist:
+#         return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    users = group.user_set.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+#     users = group.user_set.all()
+#     serializer = UserSerializer(users, many=True)
+#     return Response(serializer.data)

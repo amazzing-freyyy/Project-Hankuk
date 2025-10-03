@@ -19,6 +19,6 @@ urlpatterns = [
     path('api/wake_up/lnrmssd/<str:username>/', get_lnrmssdData, name='get_lnrmssd'),
     path('api/wake_up/ss/<str:username>/', get_ssData, name='get_ss'),
     path('api/wake_up/wellness/', get_wellnessData, name='get_Wellness'),
-    path('api/users/<str:group_name>/', users_in_group, name='users_in_group'),
+    # path('api/users/<str:group_name>/', users_in_group, name='users_in_group'),
     path('api/', include(router.urls)),
 ]  
