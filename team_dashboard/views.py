@@ -55,8 +55,8 @@ class UserViewSet(ModelViewSet):
     
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAuthenticated, IsCoachOrOwner]
-        return [AllowAny()]
+            return [IsAuthenticated, IsOwner]
+        return [AllowAny]
 
 class AthleteViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='athletes')
