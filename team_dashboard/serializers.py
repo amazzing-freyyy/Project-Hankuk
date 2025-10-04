@@ -4,7 +4,7 @@ from .models import *
 from django.contrib.auth.models import User, Group
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('project_hankuk')
 
 class MainDataSerializer(serializers.ModelSerializer):
     class Meta:
