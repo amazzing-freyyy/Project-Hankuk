@@ -70,6 +70,10 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
     
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+    
     def create(self, validated_data):
         profile_data = validated_data.pop("profile", None)  # take out profile info if present
         group_data = validated_data.pop("groups", [])  # take out group info if present
