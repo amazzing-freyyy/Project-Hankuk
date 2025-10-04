@@ -49,7 +49,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         logger.debug('Helloooooooooooooooo!!!')
-        logger.debug('Data: {validated_data}')
+        logger.debug(f'Data: {validated_data}')
 
         password = validated_data.pop('password', None)
         profile_data = validated_data.pop('profile', None)
