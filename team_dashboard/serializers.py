@@ -48,14 +48,17 @@ class UserSerializer(serializers.ModelSerializer):
         password = validated_data.pop('password', None)
         profile_data = validated_data.pop('profile', None)
 
+        # Update user fields
         for attr, value in validated_data.items():
-            setattr(instance, attr, value)
+            if hasattr(instance, attr):
+                setattr(instance, attr, value)
 
         if password:
             instance.set_password(password)
 
         instance.save()
 
+        # Update profile fields (if nested)
         if profile_data:
             profile = instance.profile
             for attr, value in profile_data.items():
