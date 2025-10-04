@@ -2,6 +2,9 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
 from django.contrib.auth.models import User, Group
+import logging
+
+logger = logging.getLogger(__name__)
 
 class MainDataSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,7 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [ 'username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'groups', 'profile']
 
     def update(self, instance, validated_data):
-        print("Validated data:", validated_data)
+        logger.debug("Validated data:", validated_data)
         password = validated_data.pop('password', None)
         profile_data = validated_data.pop('profile', None)
 
