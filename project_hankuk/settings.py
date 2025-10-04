@@ -189,37 +189,25 @@ LOGIN_URL= '/login/'
 LOGIN_REDIRECT_URL = '/home/'
 
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{levelname} {asctime} {module} {message}",
-            "style": "{",
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {'format': '{levelname} {asctime} {module} {message}', 'style': '{'},
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'formatter': 'verbose',
         },
-        "simple": {
-            "format": "{levelname} {message}",
-            "style": "{",
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
-    "handlers": {
-        "file": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "logs/django.log"),
-            "formatter": "verbose",
-        },
-        "console": {
-            "level": "ERROR",
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file", "console"],
-            "level": "ERROR",
-            "propagate": True,
-        },
+    'loggers': {
+        'django': {'handlers': ['file', 'console'], 'level': 'DEBUG', 'propagate': True},
+        'project_hankuk': {'handlers': ['file', 'console'], 'level': 'DEBUG', 'propagate': False},
     },
 }
 
