@@ -42,7 +42,7 @@ class _MainDataViewSet(ModelViewSet):
             return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
 class WUDViewSet(_MainDataViewSet):
-    queryset = Main_data.objects.all().filter(data_collection='wellness')
+    queryset = Main_data.objects.filter(data_collection='wellness')
 
 class PTDViewSet(_MainDataViewSet):
     queryset = Main_data.objects.all().filter(data_collection='training')

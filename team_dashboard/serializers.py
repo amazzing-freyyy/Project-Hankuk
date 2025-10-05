@@ -48,8 +48,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [ 'username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'groups', 'profile']
 
     def update(self, instance, validated_data):
-        logger.debug('Helloooooooooooooooo!!!')
-        logger.debug(f'Data: {validated_data}')
 
         password = validated_data.pop('password', None)
         profile_data = validated_data.pop('profile', None)
