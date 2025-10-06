@@ -116,7 +116,7 @@ def new_wellness_main_data(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=Post_Training_Data)
-def new_wellness_main_data(sender, instance, created, **kwargs):
+def new_training_main_data(sender, instance, created, **kwargs):
     if not created:
         return
     
@@ -135,3 +135,47 @@ def new_wellness_main_data(sender, instance, created, **kwargs):
             "data": dict
         }
     )
+
+@receiver(post_save, sender=Main_data)
+def new_training_main_data(sender, instance, created, **kwargs):
+    if not created:
+        return
+    
+    user= instance.user
+    date= instance.date
+    collection= instance.data_collection
+
+    data = instance.data or {}
+    
+    if collection == 'wellness':
+        Wake_Up_Data.objects.update_or_create(
+            date=date,
+            user=user,
+            defaults = {
+                'measurement_quality': data.get('measurement_quality'),
+                'RMSSD': data.get('RMSSD'),
+                'SDNN': data.get('SDNN'),
+                'HR': data.get('HR'),
+                'emotional_wellness': data.get('emotional_wellness'),
+                'chispa': data.get('chispa'),
+                'hours_of_sleep': data.get('hours_of_sleep'),
+                'quality_of_sleep': data.get('quality_of_sleep'),
+                'muscle_pain': data.get('muscle_pain'),
+                'tiredness': data.get('tiredness'),
+                'menstruation': data.get('menstruation'),
+                'injury': data.get('injury'),
+                'comments': data.get('comments', ''),
+            }
+        )
+    elif collection == 'training':
+        Post_Training_Data.objects.update_or_create(
+            date=date,
+            user=user,
+            defaults={
+                'type_of_activity': data.get('type_of_activity'),
+                'time_of_activity': data.get('time_of_activity'),
+                'perceived_strain_of_activity': data.get('perceived_strain_of_activity'),
+                'pain': data.get('pain'),
+                'comments': data.get('comments'),
+            }
+        )
