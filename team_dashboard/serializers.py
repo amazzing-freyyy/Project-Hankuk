@@ -10,7 +10,7 @@ class MainDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Main_data
         fields = '__all__'
-        read_only_fields = ['slug', 'user']
+        read_only_fields = ['slug', 'user', 'date', 'data_collection']
         lookupfield = 'slug'
 
 class WUDSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class PTDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post_Training_Data
         fields = '__all__'
-        read_only_fields = ['slug', 'user']
+        read_only_fields = ['slug', 'user', 'date']
         lookupfield = 'slug'
     
 class ProfileSerializer(serializers.ModelSerializer):
