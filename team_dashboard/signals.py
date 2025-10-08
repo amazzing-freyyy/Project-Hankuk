@@ -87,7 +87,7 @@ from decimal import Decimal
 #             }
 #         )
 
-def is_instance(self, dict, type):
+def is_instance(dict, type):
         for key, value in dict.items():
             if isinstance(value, type):
                 dict[key] = float(value)
