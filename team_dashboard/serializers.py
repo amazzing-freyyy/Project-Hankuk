@@ -10,14 +10,14 @@ class MainDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Main_data
         fields = '__all__'
-        read_only_fields = ['slug', 'user']
+        read_only_fields = ['slug', 'user', 'data_collection', 'date']
         lookupfield = 'slug'
 
 class WUDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wake_Up_Data
         fields = '__all__'
-        read_only_fields = ['slug', 'user']
+        read_only_fields = ['slug', 'user', 'date']
         lookupfield = 'slug'
 
 class PTDSerializer(serializers.ModelSerializer):

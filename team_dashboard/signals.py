@@ -101,9 +101,9 @@ def new_wellness_main_data(sender, instance, created, **kwargs):
     user= instance.user
     date= instance.date
 
-    dict = model_to_dict(instance,exclude=['user','slug', 'date'])
+    my_dict = model_to_dict(instance,exclude=['user','slug', 'date'])
 
-    dict = is_instance(dict, Decimal)
+    my_dict = is_instance(my_dict, Decimal)
 
     Main_data.objects.update_or_create(
         date=date,
