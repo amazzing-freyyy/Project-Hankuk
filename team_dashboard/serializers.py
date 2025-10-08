@@ -10,7 +10,7 @@ class MainDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Main_data
         fields = '__all__'
-        read_only_fields = ['slug', 'user', 'data_collection']
+        read_only_fields = ['slug', 'user']
         lookupfield = 'slug'
 
 class WUDSerializer(serializers.ModelSerializer):
