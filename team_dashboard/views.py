@@ -63,16 +63,14 @@ class UserViewSet(ModelViewSet):
         user = self.get_object()
         old_password = request.data.get("old_password")
         new_password = request.data.get("new_password")
-        conf_password = request.data.get("conf_password")
 
-        if not new_password or not conf_password:
-            return Response({"detail": "Both new_password and conf_password are required."}, status=status.HTTP_400_BAD_REQUEST)
-
-        if new_password != conf_password:
-            return Response({"detail": "Passwords do not match."}, status=status.HTTP_400_BAD_REQUEST)
-
-        if not request.user.is_staff:
-            if not old_password or not user.check_password(old_password):
+        if not request.user.groups.filter(name='coaching_staff').exists():
+            if not new_password:
+                return Response({"detail": "No password given"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            if not old_password or not new_password:
+                return Response({"detail": "Old and new passwords are required."}, status=status.HTTP_400_BAD_REQUEST)
+            if not user.check_password(old_password):
                 return Response({"detail": "Old password is incorrect."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
