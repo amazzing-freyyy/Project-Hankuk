@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class _MainDataViewSet(ModelViewSet):
     queryset = Main_data.objects.all()
     serializer_class = MainDataSerializer
-    permission_classes = [IsAuthenticated, IsCoachOrOwner]
+    permission_classes = [IsAuthenticated, IsCoach | IsOwner | IsAdmin]
     lookup_field = 'slug'
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['date', 'user__username']
@@ -55,20 +55,20 @@ class UserViewSet(ModelViewSet):
     
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAuthenticated(), IsOwner()]
+            return [IsAuthenticated(), IsOwner() | IsAdmin()]
         return [AllowAny()]
 
 class AthleteViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='athletes')
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsCoachOrOwner]
+    permission_classes = [IsAuthenticated, IsCoach | IsOwner | IsAdmin]
     lookup_field = 'username'
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active']
 
 class CoachViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='coaches')
-    permission_classes = [IsAuthenticated, IsCoach]
+    permission_classes = [IsAuthenticated, IsCoach | IsAdmin]
     filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff']
 
 class AdminViewSet(UserViewSet):
@@ -79,7 +79,7 @@ class AdminViewSet(UserViewSet):
 class ProfileViewSet(ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated, IsCoachOrOwner]
+    permission_classes = [IsAuthenticated, IsCoach | IsOwner | IsAdmin]
     lookup_field = 'user__username'
 
 class MyTokenObtainPairView(TokenObtainPairView):

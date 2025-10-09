@@ -16,6 +16,22 @@ class IsCoachOrOwner(BasePermission):
             is_owner = obj == request.user
         return is_coach or is_owner
     
+class IsCoachOrOwner(BasePermission):
+    """
+    Allows access only to coaches or owner athlete.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        is_coach = request.user.groups.filter(name='coaches').exists()
+        try:
+            if type(obj) == 'User':
+                is_owner = obj == request.user
+            else:
+                is_owner = obj.user == request.user
+        except AttributeError as e:
+            is_owner = obj == request.user
+        return is_coach or is_owner
+
 class IsCoach(BasePermission):
     """
     Allows access only to coaches.
