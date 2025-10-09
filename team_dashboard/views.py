@@ -121,7 +121,7 @@ def get_lnrmssdData(request, username):
     else:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all()
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all().order_by('-date')
 
     if not query.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
@@ -166,7 +166,7 @@ def get_ssData(request,username):
     else:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all()
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all().order_by('-date')
 
     if not query.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
@@ -208,7 +208,7 @@ def get_wellnessData(request):
         else:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all()
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all().order_by('-date')
 
     if date:
         dateobj = datetime.date.fromisoformat(date)
@@ -232,7 +232,7 @@ def get_rpe2XtimeData(request, username):
     else:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    data = Main_data.objects.filter(user=user, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity')
+    data = Main_data.objects.filter(user=user, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity').order_by('-date')
 
     if not data.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
