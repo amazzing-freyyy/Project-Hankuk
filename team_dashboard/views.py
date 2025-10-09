@@ -64,7 +64,7 @@ class UserViewSet(ModelViewSet):
         old_password = request.data.get("old_password")
         new_password = request.data.get("new_password")
 
-        if not request.user.groups.filter(name='coaching_staff').exists():
+        if request.user.groups.filter(name='coaching_staff').exists():
             if not new_password:
                 return Response({"detail": "No password given"}, status=status.HTTP_400_BAD_REQUEST)
         else:
