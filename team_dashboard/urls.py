@@ -10,6 +10,7 @@ router.register(r'athletes', AthleteViewSet, basename='athletes')
 router.register(r'coaches', CoachViewSet, basename='coaches')
 router.register(r'admins', AdminViewSet, basename='admins')
 router.register(r'users', UserViewSet, basename='users')
+router.register(r'groups', GroupViewSet, basename='groups')
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 

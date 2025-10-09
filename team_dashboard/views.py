@@ -48,7 +48,15 @@ class WUDViewSet(_MainDataViewSet):
 
 class PTDViewSet(_MainDataViewSet):
     queryset = Main_data.objects.all().filter(data_collection='training')
-    
+
+class GroupViewSet(ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [IsAuthenticated, IsAdmin]
+    lookup_field = 'name'
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

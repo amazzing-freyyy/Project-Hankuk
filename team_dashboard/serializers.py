@@ -95,6 +95,11 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['__all__']
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
