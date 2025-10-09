@@ -56,7 +56,7 @@ class UserViewSet(ModelViewSet):
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
 
-            return [IsAuthenticated(), IsOwner | IsAdmin]
+            return [IsAuthenticated(), IsAdminOrOwner()]
         return [AllowAny()]
 
 class AthleteViewSet(UserViewSet):
