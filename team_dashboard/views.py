@@ -14,6 +14,8 @@ import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 import datetime
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.auth.password_validation import validate_password
+from rest_framework.exceptions import ValidationError
 
 logger = logging.getLogger(__name__) 
 
