@@ -53,7 +53,7 @@ class IsAdmin(BasePermission):
         return (
             request.user and
             request.user.is_authenticated and
-            request.user.is_superuser
+            request.user.groups.filter(name='coaching_staff').exists()
         )
     
 class IsOwner(BasePermission):
