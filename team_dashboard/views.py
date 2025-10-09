@@ -174,7 +174,7 @@ def get_ssData(request,username):
     else:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all().order_by('-date')
+    query = Main_data.objects.filter(user=user, data_collection='wellness').values('date', 'data').all().order_by('date')
 
     if not query.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
