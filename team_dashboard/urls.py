@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/wake_up/ss/<str:username>/', get_ssData, name='get_ss'),
     path('api/wake_up/wellness/', get_wellnessData, name='get_Wellness'),
     path('api/', include(router.urls)),
+    path('users/<str:username>/upload-profile-image/', UploadProfileImage.as_view(), name='upload-profile-image'),
 ]  

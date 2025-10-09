@@ -16,6 +16,9 @@ import datetime
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.exceptions import ValidationError
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 logger = logging.getLogger(__name__) 
 
@@ -115,6 +118,15 @@ class ProfileViewSet(ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated, IsCoach | IsOwner | IsAdmin]
     lookup_field = 'user__username'
+
+class UploadProfileImage(APIView):
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, username):
+        user = get_object_or_404(User, username=username)
+        user.profile.avatar = request.FILES['image']
+        user.profile.save()
+        return Response({'image_url': user.profile.avatar.url})
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer
