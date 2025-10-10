@@ -179,7 +179,7 @@ STATIC_URL = '/static/'
 #]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://projecthankuk.com/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'team_dashboard', 'media')
 
 # Default primary key field type
