@@ -222,7 +222,7 @@ def get_ssData(request,username):
     # --- Convert np.nan to None for JSON compatibility ---
     def safe_value(val):
         if isinstance(val, (np.floating, float)) and (np.isnan(val) or not np.isfinite(val)):
-            return None
+            return 0
         return float(val) if isinstance(val, (np.floating, float)) else val
 
     graph_data = {
