@@ -199,8 +199,7 @@ def get_ssData(request,username):
     ss= 1000 / (sdnn / 0.7995) + 5.1174
     sp= ss / (0.7071 * rmssd)
 
-    ss= clean_infinite_values(ss)
-    sp= clean_infinite_values(sp)
+
 
     interval = 7
     windows= sliding_window_view(ss, window_shape=interval)
@@ -281,7 +280,7 @@ def clean_infinite_values(data):
         return [clean_infinite_values(v) for v in data]
     elif isinstance(data, (float, np.floating)):
         if np.isnan(data) or np.isinf(data):
-            return None  # or 0.0, depending on what makes sense for your API
+            return 'Nan'  # or 0.0, depending on what makes sense for your API
         return float(data)
     else:
         return data
