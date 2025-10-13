@@ -198,22 +198,43 @@ def get_ssData(request,username):
 
     ss= 1000 / (sdnn / 0.7995) + 5.1174
     sp= ss / (0.7071 * rmssd)
+    ss = np.where(~np.isfinite(ss), np.nan, ss)
+    sp = np.where(~np.isfinite(sp), np.nan, sp)
 
-
-
+    # --- Compute z-score ---
     interval = 7
-    windows= sliding_window_view(ss, window_shape=interval)
-    means= windows.mean(axis= 1)
-    stds= windows.std(axis= 1)
-    target_val= ss[interval-1:]
-    z_score= (target_val - means) / stds
+    if len(ss) >= interval:
+        windows = sliding_window_view(ss, window_shape=interval)
+        means = np.nanmean(windows, axis=1)
+        stds = np.nanstd(windows, axis=1)
+        target_val = ss[interval - 1:]
+        z_score = (target_val - means) / stds
 
-    p_len= interval-1
-    p_z_score= np.concatenate([np.full(p_len, 'NaN'), z_score])
+        # Replace inf/nan in z_score
+        z_score = np.where(~np.isfinite(z_score), np.nan, z_score)
 
-    graph_data= graph_data= {dates[i].strftime('%Y-%m-%d'): {'ss': ss[i], 'sp':sp[i], 'ss_z_score':p_z_score[i]} for i in range(len(dates))}
+        p_len = interval - 1
+        p_z_score = np.concatenate([np.full(p_len, np.nan), z_score])
+    else:
+        # Not enough data for sliding window
+        p_z_score = np.full(len(ss), np.nan)
 
-    return Response({'athleteUserName':username, 'graph_data':graph_data})
+    # --- Convert np.nan to None for JSON compatibility ---
+    def safe_value(val):
+        if isinstance(val, (np.floating, float)) and (np.isnan(val) or not np.isfinite(val)):
+            return None
+        return float(val) if isinstance(val, (np.floating, float)) else val
+
+    graph_data = {
+        dates[i].strftime('%Y-%m-%d'): {
+            'ss': safe_value(ss[i]),
+            'sp': safe_value(sp[i]),
+            'ss_z_score': safe_value(p_z_score[i]),
+        }
+        for i in range(len(dates))
+    }
+
+    return Response({'athleteUserName': username, 'graph_data': graph_data})
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
