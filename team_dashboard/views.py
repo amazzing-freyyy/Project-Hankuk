@@ -95,6 +95,12 @@ class UserViewSet(ModelViewSet):
         user.save()
         return Response({"detail": "Password changed successfully."}, status=status.HTTP_200_OK)
     
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        
 class AthleteViewSet(UserViewSet):
     queryset = User.objects.filter(groups__name='athletes')
     serializer_class = UserSerializer
@@ -103,13 +109,13 @@ class AthleteViewSet(UserViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active']
 
-class CoachViewSet(UserViewSet):
+class CoachViewSet(AthleteViewSet):
     queryset = User.objects.filter(groups__name='coaches')
     permission_classes = [IsAuthenticated, IsCoach | IsAdmin]
     filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff']
 
-class AdminViewSet(UserViewSet):
-    queryset = User.objects.filter(is_superuser=True)
+class AdminViewSet(AthleteViewSet):
+    queryset = User.objects.filter(groups_name='coaching_staff')
     permission_classes = [IsAuthenticated, IsAdmin]
     filterset_fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff']
 

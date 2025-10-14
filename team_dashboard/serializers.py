@@ -46,6 +46,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [ 'username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'groups', 'profile']
+        extra_kwargs = {'password': {'write_only': True}}
+
 
     def update(self, instance, validated_data):
 
@@ -94,6 +96,7 @@ class UserSerializer(serializers.ModelSerializer):
             user.save()
 
         return user
+
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
