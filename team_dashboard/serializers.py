@@ -12,13 +12,14 @@ class MainDataSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['slug', 'user']
         lookupfield = 'slug'
+        partial= True
 
 class WUDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wake_Up_Data
         fields = '__all__'
         read_only_fields = ['slug', 'user']
-        lookupfield = 'slug'
+        lookupfield = 'slug'    
 
 class PTDSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S", input_formats=["%Y-%m-%dT%H:%M:%S"])
@@ -33,9 +34,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
+        partial= True
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
+    partial= True
     profile = ProfileSerializer(required=False)
     groups = serializers.ListField(
         child=serializers.CharField(),
@@ -98,7 +101,8 @@ class UserSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ['__all__']
+        fields = ['name']
+        partial = True
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
