@@ -12,7 +12,6 @@ class MainDataSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['slug', 'user']
         lookupfield = 'slug'
-        partial= True
 
 class WUDSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,11 +33,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
-        partial= True
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
-    partial= True
     profile = ProfileSerializer(required=False)
     groups = serializers.ListField(
         child=serializers.CharField(),
@@ -102,7 +99,6 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ['name']
-        partial = True
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
