@@ -283,8 +283,10 @@ def get_rpe2XtimeData(request, username):
     dates= list(data.values_list('date', flat=True))
 
     rpe= np.array(list(data.values_list('data__perceived_strain_of_activity'))).flatten()
-
     time= np.array(list(data.values_list('data__time_of_activity'))).flatten()
+
+    rpe = np.nan_to_num(rpe, nan=0)
+    time= np.nan_to_num(rpe, nan=0)
 
     rpe2Xtime=  rpe * rpe * time
 
