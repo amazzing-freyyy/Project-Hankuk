@@ -31,11 +31,6 @@ class _MainDataViewSet(ModelViewSet):
     filterset_fields = ['date', 'user__username']
     ordering_fields = ['date']
     ordering = ['-date']
-
-    def perform_create(self, serializer):
-        user = User.objects.get(username=self.request.data["username"])
-
-        return serializer.save(user=user)
     
     def destroy(self, request, *args, **kwargs):
         try:
@@ -120,13 +115,19 @@ class ProfileViewSet(ModelViewSet):
     lookup_field = 'user__username'
 
 class UploadProfileImage(APIView):
-    parser_classes = [MultiPartParser, FormParser]
-
     def post(self, request, username):
-        user = get_object_or_404(User, username=username)
-        user.profile.avatar = request.FILES['image']
-        user.profile.save()
-        return Response({'image_url': user.profile.avatar.url})
+        user = User.objects.get(username=username)
+        file = request.FILES.get('avatar')
+
+        if not file:
+            return Response({"error": "No file uploaded"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Save the file to the Profile model
+        profile = user.profile
+        profile.avatar.save(file.name, file)
+        profile.save()
+
+        return Response({"image_url": profile.avatar.url}, status=status.HTTP_200_OK)
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer
@@ -275,7 +276,7 @@ def get_rpe2XtimeData(request, username):
     else:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    data = Main_data.objects.filter(user=user, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity').order_by('-date')
+    data = Main_data.objects.filter(user=user, data_collection='training').values('date', 'data__perceived_strain_of_activity', 'data__time_of_activity', 'data__type_of_activity', "data__type_of_training").order_by('-date')
 
     if not data.exists():
         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
@@ -289,8 +290,11 @@ def get_rpe2XtimeData(request, username):
     time= np.nan_to_num(rpe, nan=0)
 
     rpe2Xtime=  rpe * rpe * time
+    to_training = np.array(list(data.values_list('data__type_of_training'))).flatten()
+    to_activity= np.array(list(data.values_list('data__type_of_activity'))).flatten()
 
-    activity= np.array(list(data.values_list('data__type_of_activity'))).flatten()
+    activity = np.where(to_activity == None, to_training, to_activity)
+    # logger.error(f'activities: {activity}')
 
     graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'rpe2Xtime': rpe2Xtime[i], 'activity':activity[i]} for i in range(len(dates))}
 

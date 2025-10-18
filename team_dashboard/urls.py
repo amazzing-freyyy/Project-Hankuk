@@ -11,6 +11,7 @@ router.register(r'coaches', CoachViewSet, basename='coaches')
 router.register(r'admins', AdminViewSet, basename='admins')
 router.register(r'users', UserViewSet, basename='users')
 router.register(r'groups', GroupViewSet, basename='groups')
+router.register(r'profiles', ProfileViewSet)
 
 urlpatterns = [
     # path("admin/", admin.site.urls), 
@@ -21,5 +22,5 @@ urlpatterns = [
     path('api/wake_up/ss/<str:username>/', get_ssData, name='get_ss'),
     path('api/wake_up/wellness/', get_wellnessData, name='get_Wellness'),
     path('api/', include(router.urls)),
-    path('users/<str:username>/upload-profile-image/', UploadProfileImage.as_view(), name='upload-profile-image'),
 ]  
+

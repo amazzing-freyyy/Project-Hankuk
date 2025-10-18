@@ -1,3 +1,4 @@
+from django.forms import ImageField, ValidationError
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
@@ -13,6 +14,10 @@ class MainDataSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['slug', 'user']
         lookupfield = 'slug'
+    
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
 
 class WUDSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,10 +36,16 @@ class PTDSerializer(serializers.ModelSerializer):
         lookupfield = 'slug'
     
 class ProfileSerializer(serializers.ModelSerializer):
-    avatar = AvatarField(requied=False)
+    avatar = serializers.SerializerMethodField()
+
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['gender', 'avatar']
+    
+    def get_avatar(self, obj):
+        request = self.context.get('request')
+        if obj.avatar:
+            return request.build_absolute_uri(obj.avatar.url)
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
@@ -50,26 +61,21 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [ 'username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'groups', 'profile']
 
     def update(self, instance, validated_data):
-
-        password = validated_data.pop('password', None)
-        profile_data = validated_data.pop('profile', None)
+        profile_data = validated_data.pop('profile', {})
+        avatar_url = profile_data.get('avatar_url', None)
 
         # Update user fields
         for attr, value in validated_data.items():
-            if hasattr(instance, attr):
-                setattr(instance, attr, value)
-
-        if password:
-            instance.set_password(password)
-
+            setattr(instance, attr, value)
         instance.save()
 
-        # Update profile fields (if nested)
-        if profile_data:
-            profile = instance.profile
-            for attr, value in profile_data.items():
-                setattr(profile, attr, value)
-            profile.save()
+        # Update profile
+        profile = instance.profile
+        if avatar_url is not None:
+            profile.avatar = avatar_url  # assumes avatar is a URLField now
+        if 'gender' in profile_data:
+            profile.gender = profile_data['gender']
+        profile.save()
 
         return instance
     

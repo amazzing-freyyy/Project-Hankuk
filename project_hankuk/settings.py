@@ -126,7 +126,10 @@ DATABASES = {
         },
     }
 }
-
+MEDIA_URL = 'https://projecthankuk.com/media/'
+# MEDIA_URL = 'http://127.0.0.1:8000/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'team_dashboard', 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -179,9 +182,6 @@ STATIC_URL = '/static/'
 #]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = 'https://projecthankuk.com/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'team_dashboard', 'media')
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -194,22 +194,22 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'verbose': {'format': '{levelname} {asctime} {module} {message}', 'style': '{'},
+        # 'verbose': {'format': '{levelname} {asctime} {module} {message}', 'style': '{'},
     },
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
-            'formatter': 'verbose',
+            # 'formatter': 'verbose',
         },
         'console': {
             'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        'django': {'handlers': ['file', 'console'], 'level': 'DEBUG', 'propagate': True},
-        'project_hankuk': {'handlers': ['file', 'console'], 'level': 'DEBUG', 'propagate': False},
+        'django': {'handlers': ['file', 'console'], 'level': 'ERROR', 'propagate': True},
+        'project_hankuk': {'handlers': ['file', 'console'], 'level': 'ERROR', 'propagate': False},
     },
 }
 
