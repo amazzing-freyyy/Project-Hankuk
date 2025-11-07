@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '172.233.111.130', 'projecthankuk.com', 'www.projecthankuk.com']
 # ALLOWED_HOSTS = ['127.0.0.1']
@@ -126,8 +126,8 @@ DATABASES = {
         },
     }
 }
-MEDIA_URL = 'https://projecthankuk.com/media/'
-# MEDIA_URL = 'http://127.0.0.1:8000/media/'
+# MEDIA_URL = 'https://projecthankuk.com/media/'
+MEDIA_URL = 'http://127.0.0.1:8000/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'team_dashboard', 'media')
 MEDIA_ROOT = BASE_DIR / 'media'
 

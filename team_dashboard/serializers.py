@@ -1,4 +1,3 @@
-from django.forms import ImageField, ValidationError
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
@@ -50,10 +49,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     profile = ProfileSerializer(required=False)
-    groups = serializers.ListField(
-        child=serializers.CharField(),
-        required=False,
-        write_only=True
+    groups = serializers.SlugRelatedField(
+        many=True,
+        slug_field='name',
+        queryset=Group.objects.all()
     )
 
     class Meta:
@@ -86,6 +85,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         profile_data = validated_data.pop("profile", None)  # take out profile info if present
         group_data = validated_data.pop("groups", [])  # take out group info if present
+        password = validated_data.pop('password')
 
         user = User.objects.create_user(**validated_data)
 
@@ -99,7 +99,10 @@ class UserSerializer(serializers.ModelSerializer):
             for group_name in group_data:
                 group, created = Group.objects.get_or_create(name=group_name)
                 user.groups.add(group)
-            user.save()
+        
+        user.set_password(password)
+        user.save()
+
 
         return user
 
