@@ -35,16 +35,9 @@ class PTDSerializer(serializers.ModelSerializer):
         lookupfield = 'slug'
     
 class ProfileSerializer(serializers.ModelSerializer):
-    avatar = serializers.SerializerMethodField()
-
     class Meta:
         model = Profile
-        fields = ['gender', 'avatar']
-    
-    def get_avatar(self, obj):
-        request = self.context.get('request')
-        if obj.avatar:
-            return request.build_absolute_uri(obj.avatar.url)
+        fields = ['gender']
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
@@ -61,7 +54,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile', {})
-        avatar_url = profile_data.get('avatar_url', None)
 
         # Update user fields
         for attr, value in validated_data.items():
@@ -70,8 +62,6 @@ class UserSerializer(serializers.ModelSerializer):
 
         # Update profile
         profile = instance.profile
-        if avatar_url is not None:
-            profile.avatar = avatar_url  # assumes avatar is a URLField now
         if 'gender' in profile_data:
             profile.gender = profile_data['gender']
         profile.save()

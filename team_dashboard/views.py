@@ -114,21 +114,6 @@ class ProfileViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated, IsCoach | IsOwner | IsAdmin]
     lookup_field = 'user__username'
 
-class UploadProfileImage(APIView):
-    def post(self, request, username):
-        user = User.objects.get(username=username)
-        file = request.FILES.get('avatar')
-
-        if not file:
-            return Response({"error": "No file uploaded"}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Save the file to the Profile model
-        profile = user.profile
-        profile.avatar.save(file.name, file)
-        profile.save()
-
-        return Response({"image_url": profile.avatar.url}, status=status.HTTP_200_OK)
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer
 

@@ -12,7 +12,6 @@ class Profile(models.Model):
     ]
 
     gender = models.CharField( max_length=1, choices=M_OR_F, blank= False, default=M_OR_F[0][0])
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
