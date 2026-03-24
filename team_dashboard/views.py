@@ -16,9 +16,6 @@ import datetime
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.exceptions import ValidationError
-from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
 
 logger = logging.getLogger(__name__) 
 
@@ -296,46 +293,3 @@ def clean_infinite_values(data):
         return float(data)
     else:
         return data
-# @api_view(['get'])
-# @permission_classes([IsAuthenticated])
-# def get_lastWeeksTrainings(request):
-#     user = request.user
-
-#     date_str = request.data.get('date')
-#     if date_str:
-#         date= datetime.date.fromisoformat(date_str)
-#     else:
-#         date= datetime.date.today()
-
-#     if user.groups.filter(name='athletes').exists():
-#         username = user.username
-#     else:
-#         username= request.data.get('athleteUserName')
-#         user = User.objects.filter(username=username).first()
-
-#     data = Post_Training_Data.objects.filter(user=user, date__gte= date-datetime.timedelta(days=7), date__lte= date).values('date', 'type_of_activity', 'time_of_activity').all()
-    
-#     if not data.exists():
-#         return Response({'error': 'No data'}, status=status.HTTP_404_NOT_FOUND)
-
-#     dates= list(data.values_list('date', flat=True))
-
-#     time= np.array(list(data.values_list('time_of_activity'))).flatten()
-
-#     activity= np.array(list(data.values_list('type_of_activity'))).flatten()
-
-#     graph_data = {dates[i].strftime('%Y-%m-%d %H:%M'): {'activity':activity[i], 'duration':time[i]} for i in range(len(dates))}
-
-#     return Response({'athleteUserName':username, 'graph_data':graph_data})
-
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-# def users_in_group(request, group_name):
-#     try:
-#         group = Group.objects.get(name=group_name)
-#     except Group.DoesNotExist:
-#         return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
-
-#     users = group.user_set.all()
-#     serializer = UserSerializer(users, many=True)
-#     return Response(serializer.data)
