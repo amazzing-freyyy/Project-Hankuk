@@ -3,7 +3,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import *
 from django.contrib.auth.models import User, Group
 import logging
-from .fields import *
 
 logger = logging.getLogger('project_hankuk')
 

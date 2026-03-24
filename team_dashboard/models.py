@@ -16,21 +16,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def get_avatar_url(self):
-        if self.avatar:
-             return self.avatar.url
-        return '/static/images/default_avatar.png'
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        if self.avatar:
-            img = Image.open(self.avatar.path)
-            if img.height > 300 or img.width > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.avatar.path)
-
 class Wake_Up_Data(models.Model):
     YES_OR_NO=[
         ('yes', 'Yes'),
