@@ -78,19 +78,20 @@ class UserSerializer(serializers.ModelSerializer):
 
         user = User.objects.create_user(**validated_data)
 
+        if group_data:
+            for group_name in group_data:
+                group, created = Group.objects.get_or_create(name=group_name)
+                user.groups.add(group)
+
+        user.set_password(password)
+        user.save()
+
         # If client included profile data, create it
         if profile_data:
             Profile.objects.create(user=user, **profile_data)
         else:
             Profile.objects.create(user=user)
-        
-        if group_data:
-            for group_name in group_data:
-                group, created = Group.objects.get_or_create(name=group_name)
-                user.groups.add(group)
-        
-        user.set_password(password)
-        user.save()
+
 
 
         return user

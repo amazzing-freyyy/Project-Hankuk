@@ -37,6 +37,8 @@ class _MainDataViewSet(ModelViewSet):
         except Main_data.DoesNotExist:
             # Already deleted
             return Response({"detail": "Entry does not exist."}, status=status.HTTP_404_NOT_FOUND)
+        
+    
 
 class WUDViewSet(_MainDataViewSet):
     queryset = Main_data.objects.filter(data_collection='wellness')
